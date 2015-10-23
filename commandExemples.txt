@@ -1,0 +1,2 @@
+1.显示文件a.file中，hello前后20行的数据：
+grep hello -20 a.file

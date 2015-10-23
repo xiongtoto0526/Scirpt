@@ -25,7 +25,6 @@ channel_id_list=""
 outputdir="01output/"
 
 
-
 # 初始化配置变量
 for LINE in `cat zip.conf`
 do
