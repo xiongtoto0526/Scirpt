@@ -1,6 +1,52 @@
+http://man.linuxde.net/grep
+
+grep命令：
+
 1.显示文件a.file中，hello前后20行的数据：
 grep hello -20 a.file
 
 2. 显示文件
 grep -ril hello *
+
+3. 使用正则表达式过滤
+grep -e [regexp] *
+
+^	匹配行首，例如'^dog'匹配以字符串dog开头的行（注意：awk 指令中，'^'则是匹配字符串的开始）	^	^	^	^
+$	匹配行尾，例如：'^、dog$'匹配以字符串 dog 为结尾的行（注意：awk 指令中，'$'则是匹配字符串的结尾）	$	$	$	$
+^$  匹配空行
+^$	^string$	匹配行，例如：'^dog$'匹配只含一个字符串 dog 的行
+
+
+4. 递归搜索当前目录，其中，排除当前目录下的xgCommon和shell文件夹。
+grep -r --exclude-dir='xgCommon' --exclude-dir='shell' xg .
+
+
+5. 搜索并显示行号。
+grep -n 'hello' *
+
+6. 搜索出 不包括 hello的行。
+grep -v 'hello' *
+
+7. 精确匹配某个单词, hello1,hello2,3hello 都不会被显示出来。
+grep -w 'hello' file
+
+
+find命令：
+find ./ -name '*.tar.gz' -exec tar zxvf {} ; -print
+等价于：
+find ./ -name '*.tar.gz' | xargs tar zxvf {} ; -print
+
+
+找出自己家目录下所有的.txt文件并删除 
+find $HOME/. -name "*.txt" -ok rm {} \; 
+上例中，-ok和-exec行为一样，不过它会给出提示，是否执行相应的操作。
+
+
+
+运维：
+du -a : 所有文件大小明细
+du -sh :当前文件夹大小
+
+cat /proc/meminfo:查看系统信息
+
 
