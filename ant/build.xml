@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="modifyManifestFile" default="run" basedir=".">
+
+    <property name="originalJarName" value="xgsdkRun.jar" />
+    <property name="outputJarName" value="package-client-0.0.1-SNAPSHOT-iOS.jar" />
+
+    <target name="init">
+        <echo message="Note:This script can not be run Separately,ony if there is a xgsdkRun.jar provided in the current directory!"/>
+        <echo message="init begin..."/>
+        <mkdir dir="./temp"/>
+    </target>
+
+
+    <target name="run" depends="init">
+        <echo message="modify begin..."/>
+        <unzip src="./${originalJarName}" dest="./temp"/>
+        <copy file="./MANIFEST.MF" tofile="./temp/META-INF/MANIFEST.MF" overwrite="true"/>
+        <zip destfile="./${outputJarName}">
+            <fileset dir="./temp"/>
+        </zip>
+
+        <echo message="clean temp dir..."/>
+        <delete includeEmptyDirs="true">
+            <fileset dir="./temp"/>
+        </delete>
+        <delete file="xgsdkRun.jar"/>
+
+        <echo message="modify end..."/>
+    </target>
+
+
+</project>
