@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>channelAppId</key>
+	<string>1024appid</string>
+	<key>channelAppkey</key>
+	<string>e45ophf_rm4m77nv</string>
+	<key>enableFacebook</key>
+	<string>Y</string>
+	<key>enableGameCenter</key>
+	<string>Y</string>
+	<key>enableGoogle</key>
+	<string>N</string>
+	<key>enableKingSoft</key>
+	<string>N</string>
+	<key>enableLive</key>
+	<string>N</string>
+	<key>enableTwitter</key>
+	<string>N</string>
+	<key>googleClientID</key>
+	<string></string>
+	<key>kingsoftAppId</key>
+	<string></string>
+	<key>kingsoftKey</key>
+	<string></string>
+	<key>liveClientID</key>
+	<string></string>
+	<key>onlyUseKingSoft</key>
+	<string>N</string>
+	<key>twitterKey</key>
+	<string></string>
+	<key>twitterSecret</key>
+	<string></string>
+	<key>useCN</key>
+	<string>N</string>
+	<key>useSandBox</key>
+	<string>N</string>
+	<key>xgsdkAppId</key>
+	<string>100023</string>
+	<key>xgsdkAppKey</key>
+	<string>e464a202d4664a87a7d87b4ab233153e</string>
+	<key>xgsdkAuthUrl</key>
+	<string>http://a2.xgsdk.com</string>
+	<key>xgsdkBuildNumber</key>
+	<string>1.0.0</string>
+	<key>xgsdkBundleId</key>
+	<string>com.xishanju.rok</string>
+	<key>xgsdkChannelId</key>
+	<string>ios_xoyoApple</string>
+	<key>xgsdkDataUrl</key>
+	<string>http://data.xgsdk.com</string>
+	<key>xgsdkPlanId</key>
+	<string>276</string>
+	<key>xgsdkRechargeUrl</key>
+	<string>http://p2.xgsdk.com</string>
+	<key>xgsdkServerVersion</key>
+	<string>v1</string>
+	<key>xgsdk_commit_hash</key>
+	<string>c340da3</string>
+</dict>
+</plist>

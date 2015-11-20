@@ -1,0 +1,1 @@
+/Users/xionghaitao/all-sdk-project/xgsdk_objective-c_demo/Build/Intermediates/ArchiveIntermediates/xg_ios_jinshanApple/InstallationBuildProductsLocation/Applications/xg_ios_jinshanApple.app

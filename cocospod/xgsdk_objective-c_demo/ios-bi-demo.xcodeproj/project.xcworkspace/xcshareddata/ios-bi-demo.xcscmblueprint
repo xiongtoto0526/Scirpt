@@ -1,0 +1,35 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "8727F98065F146F4C3F6F48BD2A5515773EC79F9+++6E637A9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "8727F98065F146F4C3F6F48BD2A5515773EC79F9+++E45F2D2" : {
+
+    },
+    "8727F98065F146F4C3F6F48BD2A5515773EC79F9+++6E637A9" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "8727F98065F146F4C3F6F48BD2A5515773EC79F9+++E45F2D2" : 0,
+    "8727F98065F146F4C3F6F48BD2A5515773EC79F9+++6E637A9" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "34F4F66A-7A82-4245-A94E-ADB7426C85E0",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "8727F98065F146F4C3F6F48BD2A5515773EC79F9+++E45F2D2" : "all-sdk-project\/",
+    "8727F98065F146F4C3F6F48BD2A5515773EC79F9+++6E637A9" : "all-sdk-project\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ios-bi-demo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "xgsdk_objective-c_demo\/ios-bi-demo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/xgsdk2\/xgsdk2-sdkclientiOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8727F98065F146F4C3F6F48BD2A5515773EC79F9+++6E637A9"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/10.20.87.98\/davesvn",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8727F98065F146F4C3F6F48BD2A5515773EC79F9+++E45F2D2"
+    }
+  ]
+}

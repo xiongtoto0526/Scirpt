@@ -1,0 +1,76 @@
+#!/usr/bin/perl 
+use MIME::Base64; 
+use Encode;
+use JSON;
+use Data::Dumper;
+use Cwd;
+
+
+#@ARGV命令行参数数组
+# $filename=@ARGV[0];
+$filename='/Users/xionghaitao/my_git_rep/script/perl/data.txt';
+
+
+#open打开文件
+unless(open(FH,"$filename")) { 
+die "\nCan not open file $filename !\n\n"; 
+};
+
+#将整个文件读入$file的一种方法
+$file=<FH>;
+# while (<FH>) { print $_ }
+
+#seek 设置文件的当前位置
+#seek FILEHANDLE,POSITION,WHENCE 成功返回真。
+#WHENCE 有3个值，0表示起始位置,1表示当前位置，2表示文件尾
+# seek(FH,0,2); 
+# $len=tell(FH); 
+# seek(FH,0,0); 
+# read(FH,$file,$len); 
+
+# print($file);
+
+# 读取json，得到receiptData值
+my $decoded_json = decode_json($file);
+my $receiptData = $decoded_json->{'receipt-data'};
+# print $receiptData;
+
+
+# 遍历json
+# foreach $key(keys %{$decoded_json})
+# {
+#   print $key,'	',$decoded_json->{$key}, "\n";
+# }
+
+print 'step 1-------第一次base64解码，得到receiptData_base64',"\n";
+
+# 第一次base64解码，得到receiptData_base64
+my $value1 = decode_base64("$receiptData");
+
+
+# 将receiptData_base64处理成标准的json字符，receiptData_base64_json
+print 'step 2-------将receiptData_base64处理成标准的json字符',"\n";
+$value1    =~ s/\" = \"/\" : \"/g;
+$value1    =~ s/\";/\",/g;
+my @temp = split "}",$value1;
+$value1 = @temp[0];
+chop $value1;
+chop $value1;
+$value1=$value1."}";
+# print $value1,"\n";
+
+# 读取receiptData_base64_json的purchase-info
+print 'step 3 purchaseInfo -------',"\n";
+$decoded_json = decode_json($value1);
+my $purchaseInfo = $decoded_json->{'purchase-info'};
+# print $purchaseInfo,"\n";
+
+# 将 purchase-info 做base64解码，得到最终结果
+my $result = decode_base64("$purchaseInfo");
+print $result;
+
+
+
+close(FH);
+
+system(pause);

@@ -1,0 +1,21 @@
+# 请修改 project_file_path 为工程在本机的实际路径
+project_file_path: /dir1/dir2/ios-bi-demo.xcodeproj
+
+# 请修改工程的 targetName
+targetName: ios-bi-demo
+
+xgsdk_sdkAppid: demo_xgsdk_appid
+xgsdk_sdkAppkey: demo_xgsdk_appkey
+xgsdkBuildNumber: 1.0.0
+xgsdkServerVersion: v1
+xgsdkPlanId: 123
+xgsdk_channelid: demo_channel_id
+bundle_id: demo_bundle_id
+appId: demo_appid
+appKey: demo_appkey
+
+# 服务端地址
+XgRechargeUrl: http://p2.xgsdk.com
+XgAuthUrl: http://a2.xgsdk.com
+XgDataUrl: http://data.xgsdk.com
+XgPortalUrl: http://console.xgsdk.com

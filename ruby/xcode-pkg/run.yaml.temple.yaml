@@ -1,0 +1,46 @@
+
+# --编译选项
+otherLinkFlag: [-ObjC,-lz]
+
+# --每两个"$"中间的key,代表该key需要读取 config.yaml 配置。暂时只支持一个变量
+urlTypeList: [{CFBundleURLName: ,CFBundleURLSchemes: [$bundle_id$.alipay],CFBundleTypeRole: Editor}]
+
+# --每两个"$"中间的key,代表该key需要读取 config.yaml 配置。暂时只支持一个变量
+plistKeyList: {xgsdkChannelId: $xgsdk_channelid$,xgsdkAppId: $xgsdk_sdkAppid$,xgsdkAppKey: $xgsdk_sdkAppkey$,xgsdkAuthUrl: $XgAuthUrl$,
+           xgsdkRechargeUrl: $XgRechargeUrl$,xgsdkDataUrl: $XgDataUrl$,channelAppId: $appId$,channelAppkey: $appKey$,channelAppScheme: $bundle_id$.alipay,
+           xgsdkOrientation: $xgsdk_orientation$}
+
+# 是否需要同步版本号。将infoPlist的bundelVersion和CFBundleShortVersionString保持一致。若不配置，默认为false
+isVersionSynchronizesNeed: true
+
+# --用户库
+user_libs: [libsdk-xy.a,libxgCommon.a]
+# --系统库
+system_libs: [libicucore.dylib,libstdc++.6.dylib,libsqlite3.0.dylib]
+# --用户framework
+user_frameworks: [XYPlatform.framework]
+# --系统framework
+sys_frameworks: [QuartzCore.framework,SystemConfiguration.framework,Security.framework,
+                 AddressBook.framework,MobileCoreServices.framework]
+# --bundle资源
+user_bundles: [XYPlatformResources.bundle]
+# --动态framework
+embbed_frameworks: []
+# exemple=> embbed_frameworks: [XYPlatform.framework]
+# --源文件
+source_files: []
+# exemple=> source_files: [{file_name: test1.m, complier_flag: -fno-objc-arc},
+#                {file_name: test2.m, complier_flag: -fno-objc-arc}]
+
+# isNeedPortrait: true
+
+# ios9Urlschemes: ["alipay","aliminipayauth","wechat","weixin","xyzsapp","alipayauth"]
+# ios9HttpEnable: true
+# isDisableBitCode: true
+
+
+# --发布语言
+# Localization_native_development_region: taiwan
+
+# --c++标准库
+# CxxLibraryConfig: libc++
