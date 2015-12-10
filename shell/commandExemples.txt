@@ -1,5 +1,8 @@
 http://man.linuxde.net/grep
 
+创建递进目录：
+mkdir -p src/main/java/hello
+
 grep命令：
 
 1.显示文件a.file中，hello前后20行的数据：
