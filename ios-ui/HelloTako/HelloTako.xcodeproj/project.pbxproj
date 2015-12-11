@@ -1,0 +1,428 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ADC7F0DA1C1956640024A43F /* VersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC7F0D81C1956640024A43F /* VersionViewController.m */; settings = {ASSET_TAGS = (); }; };
+		ADC7F0DB1C1956640024A43F /* VersionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC7F0D91C1956640024A43F /* VersionViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		ADC7F0DF1C195B0F0024A43F /* DistributeAppsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC7F0DD1C195B0F0024A43F /* DistributeAppsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		ADC7F0E01C195B0F0024A43F /* DistributeAppsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC7F0DE1C195B0F0024A43F /* DistributeAppsViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		ADC7F0E61C196BDE0024A43F /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC7F0E41C196BDE0024A43F /* ReportViewController.m */; settings = {ASSET_TAGS = (); }; };
+		ADC7F0E71C196BDE0024A43F /* ReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC7F0E51C196BDE0024A43F /* ReportViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		ADC7F0EB1C196CE90024A43F /* ReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC7F0E91C196CE90024A43F /* ReportTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		ADC7F0EC1C196CE90024A43F /* ReportTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC7F0EA1C196CE90024A43F /* ReportTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		ADC7F0F01C198A8C0024A43F /* GameDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC7F0EE1C198A8C0024A43F /* GameDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
+		ADC7F0F11C198A8C0024A43F /* GameDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC7F0EF1C198A8C0024A43F /* GameDetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		ADC7F0F81C199A140024A43F /* TimeLineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC7F0F61C199A140024A43F /* TimeLineTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		ADC7F0F91C199A140024A43F /* TimeLineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC7F0F71C199A140024A43F /* TimeLineTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		ADD8A9471C1ACFB7007D3163 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD8A9461C1ACFB7007D3163 /* UIHelper.m */; settings = {ASSET_TAGS = (); }; };
+		ADE01D6A1C181077009F425E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE01D691C181077009F425E /* main.m */; };
+		ADE01D6D1C181077009F425E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE01D6C1C181077009F425E /* AppDelegate.m */; };
+		ADE01D701C181077009F425E /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE01D6F1C181077009F425E /* FirstViewController.m */; };
+		ADE01D731C181077009F425E /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE01D721C181077009F425E /* SecondViewController.m */; };
+		ADE01D761C181077009F425E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADE01D741C181077009F425E /* Main.storyboard */; };
+		ADE01D781C181077009F425E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADE01D771C181077009F425E /* Assets.xcassets */; };
+		ADE01D7B1C181077009F425E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADE01D791C181077009F425E /* LaunchScreen.storyboard */; };
+		ADE01D8C1C18185A009F425E /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE01D8B1C18185A009F425E /* ThirdViewController.m */; settings = {ASSET_TAGS = (); }; };
+		ADE01DB91C183247009F425E /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE01DB71C183247009F425E /* TableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		ADE01DBA1C183247009F425E /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADE01DB81C183247009F425E /* TableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		ADC7F0D71C1956640024A43F /* VersionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionViewController.h; sourceTree = "<group>"; };
+		ADC7F0D81C1956640024A43F /* VersionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionViewController.m; sourceTree = "<group>"; };
+		ADC7F0D91C1956640024A43F /* VersionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VersionViewController.xib; sourceTree = "<group>"; };
+		ADC7F0DC1C195B0F0024A43F /* DistributeAppsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistributeAppsViewController.h; sourceTree = "<group>"; };
+		ADC7F0DD1C195B0F0024A43F /* DistributeAppsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistributeAppsViewController.m; sourceTree = "<group>"; };
+		ADC7F0DE1C195B0F0024A43F /* DistributeAppsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DistributeAppsViewController.xib; sourceTree = "<group>"; };
+		ADC7F0E31C196BDE0024A43F /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
+		ADC7F0E41C196BDE0024A43F /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewController.m; sourceTree = "<group>"; };
+		ADC7F0E51C196BDE0024A43F /* ReportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportViewController.xib; sourceTree = "<group>"; };
+		ADC7F0E81C196CE90024A43F /* ReportTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportTableViewCell.h; sourceTree = "<group>"; };
+		ADC7F0E91C196CE90024A43F /* ReportTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportTableViewCell.m; sourceTree = "<group>"; };
+		ADC7F0EA1C196CE90024A43F /* ReportTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportTableViewCell.xib; sourceTree = "<group>"; };
+		ADC7F0ED1C198A8C0024A43F /* GameDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameDetailViewController.h; sourceTree = "<group>"; };
+		ADC7F0EE1C198A8C0024A43F /* GameDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameDetailViewController.m; sourceTree = "<group>"; };
+		ADC7F0EF1C198A8C0024A43F /* GameDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameDetailViewController.xib; sourceTree = "<group>"; };
+		ADC7F0F51C199A140024A43F /* TimeLineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLineTableViewCell.h; sourceTree = "<group>"; };
+		ADC7F0F61C199A140024A43F /* TimeLineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeLineTableViewCell.m; sourceTree = "<group>"; };
+		ADC7F0F71C199A140024A43F /* TimeLineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeLineTableViewCell.xib; sourceTree = "<group>"; };
+		ADD8A9461C1ACFB7007D3163 /* UIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIHelper.m; sourceTree = "<group>"; };
+		ADD8A9481C1AD028007D3163 /* UIHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIHelper.h; sourceTree = "<group>"; };
+		ADE01D651C181077009F425E /* HelloTako.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTako.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADE01D691C181077009F425E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		ADE01D6B1C181077009F425E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		ADE01D6C1C181077009F425E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		ADE01D6E1C181077009F425E /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		ADE01D6F1C181077009F425E /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		ADE01D711C181077009F425E /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		ADE01D721C181077009F425E /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		ADE01D751C181077009F425E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ADE01D771C181077009F425E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ADE01D7A1C181077009F425E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		ADE01D7C1C181077009F425E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ADE01D8A1C181845009F425E /* ThirdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ThirdViewController.h; path = ../ThirdViewController.h; sourceTree = "<group>"; };
+		ADE01D8B1C18185A009F425E /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThirdViewController.m; path = ../ThirdViewController.m; sourceTree = "<group>"; };
+		ADE01DB61C183247009F425E /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewCell.h; path = ../TableViewCell.h; sourceTree = "<group>"; };
+		ADE01DB71C183247009F425E /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewCell.m; path = ../TableViewCell.m; sourceTree = "<group>"; };
+		ADE01DB81C183247009F425E /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TableViewCell.xib; path = ../TableViewCell.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ADE01D621C181077009F425E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ADC7F0E11C19648A0024A43F /* barViews */ = {
+			isa = PBXGroup;
+			children = (
+				ADE01D8A1C181845009F425E /* ThirdViewController.h */,
+				ADE01D8B1C18185A009F425E /* ThirdViewController.m */,
+				ADE01D6E1C181077009F425E /* FirstViewController.h */,
+				ADE01D6F1C181077009F425E /* FirstViewController.m */,
+				ADE01D711C181077009F425E /* SecondViewController.h */,
+				ADE01D721C181077009F425E /* SecondViewController.m */,
+			);
+			name = barViews;
+			sourceTree = "<group>";
+		};
+		ADC7F0E21C1964C20024A43F /* detailViews */ = {
+			isa = PBXGroup;
+			children = (
+				ADC7F0DC1C195B0F0024A43F /* DistributeAppsViewController.h */,
+				ADC7F0DD1C195B0F0024A43F /* DistributeAppsViewController.m */,
+				ADC7F0DE1C195B0F0024A43F /* DistributeAppsViewController.xib */,
+				ADC7F0D71C1956640024A43F /* VersionViewController.h */,
+				ADC7F0D81C1956640024A43F /* VersionViewController.m */,
+				ADC7F0D91C1956640024A43F /* VersionViewController.xib */,
+				ADC7F0E31C196BDE0024A43F /* ReportViewController.h */,
+				ADC7F0E41C196BDE0024A43F /* ReportViewController.m */,
+				ADC7F0E51C196BDE0024A43F /* ReportViewController.xib */,
+				ADC7F0ED1C198A8C0024A43F /* GameDetailViewController.h */,
+				ADC7F0EE1C198A8C0024A43F /* GameDetailViewController.m */,
+				ADC7F0EF1C198A8C0024A43F /* GameDetailViewController.xib */,
+			);
+			name = detailViews;
+			sourceTree = "<group>";
+		};
+		ADD8A9451C1ACF95007D3163 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				ADD8A9461C1ACFB7007D3163 /* UIHelper.m */,
+				ADD8A9481C1AD028007D3163 /* UIHelper.h */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		ADE01D5C1C181077009F425E = {
+			isa = PBXGroup;
+			children = (
+				ADE01D671C181077009F425E /* HelloTako */,
+				ADE01D661C181077009F425E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ADE01D661C181077009F425E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ADE01D651C181077009F425E /* HelloTako.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADE01D671C181077009F425E /* HelloTako */ = {
+			isa = PBXGroup;
+			children = (
+				ADD8A9451C1ACF95007D3163 /* Utils */,
+				ADC7F0E21C1964C20024A43F /* detailViews */,
+				ADC7F0E11C19648A0024A43F /* barViews */,
+				ADE01DAA1C181F23009F425E /* cell */,
+				ADE01D6B1C181077009F425E /* AppDelegate.h */,
+				ADE01D6C1C181077009F425E /* AppDelegate.m */,
+				ADE01D741C181077009F425E /* Main.storyboard */,
+				ADE01D771C181077009F425E /* Assets.xcassets */,
+				ADE01D791C181077009F425E /* LaunchScreen.storyboard */,
+				ADE01D7C1C181077009F425E /* Info.plist */,
+				ADE01D681C181077009F425E /* Supporting Files */,
+			);
+			path = HelloTako;
+			sourceTree = "<group>";
+		};
+		ADE01D681C181077009F425E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ADE01D691C181077009F425E /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ADE01DAA1C181F23009F425E /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				ADE01DB61C183247009F425E /* TableViewCell.h */,
+				ADE01DB71C183247009F425E /* TableViewCell.m */,
+				ADE01DB81C183247009F425E /* TableViewCell.xib */,
+				ADC7F0E81C196CE90024A43F /* ReportTableViewCell.h */,
+				ADC7F0E91C196CE90024A43F /* ReportTableViewCell.m */,
+				ADC7F0EA1C196CE90024A43F /* ReportTableViewCell.xib */,
+				ADC7F0F51C199A140024A43F /* TimeLineTableViewCell.h */,
+				ADC7F0F61C199A140024A43F /* TimeLineTableViewCell.m */,
+				ADC7F0F71C199A140024A43F /* TimeLineTableViewCell.xib */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ADE01D641C181077009F425E /* HelloTako */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADE01D7F1C181077009F425E /* Build configuration list for PBXNativeTarget "HelloTako" */;
+			buildPhases = (
+				ADE01D611C181077009F425E /* Sources */,
+				ADE01D621C181077009F425E /* Frameworks */,
+				ADE01D631C181077009F425E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HelloTako;
+			productName = HelloTako;
+			productReference = ADE01D651C181077009F425E /* HelloTako.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ADE01D5D1C181077009F425E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "熊海涛";
+				TargetAttributes = {
+					ADE01D641C181077009F425E = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+				};
+			};
+			buildConfigurationList = ADE01D601C181077009F425E /* Build configuration list for PBXProject "HelloTako" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ADE01D5C1C181077009F425E;
+			productRefGroup = ADE01D661C181077009F425E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ADE01D641C181077009F425E /* HelloTako */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ADE01D631C181077009F425E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADC7F0F91C199A140024A43F /* TimeLineTableViewCell.xib in Resources */,
+				ADC7F0E01C195B0F0024A43F /* DistributeAppsViewController.xib in Resources */,
+				ADC7F0F11C198A8C0024A43F /* GameDetailViewController.xib in Resources */,
+				ADC7F0E71C196BDE0024A43F /* ReportViewController.xib in Resources */,
+				ADE01DBA1C183247009F425E /* TableViewCell.xib in Resources */,
+				ADC7F0DB1C1956640024A43F /* VersionViewController.xib in Resources */,
+				ADE01D7B1C181077009F425E /* LaunchScreen.storyboard in Resources */,
+				ADE01D781C181077009F425E /* Assets.xcassets in Resources */,
+				ADE01D761C181077009F425E /* Main.storyboard in Resources */,
+				ADC7F0EC1C196CE90024A43F /* ReportTableViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ADE01D611C181077009F425E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADE01DB91C183247009F425E /* TableViewCell.m in Sources */,
+				ADE01D731C181077009F425E /* SecondViewController.m in Sources */,
+				ADC7F0F01C198A8C0024A43F /* GameDetailViewController.m in Sources */,
+				ADE01D8C1C18185A009F425E /* ThirdViewController.m in Sources */,
+				ADC7F0F81C199A140024A43F /* TimeLineTableViewCell.m in Sources */,
+				ADE01D6D1C181077009F425E /* AppDelegate.m in Sources */,
+				ADC7F0DF1C195B0F0024A43F /* DistributeAppsViewController.m in Sources */,
+				ADC7F0E61C196BDE0024A43F /* ReportViewController.m in Sources */,
+				ADE01D701C181077009F425E /* FirstViewController.m in Sources */,
+				ADD8A9471C1ACFB7007D3163 /* UIHelper.m in Sources */,
+				ADC7F0EB1C196CE90024A43F /* ReportTableViewCell.m in Sources */,
+				ADE01D6A1C181077009F425E /* main.m in Sources */,
+				ADC7F0DA1C1956640024A43F /* VersionViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		ADE01D741C181077009F425E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ADE01D751C181077009F425E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		ADE01D791C181077009F425E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ADE01D7A1C181077009F425E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ADE01D7D1C181077009F425E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ADE01D7E1C181077009F425E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ADE01D801C181077009F425E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = HelloTako/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.self.HelloTako;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		ADE01D811C181077009F425E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = HelloTako/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.self.HelloTako;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADE01D601C181077009F425E /* Build configuration list for PBXProject "HelloTako" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADE01D7D1C181077009F425E /* Debug */,
+				ADE01D7E1C181077009F425E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADE01D7F1C181077009F425E /* Build configuration list for PBXNativeTarget "HelloTako" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADE01D801C181077009F425E /* Debug */,
+				ADE01D811C181077009F425E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ADE01D5D1C181077009F425E /* Project object */;
+}
