@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface TimeLineTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *button;
 
 @end

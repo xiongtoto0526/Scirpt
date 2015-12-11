@@ -53,9 +53,6 @@
     // firstViewController中已经注册，无需再次注册？
     TableViewCell *cell = (TableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // 增加外边框
-    [XHTUIHelper addBorderonButton:cell.button];
-    
     //    cell.textLabel.text = [self.listData objectAtIndex:indexPath.row];
     UIImage *image = [UIImage imageNamed:@"3"];
     cell.appImage.image = image;

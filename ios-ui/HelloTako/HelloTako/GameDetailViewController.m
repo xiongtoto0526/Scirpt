@@ -39,7 +39,6 @@
     
     // 隐藏多余的单元格
     [XHTUIHelper setExtraCellLineHidden:self.tableView];
-    
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:@"TimeLineTableViewCell" bundle:nil] forCellReuseIdentifier:@"TimeLineTableViewCell"];
     // Do any additional setup after loading the view from its nib.

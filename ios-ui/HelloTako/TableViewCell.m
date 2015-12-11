@@ -7,11 +7,12 @@
 //
 
 #import "TableViewCell.h"
-
+#import "UIHelper.h"
 @implementation TableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
+    [XHTUIHelper addBorderonButton:self.button];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -7,11 +7,12 @@
 //
 
 #import "TimeLineTableViewCell.h"
-
+#import "UIHelper.h"
 @implementation TimeLineTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
+    [XHTUIHelper addBorderonButton:self.button];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

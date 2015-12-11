@@ -7,11 +7,13 @@
 //
 
 #import "ReportTableViewCell.h"
+#import "UIHelper.h"
 
 @implementation ReportTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
+//    [XHTUIHelper addBorderonButton:self.b];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

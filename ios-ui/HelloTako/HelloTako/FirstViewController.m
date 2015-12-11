@@ -86,9 +86,6 @@
     cell.appName.text= @"测试游戏";
     cell.otherInfo.text=@"2015-12-08  3MB";
     cell.appVersion.text=@"1.2.1";
-
-    // 增加外边框
-    [XHTUIHelper addBorderonButton:cell.button];
     
     return cell;
 }

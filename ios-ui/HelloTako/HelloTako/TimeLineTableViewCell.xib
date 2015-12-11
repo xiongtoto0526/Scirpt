@@ -49,11 +49,15 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yUa-1D-kbs">
-                        <rect key="frame" x="271" y="28" width="43" height="30"/>
+                        <rect key="frame" x="264" y="28.5" width="47" height="26.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <state key="normal" title="下载"/>
                     </button>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="button" destination="yUa-1D-kbs" id="W1g-Zl-Jbl"/>
+            </connections>
             <point key="canvasLocation" x="230" y="162.5"/>
         </tableViewCell>
     </objects>
