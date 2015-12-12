@@ -16,6 +16,7 @@
 {
     NSArray* listData;
 }
+@property UIRefreshControl* refreshControl;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @end
 
@@ -24,12 +25,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     listData = @[@"app1",@"app2",@"app3"];
+    
+    // 初始化刷新控制器.
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor whiteColor];
+    self.refreshControl.tintColor = [UIColor blackColor];
+    [self.refreshControl addTarget:self
+                            action:@selector(reloadDataWhenRefresh)
+                  forControlEvents:UIControlEventValueChanged];
+    
+    // 隐藏刷新按钮
+    [self.refreshControl endRefreshing];
+    
+    // 添加refresh
+    [self.tableview addSubview:self.refreshControl];
+
+    
     // 隐藏多余的单元格
     [XHTUIHelper setExtraCellLineHidden:self.tableview];
     
     // 注册cell
     [self.tableview registerNib:[UINib nibWithNibName:@"TableViewCell" bundle:nil] forCellReuseIdentifier:@"fTablecell"];
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+-(void)reloadDataWhenRefresh{
+    NSLog(@"即将更新表数据...");
 }
 
 - (void)didReceiveMemoryWarning {

@@ -14,5 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *otherInfo;
 @property (weak, nonatomic) IBOutlet UIImageView *appImage;
 @property (weak, nonatomic) IBOutlet UIButton *button;
+@property (weak, nonatomic) IBOutlet UIButton *btnCancel;
+@property (weak, nonatomic) IBOutlet UIProgressView *progressControl;
+@property (weak, nonatomic) IBOutlet UILabel *textDownload;
 
 @end

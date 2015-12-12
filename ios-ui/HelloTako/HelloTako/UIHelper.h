@@ -10,5 +10,5 @@
 
 +(void) addBorderonButton:(UIButton*) btn;
 + (void)setExtraCellLineHidden: (UITableView *)tableView;
-
++ (UIViewController *)getCurrentVC;
 @end

@@ -36,7 +36,7 @@
     // 隐藏刷新按钮
     [self.refreshControl endRefreshing];
     
-    // 添加
+    // 添加refresh
     [self.tableview addSubview:self.refreshControl];
     
     // 隐藏多余的单元格
@@ -87,12 +87,21 @@
     cell.otherInfo.text=@"2015-12-08  3MB";
     cell.appVersion.text=@"1.2.1";
     
+    
     return cell;
 }
 
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"hello , refresh...");
+}
+
+
+-(void) showDownload:(TableViewCell*) cell{
+    // 显示下载栏
+    [cell.btnCancel setHidden:NO];
+    [cell.progressControl setHidden:NO];
+    [cell.textDownload setHidden:NO];
 }
 
 
