@@ -11,4 +11,5 @@
 +(void) addBorderonButton:(UIButton*) btn;
 + (void)setExtraCellLineHidden: (UITableView *)tableView;
 + (UIViewController *)getCurrentVC;
++ (CGSize) viewSizeWith: (UIView*) view;
 @end

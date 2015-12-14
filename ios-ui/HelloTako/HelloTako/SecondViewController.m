@@ -74,13 +74,16 @@
     // firstViewController中已经注册，无需再次注册？
     TableViewCell *cell = (TableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    //    cell.textLabel.text = [self.listData objectAtIndex:indexPath.row];
     UIImage *image = [UIImage imageNamed:@"3"];
     cell.appImage.image = image;
     cell.appName.text= @"测试游戏";
     cell.otherInfo.text=@"2015-12-08  3MB";
     cell.appVersion.text=@"1.2.1";
     [cell.button setTitle:@"反馈" forState:UIControlStateNormal];
+
+    // 去除原cell中下载按钮的事件
+    [cell.button removeTarget:nil action:nil forControlEvents:UIControlEventTouchDown];
+    // 增加反馈按钮的事件
     [cell.button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchDown];
 
     return cell;

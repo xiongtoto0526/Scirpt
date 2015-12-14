@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ADA7F4C21C1D9DE60003E0CD /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA7F4C01C1D9DE60003E0CD /* CollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		ADA7F4C31C1D9DE60003E0CD /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADA7F4C11C1D9DE60003E0CD /* CollectionViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		ADA7F4C91C1E7E0A0003E0CD /* ShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADA7F4C81C1E7E0A0003E0CD /* ShareView.xib */; settings = {ASSET_TAGS = (); }; };
+		ADA7F4D01C1E984D0003E0CD /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA7F4CE1C1E984D0003E0CD /* ShareViewController.m */; settings = {ASSET_TAGS = (); }; };
+		ADA7F4D11C1E984D0003E0CD /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADA7F4CF1C1E984D0003E0CD /* ShareViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		ADC7F0DA1C1956640024A43F /* VersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC7F0D81C1956640024A43F /* VersionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		ADC7F0DB1C1956640024A43F /* VersionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC7F0D91C1956640024A43F /* VersionViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		ADC7F0DF1C195B0F0024A43F /* DistributeAppsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC7F0DD1C195B0F0024A43F /* DistributeAppsViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -33,6 +38,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ADA7F4BF1C1D9DE60003E0CD /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
+		ADA7F4C01C1D9DE60003E0CD /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
+		ADA7F4C11C1D9DE60003E0CD /* CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
+		ADA7F4C81C1E7E0A0003E0CD /* ShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareView.xib; sourceTree = "<group>"; };
+		ADA7F4CD1C1E984D0003E0CD /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		ADA7F4CE1C1E984D0003E0CD /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		ADA7F4CF1C1E984D0003E0CD /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
 		ADC7F0D71C1956640024A43F /* VersionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionViewController.h; sourceTree = "<group>"; };
 		ADC7F0D81C1956640024A43F /* VersionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionViewController.m; sourceTree = "<group>"; };
 		ADC7F0D91C1956640024A43F /* VersionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VersionViewController.xib; sourceTree = "<group>"; };
@@ -83,6 +95,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ADA7F4CA1C1E84230003E0CD /* xib */ = {
+			isa = PBXGroup;
+			children = (
+				ADA7F4C81C1E7E0A0003E0CD /* ShareView.xib */,
+			);
+			name = xib;
+			sourceTree = "<group>";
+		};
 		ADC7F0E11C19648A0024A43F /* barViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +119,9 @@
 		ADC7F0E21C1964C20024A43F /* detailViews */ = {
 			isa = PBXGroup;
 			children = (
+				ADA7F4CD1C1E984D0003E0CD /* ShareViewController.h */,
+				ADA7F4CE1C1E984D0003E0CD /* ShareViewController.m */,
+				ADA7F4CF1C1E984D0003E0CD /* ShareViewController.xib */,
 				ADC7F0DC1C195B0F0024A43F /* DistributeAppsViewController.h */,
 				ADC7F0DD1C195B0F0024A43F /* DistributeAppsViewController.m */,
 				ADC7F0DE1C195B0F0024A43F /* DistributeAppsViewController.xib */,
@@ -143,6 +166,7 @@
 		ADE01D671C181077009F425E /* HelloTako */ = {
 			isa = PBXGroup;
 			children = (
+				ADA7F4CA1C1E84230003E0CD /* xib */,
 				ADD8A9451C1ACF95007D3163 /* Utils */,
 				ADC7F0E21C1964C20024A43F /* detailViews */,
 				ADC7F0E11C19648A0024A43F /* barViews */,
@@ -169,6 +193,9 @@
 		ADE01DAA1C181F23009F425E /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				ADA7F4BF1C1D9DE60003E0CD /* CollectionViewCell.h */,
+				ADA7F4C01C1D9DE60003E0CD /* CollectionViewCell.m */,
+				ADA7F4C11C1D9DE60003E0CD /* CollectionViewCell.xib */,
 				ADE01DB61C183247009F425E /* TableViewCell.h */,
 				ADE01DB71C183247009F425E /* TableViewCell.m */,
 				ADE01DB81C183247009F425E /* TableViewCell.xib */,
@@ -241,10 +268,13 @@
 			files = (
 				ADC7F0F91C199A140024A43F /* TimeLineTableViewCell.xib in Resources */,
 				ADC7F0E01C195B0F0024A43F /* DistributeAppsViewController.xib in Resources */,
+				ADA7F4C31C1D9DE60003E0CD /* CollectionViewCell.xib in Resources */,
 				ADC7F0F11C198A8C0024A43F /* GameDetailViewController.xib in Resources */,
 				ADC7F0E71C196BDE0024A43F /* ReportViewController.xib in Resources */,
 				ADE01DBA1C183247009F425E /* TableViewCell.xib in Resources */,
+				ADA7F4D11C1E984D0003E0CD /* ShareViewController.xib in Resources */,
 				ADC7F0DB1C1956640024A43F /* VersionViewController.xib in Resources */,
+				ADA7F4C91C1E7E0A0003E0CD /* ShareView.xib in Resources */,
 				ADE01D7B1C181077009F425E /* LaunchScreen.storyboard in Resources */,
 				ADE01D781C181077009F425E /* Assets.xcassets in Resources */,
 				ADE01D761C181077009F425E /* Main.storyboard in Resources */,
@@ -264,6 +294,7 @@
 				ADC7F0F01C198A8C0024A43F /* GameDetailViewController.m in Sources */,
 				ADE01D8C1C18185A009F425E /* ThirdViewController.m in Sources */,
 				ADC7F0F81C199A140024A43F /* TimeLineTableViewCell.m in Sources */,
+				ADA7F4C21C1D9DE60003E0CD /* CollectionViewCell.m in Sources */,
 				ADE01D6D1C181077009F425E /* AppDelegate.m in Sources */,
 				ADC7F0DF1C195B0F0024A43F /* DistributeAppsViewController.m in Sources */,
 				ADC7F0E61C196BDE0024A43F /* ReportViewController.m in Sources */,
@@ -271,6 +302,7 @@
 				ADD8A9471C1ACFB7007D3163 /* UIHelper.m in Sources */,
 				ADC7F0EB1C196CE90024A43F /* ReportTableViewCell.m in Sources */,
 				ADE01D6A1C181077009F425E /* main.m in Sources */,
+				ADA7F4D01C1E984D0003E0CD /* ShareViewController.m in Sources */,
 				ADC7F0DA1C1956640024A43F /* VersionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,6 +10,7 @@
 #import "TimeLineTableViewCell.h"
 #import "UIHelper.h"
 
+
 @interface GameDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 // head view
@@ -116,6 +117,28 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
     
+}
+
+
+-(IBAction) openShareView:(id)sender{
+    NSLog(@"即将进入“分享”界面...");
+    
+    
+ 
+    BOOL isLoadingView=false;
+    if (!isLoadingView) {
+        
+        //加载xib，背景色为透明色。
+        NSArray *nibViews=[[NSBundle mainBundle] loadNibNamed:@"ShareView" owner:nil options:nil];
+        UIView* subView=[nibViews objectAtIndex:0];
+        [self.view addSubview:subView];
+        isLoadingView=true;
+        
+    } else{
+        
+        NSLog(@"视图已经加载");
+    }
+
 }
 
 /*

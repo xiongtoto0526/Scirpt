@@ -61,4 +61,11 @@
     return result;
 }
 
++ (CGSize) viewSizeWith: (UIView*) view{
+    CGSize screensize = view.bounds.size;
+    //float height = screensize.height;
+    //float width = screensize.width;
+    return screensize;
+}
+
 @end
