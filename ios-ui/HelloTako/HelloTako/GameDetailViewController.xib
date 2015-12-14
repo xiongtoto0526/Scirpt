@@ -22,18 +22,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <segmentedControl contentMode="scaleToFill" semanticContentAttribute="spatial" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="S6b-9b-xzk">
-                    <rect key="frame" x="0.0" y="144" width="320" height="29"/>
-                    <segments>
-                        <segment title="更新记录"/>
-                        <segment title="应用介绍"/>
-                    </segments>
-                    <connections>
-                        <action selector="segmentAction:" destination="-1" eventType="valueChanged" id="vjy-ar-PFE"/>
-                    </connections>
-                </segmentedControl>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PuZ-GF-o4q">
-                    <rect key="frame" x="0.0" y="173" width="320" height="395"/>
+                    <rect key="frame" x="0.0" y="182" width="320" height="386"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="bzO-KM-MlH"/>
@@ -41,10 +31,10 @@
                     </connections>
                 </tableView>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8mg-4W-GjK">
-                    <rect key="frame" x="0.0" y="188" width="320" height="380"/>
+                    <rect key="frame" x="0.0" y="193" width="320" height="375"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="一个简单介绍, cell中各控件组合处理。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFM-AI-YWn">
-                            <rect key="frame" x="6" y="5" width="312" height="21"/>
+                            <rect key="frame" x="0.0" y="53" width="312" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
@@ -52,8 +42,8 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j70-7V-xrw">
-                    <rect key="frame" x="0.0" y="19" width="320" height="126"/>
+                <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j70-7V-xrw">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="126"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="demo游戏" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hys-5e-HEv">
                             <rect key="frame" x="155" y="40" width="78" height="21"/>
@@ -96,9 +86,33 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.21808942166854012" green="0.49993011516045344" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="126" id="V6t-P9-wyJ"/>
+                    </constraints>
                 </view>
+                <segmentedControl contentMode="scaleToFill" semanticContentAttribute="spatial" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="S6b-9b-xzk">
+                    <rect key="frame" x="0.0" y="126" width="320" height="49"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="ghq-sB-2M5"/>
+                    </constraints>
+                    <segments>
+                        <segment title="更新记录"/>
+                        <segment title="应用介绍"/>
+                    </segments>
+                    <connections>
+                        <action selector="segmentAction:" destination="-1" eventType="valueChanged" id="vjy-ar-PFE"/>
+                    </connections>
+                </segmentedControl>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="j70-7V-xrw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3Hx-EK-3oX"/>
+                <constraint firstItem="S6b-9b-xzk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CcQ-dp-JCh"/>
+                <constraint firstAttribute="trailing" secondItem="S6b-9b-xzk" secondAttribute="trailing" id="Eje-I2-e42"/>
+                <constraint firstItem="j70-7V-xrw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="FAF-cx-E6o"/>
+                <constraint firstItem="S6b-9b-xzk" firstAttribute="top" secondItem="j70-7V-xrw" secondAttribute="bottom" id="ewP-JO-SSj"/>
+                <constraint firstAttribute="trailing" secondItem="j70-7V-xrw" secondAttribute="trailing" id="kyM-n0-zZo"/>
+            </constraints>
             <point key="canvasLocation" x="280" y="201"/>
         </view>
     </objects>
