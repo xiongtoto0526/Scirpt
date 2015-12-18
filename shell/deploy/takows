@@ -1,12 +1,16 @@
 #!/bin/bash
-#
-# takows    Tako Web Service
-#
-# chkconfig: 345 70 30
-# description: tako is a beta test tools for mobile game
-# processname: takows
+# 参考文档：http://www.cnblogs.com/itech/archive/2011/01/17/1937447.html
+# 使用守护进程管理程序
+# 使用方法：
+# 1. 拷贝本文件到linux机器的/etc/init.d文件夹
+# 2. 注册service
+#chkconfig --add takows   // 注册
+#chkconfig --list takows  // 查看
+#chkconfig --del takows  // 删除
+# 3. 使用： service takows start
 
-# Source function library.
+
+
 . /etc/init.d/functions
 
 RETVAL=0
