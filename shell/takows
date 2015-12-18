@@ -1,0 +1,73 @@
+#!/bin/bash
+#
+# takows    Tako Web Service
+#
+# chkconfig: 345 70 30
+# description: tako is a beta test tools for mobile game
+# processname: takows
+
+# Source function library.
+. /etc/init.d/functions
+
+RETVAL=0
+takows_run="/tako/takows"
+takows_rc="/tako/takows_rc"
+prog=$(basename $takows_run)
+
+lockfile="/var/lock/subsys/takows"
+pidfile="/var/run/${prog}.pid"
+
+
+start() {
+        echo -n "Starting $prog: "
+        if [ -f "$takows_rc" ]
+        then
+            if [ -f "$takows_run" ]
+            then
+                rm $takows_run
+            fi
+            mv $takows_rc $takows_run
+        fi
+        daemon $takows_run &> /tako/log/takows.log &
+        RETVAL=$?
+        [ $RETVAL -eq 0 ] && touch $lockfile
+        echo
+        return $RETVAL
+}
+
+stop() {
+        echo -n "Stopping $prog: "
+        killproc $prog
+        RETVAL=$?
+        [ $RETVAL -eq 0 ] && rm -f $lockfile
+        echo
+        return $RETVAL
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status $prog
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: $prog {start|stop|status|restart}"
+        exit 1
+        ;;
+esac
+exit $RETVAL
+
+######################################### INSTALLATION #############################################
+#The tako web service script is placed inside the /etc/init.d/ directory, and given the name takows
+#Then, the script is added to the list using the chkconfig command.
+#chkconfig --add takows
+#chkconfig --list takows
+######################################### INSTALLATION #############################################
