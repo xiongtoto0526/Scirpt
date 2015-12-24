@@ -1,29 +1,28 @@
 package main
+
 import (
 	"bufio"
 	"io"
-//	"io/ioutil"
-	"strconv"
-	"time"
-	"os"
+	//	"io/ioutil"
 	"bytes"
-	"encoding/base64"
-	"fmt"
 	"crypto/cipher"
 	"crypto/des"
-	"errors"
-	"strings"
 	"crypto/hmac"
 	"crypto/sha1"
+	"encoding/base64"
 	"encoding/hex"
+	"errors"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+	"time"
 )
 
 const HMAC_KEY = "xgsdkNiuxgsdkNiu"
 const USER_PWD_KEY = "KEGD^&#O"
 const DES_KEY = "JME*#$KF" // des crypt key lenght must be 8 in xunce system
 var firstIn bool = true
-
-
 
 var help = `
 	usage: ./readFile [inputFile] [outputFile]
@@ -37,7 +36,6 @@ var help = `
 	other - failed
 
 	`
-
 
 func main() {
 
@@ -60,14 +58,12 @@ func main() {
 	}
 	os.Create(outputFile)
 
-
 	writeNewLine("#delete from user_tako where userid like 'tako_%';")
 	// processLine函数中处理回调
 	ReadLine(inputFile, processLine)
 
 	fmt.Print("00:success")
 }
-
 
 // 成功读取一行后的回调函数
 func processLine(line []byte) {
@@ -80,17 +76,17 @@ func processLine(line []byte) {
 	filedArray1 := strings.Split(temp, ",")
 
 	// 处理userId
-	filedArray1[0] = processUserId(filedArray1[0])//回写
+	filedArray1[0] = processUserId(filedArray1[0]) //回写
 	if filedArray1[0] == "tako__id" {
 		// 首行忽略
-		return;
+		return
 	}
 
 	// 处理password
-	filedArray1[3] = processPassword(filedArray1[3])//回写
+	filedArray1[3] = processPassword(filedArray1[3]) //回写
 
 	// 处理createtime
-	filedArray1[4] = processCreatetime(filedArray1[4])//回写
+	filedArray1[4] = processCreatetime(filedArray1[4]) //回写
 
 	// 输出转换后的行
 	newline := generateNewline(filedArray1)
@@ -100,12 +96,9 @@ func processLine(line []byte) {
 
 }
 
-
-
-
 /*
  process Feild
- */
+*/
 
 // 处理密码
 func processPassword(password string) string {
@@ -143,10 +136,9 @@ func processUserId(userId string) string {
 	return userId
 }
 
-
 /*
   some utils
- */
+*/
 
 // 读取行
 func ReadLine(filePth string, hookfn func([]byte)) error {
@@ -158,7 +150,7 @@ func ReadLine(filePth string, hookfn func([]byte)) error {
 	bfRd := bufio.NewReader(f)
 	for {
 		line, err := bfRd.ReadBytes('\n')
-		hookfn(line) //放在错误处理前面，即使发生错误，也会处理已经读取到的数据。
+		hookfn(line)    //放在错误处理前面，即使发生错误，也会处理已经读取到的数据。
 		if err != nil { //遇到任何错误立即返回，并忽略 EOF 错误信息
 			if err == io.EOF {
 				return nil
@@ -173,12 +165,12 @@ func ReadLine(filePth string, hookfn func([]byte)) error {
 func generateNewline(filedArray1 []string) string {
 	var newline string = "INSERT INTO user_tako (userid,username,email,password,createtime,disabled,active,nickname,channel,mobile,realname,gender,image,address)"
 	newline += "VALUES ("
-	for i := 0; i < len(filedArray1) - 1; i++ {
+	for i := 0; i < len(filedArray1)-1; i++ {
 		if filedArray1[i] == "\"\"" {
 			newline += "'',"
-		}else if filedArray1[i] == "true" || filedArray1[i] == "false" {
+		} else if filedArray1[i] == "true" || filedArray1[i] == "false" {
 			newline += filedArray1[i] + ","
-		}else {
+		} else {
 			newline += "'" + filedArray1[i] + "',"
 		}
 	}
@@ -190,7 +182,7 @@ func generateNewline(filedArray1 []string) string {
 
 // 写入文件,append mode
 func writeNewLine(newline string) {
-	f, err := os.OpenFile(os.Args[2], os.O_APPEND | os.O_WRONLY, 0600)
+	f, err := os.OpenFile(os.Args[2], os.O_APPEND|os.O_WRONLY, 0600)
 	if err != nil {
 		panic(err)
 	}
@@ -208,17 +200,17 @@ func writeNewLine(newline string) {
 }
 
 // 检查文件存在
-func IsFileExist(filename string) (bool) {
-	var exist = true;
+func IsFileExist(filename string) bool {
+	var exist = true
 	if _, err := os.Stat(filename); os.IsNotExist(err) {
-		exist = false;
+		exist = false
 	}
-	return exist;
+	return exist
 }
 
 // padding
 func PKCS5Padding(ciphertext []byte, blockSize int) []byte {
-	padding := blockSize - len(ciphertext) % blockSize
+	padding := blockSize - len(ciphertext)%blockSize
 	padtext := bytes.Repeat([]byte{byte(padding)}, padding)
 	return append(ciphertext, padtext...)
 }
@@ -227,7 +219,7 @@ func PKCS5Padding(ciphertext []byte, blockSize int) []byte {
 func PKCS5UnPadding(origData []byte) []byte {
 	length := len(origData)
 	// 去掉最后一个字节 unpadding 次
-	unpadding := int(origData[length - 1])
+	unpadding := int(origData[length-1])
 	return origData[:(length - unpadding)]
 }
 
