@@ -1,0 +1,26 @@
+[root@localhost mongodb]# 
+mongoexport -d tako -c user -o /Users/xionghaitao/Desktop/mogontest/users.dat
+mongoexport -d tako -c user -o /root/mongoData/users.dat
+
+
+1. 本地数据库
+mongoexport -d test -c user -f _id,username,email,password,createtime,disabled,active,nickname,channel,key --type=csv -o ./test-user.csv
+
+2. 远程数据库
+mongoexport --host mongodb1.example.net --port 37017 --username user --password pass --collection contacts --db marketing --out mdb1-examplenet.json
+
+3. 先导出，再导入数据
+// 导出
+mongoexport -d tako -c user -f _id,username,email,password,createtime,disabled,active,nickname,channel,key --type=csv -o ./test-user.csv
+// 导入
+db.user.drop()
+mongoimport --db test --collection user --type csv --headerline --file ./test-user.csv
+
+
+
+mongoexport -d tako -c user -f _id,username,email,password,createtime,disabled,active,nickname,channel,key,info --type=csv -o ./test-user.csv
+mongoexport -d tako -c user -f _id,username,email,password,createtime,disabled,active,nickname,channel,info.mobile,info.realname,info.gender,info.image,info.address,key --type=csv -o ./test-user.csv
+
+
+db.user.find().forEach(function(user) { db.user.update({"_id": user._id}, {$set:{"userName": ObjectId().str}}); });
+db.user.find({username:"yaoshu1221ii54angxi"}).update({"_id": user._id}, {$set:{"userName": "tako_"+user.username}});
