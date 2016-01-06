@@ -1,0 +1,48 @@
+/* 循环次数比实际次数少k次，由n->n-k
+原因：由循环体内的select语句造成，如果条件不满足，会导致sId的赋值为空，提前将stopFlag的值置为1
+解决方法：使用临时变量来存储stopFlag的值 set tmpFlag = stopFlag; 然后在每次循环结束之前将临时变量的值重新赋给stopFlag */
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_pro_insertTakoUsers`()
+begin
+       declare t_userid varchar(50);
+       declare t_username varchar(30);
+       declare t_email varchar(40) ;
+       declare t_mobile varchar(20) ;
+   	   declare t_password varchar(100) ;
+       declare t_nickname varchar(30) ;
+       declare t_realname varchar(20) ;
+       declare t_gender varchar(20) ;
+       declare t_image varchar(200) ;
+       declare t_address varchar(100) ;
+       declare t_active tinyint(1) ;
+
+       declare t_cid bigint(20) default 0;
+       declare t_crol int default 0;    /*是否达到记录的末尾控制变量*/
+
+       DECLARE cur_1 CURSOR FOR select userid,username,email,mobile,nickname,realname,gender,image,address,password,active from user_tako;
+       DECLARE CONTINUE HANDLER FOR NOT FOUND SET t_crol = 1;
+       OPEN cur_1;
+       FETCH cur_1 INTO t_userid,t_username,t_email,t_mobile,t_nickname,t_realname,t_gender,t_image,t_address,t_password,t_active; /*获取第一条记录*/
+	  
+       while t_crol<>1 do
+		
+	   set @tmp_cid = 0;
+	   select concat("** ", '00 will find old, userId is:',t_userid) AS '** DEBUG:';
+       set @tmpFlag=t_crol;/* 保留select 中的临时变量，参考：http://blog.sina.com.cn/s/blog_53b13d950101dw1e.html*/
+       SELECT cid INTO @tmp_cid FROM cc_auth_login_password WHERE login_id = t_userid LIMIT 1;
+       set t_crol=@tmpFlag;/* 回设select 中的临时变量 */
+       
+       if @tmp_cid>0 then/* 先删除旧数据 */
+	   select concat("** ", '01 will delete old, cid is:',t_cid) AS '** DEBUG:';
+       DELETE FROM cc_customer_info WHERE cid = @tmp_cid;
+       DELETE FROM cc_auth_login_password WHERE cid = @tmp_cid;
+	   end if;
+           
+	   select concat('** ', '02 will insert new :') AS '** DEBUG:'; /* 再插入新数据 */
+       insert into cc_customer_info(user_name,email,mobile,nick_name,real_name,sex_select,head_img_url,work_address)  values(t_username,t_email,t_mobile,t_nickname,t_realname,t_gender,t_image,t_address);
+	   SELECT MAX(cid) FROM cc_customer_info INTO t_cid;
+	   insert into cc_auth_login_password (cid,login_id,login_pwd,status) values (t_cid,t_userid,t_password,t_active);
+       FETCH cur_1 INTO t_userid,t_username,t_email,t_mobile,t_nickname,t_realname,t_gender,t_image,t_address,t_password,t_active; /*取下一条记录*/
+       end while;
+       close cur_1;      
+end
