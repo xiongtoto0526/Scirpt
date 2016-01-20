@@ -13,6 +13,8 @@ import (
 	"io/ioutil"
 //	"strconv"
 
+	"strings"
+	"strconv"
 )
 
 
@@ -162,10 +164,17 @@ func TestUpdate(t *testing.T) {
 }
 
 
+type ChanHe struct {
+	Name         string                    `json:"name"`
+	St          int                        `json:"st"`
+	Ed          int                        `json:"ed"`
+}
+
+
 func TestDayDownload(t *testing.T) {
 
 	// 模拟数据
-	startDayStr := "2016-11-26"
+	startDayStr := "2015-11-26"
 	endDayStr := "2016-11-27"
 
 //	//时间段,不转换时区
@@ -207,15 +216,19 @@ func TestDayDownload(t *testing.T) {
 			"total": bson.M{
 				"$sum": 1,
 			},
+			"date":  bson.M{
+				"$first": "$localcreated",
+			},
 		},
 	}
+
 
 	o3 := bson.M{
 		"$project":
 		bson.M{
-			"day":"$_id.dayInfo.day",
-			"month":"$_id.dayInfo.month",
-			"year":"$_id.dayInfo.year",
+//			"day":"$_id.dayInfo.day",
+//			"month":"$_id.dayInfo.month",
+//			"year":"$_id.dayInfo.year",
 //			"fullDate":bson.M{"$concat":[]string{
 //				    {"$substr":[]int{"$_id.dayInfo.month", 0, 2}},
 //					"/",
@@ -223,12 +236,16 @@ func TestDayDownload(t *testing.T) {
 //					{"$substr":[]int{"$_id.dayInfo.year", 0, 4}},
 //			todo: 参考http://stackoverflow.com/questions/26736928/mongodb-group-by-duration-span
 //			}},
+			"_id":0,
 			"count": "$total",
+			"date": bson.M{"$substr":[]interface{}{"$date", 0, 10 } },
 		}}
+
+	  o4 := bson.M{ "$sort" : bson.M{ "date" : 1 } }
 
 //	{ $project: { element_id: '$_id.ord_dt.month', count: '$total' } },
 
-	operations := []bson.M{o1, o2,o3}
+	operations := []bson.M{o1, o2,o3,o4}
 
 	db,err:=mgox.GetDatabase()
 	defer db.Session.Close()
@@ -269,8 +286,22 @@ type CountInfo struct {
 	DownloadCount  int          `json:"downloadcount"`
 }
 
-func TestLocationLogs(t *testing.T)  {
+func TestList(t *testing.T)  {
+	var ipinfos=[5]string{}
+	for i:=0;i<5;i++{
+		ipinfos[i]="1"
+	}
+	println(ipinfos[2])
+}
 
+func TestSlice(t *testing.T)  {
+	a := []int{1, 2, 3, 4}
+//	sa := a[1:3]
+//	fmt.Printf("%p\n", sa) //输出：0xc0840046e0
+	s := append(a, 11, 22, 33)
+	println("okkk")
+	println(a[1])
+	fmt.Printf("sdds%p\n", s[6]) //输
 }
 
 func TestFindAppInfo(t *testing.T) {
@@ -317,6 +348,26 @@ func TestFindAppInfo(t *testing.T) {
 
 }
 
+func TestTimeConvfunc (t *testing.T) {
+//	tm1, err := time.Parse("2015/09/01", "2016/09/01")
+//	tm2, err := time.Parse("2015/09/08", "2015/09/08")
+
+	startDay, err1 := time.Parse("2006-01-02", "2006-01-02")
+	endday, err2 := time.Parse("2006-01-02", "2006-01-03")
+
+	if err1!=nil || err2!=nil {
+		println("time fomat error!!!")
+	}else {
+   fmt.Println("fomat ok!!")
+	}
+
+	if startDay.Before(endday){
+		println("check ok1")
+	}else{
+		println("check err1")
+	}
+
+}
 
 // testTime
 
@@ -353,7 +404,7 @@ func TestInsert(t *testing.T) {
 	}
 
 	results := []bson.M{}
-	mgox.Dao().Find(bson.M{"name":"xiongtoto456"}).Result(&results)
+	mgox.Dao().Find(bson.M{}).Result(&results)
 
 	if len(results) > 0 {
 		output, _ := json.MarshalIndent(results, "", " ")
@@ -377,18 +428,35 @@ func TestTimezone(t *testing.T) {
 
 	fmt.Println("localtime:",localTime)
 
-	var t0=time.Now()
+//	var t0=time.Now()
 	//offset = 秒
 	zoneName,offset:=localTime.Local().Zone()
 	println("zone name is:%s,offset is:%d",zoneName,offset)
 	newtime:= localTime.Add(time.Duration(offset*1000000000))
 	fmt.Println("newtime:",newtime)
 
+	startDay, _ := time.Parse("2006-01-02", "2015-02-12")
+	localTime = time.Date(2015, time.Month(2), 12, 0, 0, 0, 0, time.Local)
+
+	fmt.Println("xht:",startDay.Local())
+	fmt.Println("xht1:",localTime)
 
 	t1:=time.Now();
-	fmt.Println("diff is:",t1.Sub(t0).Seconds())
+	fmt.Println("diff is:",t1)
+	year,month,day=convert2ymd("2015-09-28")
+	println("xht2:",year,month,day)
 }
 
+
+func convert2ymd(dateStr string)(year,month,day int)  {
+	yearStr:=strings.Split(dateStr,"-")[0]
+	monthStr:=strings.Split(dateStr,"-")[1]
+	dayStr:=strings.Split(dateStr,"-")[2]
+	year,_ = strconv.Atoi(yearStr)
+	month,_ = strconv.Atoi(monthStr)
+	day,_ = strconv.Atoi(dayStr)
+	return year,month,day
+}
 
 
 func TestPipe(t *testing.T) {
@@ -458,7 +526,7 @@ func TestPipe(t *testing.T) {
 
 	if len(results) > 0 {
 		output, _ := json.MarshalIndent(results, "", " ")
-		println("result is :" + string(output))
+		println("result xht is :" + string(output))
 	}
 
 	if err1 != nil {

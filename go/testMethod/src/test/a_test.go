@@ -1,5 +1,8 @@
 package test
-import "fmt"
+import (
+"fmt"
+"testing"
+)
 
 // this method will test go extends and overrid ability
 
@@ -23,6 +26,20 @@ func (this *Dog) callMyName(){
 
 func (this *Dog)  getName() string{
   return this.name
+}
+
+
+func TestArray(t *testing.T) {
+
+   a := []string{"1","2"}
+	fmt.Println("old array is:",a)
+	changeArrayData(a)
+	fmt.Println("new array is:",a)
+
+}
+
+func changeArrayData(param []string)  {
+	param[1]="4"
 }
 
 func main2(){

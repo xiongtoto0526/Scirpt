@@ -45,6 +45,8 @@ find . -name "*.txt" -ok rm {} \;
 find . -name '*.sh' -exec echo {} \;
 上例中，-ok和-exec行为一样，不过它会给出提示，是否执行相应的操作。
 
+pgrep:
+
 
 
 运维：
