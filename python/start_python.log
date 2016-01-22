@@ -1,0 +1,13 @@
+1.安装
+mac 自带python,linux也自带。
+注：mac自带的python一旦更新，会导致xcode运行异常。
+
+2.helloworld
+
+
+3. django 安装
+http://cgwxyz.blog.163.com/blog/static/262806020128281459768/
+
+- 安装pip,参考：https://pip.pypa.io/en/latest/installing/#using-the-installer
+- 执行：pip install Django 
+

@@ -47,10 +47,10 @@ type User struct {
 }
 
 type DayInfoS struct {
-	Day     int               `json:"day"`
-	Year          int          `json:"year"`
-	Month         int          `json:"month"`
-	Count         int         `json:"count"`
+	Day   int               `json:"day"`
+	Year  int          `json:"year"`
+	Month int          `json:"month"`
+	Count int         `json:"count"`
 }
 
 
@@ -62,64 +62,64 @@ type DayInfoS struct {
 //}
 
 type IPTemp struct {
-	Id           bson.ObjectId              `json:"id" bson:"_id,omitempty"`
-	Count  int `json:"count"`
+	Id    bson.ObjectId              `json:"id" bson:"_id,omitempty"`
+	Count int `json:"count"`
 }
 
 
 type IPDetail struct {
-	Country string `json:"country"`
+	Country   string `json:"country"`
 	CountryId string `json:"country_id"`
-	Area    string `json:"area"`
-	AreaId  string `json:"area_id"`
-	Region  string `json:"region"`
-	RegionId string `json:"region_id"`
-	City    string `json:"city"`
+	Area      string `json:"area"`
+	AreaId    string `json:"area_id"`
+	Region    string `json:"region"`
+	RegionId  string `json:"region_id"`
+	City      string `json:"city"`
 	CityId    string `json:"city_id"`
 	County    string `json:"county"`
-	CountyId    string `json:"county_id"`
-	Isp    string `json:"isp"`
-	IspId    string `json:"isp_id"`
-	Ip    string `json:"ip"`
+	CountyId  string `json:"county_id"`
+	Isp       string `json:"isp"`
+	IspId     string `json:"isp_id"`
+	Ip        string `json:"ip"`
 }
 
 type IPInfo struct {
 	Ip     string `json:"ip"`
 	Count  string `json:"count"`
 	County string `json:"county"`
-	Area string `json:"area"`
+	Area   string `json:"area"`
 	Region string `json:"region"`
-	City string `json:"city"`
+	City   string `json:"city"`
 }
 
-var ipMap  = make(map[string]interface{})
+var ipMap = make(map[string]interface{})
 
 
 func TestIpCity(t *testing.T) {
 
-	ip:="113.106.106.98"
-	response, _ := http.Get("http://ip.taobao.com/service/getIpInfo.php?ip="+ip)
+	ip := "113.106.106.98"
+	response, _ := http.Get("http://ip.taobao.com/service/getIpInfo.php?ip=" + ip)
 	defer response.Body.Close()
 	body, _ := ioutil.ReadAll(response.Body)
 	println(response.Status)
 	fmt.Println(string(body))
 
-	s:=string(body)
+	s := string(body)
 	c1 := gojson.Json(s).Get("data").Get("area")
-	ipMap[ip]=c1.Tostring()
+	ipMap[ip] = c1.Tostring()
 	println(ipMap[ip])
-	if ipMap[ip]==nil {
-	println("errr")
+	if ipMap[ip] == nil {
+		println("errr")
 	}
 
 	println(c1.Tostring())
 }
 
 func TestUpdate(t *testing.T) {
-	db,_:=mgox.GetDatabase()
+	db, _ := mgox.GetDatabase()
 
-	o1 :=bson.M{
-//		"ip" : "113.106.106.98",
+	o1 := bson.M{
+		//		"ip" : "113.106.106.98",
 		"_id" : bson.ObjectIdHex("5656b4833e5a2c071d00005b"),
 		"client.country":bson.M{"$exists":true},
 	}
@@ -127,29 +127,28 @@ func TestUpdate(t *testing.T) {
 	o2 := bson.M{"$set":bson.M{
 		"client.country": "china111",
 		"client.area": "华南1",
-//		"client.region":"广东1",
+		//		"client.region":"广东1",
 		"client.city":"珠海",
 		"client.hee":"11112",
 	}}
-//	o2 := bson.M{"$set":bson.M{"client":bson.M{
-//		"country": "china111",
-//		"area": "华南",
-//		"region":"广东1",
-//		"city":"珠海",
-//		"hee":"1111",
-//	}}}
-
+	//	o2 := bson.M{"$set":bson.M{"client":bson.M{
+	//		"country": "china111",
+	//		"area": "华南",
+	//		"region":"广东1",
+	//		"city":"珠海",
+	//		"hee":"1111",
+	//	}}}
 
 
 	results := []bson.M{}
 
-//	_ = mgox.Dao().Set("downloadlog", o1, o2)
+	//	_ = mgox.Dao().Set("downloadlog", o1, o2)
 
-	db.C("downloadlog").UpdateAll(o1,o2);
+	db.C("downloadlog").UpdateAll(o1, o2);
 	db.C("downloadlog").Find(o1).All(&results)
 
-	db.C("app").UpdateAll(bson.M{"appid":"55bb3026e138230ee700000e"},bson.M{"$set":bson.M{"downloadcount":11,"viewcount":555}})
-//	db.C("").Pipe()
+	db.C("app").UpdateAll(bson.M{"appid":"55bb3026e138230ee700000e"}, bson.M{"$set":bson.M{"downloadcount":11, "viewcount":555}})
+	//	db.C("").Pipe()
 
 
 	if len(results) > 0 {
@@ -157,7 +156,7 @@ func TestUpdate(t *testing.T) {
 		println("update result is :" + string(output))
 	}
 
-   var ips []string
+	var ips []string
 	mgox.Dao().Find().Distinct("downloadlog", "client.ip", &ips)
 	//	db.C("downloadlog").UpdateId(bson.ObjectIdHex("5656b4e13e5a2c071d00005d"),o2)
 
@@ -165,9 +164,9 @@ func TestUpdate(t *testing.T) {
 
 
 type ChanHe struct {
-	Name         string                    `json:"name"`
-	St          int                        `json:"st"`
-	Ed          int                        `json:"ed"`
+	Name string                    `json:"name"`
+	St   int                        `json:"st"`
+	Ed   int                        `json:"ed"`
 }
 
 
@@ -177,40 +176,40 @@ func TestDayDownload(t *testing.T) {
 	startDayStr := "2015-11-26"
 	endDayStr := "2016-11-27"
 
-//	//时间段,不转换时区
-	startDayStr+=" 00:00:00"
-	endDayStr+=" 00:00:00"
+	//	//时间段,不转换时区
+	startDayStr += " 00:00:00"
+	endDayStr += " 00:00:00"
 	beginDay, _ := time.Parse("2006-01-02 15:04:05", startDayStr)
 	endDay, _ := time.Parse("2006-01-02 15:04:05", endDayStr)
-//
+	//
 
 
-//	时间段,转换时区
-//	startDay, _ := time.Parse("2006-01-02", startDayStr)
-//	endDay, _ := time.Parse("2006-01-02", en,dDayStr)
-//	diff := int(endDay.Sub(startDay).Hours() / 24)
-//	endDayStr += " 16:59:59"
-//	endDay, _ = time.Parse("2006-01-02 15:04:05", endDayStr)
-//	beginDay := endDay.AddDate(0, 0, -diff)
-//	fmt.Println("diff is:",diff)
+	//	时间段,转换时区
+	//	startDay, _ := time.Parse("2006-01-02", startDayStr)
+	//	endDay, _ := time.Parse("2006-01-02", en,dDayStr)
+	//	diff := int(endDay.Sub(startDay).Hours() / 24)
+	//	endDayStr += " 16:59:59"
+	//	endDay, _ = time.Parse("2006-01-02 15:04:05", endDayStr)
+	//	beginDay := endDay.AddDate(0, 0, -diff)
+	//	fmt.Println("diff is:",diff)
 
-	fmt.Println("start day is:",beginDay)
-	fmt.Println("end day is:",endDay)
+	fmt.Println("start day is:", beginDay)
+	fmt.Println("end day is:", endDay)
 
 	// 条件
 	o1 := bson.M{
 		"$match": bson.M{
 			"client":bson.M{"$exists":true},
 			"firstcreated": bson.M{"$gt": beginDay, "$lt": endDay, },
-//			"client.ip" : "113.106.106.126",
+			//			"client.ip" : "113.106.106.126",
 		},
 	}
 
 	o2 := bson.M{
 		"$group": bson.M{
 			"_id": bson.M{"dayInfo":bson.M{
-				"month": bson.M{ "$month": "$localcreated" },
-				"day": bson.M{ "$dayOfMonth": "$localcreated" },
+				"month": bson.M{"$month": "$localcreated" },
+				"day": bson.M{"$dayOfMonth": "$localcreated" },
 				"year": bson.M{"$year": "$localcreated"},
 			}},
 			"total": bson.M{
@@ -226,78 +225,76 @@ func TestDayDownload(t *testing.T) {
 	o3 := bson.M{
 		"$project":
 		bson.M{
-//			"day":"$_id.dayInfo.day",
-//			"month":"$_id.dayInfo.month",
-//			"year":"$_id.dayInfo.year",
-//			"fullDate":bson.M{"$concat":[]string{
-//				    {"$substr":[]int{"$_id.dayInfo.month", 0, 2}},
-//					"/",
-//				    {"$substr":[]int{"$_id.dayInfo.day", 0, 2}},
-//					{"$substr":[]int{"$_id.dayInfo.year", 0, 4}},
-//			todo: 参考http://stackoverflow.com/questions/26736928/mongodb-group-by-duration-span
-//			}},
+			//			"day":"$_id.dayInfo.day",
+			//			"month":"$_id.dayInfo.month",
+			//			"year":"$_id.dayInfo.year",
+			//			"fullDate":bson.M{"$concat":[]string{
+			//				    {"$substr":[]int{"$_id.dayInfo.month", 0, 2}},
+			//					"/",
+			//				    {"$substr":[]int{"$_id.dayInfo.day", 0, 2}},
+			//					{"$substr":[]int{"$_id.dayInfo.year", 0, 4}},
+			//			todo: 参考http://stackoverflow.com/questions/26736928/mongodb-group-by-duration-span
+			//			}},
 			"_id":0,
 			"count": "$total",
 			"date": bson.M{"$substr":[]interface{}{"$date", 0, 10 } },
 		}}
 
-	  o4 := bson.M{ "$sort" : bson.M{ "date" : 1 } }
+	o4 := bson.M{"$sort" : bson.M{"date" : 1 } }
 
-//	{ $project: { element_id: '$_id.ord_dt.month', count: '$total' } },
+	//	{ $project: { element_id: '$_id.ord_dt.month', count: '$total' } },
 
-	operations := []bson.M{o1, o2,o3,o4}
+	operations := []bson.M{o1, o2, o3, o4}
 
-	db,err:=mgox.GetDatabase()
+	db, err := mgox.GetDatabase()
 	defer db.Session.Close()
 	if err != nil {
 		return;
 	}
 
-		results := []bson.M{}
+	results := []bson.M{}
 	err = db.C("downloadlog").Pipe(operations).All(&results)
 	output, _ := json.MarshalIndent(results, "", " ")
-		println("result is :" + string(output))
+	println("result is :" + string(output))
 
-   var ds []DayInfoS
+	var ds []DayInfoS
 	err = db.C("downloadlog").Pipe(operations).All(&ds)
 
-//		println("result is :%d" , ds[1].Day)
-//		println("result is :%d" , ds[1].Month)
-//	    println("result is :%d" , ds[1].Year)
-//		println("result is :%d" , ds[1].Count)
-//	   println(strconv.Itoa(ds[1].Year)+"-"+strconv.Itoa(ds[1].Month)+"-"+strconv.Itoa(ds[1].Day))
+	//		println("result is :%d" , ds[1].Day)
+	//		println("result is :%d" , ds[1].Month)
+	//	    println("result is :%d" , ds[1].Year)
+	//		println("result is :%d" , ds[1].Count)
+	//	   println(strconv.Itoa(ds[1].Year)+"-"+strconv.Itoa(ds[1].Month)+"-"+strconv.Itoa(ds[1].Day))
 
 
-//	output, _ := json.MarshalIndent(results, "", " ")
-//	println("result is :" + string(output))
-//	for i:=0;i<len(results);i++{
-//		output, _ := json.MarshalIndent(results[i], "", " ")
-//		c1 := gojson.Json(string(output)).Get("_id").Get("dayInfo").Get("day")
-//		println(c1)
-//	}
+	//	output, _ := json.MarshalIndent(results, "", " ")
+	//	println("result is :" + string(output))
+	//	for i:=0;i<len(results);i++{
+	//		output, _ := json.MarshalIndent(results[i], "", " ")
+	//		c1 := gojson.Json(string(output)).Get("_id").Get("dayInfo").Get("day")
+	//		println(c1)
+	//	}
 
 }
-
-
 
 
 type CountInfo struct {
-	ViewCount      int          `json:"viewcount"`
-	DownloadCount  int          `json:"downloadcount"`
+	ViewCount     int          `json:"viewcount"`
+	DownloadCount int          `json:"downloadcount"`
 }
 
-func TestList(t *testing.T)  {
-	var ipinfos=[5]string{}
-	for i:=0;i<5;i++{
-		ipinfos[i]="1"
+func TestList(t *testing.T) {
+	var ipinfos = [5]string{}
+	for i := 0; i < 5; i++ {
+		ipinfos[i] = "1"
 	}
 	println(ipinfos[2])
 }
 
-func TestSlice(t *testing.T)  {
+func TestSlice(t *testing.T) {
 	a := []int{1, 2, 3, 4}
-//	sa := a[1:3]
-//	fmt.Printf("%p\n", sa) //输出：0xc0840046e0
+	//	sa := a[1:3]
+	//	fmt.Printf("%p\n", sa) //输出：0xc0840046e0
 	s := append(a, 11, 22, 33)
 	println("okkk")
 	println(a[1])
@@ -306,13 +303,13 @@ func TestSlice(t *testing.T)  {
 
 func TestFindAppInfo(t *testing.T) {
 
-	db,_ := mgox.GetDatabase()
+	db, _ := mgox.GetDatabase()
 
 	o1 := bson.M{
-			"$match": bson.M{
-				"appid":"55bb3026e138230ee700000e",
-			},
-		}
+		"$match": bson.M{
+			"appid":"55bb3026e138230ee700000e",
+		},
+	}
 
 	o2 := bson.M{
 		"$project": bson.M{
@@ -322,8 +319,8 @@ func TestFindAppInfo(t *testing.T) {
 		},
 	}
 
-//	operations := []bson.M{o1}
-	operations := []bson.M{o1,o2}
+	//	operations := []bson.M{o1}
+	operations := []bson.M{o1, o2}
 
 	//   =========3. do data analyse ===============================================
 	// Prepare the query to run in the MongoDB aggregation pipeline
@@ -336,7 +333,7 @@ func TestFindAppInfo(t *testing.T) {
 
 
 	if len(countinfo) > 0 {
-		println("len is :%d",len(countinfo))
+		println("len is :%d", len(countinfo))
 		println("downloadCount is :%d", countinfo[0].DownloadCount)
 		println("viewCount is :%d", countinfo[0].ViewCount)
 	}
@@ -348,22 +345,22 @@ func TestFindAppInfo(t *testing.T) {
 
 }
 
-func TestTimeConvfunc (t *testing.T) {
-//	tm1, err := time.Parse("2015/09/01", "2016/09/01")
-//	tm2, err := time.Parse("2015/09/08", "2015/09/08")
+func TestTimeConvfunc(t *testing.T) {
+	//	tm1, err := time.Parse("2015/09/01", "2016/09/01")
+	//	tm2, err := time.Parse("2015/09/08", "2015/09/08")
 
 	startDay, err1 := time.Parse("2006-01-02", "2006-01-02")
 	endday, err2 := time.Parse("2006-01-02", "2006-01-03")
 
-	if err1!=nil || err2!=nil {
+	if err1 != nil || err2 != nil {
 		println("time fomat error!!!")
 	}else {
-   fmt.Println("fomat ok!!")
+		fmt.Println("fomat ok!!")
 	}
 
-	if startDay.Before(endday){
+	if startDay.Before(endday) {
 		println("check ok1")
-	}else{
+	}else {
 		println("check err1")
 	}
 
@@ -373,7 +370,7 @@ func TestTimeConvfunc (t *testing.T) {
 
 func TestTimezoneInsert(t *testing.T) {
 	err := mgox.Dao("111111").Insert(
-		&User{Name : "xiongtoto456", Age : 8, Sex :1,FirstCreated:time.Now()},
+		&User{Name : "xiongtoto456", Age : 8, Sex :1, FirstCreated:time.Now()},
 	)
 
 
@@ -387,10 +384,10 @@ func TestTimezoneInsert(t *testing.T) {
 
 	println(usr.FirstCreated.String())
 
-//	if len(results) > 0 {
-//		output, _ := json.MarshalIndent(results, "", " ")
-//		println("result is :" + string(output))
-//	}
+	//	if len(results) > 0 {
+	//		output, _ := json.MarshalIndent(results, "", " ")
+	//		println("result is :" + string(output))
+	//	}
 
 }
 
@@ -424,38 +421,38 @@ func TestTimezone(t *testing.T) {
 	minute := 57
 
 	localTime := time.Date(year, time.Month(month), day, hour, minute, 0, 0, location)
-//	utcTime := localTime.UTC()
+	//	utcTime := localTime.UTC()
 
-	fmt.Println("localtime:",localTime)
+	fmt.Println("localtime:", localTime)
 
-//	var t0=time.Now()
+	//	var t0=time.Now()
 	//offset = 秒
-	zoneName,offset:=localTime.Local().Zone()
-	println("zone name is:%s,offset is:%d",zoneName,offset)
-	newtime:= localTime.Add(time.Duration(offset*1000000000))
-	fmt.Println("newtime:",newtime)
+	zoneName, offset := localTime.Local().Zone()
+	println("zone name is:%s,offset is:%d", zoneName, offset)
+	newtime := localTime.Add(time.Duration(offset * 1000000000))
+	fmt.Println("newtime:", newtime)
 
 	startDay, _ := time.Parse("2006-01-02", "2015-02-12")
 	localTime = time.Date(2015, time.Month(2), 12, 0, 0, 0, 0, time.Local)
 
-	fmt.Println("xht:",startDay.Local())
-	fmt.Println("xht1:",localTime)
+	fmt.Println("xht:", startDay.Local())
+	fmt.Println("xht1:", localTime)
 
-	t1:=time.Now();
-	fmt.Println("diff is:",t1)
-	year,month,day=convert2ymd("2015-09-28")
-	println("xht2:",year,month,day)
+	t1 := time.Now();
+	fmt.Println("diff is:", t1)
+	year, month, day = convert2ymd("2015-09-28")
+	println("xht2:", year, month, day)
 }
 
 
-func convert2ymd(dateStr string)(year,month,day int)  {
-	yearStr:=strings.Split(dateStr,"-")[0]
-	monthStr:=strings.Split(dateStr,"-")[1]
-	dayStr:=strings.Split(dateStr,"-")[2]
-	year,_ = strconv.Atoi(yearStr)
-	month,_ = strconv.Atoi(monthStr)
-	day,_ = strconv.Atoi(dayStr)
-	return year,month,day
+func convert2ymd(dateStr string) (year, month, day int) {
+	yearStr := strings.Split(dateStr, "-")[0]
+	monthStr := strings.Split(dateStr, "-")[1]
+	dayStr := strings.Split(dateStr, "-")[2]
+	year, _ = strconv.Atoi(yearStr)
+	month, _ = strconv.Atoi(monthStr)
+	day, _ = strconv.Atoi(dayStr)
+	return year, month, day
 }
 
 
@@ -537,3 +534,84 @@ func TestPipe(t *testing.T) {
 	println("cmd is ok...")
 
 }
+
+
+/*
+reference:
+- https://godoc.org/labix.org/v2/mgo
+- https://docs.mongodb.org/manual/tutorial/map-reduce-examples/
+
+1. prepare data in test-db:
+db.orders.save({_id: ObjectId("50a8240b927d5d8b5891743c"),cust_id: "abc123",ord_date: new Date("Oct 04, 2012"),status: 'A',price: 25,items: [ { sku: "ss1", qty: 5, price: 2.5 },{ sku: "nnn", qty: 5, price: 2.5 } ]})
+db.orders.save({_id: ObjectId("50a8240b927d5d8b5891744c"),cust_id: "abc123",ord_date: new Date("Oct 04, 2012"),status: 'A',price: 21,items: [ { sku: "sss2", qty: 5, price: 2.5 },{ sku: "nnn", qty: 5, price: 2.5 } ]});
+db.orders.save({_id: ObjectId("50a8240b927d5d8b5891745c"),cust_id: "abc124",ord_date: new Date("Oct 04, 2012"),status: 'B',price: 29,items: [ { sku: "sss3", qty: 5, price: 2.5 },{ sku: "nnn", qty: 5, price: 2.5 } ]});
+db.orders.save({_id: ObjectId("50a8240b927d5d8b5891746c"),cust_id: "abc125",ord_date: new Date("Oct 04, 2012"),status: 'A',price: 11,items: [ { sku: "sss4", qty: 5, price: 2.5 },{ sku: "nnn", qty: 5, price: 2.5 } ]});
+
+2. execute in mongo-shell
+var mapFunction1 = function() {
+                       emit(this.cust_id, this.price);
+                   };
+var reduceFunction1 = function(keyCustId, valuesPrices) {
+                       return Array.sum(valuesPrices);
+                   };
+
+db.orders.mapReduce(
+                     mapFunction1,
+                     reduceFunction1,
+                     { out: "map_reduce_example" }
+                   )
+
+3. show the shell result
+{
+	"result" : "map_reduce_example",
+	"timeMillis" : 117,
+	"counts" : {
+		"input" : 4,
+		"emit" : 4,
+		"reduce" : 1,
+		"output" : 3
+	},
+	"ok" : 1
+}
+*/
+func TestMapReduce(t *testing.T) {
+
+	dialInfo := &mgo.DialInfo{
+		Addrs:    []string{"127.0.0.1"},
+		Timeout:  10 * time.Second,
+		Database: "tako",
+		Username: "tako",
+		Password: "tako",
+	}
+
+
+	// Connect to MongoDB and establish a connection
+	session, err := mgo.DialWithInfo(dialInfo)
+	if err != nil {
+		println("db create ERROR : %s", err)
+		return
+	}
+
+	println("db create success")
+
+	// Capture a reference to the collection
+	db := session.DB(MONGODB_DATABASE)
+
+
+	job := &mgo.MapReduce{
+		Map:      "function() {emit(this.cust_id, this.price);};",
+		Reduce:   "function(keyCustId, valuesPrices) {return Array.sum(valuesPrices);};",
+	}
+
+	result := []bson.M{}
+	_, err1 := db.C("orders").Find(nil).MapReduce(job, &result)
+	if err1 != nil {
+		return
+	}
+	if len(result) > 0 {
+		output, _ := json.MarshalIndent(result, "", " ")
+		println("map reduce result is :" + string(output))
+	}
+
+}
+

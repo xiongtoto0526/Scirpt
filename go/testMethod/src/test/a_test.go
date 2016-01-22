@@ -2,6 +2,7 @@ package test
 import (
 "fmt"
 "testing"
+	"unicode/utf8"
 )
 
 // this method will test go extends and overrid ability
@@ -41,6 +42,27 @@ func TestArray(t *testing.T) {
 func changeArrayData(param []string)  {
 	param[1]="4"
 }
+
+
+func TestEmoj(t *testing.T) {
+	aa := FilterEmoji("🐒微转")
+	println(aa)
+}
+
+
+// 过滤 emoji 表情
+func FilterEmoji(content string) string {
+	new_content := ""
+	for _, value := range content {
+		_, size := utf8.DecodeRuneInString(string(value))
+		println(size)
+		if size <= 3 {
+			new_content += string(value)
+		}
+	}
+	return new_content
+}
+
 
 func main2(){
 

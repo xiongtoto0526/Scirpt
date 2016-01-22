@@ -1,0 +1,41 @@
+db.orders.save({_id: ObjectId("50a8240b927d5d8b5891743c"),cust_id: "abc123",ord_date: new Date("Oct 04, 2012"),status: 'A',price: 25,items: [ { sku: "ss1", qty: 5, price: 2.5 },{ sku: "nnn", qty: 5, price: 2.5 } ]})
+db.orders.save({_id: ObjectId("50a8240b927d5d8b5891744c"),cust_id: "abc123",ord_date: new Date("Oct 04, 2012"),status: 'A',price: 21,items: [ { sku: "sss2", qty: 5, price: 2.5 },{ sku: "nnn", qty: 5, price: 2.5 } ]});
+db.orders.save({_id: ObjectId("50a8240b927d5d8b5891745c"),cust_id: "abc124",ord_date: new Date("Oct 04, 2012"),status: 'B',price: 29,items: [ { sku: "sss3", qty: 5, price: 2.5 },{ sku: "nnn", qty: 5, price: 2.5 } ]});
+db.orders.save({_id: ObjectId("50a8240b927d5d8b5891746c"),cust_id: "abc125",ord_date: new Date("Oct 04, 2012"),status: 'A',price: 11,items: [ { sku: "sss4", qty: 5, price: 2.5 },{ sku: "nnn", qty: 5, price: 2.5 } ]});
+
+
+var mapFunction1 = function() {
+                       emit(this.cust_id, this.price);
+                   };
+
+// function() {emit(this.cust_id, this.price);};
+
+var reduceFunction1 = function(keyCustId, valuesPrices) {
+                          return Array.sum(valuesPrices);
+                      };
+
+// function(keyCustId, valuesPrices) {return Array.sum(valuesPrices);};
+
+db.orders.mapReduce(
+                     mapFunction1,
+                     reduceFunction1,
+                     { out: "map_reduce_example" }
+                   )
+
+
+                   var reduceFunction = function(key, values) {
+
+                        var reducedObject = {
+                                              userid: key,
+                                              total_time: 0,
+                                              count:0,
+                                              avg_time:0
+                                            };
+
+                        values.forEach( function(value) {
+                                              reducedObject.total_time += value.total_time;
+                                              reducedObject.count += value.count;
+                                        }
+                                      );
+                        return reducedObject;
+                     };
