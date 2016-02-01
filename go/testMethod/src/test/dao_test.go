@@ -615,3 +615,52 @@ func TestMapReduce(t *testing.T) {
 
 }
 
+func TestGenDays(t *testing.T) {
+	ret:=make(map[string]string)
+	begin:=Convert2localDate("2015-03-09");
+	end:=Convert2localDate("2015-04-02");
+	temp:= begin.AddDate(0,0,1)
+	ret[temp.Format("2006-01-02")]=""
+	for{
+		temp = temp.AddDate(0,0,1)
+		ret[temp.Format("2006-01-02")]=""
+		if temp.Equal(end) {
+			break
+		}
+	}
+
+	for key,_ :=range ret{
+		println("key is:",key)
+	}
+}
+
+
+/*
+  输入:日期字符格式:"2015-11-22"
+  输出:本地时区时间.非utc时间
+  */
+func Convert2localDate(dateStr string) (time.Time) {
+	yearStr := strings.Split(dateStr, "-")[0]
+	monthStr := strings.Split(dateStr, "-")[1]
+	dayStr := strings.Split(dateStr, "-")[2]
+	year, _ := strconv.Atoi(yearStr)
+	month, _ := strconv.Atoi(monthStr)
+	day, _ := strconv.Atoi(dayStr)
+	localdate := time.Date(year, time.Month(month), day, 0, 0, 0, 0, time.Local)
+	return localdate
+}
+
+
+//
+//func TestInsert(t *testing.T) {
+//	var userAppKey model.UserAppKey
+//	userAppKey.UploadKey = "123"
+//	userAppKey.XgAppId = "aa9"
+//	userAppKey.UserId = "8881"
+//	if err := mgox.Dao("8881").Insert(&userAppKey); err != nil {
+//		//		lerr := &mgo.LastError{Code: 16460, Err: "error inserting 1 documents to shard ... caused by :: E11000 duplicate key error index: ..."}
+//		//		e := err.(type)
+//		println("dup check result is:",mgo.IsDup(err))
+//	}
+//}
+

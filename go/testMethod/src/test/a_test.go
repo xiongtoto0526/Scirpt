@@ -64,6 +64,8 @@ func FilterEmoji(content string) string {
 }
 
 
+
+
 func main2(){
 
 	b:= new(BDog)
