@@ -1,0 +1,177 @@
+//package test
+//
+//import (
+//"crypto/rand"
+//"fmt"
+//log "github.com/kimiazhu/log4go"
+//"github.com/yaosxi/mgox"
+//"gopkg.in/mgo.v2/bson"
+//"strconv"
+//"strings"
+//"sync"
+//"takows/model"
+//"testing"
+//"time"
+//"io/ioutil"
+//"net/http"
+//"github.com/widuu/gojson"
+//)
+//
+//func init() {
+//mgox.LoadConfig("../../../../conf/mgox.properties")
+//log.LoadConfiguration("../../../../conf/log4go.xml")
+//}
+//
+//func TestN(t *testing.T) {
+//defer time.Sleep(time.Second * 1)
+//fmt.Println(1 << 16)
+//done := make(chan struct{})
+//signal := sync.WaitGroup{}
+//signal.Add(1)
+//go func() {
+//t.Logf("start new go routines\n")
+//signal.Wait()
+//select {
+//case <-done:
+//t.Logf("receive done signal, this should not be printed\n")
+//}
+//}()
+//close(done)
+//}
+//
+//func TestFindEmpty(t *testing.T) {
+//r := []model.IpCache{}
+//mgox.New().Find(bson.M{"$or": []bson.M{bson.M{"area": ""}, bson.M{"area": nil}}}).Select("_id").Sort("-createtime").Limit(10).Result(&r)
+//fmt.Println(len(r))
+////l, _ := mgox.New().Find(bson.M{"area": ""}).Count(model.IpCacheCollection)
+//l, _ := mgox.New().Find(bson.M{"$or": []bson.M{bson.M{"area": ""}, bson.M{"area": nil}}}).Count(model.IpCacheCollection)
+//fmt.Println(l)
+//}
+//
+//// 测试IP解析器未就绪的情况
+//func TestResolverNotRun(t *testing.T) {
+//defer time.Sleep(time.Second * 2)
+//Push("101.26.110.161", nil, nil)
+//}
+//
+//// 测试大量异步请求的情况,此测试完成之后应该去数据库查询是否增加了10000条记录
+//// (为了保证之前没有重复数据，可以先清除表)
+//func TestParallelRequest(t *testing.T) {
+//total := 10
+//resolveDone := make(chan bool)
+//defer close(resolveDone)
+//recoverDone := make(chan bool)
+//defer close(recoverDone)
+//// 测试的时候使用size=100的channel，测试发送1000个数据
+//RunResolver(resolveDone, recoverDone, 64)
+//time.Sleep(time.Second * 1)
+//sig := sync.WaitGroup{}
+//sig.Add(total + 1) // 实时数据数量 + 1个恢复线程
+//for i := 0; i < total; i++ {
+//ip := randIp()
+//go func() {
+//Add(ip, nil)
+//sig.Done()
+//}()
+//}
+//
+//go func() {
+//for {
+//select {
+//case <-recoverDone:
+//sig.Done()
+//}
+//}
+//}()
+//
+//go func() {
+//sig.Wait()
+//CloseResolver()
+//}()
+//
+//wait:
+//for {
+//select {
+//case <-resolveDone:
+//break wait
+//}
+//}
+//time.Sleep(100)
+//}
+//
+//type CallBack func(string)
+//
+//// 测试重复IP的情况，
+//// 通过修改数据库中的记录也测试过期的情况,
+//// 测试执行完请求之后自动切换状态到suspended的情况
+//func TestResolveRepeatIp(t *testing.T) {
+//a := func(ip string) {
+//println("routine is ok:"+ip)
+//}
+//
+//for i:=0;i<100000 ;i++  {
+//GetClientInfoWithcallback(randIp(), a)
+//}
+//for{}
+//}
+//
+//
+//func GetClientInfoWithcallback(ip string, callback CallBack) {
+//go work4GetClientIpInfoWithCallback(ip, callback)
+//}
+//
+//func work4GetClientIpInfoWithCallback(ip string, cb CallBack) {
+//cb(GetIpInfo(ip))
+//}
+//
+//// 生成随机IP用于测试
+//func randIp() string {
+//random := make([]byte, 4)
+//for {
+//rand.Read(random[:])
+//// 判断第一位非0
+//if fmt.Sprintf("%x", random[0]) != "0" {
+//break
+//}
+//}
+//
+//ip := []string{}
+//for _, b := range random {
+//segment, _ := strconv.ParseUint(fmt.Sprintf("%x", b), 16, 0)
+//ip = append(ip, strconv.Itoa(int(segment)))
+//}
+//return strings.Join(ip, ".")
+//}
+//
+//
+//
+///*
+//使用淘宝代理查询ip
+//*/
+//func GetIpInfo(ip string) (string) {
+//
+////	println("return 2")
+////	return "2"
+//if ip == "127.0.0.1" {
+//return "1"
+//}
+//response, err := http.Get("http://ip.taobao.com/service/getIpInfo.php?ip=" + ip)
+//
+//
+//
+//
+//if err != nil || response.StatusCode != http.StatusOK {
+//return "2"
+//}
+//defer response.Body.Close()
+//
+//body, _ := ioutil.ReadAll(response.Body)
+//s := string(body)
+//country := gojson.Json(s).Get("data").Get("country").Tostring()// 中国
+//area := gojson.Json(s).Get("data").Get("area").Tostring()// 华南
+//regin := gojson.Json(s).Get("data").Get("region").Tostring()// 广东省
+//city := gojson.Json(s).Get("data").Get("city").Tostring()// 广东省
+//ipinfo := model.IpInfo{ip, country, area, regin, city}
+//println("ipInfo is:" + ipinfo.ToString())
+//return "3"
+//}

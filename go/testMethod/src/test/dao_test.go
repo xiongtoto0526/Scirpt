@@ -15,6 +15,9 @@ import (
 
 	"strings"
 	"strconv"
+	"os"
+	"io"
+	"crypto/rand"
 )
 
 
@@ -157,7 +160,7 @@ func TestUpdate(t *testing.T) {
 	}
 
 	var ips []string
-	mgox.Dao().Find().Distinct("downloadlog", "client.ip", &ips)
+	mgox.New().Find().Distinct("downloadlog", "client.ip", &ips)
 	//	db.C("downloadlog").UpdateId(bson.ObjectIdHex("5656b4e13e5a2c071d00005d"),o2)
 
 }
@@ -369,7 +372,7 @@ func TestTimeConvfunc(t *testing.T) {
 // testTime
 
 func TestTimezoneInsert(t *testing.T) {
-	err := mgox.Dao("111111").Insert(
+	err := mgox.New("111111").Insert(
 		&User{Name : "xiongtoto456", Age : 8, Sex :1, FirstCreated:time.Now()},
 	)
 
@@ -380,7 +383,7 @@ func TestTimezoneInsert(t *testing.T) {
 	}
 
 	var usr User
-	mgox.Dao().Find(bson.M{"name":"xiongtoto456"}).Result(&usr)
+	mgox.New().Find(bson.M{"name":"xiongtoto456"}).Result(&usr)
 
 	println(usr.FirstCreated.String())
 
@@ -392,7 +395,7 @@ func TestTimezoneInsert(t *testing.T) {
 }
 
 func TestInsert(t *testing.T) {
-	err := mgox.Dao("111111").Insert(
+	err := mgox.New("111").Insert(
 		&User{Name : "xiongtoto456", Age : 8, Sex :1},
 	)
 	println("success...xht")
@@ -401,7 +404,7 @@ func TestInsert(t *testing.T) {
 	}
 
 	results := []bson.M{}
-	mgox.Dao().Find(bson.M{}).Result(&results)
+	mgox.New().Find(bson.M{}).Result(&results)
 
 	if len(results) > 0 {
 		output, _ := json.MarshalIndent(results, "", " ")
@@ -576,6 +579,132 @@ db.orders.mapReduce(
 */
 func TestMapReduce(t *testing.T) {
 
+	println("aa:",1<<5)
+
+	dialInfo := &mgo.DialInfo{
+		Addrs:    []string{"127.0.0.1"},
+		Timeout:  10 * time.Second,
+		Database: "tako",
+		Username: "tako",
+		Password: "tako",
+	}
+
+
+	// Connect to MongoDB and establish a connection
+	session, err := mgo.DialWithInfo(dialInfo)
+	if err != nil {
+		println("db create ERROR : %s", err)
+		return
+	}
+
+	println("db create success")
+
+	// Capture a reference to the collection
+	db := session.DB(MONGODB_DATABASE)
+
+
+	job := &mgo.MapReduce{
+		Map:      "function() {emit(this.cust_id, this.price);};",
+		Reduce:   "function(keyCustId, valuesPrices) {return Array.sum(valuesPrices);};",
+	}
+
+	result := []bson.M{}
+
+	_, err1 := db.C("orders").Find(nil).MapReduce(job, &result)
+	if err1 != nil {
+		return
+	}
+	if len(result) > 0 {
+		output, _ := json.MarshalIndent(result, "", " ")
+		println("map reduce result is :" + string(output))
+	}
+
+	count := 1000000
+	for i := 0; i < count; i++ {
+		//Push(randIp(), nil, nil)
+		go func() {
+			d:=mgox.Connect()
+			defer  d.Close()
+			mgox.New("111111").Insert(
+				&User{Name : "xiongtoto456", Age : 8, Sex :1, FirstCreated:time.Now()},
+			)
+		}()
+	}
+
+
+}
+
+type Cb1 func(string,string)
+
+func TestGs(t *testing.T) {
+	a:= func(p1 string, p2 string) { println("will do cb1"); println("param1 is:"+p1) }
+	a(getStr(),"e")
+
+
+	res, _ := http.Get("http://dlsw.baidu.com/sw-search-sp/soft/9d/25765/sogou_mac_32c_V3.2.0.1437101586.dmg")
+	file, _ := os.Create("xxx.jpg")
+	io.Copy(file, res.Body)
+	println("finish...")
+//	count := 1000000
+//	for i := 0; i < count; i++ {
+//		//Push(randIp(), nil, nil)
+//		testP();
+//	}
+}
+
+func getStr()(string)  {
+	println("will get string...")
+	return "123"
+}
+
+func testP()  {
+	go func() {
+		mgox.New("111111").Insert(
+			&User{Name : "xiongtoto456", Age : 8, Sex :1, FirstCreated:time.Now()},
+		)
+	}()
+}
+
+
+func TestGenDays(t *testing.T) {
+	ret:=make(map[string]string)
+	begin:=Convert2localDate("2015-03-09");
+	end:=Convert2localDate("2015-04-02");
+	temp:= begin.AddDate(0,0,1)
+	ret[temp.Format("2006-01-02")]=""
+	for{
+		temp = temp.AddDate(0,0,1)
+		ret[temp.Format("2006-01-02")]=""
+		if temp.Equal(end) {
+			break
+		}
+	}
+
+	for key,_ :=range ret{
+		println("key is:",key)
+	}
+}
+
+
+/*
+  输入:日期字符格式:"2015-11-22"
+  输出:本地时区时间.非utc时间
+  */
+func Convert2localDate(dateStr string) (time.Time) {
+	yearStr := strings.Split(dateStr, "-")[0]
+	monthStr := strings.Split(dateStr, "-")[1]
+	dayStr := strings.Split(dateStr, "-")[2]
+	year, _ := strconv.Atoi(yearStr)
+	month, _ := strconv.Atoi(monthStr)
+	day, _ := strconv.Atoi(dayStr)
+	localdate := time.Date(year, time.Month(month), day, 0, 0, 0, 0, time.Local)
+	return localdate
+}
+
+func TestMapReduceLocation(t *testing.T) {
+
+	println("aa:",1<<5)
+
 	dialInfo := &mgo.DialInfo{
 		Addrs:    []string{"127.0.0.1"},
 		Timeout:  10 * time.Second,
@@ -615,52 +744,85 @@ func TestMapReduce(t *testing.T) {
 
 }
 
-func TestGenDays(t *testing.T) {
-	ret:=make(map[string]string)
-	begin:=Convert2localDate("2015-03-09");
-	end:=Convert2localDate("2015-04-02");
-	temp:= begin.AddDate(0,0,1)
-	ret[temp.Format("2006-01-02")]=""
-	for{
-		temp = temp.AddDate(0,0,1)
-		ret[temp.Format("2006-01-02")]=""
-		if temp.Equal(end) {
+
+
+type CallBack func(string)
+
+// 测试重复IP的情况，
+// 通过修改数据库中的记录也测试过期的情况,
+// 测试执行完请求之后自动切换状态到suspended的情况
+func TestResolveRepeatIp(t *testing.T) {
+	a := func(ip string) {
+//		println("routine is ok:"+ip)
+//		 mgox.New("111111").Insert(
+//			&User{Name : "xiongtoto456", Age : 8, Sex :1, FirstCreated:time.Now()},
+//		)
+		println("insert is ok:"+ip)
+	}
+
+	for i:=0;i<10000 ;i++  {
+		GetClientInfoWithcallback(randIp(), a)
+	}
+	for{}
+}
+
+
+func GetClientInfoWithcallback(ip string, callback CallBack) {
+	go work4GetClientIpInfoWithCallback(ip, callback)
+}
+
+func work4GetClientIpInfoWithCallback(ip string, cb CallBack) {
+	cb(GetIpInfo(ip))
+}
+
+// 生成随机IP用于测试
+func randIp() string {
+	random := make([]byte, 4)
+	for {
+		rand.Read(random[:])
+		// 判断第一位非0
+		if fmt.Sprintf("%x", random[0]) != "0" {
 			break
 		}
 	}
 
-	for key,_ :=range ret{
-		println("key is:",key)
+	ip := []string{}
+	for _, b := range random {
+		segment, _ := strconv.ParseUint(fmt.Sprintf("%x", b), 16, 0)
+		ip = append(ip, strconv.Itoa(int(segment)))
 	}
+	return strings.Join(ip, ".")
 }
+
 
 
 /*
-  输入:日期字符格式:"2015-11-22"
-  输出:本地时区时间.非utc时间
-  */
-func Convert2localDate(dateStr string) (time.Time) {
-	yearStr := strings.Split(dateStr, "-")[0]
-	monthStr := strings.Split(dateStr, "-")[1]
-	dayStr := strings.Split(dateStr, "-")[2]
-	year, _ := strconv.Atoi(yearStr)
-	month, _ := strconv.Atoi(monthStr)
-	day, _ := strconv.Atoi(dayStr)
-	localdate := time.Date(year, time.Month(month), day, 0, 0, 0, 0, time.Local)
-	return localdate
+使用淘宝代理查询ip
+*/
+func GetIpInfo(ip string) (string) {
+
+	//	println("return 2")
+	//	return "2"
+	if ip == "127.0.0.1" {
+		return "1"
+	}
+	response, err := http.Get("http://ip.taobao.com/service/getIpInfo.php?ip=" + ip)
+
+
+
+	defer response.Body.Close()
+
+	if err != nil || response.StatusCode != http.StatusOK {
+		return "2"
+	}
+//	defer response.Body.Close()
+
+	body, _ := ioutil.ReadAll(response.Body)
+	s := string(body)
+	gojson.Json(s).Get("data").Get("country").Tostring()// 中国
+	gojson.Json(s).Get("data").Get("area").Tostring()// 华南
+	gojson.Json(s).Get("data").Get("region").Tostring()// 广东省
+	gojson.Json(s).Get("data").Get("city").Tostring()// 广东省
+
+	return "3"
 }
-
-
-//
-//func TestInsert(t *testing.T) {
-//	var userAppKey model.UserAppKey
-//	userAppKey.UploadKey = "123"
-//	userAppKey.XgAppId = "aa9"
-//	userAppKey.UserId = "8881"
-//	if err := mgox.Dao("8881").Insert(&userAppKey); err != nil {
-//		//		lerr := &mgo.LastError{Code: 16460, Err: "error inserting 1 documents to shard ... caused by :: E11000 duplicate key error index: ..."}
-//		//		e := err.(type)
-//		println("dup check result is:",mgo.IsDup(err))
-//	}
-//}
-
