@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ShareEntity.h"
 @interface FirstViewController : UIViewController
-
+@property BOOL isLogin;
 
 @end
 

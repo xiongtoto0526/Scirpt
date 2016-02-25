@@ -8,12 +8,22 @@
 
 #import "TableViewCell.h"
 #import "UIHelper.h"
+#import "DownloadWorker.h"
+
+@interface TableViewCell()<XHtDownLoadDelegate>
+@property BOOL isClicked;
+@end
+
 @implementation TableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
+    self.isClicked=NO;
     [XHTUIHelper addBorderonButton:self.button];
    
+    // tableView设置为不可点击
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     // 隐藏下载栏
     [self.btnCancel setHidden:YES];
     [self.progressControl setHidden:YES];
@@ -27,15 +37,33 @@
 
 -(void) showDownload{
     
-    // 修改下载按钮的文本显示
-    [self.button setTitle:@"暂停" forState:UIControlStateNormal];
+    if (!self.isClicked) {
+        [self startDownload];
+      
+    }else{
+        [self pauseDownload];
+    }
 
+    self.isClicked = !self.isClicked;
     // 显示下载栏
     [self.btnCancel setHidden:NO];
     [self.progressControl setHidden:NO];
     [self.textDownload setHidden:NO];
 }
 
+// 启动下载
+-(void)startDownload{
+    NSLog(@"will start download...");
+    [self.button setTitle:@"暂停" forState:UIControlStateNormal];    // 修改下载按钮的文本显示
+    [[DownloadWorker shareInstance] startWithUrl:[NSURL URLWithString:@"http://han/1/hello.zip"]  delegate:self];
+}
+
+// 暂停下载
+-(void)pauseDownload{
+     NSLog(@"will pause download...");
+    [self.button setTitle:@"下载" forState:UIControlStateNormal];
+    [[DownloadWorker shareInstance] pause];
+}
 
 -(void) stopDownload{
     
@@ -69,5 +97,20 @@
     // Configure the view for the selected state
 }
 
+#pragma mark  下载回调
+
+-(void)downloadFinish:(BOOL)isSuccess{
+    NSLog(@"收到回调通知：文件下载完成。");
+    [self.button setTitle:@"已下载" forState:UIControlStateNormal];    // 修改下载按钮的文本显示
+    [self.progressControl setHidden:YES];
+    [self.btnCancel setHidden:YES];
+    [self.textDownload setHidden:YES];
+}
+
+-(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize{
+    double prg = (double)totalSize/finishSize;
+    NSLog(@"收到回调通知：当前进度为:%f",prg);
+    [self.progressControl setProgress:prg];
+}
 
 @end

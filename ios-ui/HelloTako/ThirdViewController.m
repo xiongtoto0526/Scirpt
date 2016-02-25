@@ -14,7 +14,9 @@
 #import "ThirdViewController.h"
 #import "VersionViewController.h"
 #import "DistributeAppsViewController.h"
+#import "LoginViewController.h"
 #import "UIHelper.h"
+#import "ShareEntity.h"
 
 @interface ThirdViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -36,6 +38,12 @@
                        [NSArray arrayWithObjects:@"我发布的应用",nil],
                        [NSArray arrayWithObjects:@"关于Tako",@"退出登录",nil],nil];
 
+    self.userAccount.text=[ShareEntity shareInstance].userAccount;
+    self.userName.text=[ShareEntity shareInstance].userName;
+    // todo:
+//    self.userImage = [ShareEntity shareInstance].userImage;
+   
+    
     // 注册cell
 //     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"navigateTableCell"];
 }
@@ -104,6 +112,13 @@
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     }
+}
+
+
+-(IBAction) gotoLoginView:(id)sender{
+    [self presentViewController:[LoginViewController new] animated:NO completion:^{
+        NSLog(@"enter login view");
+    }];
 }
 
 @end

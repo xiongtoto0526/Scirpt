@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD57DF331C7E9B0A008547B2 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD57DF311C7E9B0A008547B2 /* LoginViewController.m */; settings = {ASSET_TAGS = (); }; };
+		AD57DF341C7E9B0A008547B2 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD57DF321C7E9B0A008547B2 /* LoginViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		AD57DF371C7EBDDE008547B2 /* ShareEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = AD57DF361C7EBDDE008547B2 /* ShareEntity.m */; settings = {ASSET_TAGS = (); }; };
+		AD57DF401C7ED7E7008547B2 /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = AD57DF3F1C7ED7E7008547B2 /* App.m */; settings = {ASSET_TAGS = (); }; };
+		AD57DF521C7EF287008547B2 /* DownLoadWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = AD57DF511C7EF287008547B2 /* DownLoadWorker.m */; settings = {ASSET_TAGS = (); }; };
 		ADA7F4C21C1D9DE60003E0CD /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA7F4C01C1D9DE60003E0CD /* CollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		ADA7F4C31C1D9DE60003E0CD /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADA7F4C11C1D9DE60003E0CD /* CollectionViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		ADA7F4C91C1E7E0A0003E0CD /* ShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADA7F4C81C1E7E0A0003E0CD /* ShareView.xib */; settings = {ASSET_TAGS = (); }; };
@@ -38,6 +43,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AD57DF301C7E9B0A008547B2 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		AD57DF311C7E9B0A008547B2 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		AD57DF321C7E9B0A008547B2 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		AD57DF351C7EBD18008547B2 /* ShareEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareEntity.h; sourceTree = "<group>"; };
+		AD57DF361C7EBDDE008547B2 /* ShareEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareEntity.m; sourceTree = "<group>"; };
+		AD57DF391C7ECD13008547B2 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
+		AD57DF3E1C7ED7E7008547B2 /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
+		AD57DF3F1C7ED7E7008547B2 /* App.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = App.m; sourceTree = "<group>"; };
+		AD57DF511C7EF287008547B2 /* DownLoadWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownLoadWorker.m; sourceTree = "<group>"; };
+		AD57DF541C7EF302008547B2 /* DownloadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadWorker.h; sourceTree = "<group>"; };
 		ADA7F4BF1C1D9DE60003E0CD /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
 		ADA7F4C01C1D9DE60003E0CD /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 		ADA7F4C11C1D9DE60003E0CD /* CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
@@ -95,6 +110,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD57DF3D1C7ED7C7008547B2 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				AD57DF3E1C7ED7E7008547B2 /* App.h */,
+				AD57DF3F1C7ED7E7008547B2 /* App.m */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		AD57DF4C1C7EF257008547B2 /* download */ = {
+			isa = PBXGroup;
+			children = (
+				AD57DF541C7EF302008547B2 /* DownloadWorker.h */,
+				AD57DF511C7EF287008547B2 /* DownLoadWorker.m */,
+			);
+			name = download;
+			sourceTree = "<group>";
+		};
 		ADA7F4CA1C1E84230003E0CD /* xib */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +167,11 @@
 				ADC7F0ED1C198A8C0024A43F /* GameDetailViewController.h */,
 				ADC7F0EE1C198A8C0024A43F /* GameDetailViewController.m */,
 				ADC7F0EF1C198A8C0024A43F /* GameDetailViewController.xib */,
+				AD57DF301C7E9B0A008547B2 /* LoginViewController.h */,
+				AD57DF311C7E9B0A008547B2 /* LoginViewController.m */,
+				AD57DF321C7E9B0A008547B2 /* LoginViewController.xib */,
+				AD57DF351C7EBD18008547B2 /* ShareEntity.h */,
+				AD57DF361C7EBDDE008547B2 /* ShareEntity.m */,
 			);
 			name = detailViews;
 			sourceTree = "<group>";
@@ -143,6 +181,7 @@
 			children = (
 				ADD8A9461C1ACFB7007D3163 /* UIHelper.m */,
 				ADD8A9481C1AD028007D3163 /* UIHelper.h */,
+				AD57DF391C7ECD13008547B2 /* Constant.h */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -166,6 +205,8 @@
 		ADE01D671C181077009F425E /* HelloTako */ = {
 			isa = PBXGroup;
 			children = (
+				AD57DF4C1C7EF257008547B2 /* download */,
+				AD57DF3D1C7ED7C7008547B2 /* models */,
 				ADA7F4CA1C1E84230003E0CD /* xib */,
 				ADD8A9451C1ACF95007D3163 /* Utils */,
 				ADC7F0E21C1964C20024A43F /* detailViews */,
@@ -278,6 +319,7 @@
 				ADE01D7B1C181077009F425E /* LaunchScreen.storyboard in Resources */,
 				ADE01D781C181077009F425E /* Assets.xcassets in Resources */,
 				ADE01D761C181077009F425E /* Main.storyboard in Resources */,
+				AD57DF341C7E9B0A008547B2 /* LoginViewController.xib in Resources */,
 				ADC7F0EC1C196CE90024A43F /* ReportTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,13 +339,17 @@
 				ADA7F4C21C1D9DE60003E0CD /* CollectionViewCell.m in Sources */,
 				ADE01D6D1C181077009F425E /* AppDelegate.m in Sources */,
 				ADC7F0DF1C195B0F0024A43F /* DistributeAppsViewController.m in Sources */,
+				AD57DF401C7ED7E7008547B2 /* App.m in Sources */,
+				AD57DF331C7E9B0A008547B2 /* LoginViewController.m in Sources */,
 				ADC7F0E61C196BDE0024A43F /* ReportViewController.m in Sources */,
 				ADE01D701C181077009F425E /* FirstViewController.m in Sources */,
 				ADD8A9471C1ACFB7007D3163 /* UIHelper.m in Sources */,
 				ADC7F0EB1C196CE90024A43F /* ReportTableViewCell.m in Sources */,
+				AD57DF521C7EF287008547B2 /* DownLoadWorker.m in Sources */,
 				ADE01D6A1C181077009F425E /* main.m in Sources */,
 				ADA7F4D01C1E984D0003E0CD /* ShareViewController.m in Sources */,
 				ADC7F0DA1C1956640024A43F /* VersionViewController.m in Sources */,
+				AD57DF371C7EBDDE008547B2 /* ShareEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

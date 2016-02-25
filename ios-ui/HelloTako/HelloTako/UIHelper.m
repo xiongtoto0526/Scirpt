@@ -68,4 +68,28 @@
     return screensize;
 }
 
+
+
+//读取userDefault的nsstring数据
++(NSString*)readNSUserDefaultsWithkey:(NSString*) key{
+    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    return [userDefaultes stringForKey:key];
+}
+
+
+
+
+//数据持久化至userDefault
++(void)writeNSUserDefaultsWithKey:(NSString*) key withValue:(NSString*) value
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    //添加
+    [userDefaults setObject:value forKey:key];
+    
+    //同步
+    [userDefaults synchronize];
+}
+
+
 @end

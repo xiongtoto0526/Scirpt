@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userAccount;
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
 @property (weak, nonatomic) IBOutlet UIView *profileView;
+@property (weak, nonatomic) IBOutlet UIButton *loginBt;
 
 @end
 

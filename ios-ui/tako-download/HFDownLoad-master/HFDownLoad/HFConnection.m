@@ -189,9 +189,13 @@
          NSURL* url = [NSURL URLWithString:@"http://dlsw.baidu.com/sw-search-sp/soft/9d/25765/sogou_mac_32c_V3.2.0.1437101586.dmg"];
 //        url = [NSURL URLWithString:@"file:///Users/xionghaitao/Library/Developer/CoreSimulator/Devices/0F7D04C7-A015-4B90-AE50-75A6EA9D206B/data/Containers/Data/Application/F788D6E2-2CAF-4500-969D-B7D6692225BF/Documents/TakoTest01_resigned.ipa"];
        
-        
+    
+    
+//       url = [NSURL URLWithString:@"http://dlsw.baidu.com/sw-search-sp/soft/9d/25765/sogou_mac_32c_V3.2.0.1437101586.dmg"];
+
+    
         url = [NSURL URLWithString:@"http://doc.xgsdk.com:28870/static/TakoTest01_resigned.ipa"];
-        
+    
         
         // 2.请求
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
