@@ -33,12 +33,7 @@
     [self.button addTarget:self action:@selector(showDownload) forControlEvents:UIControlEventTouchDown];
     [self.btnCancel addTarget:self action:@selector(stopDownload) forControlEvents:UIControlEventTouchDown];
     
-    // 不能再此处动态设置cell，应该在tableview的 willDisplayCell 回调中处理。
-//    if ([self isAppDownloadedBefore:[NSString stringWithFormat:@"%@%@",self.appName.text,self.appVersion.text]]) {
-//        [self.button setTitle:@"已下载" forState:UIControlStateNormal];
-//         self.button.enabled = NO;
-//    }
-
+    // t:不能再此处动态设置cell，应该在tableview的 willDisplayCell 回调中处理。
 }
 
 

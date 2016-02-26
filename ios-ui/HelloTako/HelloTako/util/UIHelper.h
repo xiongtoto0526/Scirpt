@@ -17,4 +17,9 @@
 +(id)readNSUserDefaultsObjectWithkey:(NSString*) key;
 + (void) writeNSUserDefaultsWithKey:(NSString*) key withValue:(NSString*) value;
 + (void)writeNSUserDefaultsWithKey:(NSString*) key withObject:(id) value;
+
++(void)alertWithNoChoice:(NSString*)msg view:(UIViewController*)view;
+
++ (void)clearAllUserDefaultsData;
+
 @end

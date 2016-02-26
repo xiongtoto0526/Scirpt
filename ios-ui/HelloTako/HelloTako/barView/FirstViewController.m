@@ -28,40 +28,28 @@
 
 
 -(void)viewDidAppear:(BOOL)animated{
-    
-    if (![self checkIsLogin]) {
-//        [self.tableview setHidden:YES];
-//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"您尚未登录，请先登录~" preferredStyle:UIAlertControllerStyleAlert];
-//        
-//        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//            [self presentViewController:[LoginViewController new] animated:YES completion:nil];
-//        }];
-//        
-//        [alertController addAction:okAction];
-//        [self presentViewController:alertController animated:YES completion:nil];
-    }else{
-        
-    }
+    // t:此处不能模态alter窗口,否则崩溃。
 }
 
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    if(![ShareEntity shareInstance].isLogined){
-        // 用户未登录，需要强制加载整个view，实现refresh
-        self.view= nil;
+
+-(void)receiveLoginBackNotification{
+    BOOL isLogined = [ShareEntity shareInstance].isLogined;
+    [self.tableview setHidden:!isLogined];
+    if (isLogined && self.listData ==nil) {
+         self.listData = [self fetchDataFromServer];
+        [self.tableview reloadData];
     }
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if(![ShareEntity shareInstance].isLogined){
-        [self.tableview setHidden:YES];
-        return;
-    }
-   
-    [self.tableview setHidden:NO];
-//    [self.loginbtn add]
+    
+    // 1.添加监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveLoginBackNotification) name:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];
+    
+    // 未登录时不显示
+    [self.tableview setHidden:![ShareEntity shareInstance].isLogined];
+
     // 初始化刷新控制器.
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [UIColor whiteColor];
@@ -83,8 +71,13 @@
     [self.tableview registerNib:[UINib nibWithNibName:@"TableViewCell" bundle:nil] forCellReuseIdentifier:@"fTablecell"];
    
     // todo : 获取用户所有游戏，需取top10，分页。
-    self.listData = [self fetchDataFromServer];
-//    self.listData = @[@"app1",@"app2",@"app3"];
+    // 未登录时不显示tableView
+//    [self.tableview setHidden:![ShareEntity shareInstance].isLogined];
+    if (![ShareEntity shareInstance].isLogined) {
+        self.listData = nil;
+    }else{
+     self.listData = [self fetchDataFromServer];
+    }
     
 }
 
@@ -149,11 +142,6 @@
     
     UIImage *image = [UIImage imageNamed:@"3"];
     cell.appImage.image = image;
-   
-//    cell.appName.text= @"测试游戏";
-//    cell.otherInfo.text=@"2015-12-08  3MB";
-//    cell.appVersion.text=@"1.2.1";
-    
     
     return cell;
 }

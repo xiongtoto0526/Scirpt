@@ -84,6 +84,7 @@
 		AD0E36E81C8001F800714FF3 /* icon_transform_animation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36981C8001F800714FF3 /* icon_transform_animation@2x.png */; settings = {ASSET_TAGS = (); }; };
 		AD0E36E91C8001F800714FF3 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E369B1C8001F800714FF3 /* UIHelper.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36EA1C8001F800714FF3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E369D1C8001F800714FF3 /* ViewController.m */; settings = {ASSET_TAGS = (); }; };
+		AD0E36EE1C80354B00714FF3 /* validation.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36ED1C80354B00714FF3 /* validation.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -211,6 +212,8 @@
 		AD0E369B1C8001F800714FF3 /* UIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIHelper.m; sourceTree = "<group>"; };
 		AD0E369C1C8001F800714FF3 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		AD0E369D1C8001F800714FF3 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		AD0E36EC1C80354B00714FF3 /* validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = validation.h; sourceTree = "<group>"; };
+		AD0E36ED1C80354B00714FF3 /* validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = validation.m; sourceTree = "<group>"; };
 		ADE01D651C181077009F425E /* HelloTako.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTako.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -228,6 +231,7 @@
 		AD0E360E1C8001F800714FF3 /* HelloTako */ = {
 			isa = PBXGroup;
 			children = (
+				AD0E36EB1C80354B00714FF3 /* validate */,
 				AD0E360F1C8001F800714FF3 /* AppDelegate.h */,
 				AD0E36101C8001F800714FF3 /* AppDelegate.m */,
 				AD0E36111C8001F800714FF3 /* Assets.xcassets */,
@@ -492,6 +496,15 @@
 			path = util;
 			sourceTree = "<group>";
 		};
+		AD0E36EB1C80354B00714FF3 /* validate */ = {
+			isa = PBXGroup;
+			children = (
+				AD0E36EC1C80354B00714FF3 /* validation.h */,
+				AD0E36ED1C80354B00714FF3 /* validation.m */,
+			);
+			path = validate;
+			sourceTree = "<group>";
+		};
 		ADE01D5C1C181077009F425E = {
 			isa = PBXGroup;
 			children = (
@@ -633,6 +646,7 @@
 				AD0E36B81C8001F800714FF3 /* VersionViewController.m in Sources */,
 				AD0E36A21C8001F800714FF3 /* ThirdViewController.m in Sources */,
 				AD0E36D01C8001F800714FF3 /* DDASLLogger.m in Sources */,
+				AD0E36EE1C80354B00714FF3 /* validation.m in Sources */,
 				AD0E36B31C8001F800714FF3 /* ReportViewController.m in Sources */,
 				AD0E36C01C8001F800714FF3 /* HTTPMessage.m in Sources */,
 				AD0E36BC1C8001F800714FF3 /* DDNumber.m in Sources */,

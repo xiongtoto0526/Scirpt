@@ -31,6 +31,15 @@
 }
 
 
++(void)alertWithNoChoice:(NSString*)msg view:(UIViewController*)view{
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:msg preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:okAction];
+    [view presentViewController:alertController animated:YES completion:nil];
+}
+
 //获取当前屏幕显示的viewcontroller
 + (UIViewController *)getCurrentVC
 {
@@ -98,6 +107,11 @@
     [userDefaults synchronize];
 }
 
++ (void)clearAllUserDefaultsData
+{
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+}
 
 
 //object持久化至userDefault

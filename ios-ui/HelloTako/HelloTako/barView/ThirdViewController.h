@@ -9,12 +9,16 @@
 #import <UIKit/UIKit.h>
 
 @interface ThirdViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UILabel *userName;
 
+@property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userAccount;
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
 @property (weak, nonatomic) IBOutlet UIView *profileView;
-@property (weak, nonatomic) IBOutlet UIButton *loginBt;
+@property (weak, nonatomic) IBOutlet UIButton *loginBtn;
+
+-(void)receiveLoginBackNotification;
 
 @end
+
+
 

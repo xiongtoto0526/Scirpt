@@ -19,6 +19,10 @@ static ShareEntity* share=nil;
         if(share==nil){
             share=[[ShareEntity alloc]init];
             share.isLogined=[self checkLoginFromHistory];
+            share.userAccount= [XHTUIHelper readNSUserDefaultsObjectWithkey:USER_ACCOUNT_KEY];
+            share.userName=[XHTUIHelper readNSUserDefaultsObjectWithkey:USER_NAME_KEY];
+            // todo:
+            // share.userImage=
         }
             return share;
    }

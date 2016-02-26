@@ -17,6 +17,7 @@
 #import "LoginViewController.h"
 #import "UIHelper.h"
 #import "ShareEntity.h"
+#import "Constant.h"
 
 @interface ThirdViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -29,23 +30,40 @@
 
 @implementation ThirdViewController
 
+-(void)receiveLoginBackNotification{
+    NSLog(@"receive login back notification...");
+    
+    // 刷新页面。
+    [self.loginBtn setHidden:[ShareEntity shareInstance].isLogined];
+    self.userName.text = [ShareEntity shareInstance].userName;
+    self.userAccount.text = [ShareEntity shareInstance].userAccount;
+
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    NSLog(@"view will appear...");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // 1.添加监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveLoginBackNotification) name:LOGIN_BACK_TO_USER_NOTIFICATION object:nil];
+    
     // Do any additional setup after loading the view, typically from a nib.
 
      sectionTitleArray = [NSArray arrayWithObjects:@"应用",@"其他",nil];
      sectionTextArray =[NSArray arrayWithObjects:
                        [NSArray arrayWithObjects:@"我发布的应用",nil],
                        [NSArray arrayWithObjects:@"关于Tako",@"退出登录",nil],nil];
-
-    self.userAccount.text=[ShareEntity shareInstance].userAccount;
-    self.userName.text=[ShareEntity shareInstance].userName;
-    // todo:
-//    self.userImage = [ShareEntity shareInstance].userImage;
-   
     
-    // 注册cell
-//     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"navigateTableCell"];
+    // 未登录时的显示内容
+    [self.loginBtn setHidden:[ShareEntity shareInstance].isLogined];
+    self.userAccount.text = [ShareEntity shareInstance].userAccount;
+    self.userName.text = [ShareEntity shareInstance].userName;
+    
+    // todo:
+    // self.userImage = [ShareEntity shareInstance].userImage;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,12 +78,12 @@
 }
 
 
-//改变行的高度,todo: 为何自定义的cell本身未生效？
+// 改变行的高度,todo: 为何自定义的cell本身未生效？
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 44;
 }
 
-//section数目
+// section数目
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [sectionTitleArray count];
 }
@@ -102,11 +120,26 @@
     }else if(indexPath.section==1 && indexPath.row==1){
         NSLog(@"即将进入“退出登录”页面...");
         
+        if (![ShareEntity shareInstance].isLogined) {
+            [XHTUIHelper alertWithNoChoice:@"您已登出." view:self];
+            return;
+        }
+        
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"确认要退出登录？" preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            NSLog(@"您即将退出登录...");
+            NSLog(@"您已登出...");
+            self.userName.text=@"";
+            self.userAccount.text=@"";
+            [ShareEntity shareInstance].userName=@"";
+            [ShareEntity shareInstance].userAccount=@"";
+            [ShareEntity shareInstance].isLogined=NO;
+            [XHTUIHelper writeNSUserDefaultsWithKey:LOGIN_KEY withObject:LOGIN_FAILED_KEY];
+            
+            // 通知上层view刷新视图
+            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_BACK_TO_USER_NOTIFICATION object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];
         }];
         
         [alertController addAction:cancelAction];
@@ -121,5 +154,8 @@
         NSLog(@"enter login view");
     }];
 }
+
+
+
 
 @end

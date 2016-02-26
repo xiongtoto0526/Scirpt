@@ -8,9 +8,11 @@
 
 #import "LoginViewController.h"
 #import "FirstViewController.h"
+#import "ThirdViewController.h"
 #import "ShareEntity.h"
 #import "Constant.h"
 #import "UIHelper.h"
+#import "validation.h"
 
 @interface LoginViewController ()
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator ;
@@ -46,20 +48,34 @@
 
 
 -(IBAction) signin:(id)sender{
-    if(self.loginBt.selected) return;
-   self.loginBt.selected = YES;
-   self.activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(100, 100, 60, 60)];
-    [self.view addSubview:   self.activityIndicator];
-       self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
-    [self.activityIndicator startAnimating];
     
+    if(self.loginBt.selected) return;
+   
+    self.loginBt.selected = YES;
+
     NSString *userAccount = self.userNameTxt.text;
     NSString *password = self.userPwd.text;
     // todo: 输入txt的格式校验。
+    XHtValidation *validate=[[XHtValidation alloc] init];
+    
+    //====== Pass In the textField and desired textFieldName for each validation method
+    [validate Email:userAccount FieldName:@"账号:"];
+    [validate Required:userAccount FieldName:@"账号:"];
+    [validate Required:password FieldName:@"密码:"];
+    [validate MaxLength:12 textField:password FieldName:@"密码:"];
+    if (![validate isValid]) {
+        NSLog(@"格式校验不通过!");
+        [self showLoginFailed:[validate.errorMsg objectAtIndex:0]];
+        self.loginBt.selected = NO;
+        return;
+    }
+    
+    [self showIndicator];
     
     if([self authwithUserName:userAccount password:password]){
         NSLog(@"登陆成功。");
-        [XHTUIHelper writeNSUserDefaultsWithKey:USER_KEY withValue:userAccount];
+        [XHTUIHelper writeNSUserDefaultsWithKey:USER_ACCOUNT_KEY withValue:userAccount];
+        [XHTUIHelper writeNSUserDefaultsWithKey:USER_NAME_KEY withValue:userAccount];
         [XHTUIHelper writeNSUserDefaultsWithKey:LOGIN_KEY withValue:LOGIN_SUCCESS_KEY];
         [ShareEntity shareInstance].isLogined=true;
         [ShareEntity shareInstance].userAccount=userAccount;
@@ -67,19 +83,20 @@
         [self gotoParentView:nil];
     }else{
         NSLog(@"登陆失败。");
-        [self showLoginFailed];
+        [self showLoginFailed:nil];
+        self.loginBt.selected = NO;
     }
 }
 
--(void) showLoginFailed{
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"登录失败,请重试~" preferredStyle:UIAlertControllerStyleAlert];
+
+-(void) showLoginFailed:(NSString*) failedMsg{
     
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        NSLog(@"will back to login view...");
-    }];
-    
-    [alertController addAction:okAction];
-    [self presentViewController:alertController animated:YES completion:nil];
+    if (failedMsg==nil) {
+     failedMsg = @"登录失败,请重试~";
+    }
+
+    [XHTUIHelper alertWithNoChoice:failedMsg view:self];
+        
 }
 
 - (void)authFinish{
@@ -98,16 +115,28 @@
     return YES;
 }
 
+-(void)showIndicator{
+    self.loginBt.selected = YES;
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(100, 100, 60, 60)];
+    [self.view addSubview:   self.activityIndicator];
+    self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+    [self.activityIndicator startAnimating];
+
+}
 
 -(IBAction) signup:(id)sender{
-    
     NSLog(@"will do register...");
-    
 }
 
 -(IBAction) gotoParentView:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    // 通知上层view刷新视图
+    [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_BACK_TO_USER_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];
+
 }
+
 
 
 @end

@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "HTTPServer.h"
 #import "Constant.h"
+#import "UIHelper.h"
 
 @interface AppDelegate (){
 	HTTPServer *httpServer;
@@ -39,6 +40,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [XHTUIHelper clearAllUserDefaultsData];
     
     // 启动httpserver
     httpServer = [[HTTPServer alloc] init];
