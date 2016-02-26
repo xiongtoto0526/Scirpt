@@ -579,7 +579,7 @@ db.orders.mapReduce(
 */
 func TestMapReduce(t *testing.T) {
 
-	println("aa:",1<<5)
+	println("aa:", 1 << 5)
 
 	dialInfo := &mgo.DialInfo{
 		Addrs:    []string{"127.0.0.1"},
@@ -623,8 +623,8 @@ func TestMapReduce(t *testing.T) {
 	for i := 0; i < count; i++ {
 		//Push(randIp(), nil, nil)
 		go func() {
-			d:=mgox.Connect()
-			defer  d.Close()
+			d := mgox.Connect()
+			defer d.Close()
 			mgox.New("111111").Insert(
 				&User{Name : "xiongtoto456", Age : 8, Sex :1, FirstCreated:time.Now()},
 			)
@@ -634,30 +634,30 @@ func TestMapReduce(t *testing.T) {
 
 }
 
-type Cb1 func(string,string)
+type Cb1 func(string, string)
 
 func TestGs(t *testing.T) {
-	a:= func(p1 string, p2 string) { println("will do cb1"); println("param1 is:"+p1) }
-	a(getStr(),"e")
+	a := func(p1 string, p2 string) { println("will do cb1"); println("param1 is:" + p1) }
+	a(getStr(), "e")
 
 
 	res, _ := http.Get("http://dlsw.baidu.com/sw-search-sp/soft/9d/25765/sogou_mac_32c_V3.2.0.1437101586.dmg")
 	file, _ := os.Create("xxx.jpg")
 	io.Copy(file, res.Body)
 	println("finish...")
-//	count := 1000000
-//	for i := 0; i < count; i++ {
-//		//Push(randIp(), nil, nil)
-//		testP();
-//	}
+	//	count := 1000000
+	//	for i := 0; i < count; i++ {
+	//		//Push(randIp(), nil, nil)
+	//		testP();
+	//	}
 }
 
-func getStr()(string)  {
+func getStr() (string) {
 	println("will get string...")
 	return "123"
 }
 
-func testP()  {
+func testP() {
 	go func() {
 		mgox.New("111111").Insert(
 			&User{Name : "xiongtoto456", Age : 8, Sex :1, FirstCreated:time.Now()},
@@ -667,21 +667,21 @@ func testP()  {
 
 
 func TestGenDays(t *testing.T) {
-	ret:=make(map[string]string)
-	begin:=Convert2localDate("2015-03-09");
-	end:=Convert2localDate("2015-04-02");
-	temp:= begin.AddDate(0,0,1)
-	ret[temp.Format("2006-01-02")]=""
-	for{
-		temp = temp.AddDate(0,0,1)
-		ret[temp.Format("2006-01-02")]=""
+	ret := make(map[string]string)
+	begin := Convert2localDate("2015-03-09");
+	end := Convert2localDate("2015-04-02");
+	temp := begin.AddDate(0, 0, 1)
+	ret[temp.Format("2006-01-02")] = ""
+	for {
+		temp = temp.AddDate(0, 0, 1)
+		ret[temp.Format("2006-01-02")] = ""
 		if temp.Equal(end) {
 			break
 		}
 	}
 
-	for key,_ :=range ret{
-		println("key is:",key)
+	for key, _ := range ret {
+		println("key is:", key)
 	}
 }
 
@@ -703,7 +703,7 @@ func Convert2localDate(dateStr string) (time.Time) {
 
 func TestMapReduceLocation(t *testing.T) {
 
-	println("aa:",1<<5)
+	println("aa:", 1 << 5)
 
 	dialInfo := &mgo.DialInfo{
 		Addrs:    []string{"127.0.0.1"},
@@ -745,7 +745,6 @@ func TestMapReduceLocation(t *testing.T) {
 }
 
 
-
 type CallBack func(string)
 
 // 测试重复IP的情况，
@@ -753,17 +752,17 @@ type CallBack func(string)
 // 测试执行完请求之后自动切换状态到suspended的情况
 func TestResolveRepeatIp(t *testing.T) {
 	a := func(ip string) {
-//		println("routine is ok:"+ip)
-//		 mgox.New("111111").Insert(
-//			&User{Name : "xiongtoto456", Age : 8, Sex :1, FirstCreated:time.Now()},
-//		)
-		println("insert is ok:"+ip)
+		//		println("routine is ok:"+ip)
+		//		 mgox.New("111111").Insert(
+		//			&User{Name : "xiongtoto456", Age : 8, Sex :1, FirstCreated:time.Now()},
+		//		)
+		println("insert is ok:" + ip)
 	}
 
-	for i:=0;i<10000 ;i++  {
+	for i := 0; i < 10000; i++ {
 		GetClientInfoWithcallback(randIp(), a)
 	}
-	for{}
+	for {}
 }
 
 
@@ -808,14 +807,17 @@ func GetIpInfo(ip string) (string) {
 	}
 	response, err := http.Get("http://ip.taobao.com/service/getIpInfo.php?ip=" + ip)
 
-
+	if err != nil {
+		fmt.Println("err:", err)
+		return "9"
+	}
 
 	defer response.Body.Close()
 
 	if err != nil || response.StatusCode != http.StatusOK {
 		return "2"
 	}
-//	defer response.Body.Close()
+	//	defer response.Body.Close()
 
 	body, _ := ioutil.ReadAll(response.Body)
 	s := string(body)

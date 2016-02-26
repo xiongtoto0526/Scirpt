@@ -14,5 +14,6 @@
 #define USER_KEY @"userAccount"
 #define LOGIN_KEY @"isLogined"
 #define LOGIN_SUCCESS_KEY @"2"
+#define DOWNLOADED_APP_KEY @"downloadApps"
 
 #endif /* Constant_h */

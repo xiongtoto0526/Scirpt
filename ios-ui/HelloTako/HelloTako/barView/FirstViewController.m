@@ -15,6 +15,7 @@
 #import "UIHelper.h"
 #import "App.h"
 #import "DownloadWorker.h"
+#import "Constant.h"
 
 @interface FirstViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property UIRefreshControl* refreshControl;
@@ -159,9 +160,29 @@
 
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-//    NSLog(@"hello , refresh...");
+//    NSLog(@" cell will display...");
+    TableViewCell* tbCell = (TableViewCell*)cell;
+    if ([self isAppDownloadedBefore:[NSString stringWithFormat:@"%@%@",tbCell.appName.text,tbCell.appVersion.text]]) {
+        [tbCell.button setTitle:@"已下载" forState:UIControlStateNormal];
+        tbCell.button.enabled = NO;
+    }
+
 }
 
+
+-(BOOL)isAppDownloadedBefore:(NSString*) newAppId{
+    BOOL isExist = NO;
+    NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_KEY];
+    for (NSString *key in downloadAppDict) {
+        NSLog(@"dict key: %@ value: %@", key, downloadAppDict[key]);
+        if ([key isEqualToString:newAppId]) {
+            NSLog(@"该应用已保存在下载记录中...");
+            isExist = YES;
+            break;
+        }
+    }
+    return isExist;
+}
 
 -(void) showDownload:(TableViewCell*) cell{
     // 显示下载栏

@@ -14,5 +14,7 @@
 + (UIViewController *)getCurrentVC;
 + (CGSize) viewSizeWith: (UIView*) view;
 + (NSString*) readNSUserDefaultsWithkey:(NSString*) key;
++(id)readNSUserDefaultsObjectWithkey:(NSString*) key;
 + (void) writeNSUserDefaultsWithKey:(NSString*) key withValue:(NSString*) value;
++ (void)writeNSUserDefaultsWithKey:(NSString*) key withObject:(id) value;
 @end

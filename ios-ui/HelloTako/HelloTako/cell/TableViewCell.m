@@ -9,6 +9,7 @@
 #import "TableViewCell.h"
 #import "UIHelper.h"
 #import "DownloadWorker.h"
+#import "Constant.h"
 
 @interface TableViewCell()<XHtDownLoadDelegate>
 @property BOOL isClicked;
@@ -31,6 +32,12 @@
     
     [self.button addTarget:self action:@selector(showDownload) forControlEvents:UIControlEventTouchDown];
     [self.btnCancel addTarget:self action:@selector(stopDownload) forControlEvents:UIControlEventTouchDown];
+    
+    // 不能再此处动态设置cell，应该在tableview的 willDisplayCell 回调中处理。
+//    if ([self isAppDownloadedBefore:[NSString stringWithFormat:@"%@%@",self.appName.text,self.appVersion.text]]) {
+//        [self.button setTitle:@"已下载" forState:UIControlStateNormal];
+//         self.button.enabled = NO;
+//    }
 
 }
 
@@ -102,9 +109,22 @@
 -(void)downloadFinish:(BOOL)isSuccess{
     NSLog(@"收到回调通知：文件下载完成。");
     [self.button setTitle:@"已下载" forState:UIControlStateNormal];    // 修改下载按钮的文本显示
+//    self.button.selected = YES;
+    self.button.enabled = NO;
     [self.progressControl setHidden:YES];
     [self.btnCancel setHidden:YES];
     [self.textDownload setHidden:YES];
+    
+    NSString* newAppId = [NSString stringWithFormat:@"%@%@",self.appName.text,self.appVersion.text];
+    NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_KEY];
+    if (downloadAppDict==nil) {
+        downloadAppDict = [NSMutableDictionary new];
+    }
+    NSMutableDictionary* newDict = [NSMutableDictionary dictionaryWithDictionary:downloadAppDict];
+    [newDict setValue:@"1" forKey:newAppId];
+    [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_KEY withObject:newDict];
+    
+    
 }
 
 -(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize{

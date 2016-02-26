@@ -77,10 +77,31 @@
 }
 
 
+//读取userDefault的object数据
++(id)readNSUserDefaultsObjectWithkey:(NSString*) key{
+    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    return [userDefaultes objectForKey:key];
+}
+
+
 
 
 //数据持久化至userDefault
 +(void)writeNSUserDefaultsWithKey:(NSString*) key withValue:(NSString*) value
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    //添加
+    [userDefaults setObject:value forKey:key];
+    
+    //同步
+    [userDefaults synchronize];
+}
+
+
+
+//object持久化至userDefault
++(void)writeNSUserDefaultsWithKey:(NSString*) key withObject:(id) value
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
