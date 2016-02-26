@@ -7,17 +7,49 @@
 //
 
 #import "AppDelegate.h"
+#import "HTTPServer.h"
+#import "Constant.h"
 
-@interface AppDelegate ()
+@interface AppDelegate (){
+	HTTPServer *httpServer;
+}
 
 @end
 
 @implementation AppDelegate
 
 
+
+- (void)startServer
+{
+    // Start the server (and check for problems)
+    NSError *error;
+    if([httpServer start:&error])
+    {
+        int port = [httpServer listeningPort];
+        NSLog(@"Started HTTP Server on port %d", port);
+    }
+    else
+    {
+        NSLog(@"Error starting HTTP Server: %@", error);
+    }
+}
+
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    // 启动httpserver
+    httpServer = [[HTTPServer alloc] init];
+    [httpServer setType:@"_http._tcp."];
+    [httpServer setPort:HTTP_SERVER_PORT];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *homePath = [paths firstObject];
+    //    filepath = [homePath  stringByAppendingPathComponent:@"xgtakofiles"];
+    [httpServer setDocumentRoot:homePath];
+    [self startServer];
     return YES;
 }
 
@@ -26,13 +58,19 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
+
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    
+    //    [httpServer stop];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+
+    //    [self startServer];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

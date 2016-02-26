@@ -82,6 +82,7 @@
     static NSString *CellIdentifier = @"navigateTableCell";
     UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     cell.textLabel.text =sectionTextArray[indexPath.section][indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }

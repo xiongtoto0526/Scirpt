@@ -16,7 +16,7 @@
 #import "App.h"
 #import "DownloadWorker.h"
 
-@interface FirstViewController ()<UITableViewDataSource,UITableViewDelegate,XHtDownLoadDelegate>
+@interface FirstViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property UIRefreshControl* refreshControl;
 @property NSArray* listData;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -29,14 +29,15 @@
 -(void)viewDidAppear:(BOOL)animated{
     
     if (![self checkIsLogin]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"您尚未登录，请先登录~" preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self presentViewController:[LoginViewController new] animated:YES completion:nil];
-        }];
-        
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
+//        [self.tableview setHidden:YES];
+//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"您尚未登录，请先登录~" preferredStyle:UIAlertControllerStyleAlert];
+//        
+//        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//            [self presentViewController:[LoginViewController new] animated:YES completion:nil];
+//        }];
+//        
+//        [alertController addAction:okAction];
+//        [self presentViewController:alertController animated:YES completion:nil];
     }else{
         
     }
@@ -54,10 +55,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     if(![ShareEntity shareInstance].isLogined){
+        [self.tableview setHidden:YES];
         return;
     }
-//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"标题" message:@"这个是UIAlertController的默认样式" preferredStyle:UIAlertControllerStyleAlert];
-//   [self presentViewController:alertController animated:YES completion:nil];
+   
+    [self.tableview setHidden:NO];
+//    [self.loginbtn add]
     // 初始化刷新控制器.
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [UIColor whiteColor];
@@ -119,11 +122,11 @@
     return 84;
 }
 
-// 点击单元格，暂时关闭该页面。如需激活该方法，需要修改cell中设置：cell.selectionStyle = UITableViewCellSelectionStyleNone;
+// 点击单元格，暂时关闭该页面。如需激活该方法，需要修改cell中设置。
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"即将进入“游戏详情”页面...");
-    GameDetailViewController* gameDetailView = [[GameDetailViewController alloc] init];
-    [self presentViewController:gameDetailView animated:YES completion:nil];
+//    NSLog(@"即将进入“游戏详情”页面...");
+//    GameDetailViewController* gameDetailView = [[GameDetailViewController alloc] init];
+//    [self presentViewController:gameDetailView animated:YES completion:nil];
 }
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -167,6 +170,13 @@
     [cell.textDownload setHidden:NO];
 }
 
+
+
+-(IBAction) gotoLoginView:(id)sender{
+    [self presentViewController:[LoginViewController new] animated:NO completion:^{
+        NSLog(@"enter login view");
+    }];
+}
 
 
 - (void)reloadDataWhenRefresh

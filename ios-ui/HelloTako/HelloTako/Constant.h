@@ -9,6 +9,8 @@
 #ifndef Constant_h
 #define Constant_h
 
+#define HTTP_SERVER_PORT 12345
+
 #define USER_KEY @"userAccount"
 #define LOGIN_KEY @"isLogined"
 #define LOGIN_SUCCESS_KEY @"2"
