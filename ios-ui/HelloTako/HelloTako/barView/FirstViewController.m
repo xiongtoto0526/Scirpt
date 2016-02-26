@@ -154,7 +154,7 @@
     BOOL isExist = NO;
     NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_KEY];
     for (NSString *key in downloadAppDict) {
-        NSLog(@"dict key: %@ value: %@", key, downloadAppDict[key]);
+//        NSLog(@"dict key: %@ value: %@", key, downloadAppDict[key]);
         if ([key isEqualToString:newAppId]) {
             NSLog(@"该应用已保存在下载记录中...");
             isExist = YES;

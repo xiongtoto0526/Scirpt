@@ -13,6 +13,7 @@
 #import "Constant.h"
 #import "UIHelper.h"
 #import "validation.h"
+#import "Server.h"
 
 @interface LoginViewController ()
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator ;
@@ -112,9 +113,13 @@
 -(BOOL)authwithUserName:(NSString*)userName password:(NSString*)password{
     // 模拟鉴权过程
     [self performSelector:@selector(authFinish) withObject:nil afterDelay:3.0]; //使用延时进行限制。
-    
-    //todo: 解析用户信息
-    self.authUserName=@"authedUserNiceName";
+  
+    TakoUser* user = [TakoServer auth];
+    if (user==nil) {
+        return NO;
+    }
+
+    self.authUserName=user.name;
     self.authUserIcon=nil;
     return YES;
 }

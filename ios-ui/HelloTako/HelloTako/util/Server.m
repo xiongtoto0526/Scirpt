@@ -34,4 +34,12 @@
     return result;
 }
 
+
++(TakoUser*)auth{
+    TakoUser* user = [TakoUser new];
+    user.name =@"authUserNickName";
+    user.createTime=nil;
+    return user;
+}
+
 @end

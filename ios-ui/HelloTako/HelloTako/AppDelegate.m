@@ -44,7 +44,7 @@
     // Override point for customization after application launch.
 
     
-    // [XHTUIHelper clearAllUserDefaultsData]; // 调试用
+     [XHTUIHelper clearAllUserDefaultsData]; // 调试用
     
     
     TakoVersion* takoVersion = [TakoServer fetchVersion];

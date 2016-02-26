@@ -87,6 +87,7 @@
 		AD0E36EE1C80354B00714FF3 /* validation.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36ED1C80354B00714FF3 /* validation.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36F41C804AC100714FF3 /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36F31C804AC100714FF3 /* Server.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36F71C804B9400714FF3 /* Version.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36F61C804B9400714FF3 /* Version.m */; settings = {ASSET_TAGS = (); }; };
+		AD0E36FA1C80597300714FF3 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36F91C80597300714FF3 /* User.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -220,6 +221,8 @@
 		AD0E36F31C804AC100714FF3 /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
 		AD0E36F51C804B9400714FF3 /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
 		AD0E36F61C804B9400714FF3 /* Version.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Version.m; sourceTree = "<group>"; };
+		AD0E36F81C80597300714FF3 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		AD0E36F91C80597300714FF3 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		ADE01D651C181077009F425E /* HelloTako.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTako.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -305,7 +308,6 @@
 			children = (
 				AD0E362D1C8001F800714FF3 /* DistributeAppsViewController.h */,
 				AD0E362E1C8001F800714FF3 /* DistributeAppsViewController.m */,
-				AD0E362F1C8001F800714FF3 /* DistributeAppsViewController.xib */,
 				AD0E36301C8001F800714FF3 /* GameDetailViewController.h */,
 				AD0E36311C8001F800714FF3 /* GameDetailViewController.m */,
 				AD0E36321C8001F800714FF3 /* GameDetailViewController.xib */,
@@ -313,13 +315,14 @@
 				AD0E36341C8001F800714FF3 /* LoginViewController.m */,
 				AD0E36351C8001F800714FF3 /* LoginViewController.xib */,
 				AD0E36361C8001F800714FF3 /* ReportViewController.h */,
+				AD0E362F1C8001F800714FF3 /* DistributeAppsViewController.xib */,
 				AD0E36371C8001F800714FF3 /* ReportViewController.m */,
-				AD0E36381C8001F800714FF3 /* ReportViewController.xib */,
 				AD0E36391C8001F800714FF3 /* ShareView.xib */,
 				AD0E363A1C8001F800714FF3 /* ShareViewController.h */,
 				AD0E363B1C8001F800714FF3 /* ShareViewController.m */,
 				AD0E363C1C8001F800714FF3 /* ShareViewController.xib */,
 				AD0E363D1C8001F800714FF3 /* VersionViewController.h */,
+				AD0E36381C8001F800714FF3 /* ReportViewController.xib */,
 				AD0E363E1C8001F800714FF3 /* VersionViewController.m */,
 				AD0E363F1C8001F800714FF3 /* VersionViewController.xib */,
 			);
@@ -466,6 +469,8 @@
 			children = (
 				AD0E36861C8001F800714FF3 /* App.h */,
 				AD0E36871C8001F800714FF3 /* App.m */,
+				AD0E36F81C80597300714FF3 /* User.h */,
+				AD0E36F91C80597300714FF3 /* User.m */,
 				AD0E36F51C804B9400714FF3 /* Version.h */,
 				AD0E36F61C804B9400714FF3 /* Version.m */,
 				AD0E36881C8001F800714FF3 /* ShareEntity.h */,
@@ -666,6 +671,7 @@
 				AD0E36D51C8001F800714FF3 /* DispatchQueueLogFormatter.m in Sources */,
 				AD0E36B61C8001F800714FF3 /* ShareViewController.m in Sources */,
 				AD0E36D21C8001F800714FF3 /* DDLog.m in Sources */,
+				AD0E36FA1C80597300714FF3 /* User.m in Sources */,
 				AD0E36D11C8001F800714FF3 /* DDFileLogger.m in Sources */,
 				AD0E36BE1C8001F800714FF3 /* HTTPAuthenticationRequest.m in Sources */,
 				AD0E36C61C8001F800714FF3 /* HTTPDataResponse.m in Sources */,

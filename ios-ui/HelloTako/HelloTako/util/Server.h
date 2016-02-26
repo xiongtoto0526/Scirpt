@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "Version.h"
+#import "User.h"
 
 @interface TakoServer : NSObject
 
 +(TakoVersion*)fetchVersion;
 
 +(NSArray*)fetchApp;
+
++(TakoUser*)auth;
 
 @end
