@@ -10,6 +10,7 @@
 #import "HTTPServer.h"
 #import "Constant.h"
 #import "UIHelper.h"
+#import "Server.h"
 
 @interface AppDelegate (){
 	HTTPServer *httpServer;
@@ -38,9 +39,29 @@
 
 
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [XHTUIHelper clearAllUserDefaultsData];
+
+    
+    // [XHTUIHelper clearAllUserDefaultsData]; // 调试用
+    
+    
+    TakoVersion* takoVersion = [TakoServer fetchVersion];
+    
+    
+    NSLog(@"老版本:%@",[XHTUIHelper readNSUserDefaultsObjectWithkey:APP_VERSION_KEY]);
+    
+    // 首次下载,写入版本号
+    if([XHTUIHelper readNSUserDefaultsObjectWithkey:APP_VERSION_KEY]==nil){
+        [XHTUIHelper writeNSUserDefaultsWithKey:APP_VERSION_KEY withObject:takoVersion.versionName];
+        [XHTUIHelper writeNSUserDefaultsWithKey:APP_VERSION_CREATE_TIME_KEY withObject:takoVersion.createTime];
+    }
+    
+    NSDate* old = [XHTUIHelper readNSUserDefaultsObjectWithkey:APP_VERSION_CREATE_TIME_KEY];
+    if ([takoVersion.createTime timeIntervalSinceDate:old]>0.0) {
+        NSLog(@"检测到新版本....");
+    }
     
     // 启动httpserver
     httpServer = [[HTTPServer alloc] init];

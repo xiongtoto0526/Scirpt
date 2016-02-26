@@ -103,9 +103,12 @@
 
 -(void)downloadFinish:(BOOL)isSuccess{
     NSLog(@"收到回调通知：文件下载完成。");
-    [self.button setTitle:@"已下载" forState:UIControlStateNormal];    // 修改下载按钮的文本显示
-//    self.button.selected = YES;
+    
+    // todo: 可抽取为公共方法。
+    [self.button setTitle:@"已下载" forState:UIControlStateNormal];
+    [self.button.layer setBorderColor:(__bridge CGColorRef _Nullable)([UIColor grayColor])];
     self.button.enabled = NO;
+    
     [self.progressControl setHidden:YES];
     [self.btnCancel setHidden:YES];
     [self.textDownload setHidden:YES];

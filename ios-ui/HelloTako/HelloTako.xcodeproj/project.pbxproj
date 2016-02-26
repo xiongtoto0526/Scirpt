@@ -85,6 +85,8 @@
 		AD0E36E91C8001F800714FF3 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E369B1C8001F800714FF3 /* UIHelper.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36EA1C8001F800714FF3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E369D1C8001F800714FF3 /* ViewController.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36EE1C80354B00714FF3 /* validation.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36ED1C80354B00714FF3 /* validation.m */; settings = {ASSET_TAGS = (); }; };
+		AD0E36F41C804AC100714FF3 /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36F31C804AC100714FF3 /* Server.m */; settings = {ASSET_TAGS = (); }; };
+		AD0E36F71C804B9400714FF3 /* Version.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36F61C804B9400714FF3 /* Version.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -214,6 +216,10 @@
 		AD0E369D1C8001F800714FF3 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		AD0E36EC1C80354B00714FF3 /* validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = validation.h; sourceTree = "<group>"; };
 		AD0E36ED1C80354B00714FF3 /* validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = validation.m; sourceTree = "<group>"; };
+		AD0E36F21C804AC100714FF3 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
+		AD0E36F31C804AC100714FF3 /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
+		AD0E36F51C804B9400714FF3 /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
+		AD0E36F61C804B9400714FF3 /* Version.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Version.m; sourceTree = "<group>"; };
 		ADE01D651C181077009F425E /* HelloTako.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTako.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -460,6 +466,8 @@
 			children = (
 				AD0E36861C8001F800714FF3 /* App.h */,
 				AD0E36871C8001F800714FF3 /* App.m */,
+				AD0E36F51C804B9400714FF3 /* Version.h */,
+				AD0E36F61C804B9400714FF3 /* Version.m */,
 				AD0E36881C8001F800714FF3 /* ShareEntity.h */,
 				AD0E36891C8001F800714FF3 /* ShareEntity.m */,
 			);
@@ -490,6 +498,8 @@
 		AD0E36991C8001F800714FF3 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				AD0E36F21C804AC100714FF3 /* Server.h */,
+				AD0E36F31C804AC100714FF3 /* Server.m */,
 				AD0E369A1C8001F800714FF3 /* UIHelper.h */,
 				AD0E369B1C8001F800714FF3 /* UIHelper.m */,
 			);
@@ -633,6 +643,7 @@
 				AD0E369E1C8001F800714FF3 /* AppDelegate.m in Sources */,
 				AD0E36D91C8001F800714FF3 /* App.m in Sources */,
 				AD0E36DA1C8001F800714FF3 /* ShareEntity.m in Sources */,
+				AD0E36F41C804AC100714FF3 /* Server.m in Sources */,
 				AD0E36CD1C8001F800714FF3 /* GCDAsyncSocket.m in Sources */,
 				AD0E36BB1C8001F800714FF3 /* DDData.m in Sources */,
 				AD0E36BA1C8001F800714FF3 /* DownLoadWorker.m in Sources */,
@@ -649,6 +660,7 @@
 				AD0E36EE1C80354B00714FF3 /* validation.m in Sources */,
 				AD0E36B31C8001F800714FF3 /* ReportViewController.m in Sources */,
 				AD0E36C01C8001F800714FF3 /* HTTPMessage.m in Sources */,
+				AD0E36F71C804B9400714FF3 /* Version.m in Sources */,
 				AD0E36BC1C8001F800714FF3 /* DDNumber.m in Sources */,
 				AD0E36A01C8001F800714FF3 /* FirstViewController.m in Sources */,
 				AD0E36D51C8001F800714FF3 /* DispatchQueueLogFormatter.m in Sources */,

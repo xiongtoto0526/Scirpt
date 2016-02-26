@@ -52,10 +52,14 @@
     
     // Do any additional setup after loading the view, typically from a nib.
 
-     sectionTitleArray = [NSArray arrayWithObjects:@"应用",@"其他",nil];
-     sectionTextArray =[NSArray arrayWithObjects:
-                       [NSArray arrayWithObjects:@"我发布的应用",nil],
-                       [NSArray arrayWithObjects:@"关于Tako",@"退出登录",nil],nil];
+    
+    sectionTitleArray = [NSArray arrayWithObjects:@"",nil];
+    sectionTextArray =[NSArray arrayWithObjects:[NSArray arrayWithObjects:@"关于Tako",@"退出登录",nil],nil];
+
+//     sectionTitleArray = [NSArray arrayWithObjects:@"应用",@"其他",nil];
+//     sectionTextArray =[NSArray arrayWithObjects:
+//                       [NSArray arrayWithObjects:@"我发布的应用",nil],
+//                       [NSArray arrayWithObjects:@"关于Tako",@"退出登录",nil],nil];
     
     // 未登录时的显示内容
     [self.loginBtn setHidden:[ShareEntity shareInstance].isLogined];
@@ -107,17 +111,17 @@
 
 // 单元格选中时
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section==0 && indexPath.row==0) {
-        NSLog(@"即将进入“我发布的应用”页面...");
-        UIViewController* distributeAppsView = [[DistributeAppsViewController alloc] init];
-        [self.navigationController pushViewController:distributeAppsView animated:YES];
-        
-    }else if(indexPath.section==1 && indexPath.row==0){
+//    if (indexPath.section==0 && indexPath.row==0) {
+//        NSLog(@"即将进入“我发布的应用”页面...");
+//        UIViewController* distributeAppsView = [[DistributeAppsViewController alloc] init];
+//        [self.navigationController pushViewController:distributeAppsView animated:YES];
+//    }
+    if(indexPath.section==0 && indexPath.row==0){
         NSLog(@"即将进入“关于Tako”页面...");
         UIViewController* versionView = [[VersionViewController alloc] init];
         [self.navigationController pushViewController:versionView animated:YES];
         
-    }else if(indexPath.section==1 && indexPath.row==1){
+    }else if(indexPath.section==0 && indexPath.row==1){
         NSLog(@"即将进入“退出登录”页面...");
         
         if (![ShareEntity shareInstance].isLogined) {

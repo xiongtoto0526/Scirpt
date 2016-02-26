@@ -1,7 +1,7 @@
 
-#import "App.h"
+#import "Version.h"
 
-@implementation TakoApp
+@implementation TakoVersion
 
 
 //- (void)setValue:(id)value forKey:(NSString *)key

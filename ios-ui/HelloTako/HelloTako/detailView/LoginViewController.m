@@ -75,7 +75,11 @@
     if([self authwithUserName:userAccount password:password]){
         NSLog(@"登陆成功。");
         [XHTUIHelper writeNSUserDefaultsWithKey:USER_ACCOUNT_KEY withValue:userAccount];
-        [XHTUIHelper writeNSUserDefaultsWithKey:USER_NAME_KEY withValue:userAccount];
+        [XHTUIHelper writeNSUserDefaultsWithKey:USER_NAME_KEY withValue:self.authUserName];
+
+        // todo: icon本地化
+        // [XHTUIHelper writeNSUserDefaultsWithKey:USER_IMAGE_KEY withObject:self.authUserIcon];
+        
         [XHTUIHelper writeNSUserDefaultsWithKey:LOGIN_KEY withValue:LOGIN_SUCCESS_KEY];
         [ShareEntity shareInstance].isLogined=true;
         [ShareEntity shareInstance].userAccount=userAccount;
@@ -110,7 +114,7 @@
     [self performSelector:@selector(authFinish) withObject:nil afterDelay:3.0]; //使用延时进行限制。
     
     //todo: 解析用户信息
-    self.authUserName=@"authUserName";
+    self.authUserName=@"authedUserNiceName";
     self.authUserIcon=nil;
     return YES;
 }

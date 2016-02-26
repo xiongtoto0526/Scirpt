@@ -16,6 +16,7 @@
 #import "App.h"
 #import "DownloadWorker.h"
 #import "Constant.h"
+#import "Server.h"
 
 @interface FirstViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property UIRefreshControl* refreshControl;
@@ -82,18 +83,8 @@
 }
 
 
-// todo: 模拟从server取数据
 -(NSArray*)fetchDataFromServer{
-        NSMutableArray* result = [NSMutableArray new];
-    for (int i=0; i<3; i++) {
-        App* app = [App new];
-        app.name=[NSString stringWithFormat:@"app%d",i+1];
-        app.version=[NSString stringWithFormat:@"%d.%d.%d",i+1,i+1,i+1];
-        app.createTime=@"2015-11-09";
-        app.size=@"3.1M";
-        [result addObject:app];
-    }
-    return result;
+    return [TakoServer fetchApp];
 }
 
 
@@ -134,7 +125,7 @@
     
 
     // todo: 需要加载不同的游戏数据。 使用for 遍历
-    App *app = [self.listData objectAtIndex:indexPath.row];
+    TakoApp *app = [self.listData objectAtIndex:indexPath.row];
     cell.appName.text=app.name;
     cell.appVersion.text = app.version;
     cell.otherInfo.text = [NSString stringWithFormat:@"%@ %@",app.createTime,app.size];
@@ -152,6 +143,7 @@
     TableViewCell* tbCell = (TableViewCell*)cell;
     if ([self isAppDownloadedBefore:[NSString stringWithFormat:@"%@%@",tbCell.appName.text,tbCell.appVersion.text]]) {
         [tbCell.button setTitle:@"已下载" forState:UIControlStateNormal];
+        [tbCell.button.layer setBorderColor:(__bridge CGColorRef _Nullable)([UIColor grayColor])];
         tbCell.button.enabled = NO;
     }
 

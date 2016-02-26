@@ -7,6 +7,8 @@
 //
 
 #import "VersionViewController.h"
+#import "UIHelper.h"
+#import "Constant.h"
 
 @interface VersionViewController ()
 
@@ -15,7 +17,10 @@
 @implementation VersionViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+  [super viewDidLoad];
+    
+   NSString* verionName = [XHTUIHelper readNSUserDefaultsObjectWithkey:APP_VERSION_KEY];
+    self.version.text = [NSString stringWithFormat:@"Tako %@",verionName];
     // Do any additional setup after loading the view from its nib.
 }
 

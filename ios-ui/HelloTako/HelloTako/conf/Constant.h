@@ -13,12 +13,15 @@
 #define HTTP_SERVER_PORT 12345
 
 // user default
-#define USER_ACCOUNT_KEY @"userAccount"
-#define USER_NAME_KEY @"userName"
-#define LOGIN_KEY @"isLogined"
+#define USER_ACCOUNT_KEY @"user_account"
+#define USER_NAME_KEY @"user_name"
+#define USER_IMAGE_KEY @"user_image"
+#define LOGIN_KEY @"is_logined"
 #define LOGIN_SUCCESS_KEY @"1"
 #define LOGIN_FAILED_KEY @"0"
-#define DOWNLOADED_APP_KEY @"downloadApps"
+#define DOWNLOADED_APP_KEY @"downloaded_app"
+#define APP_VERSION_KEY @"app_version"
+#define APP_VERSION_CREATE_TIME_KEY @"app_version_create_time"
 
 // notification
 #define LOGIN_BACK_TO_USER_NOTIFICATION @"login_back_to_user"

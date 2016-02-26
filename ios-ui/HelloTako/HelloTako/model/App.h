@@ -3,7 +3,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface App : NSObject
+@interface TakoApp : NSObject
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *version;
 @property (nonatomic, copy) UIImage *image;
