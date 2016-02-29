@@ -154,7 +154,9 @@
         [tbCell.button.layer setBorderColor:(__bridge CGColorRef _Nullable)([UIColor grayColor])];
         tbCell.button.enabled = NO;
     }
-
+    
+    // 记录每个cell的index
+    tbCell.myCellIndex = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
 }
 
 

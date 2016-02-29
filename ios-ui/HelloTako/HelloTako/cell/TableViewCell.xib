@@ -13,7 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="343" height="84"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="343" height="84"/>
+                <rect key="frame" x="0.0" y="0.0" width="343" height="83.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zmQ-Pk-IAc">
@@ -37,14 +37,14 @@
                             </mask>
                         </variation>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPs-aO-2G5">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPs-aO-2G5">
                         <rect key="frame" x="166" y="32" width="49" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="H4F-4L-hRe"/>
                             <constraint firstAttribute="width" constant="49" id="qtX-k5-gGf"/>
                             <constraint firstAttribute="width" constant="49" id="ssy-CY-Xme"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
@@ -53,7 +53,7 @@
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80r-ra-7Y2">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80r-ra-7Y2">
                         <rect key="frame" x="124" y="32" width="29" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="KS0-R7-GaF"/>
@@ -79,7 +79,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yI1-5c-01v">
+                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yI1-5c-01v">
                         <rect key="frame" x="124" y="12" width="124" height="2"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="2" id="QS4-O0-3nL"/>
@@ -92,14 +92,14 @@
                             </mask>
                         </variation>
                     </progressView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前进度: 24MB/100MB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S1b-aN-LGR">
-                        <rect key="frame" x="124" y="14" width="111" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前进度: 0%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S1b-aN-LGR">
+                        <rect key="frame" x="124" y="14" width="120" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="fmN-Wn-suF"/>
                             <constraint firstAttribute="height" constant="21" id="h70-GA-8r5"/>
-                            <constraint firstAttribute="width" constant="111" id="ru3-KS-TmL"/>
+                            <constraint firstAttribute="width" constant="120" id="ru3-KS-TmL"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="10"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
@@ -109,7 +109,7 @@
                         </variation>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEf-pj-kOc">
-                        <rect key="frame" x="268" y="6" width="17" height="17"/>
+                        <rect key="frame" x="277" y="6" width="17" height="17"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="17" id="4sG-uX-MDP"/>
                             <constraint firstAttribute="height" constant="17" id="T9q-VJ-rJd"/>

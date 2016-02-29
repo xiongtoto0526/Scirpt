@@ -223,6 +223,7 @@
 		AD0E36F61C804B9400714FF3 /* Version.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Version.m; sourceTree = "<group>"; };
 		AD0E36F81C80597300714FF3 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		AD0E36F91C80597300714FF3 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		AD4E93631C844303007BA86C /* RequestQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestQueue.h; sourceTree = "<group>"; };
 		ADE01D651C181077009F425E /* HelloTako.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTako.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -332,6 +333,7 @@
 		AD0E36401C8001F800714FF3 /* download */ = {
 			isa = PBXGroup;
 			children = (
+				AD4E93631C844303007BA86C /* RequestQueue.h */,
 				AD0E36411C8001F800714FF3 /* DownloadWorker.h */,
 				AD0E36421C8001F800714FF3 /* DownLoadWorker.m */,
 			);

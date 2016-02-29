@@ -12,18 +12,23 @@
 #import "Constant.h"
 
 @interface TableViewCell()<XHtDownLoadDelegate>
-@property BOOL isClicked;
+
 @end
+
+
+
+NSMutableDictionary* workerDict = nil;
 
 @implementation TableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
-    self.isClicked=NO;
+    self.isStarted=NO;
     [XHTUIHelper addBorderonButton:self.button];
    
     // tableView设置为不可点击
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     
     // 隐藏下载栏
     [self.btnCancel setHidden:YES];
@@ -32,21 +37,20 @@
     
     [self.button addTarget:self action:@selector(showDownload) forControlEvents:UIControlEventTouchDown];
     [self.btnCancel addTarget:self action:@selector(stopDownload) forControlEvents:UIControlEventTouchDown];
-    
+
     // t:不能再此处动态设置cell，应该在tableview的 willDisplayCell 回调中处理。
 }
 
 
 -(void) showDownload{
-    
-    if (!self.isClicked) {
+    if (!self.isStarted) {
         [self startDownload];
-      
-    }else{
+    }else if(!self.isPaused){
         [self pauseDownload];
+    }else{
+        [self countinueDownload];
     }
 
-    self.isClicked = !self.isClicked;
     // 显示下载栏
     [self.btnCancel setHidden:NO];
     [self.progressControl setHidden:NO];
@@ -56,15 +60,46 @@
 // 启动下载
 -(void)startDownload{
     NSLog(@"will start download...");
+    self.isPaused = false;
+    self.isStarted=YES;
     [self.button setTitle:@"暂停" forState:UIControlStateNormal];    // 修改下载按钮的文本显示
-    [[DownloadWorker shareInstance] startWithUrl:[NSURL URLWithString:@"http://han/1/hello.zip"]  delegate:self];
+    [self runWorker];
 }
+
+
+-(void)runWorker{
+    if (workerDict==nil ) {
+        workerDict = [NSMutableDictionary new];
+    }
+    
+    if([workerDict objectForKey:self.myCellIndex]==nil){
+        [workerDict setObject:[DownloadWorker new] forKey:self.myCellIndex];
+    }
+    
+    // 每个cell分配一个worker。
+    DownloadWorker* worker = [workerDict objectForKey:self.myCellIndex];
+    
+    [worker startWithUrl:[NSURL URLWithString:@"http://han/1/hello.zip"]  delegate:self tag:self.myCellIndex];
+}
+
+// 继续下载
+-(void)countinueDownload{
+    NSLog(@"will pause download...");
+    [self.button setTitle:@"暂停" forState:UIControlStateNormal];
+    self.isPaused = false;
+    [self runWorker];
+}
+
+
 
 // 暂停下载
 -(void)pauseDownload{
      NSLog(@"will pause download...");
-    [self.button setTitle:@"下载" forState:UIControlStateNormal];
-    [[DownloadWorker shareInstance] pause];
+    [self.button setTitle:@"继续" forState:UIControlStateNormal];
+    self.isPaused = true;
+
+    DownloadWorker* worker = [workerDict objectForKey:self.myCellIndex];
+    [worker pause];
 }
 
 -(void) stopDownload{
@@ -81,8 +116,15 @@
         
         // 隐藏下载栏
         [self.btnCancel setHidden:YES];
+        [self.progressControl setProgress:0];
         [self.progressControl setHidden:YES];
         [self.textDownload setHidden:YES];
+        self.isStarted=NO;
+        
+        // 停止下载器
+         DownloadWorker* worker = [workerDict objectForKey:self.myCellIndex];
+        [worker stop];
+        
     }];
     
     [alertController addAction:cancelAction];
@@ -101,7 +143,7 @@
 
 #pragma mark  下载回调
 
--(void)downloadFinish:(BOOL)isSuccess{
+-(void)downloadFinish:(BOOL)isSuccess tag:(NSString *)tag{
     NSLog(@"收到回调通知：文件下载完成。");
     
     // todo: 可抽取为公共方法。
@@ -125,10 +167,16 @@
     
 }
 
--(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize{
-    double prg = (double)totalSize/finishSize;
-    NSLog(@"收到回调通知：当前进度为:%f",prg);
-    [self.progressControl setProgress:prg];
-}
+-(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize tag:(NSString *)tag{
+    float prg = (float)finishSize/totalSize;
+    NSLog(@"收到回调通知：当前进度为:%f,tag:%@",prg,tag);
+    
+    // 仅刷新匹配的行
+    if ([tag isEqualToString:self.myCellIndex]) {
+         [self.progressControl setProgress:prg];
+         self.progress = [NSString stringWithFormat:@"%.1lf",prg*100];
+        self.textDownload.text = [NSString stringWithFormat:@"当前进度:%@%%",self.progress];
+    }
+   }
 
 @end

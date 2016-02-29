@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+
+
+
 @interface TableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *appName;
 @property (weak, nonatomic) IBOutlet UILabel *appVersion;
@@ -17,5 +20,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnCancel;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressControl;
 @property (weak, nonatomic) IBOutlet UILabel *textDownload;
+@property (nonatomic,copy) NSString* myCellIndex;
+
+// progress info
+@property BOOL isStarted;
+@property BOOL isPaused;
+@property NSString* progress;
 
 @end

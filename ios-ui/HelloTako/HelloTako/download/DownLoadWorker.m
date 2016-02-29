@@ -25,20 +25,15 @@
 // 下载文件的文件名
 @property (nonatomic, copy) NSString  *filename;
 
+
+// 请求标示
+@property (nonatomic, copy) NSString  *tag;
+
 @end
 
-DownloadWorker* worker =nil;
 
 @implementation DownloadWorker
 
-+(DownloadWorker*) shareInstance{
-    @synchronized(self) {
-        if (worker==nil) {
-            worker = [[DownloadWorker alloc]init];
-        }
-        return worker;
-    }
-}
 
 
 #pragma mark - NSURLConnectionDataDelegate代理方法
@@ -51,7 +46,7 @@ DownloadWorker* worker =nil;
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     NSLog(@"下载结束，结果为失败...%@",error);
-    [self.delegate downloadFinish:NO];
+    [self.delegate downloadFinish:NO tag:self.tag];
 }
 
 
@@ -107,7 +102,7 @@ DownloadWorker* worker =nil;
     // 下载进度
     self.progress = (double)self.currentLength / self.totalLength;
     NSLog(@"当前下载进度:%lld",self.progress);
-    [self.delegate downloadingWithTotal:self.totalLength complete:self.currentLength];
+    [self.delegate downloadingWithTotal:self.totalLength complete:self.currentLength tag:self.tag];
 }
 
 
@@ -131,7 +126,7 @@ DownloadWorker* worker =nil;
     [self.writeHandle closeFile];
     self.writeHandle = nil;
     
-    [self.delegate downloadFinish:YES];
+    [self.delegate downloadFinish:YES tag:self.tag];
     NSLog(@"下载结束，结果为成功...");
     
 }
@@ -139,16 +134,19 @@ DownloadWorker* worker =nil;
 /*
  启动
  */
-- (void)startWithUrl:(NSURL*) url delegate:(id<XHtDownLoadDelegate>)delegate{
+- (void)startWithUrl:(NSURL*) url delegate:(id<XHtDownLoadDelegate>)delegate tag:(NSString*)tag{
 
     if (![self isDelegateAvailable:delegate]) {
         return;
     }
     
     self.delegate=delegate;
+    self.tag = tag;
     
     // 1.待下载url
     url = [NSURL URLWithString:@"http://doc.xgsdk.com:28870/static/TakoTest01_resigned.ipa"];
+    url = [NSURL URLWithString:@"http://dlsw.baidu.com/sw-search-sp/soft/9d/25765/sogou_mac_32c_V3.2.0.1437101586.dmg"];
+    
     
     // 2.请求
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -169,16 +167,22 @@ DownloadWorker* worker =nil;
     self.connection = nil;
 }
 
+/*取消*/
+- (void)stop{
+   [self.connection cancel];
+   self.connection=nil;
+   self.currentLength=0;
+}
 
 -(BOOL) isDelegateAvailable:(id<XHtDownLoadDelegate>) delegate{
     BOOL isAllAvailable = YES;
     
-    if(![delegate respondsToSelector:@selector(downloadingWithTotal:complete:)]){
+    if(![delegate respondsToSelector:@selector(downloadingWithTotal:complete:tag:)]){
         NSLog(@"Error!!! Please implement mehtod < downloadingWithTotal:complete: > in <XHtDownLoadDelegate> first!");
         isAllAvailable = NO;
     }
     
-    if(![delegate respondsToSelector:@selector(downloadFinish:)]){
+    if(![delegate respondsToSelector:@selector(downloadFinish:tag:)]){
         NSLog(@"Error!!! Please implement mehtod < downloadFinish: > in <XHtDownLoadDelegate> first!");
         isAllAvailable = NO;
     }
