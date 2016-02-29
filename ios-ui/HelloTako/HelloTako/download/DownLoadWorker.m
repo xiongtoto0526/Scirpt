@@ -146,6 +146,7 @@
     // 1.待下载url
     url = [NSURL URLWithString:@"http://doc.xgsdk.com:28870/static/TakoTest01_resigned.ipa"];
     url = [NSURL URLWithString:@"http://dlsw.baidu.com/sw-search-sp/soft/9d/25765/sogou_mac_32c_V3.2.0.1437101586.dmg"];
+    url=[NSURL URLWithString: @"http://www.haima.me/Download.ashx?t=1&c=000000036&r=0.7960992017760873"];
     
     
     // 2.请求

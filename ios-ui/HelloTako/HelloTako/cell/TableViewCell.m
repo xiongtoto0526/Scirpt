@@ -10,6 +10,8 @@
 #import "UIHelper.h"
 #import "DownloadWorker.h"
 #import "Constant.h"
+//#import "RequestQueue.h"
+#import "DownloadQueue.h"
 
 @interface TableViewCell()<XHtDownLoadDelegate>
 
@@ -63,11 +65,14 @@ NSMutableDictionary* workerDict = nil;
     self.isPaused = false;
     self.isStarted=YES;
     [self.button setTitle:@"暂停" forState:UIControlStateNormal];    // 修改下载按钮的文本显示
-    [self runWorker];
+
+    [[XHtDownLoadQueue share] add:@"http://1.zip" tag:self.myCellIndex delegate:self];
+    //    [self runWorker];
 }
 
 
 -(void)runWorker{
+    
     if (workerDict==nil ) {
         workerDict = [NSMutableDictionary new];
     }
@@ -87,7 +92,9 @@ NSMutableDictionary* workerDict = nil;
     NSLog(@"will pause download...");
     [self.button setTitle:@"暂停" forState:UIControlStateNormal];
     self.isPaused = false;
-    [self runWorker];
+//    [self runWorker];
+    [[XHtDownLoadQueue share] add:@"http://1.zip" tag:self.myCellIndex delegate:self];
+
 }
 
 
@@ -98,8 +105,10 @@ NSMutableDictionary* workerDict = nil;
     [self.button setTitle:@"继续" forState:UIControlStateNormal];
     self.isPaused = true;
 
-    DownloadWorker* worker = [workerDict objectForKey:self.myCellIndex];
-    [worker pause];
+//    DownloadWorker* worker = [workerDict objectForKey:self.myCellIndex];
+//    [worker pause];
+    [[XHtDownLoadQueue share] pause:self.myCellIndex];
+
 }
 
 -(void) stopDownload{
@@ -122,8 +131,9 @@ NSMutableDictionary* workerDict = nil;
         self.isStarted=NO;
         
         // 停止下载器
-         DownloadWorker* worker = [workerDict objectForKey:self.myCellIndex];
-        [worker stop];
+//         DownloadWorker* worker = [workerDict objectForKey:self.myCellIndex];
+//        [worker stop];
+        [[XHtDownLoadQueue share] pause:self.myCellIndex];
         
     }];
     
@@ -146,6 +156,7 @@ NSMutableDictionary* workerDict = nil;
 -(void)downloadFinish:(BOOL)isSuccess tag:(NSString *)tag{
     NSLog(@"收到回调通知：文件下载完成。");
     
+    if ([tag isEqualToString:self.myCellIndex]) {
     // todo: 可抽取为公共方法。
     [self.button setTitle:@"已下载" forState:UIControlStateNormal];
     [self.button.layer setBorderColor:(__bridge CGColorRef _Nullable)([UIColor grayColor])];
@@ -163,8 +174,7 @@ NSMutableDictionary* workerDict = nil;
     NSMutableDictionary* newDict = [NSMutableDictionary dictionaryWithDictionary:downloadAppDict];
     [newDict setValue:@"1" forKey:newAppId];
     [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_KEY withObject:newDict];
-    
-    
+    }
 }
 
 -(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize tag:(NSString *)tag{

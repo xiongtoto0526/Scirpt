@@ -22,7 +22,7 @@
 
 +(NSArray*)fetchApp{
     NSMutableArray* result = [NSMutableArray new];
-    for (int i=0;i<3;i++) {
+    for (int i=0;i<5;i++) {
         TakoApp* app = [TakoApp new];
         app.name=[NSString stringWithFormat:@"app%d",i+1];
         app.version=[NSString stringWithFormat:@"%d.%d.%d",i+1,i+1,i+1];

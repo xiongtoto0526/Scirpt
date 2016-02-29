@@ -88,6 +88,7 @@
 		AD0E36F41C804AC100714FF3 /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36F31C804AC100714FF3 /* Server.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36F71C804B9400714FF3 /* Version.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36F61C804B9400714FF3 /* Version.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36FA1C80597300714FF3 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36F91C80597300714FF3 /* User.m */; settings = {ASSET_TAGS = (); }; };
+		AD4E93691C8459CC007BA86C /* DownLoadQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93681C8459CC007BA86C /* DownLoadQueue.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -224,6 +225,8 @@
 		AD0E36F81C80597300714FF3 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		AD0E36F91C80597300714FF3 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		AD4E93631C844303007BA86C /* RequestQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestQueue.h; sourceTree = "<group>"; };
+		AD4E93671C8459CC007BA86C /* DownloadQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadQueue.h; sourceTree = "<group>"; };
+		AD4E93681C8459CC007BA86C /* DownLoadQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownLoadQueue.m; sourceTree = "<group>"; };
 		ADE01D651C181077009F425E /* HelloTako.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTako.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -334,6 +337,8 @@
 			isa = PBXGroup;
 			children = (
 				AD4E93631C844303007BA86C /* RequestQueue.h */,
+				AD4E93671C8459CC007BA86C /* DownloadQueue.h */,
+				AD4E93681C8459CC007BA86C /* DownLoadQueue.m */,
 				AD0E36411C8001F800714FF3 /* DownloadWorker.h */,
 				AD0E36421C8001F800714FF3 /* DownLoadWorker.m */,
 			);
@@ -664,6 +669,7 @@
 				AD0E36B81C8001F800714FF3 /* VersionViewController.m in Sources */,
 				AD0E36A21C8001F800714FF3 /* ThirdViewController.m in Sources */,
 				AD0E36D01C8001F800714FF3 /* DDASLLogger.m in Sources */,
+				AD4E93691C8459CC007BA86C /* DownLoadQueue.m in Sources */,
 				AD0E36EE1C80354B00714FF3 /* validation.m in Sources */,
 				AD0E36B31C8001F800714FF3 /* ReportViewController.m in Sources */,
 				AD0E36C01C8001F800714FF3 /* HTTPMessage.m in Sources */,
