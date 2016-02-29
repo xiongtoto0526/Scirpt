@@ -10,6 +10,7 @@
 #import "ShareEntity.h"
 @interface FirstViewController : UIViewController
 @property BOOL isLogin;
+@property (weak, nonatomic) IBOutlet UIButton *loginBt;
 
 @end
 

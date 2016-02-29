@@ -30,6 +30,12 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     // t:此处不能模态alter窗口,否则崩溃。
+    if (![ShareEntity shareInstance].isLogined) {
+        [self presentViewController:[LoginViewController new] animated:NO completion:^{
+            NSLog(@"enter login view");
+        }];
+    }
+   
 }
 
 
@@ -44,6 +50,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.loginBt setHidden:YES];// 登陆按钮暂不展示。
     
     // 1.添加监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveLoginBackNotification) name:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];

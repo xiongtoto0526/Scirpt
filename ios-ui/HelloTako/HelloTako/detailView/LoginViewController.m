@@ -29,6 +29,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.backBt setHidden:YES];// 返回按钮暂不展示。
     // Do any additional setup after loading the view from its nib.
 }
 
