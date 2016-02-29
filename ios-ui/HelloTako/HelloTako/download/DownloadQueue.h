@@ -2,7 +2,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "DownloadWorker.h"
-
+#import "Constant.h"
 
 @interface DownloadInfo : NSObject 
 @property (nonatomic, copy) NSString* url;

@@ -46,7 +46,7 @@ NSMutableDictionary* taskDict = nil;
     }
     
     // 允许重复请求(即暂停后的恢复)
-    if (isDup || [workerThreadDict count]<2) {
+    if (isDup || [workerThreadDict count]< MAX_DOWNLOAD_THREAD_COUNT) {
         [self newWorker:tag];
         [[workerThreadDict objectForKey:tag] startWithUrl:[NSURL URLWithString:url] delegate:self tag:tag];
         DownloadInfo* d = (DownloadInfo*)[taskDict objectForKey:tag];

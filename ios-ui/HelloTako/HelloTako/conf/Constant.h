@@ -27,4 +27,6 @@
 #define LOGIN_BACK_TO_USER_NOTIFICATION @"login_back_to_user"
 #define LOGIN_BACK_TO_TEST_NOTIFICATION @"login_back_to_test"
 
+#define MAX_DOWNLOAD_THREAD_COUNT 3
+
 #endif /* Constant_h */
