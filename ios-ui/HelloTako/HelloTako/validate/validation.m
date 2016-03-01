@@ -160,7 +160,7 @@
     for (NSString *item in self.errors) {
         if ([item isEqualToString:@"1"]) {
             self.textFiledIsValid = FALSE;
-            NSLog(@"Not Valid %hhi",self.textFiledIsValid);
+            NSLog(@"Not Valid ");
             break;
         }
     }

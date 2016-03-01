@@ -127,4 +127,31 @@
 }
 
 
+
++ (id) objectWithJsonStr: (NSString*) jsonStr byKey: (NSString*) key
+{
+    if (jsonStr==nil||key==nil) {
+        return nil;
+    }
+
+    id ret=nil;
+    NSData* tempData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    if(tempData != nil){
+        ret = [NSJSONSerialization JSONObjectWithData:tempData options:0 error:nil];
+        if(ret != nil && [ret isKindOfClass:[NSDictionary class]]){
+            NSDictionary* retDict = (NSDictionary*)ret;
+            ret = [retDict objectForKey:key];
+        }
+    }
+    
+    return ret;
+}
+
+
++(void) setDictValue:(NSMutableDictionary*) dict withObject:(id)object forKey:(NSString*)key{
+    if(object != nil && dict!=nil){
+        [dict setObject:object forKey:key];
+    }
+}
+
 @end

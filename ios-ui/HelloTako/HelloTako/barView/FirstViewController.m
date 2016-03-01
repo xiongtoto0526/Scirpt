@@ -17,10 +17,12 @@
 #import "DownloadWorker.h"
 #import "Constant.h"
 #import "Server.h"
+#import "MJRefresh.h"
 
 @interface FirstViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property UIRefreshControl* refreshControl;
-@property NSArray* listData;
+@property NSMutableArray* listData;
+@property NSString* cursor;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @end
 
@@ -42,14 +44,14 @@
 -(void)receiveLoginBackNotification{
     BOOL isLogined = [ShareEntity shareInstance].isLogined;
     [self.tableview setHidden:!isLogined];
-    if (isLogined && self.listData ==nil) {
-         self.listData = [self fetchDataFromServer];
-        [self.tableview reloadData];
+    if (isLogined && [self.listData count]==0) {
+        [self loadMoreData];
     }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.listData =[NSMutableArray new];
     
     [self.loginBt setHidden:YES];// 登陆按钮暂不展示。
     
@@ -59,7 +61,7 @@
     // 未登录时不显示
     [self.tableview setHidden:![ShareEntity shareInstance].isLogined];
 
-    // 初始化刷新控制器.
+    // 初始化刷新控制器
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [UIColor whiteColor];
     self.refreshControl.tintColor = [UIColor blackColor];
@@ -79,20 +81,52 @@
     // 注册cell
     [self.tableview registerNib:[UINib nibWithNibName:@"TableViewCell" bundle:nil] forCellReuseIdentifier:@"fTablecell"];
    
+    self.tableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+
+
+    
     // todo : 获取用户所有游戏，需取top10，分页。
     // 未登录时不显示tableView
 //    [self.tableview setHidden:![ShareEntity shareInstance].isLogined];
-    if (![ShareEntity shareInstance].isLogined) {
-        self.listData = nil;
-    }else{
-     self.listData = [self fetchDataFromServer];
+    if ([ShareEntity shareInstance].isLogined) {
+        [self loadMoreData];
     }
     
 }
 
 
--(NSArray*)fetchDataFromServer{
-    return [TakoServer fetchApp];
+#pragma mark 上拉加载更多数据
+- (void)loadMoreData
+{
+    // 1.添加假数据
+    NSArray* newdata = [self fetchDataFromServer];
+   
+    [self.listData addObjectsFromArray:newdata];
+    [self.tableview reloadData];
+    [self.tableview.mj_footer endRefreshing];
+    
+    
+    // 更新游标
+    self.cursor = [NSString stringWithFormat:@"%lu",(unsigned long)[self.listData count]];
+   
+//    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3), dispatch_get_main_queue(), ^{
+//        // 刷新表格
+//        [self.tableview reloadData];
+//        
+//        // 拿到当前的上拉刷新控件，结束刷新状态
+//        [self.tableview.mj_footer endRefreshing];
+//    });
+}
+
+
+-(NSMutableArray*)fetchDataFromServer{
+    if (self.cursor==nil) {
+        self.cursor=@"0";
+    }
+    
+    NSMutableArray* data = [TakoServer fetchApp:self.cursor];
+    return data;
 }
 
 
@@ -134,9 +168,9 @@
 
     // todo: 需要加载不同的游戏数据。 使用for 遍历
     TakoApp *app = [self.listData objectAtIndex:indexPath.row];
-    cell.appName.text=app.name;
+    cell.appName.text=app.appname;
     cell.appVersion.text = app.version;
-    cell.otherInfo.text = [NSString stringWithFormat:@"%@ %@",app.createTime,app.size];
+    cell.otherInfo.text = [NSString stringWithFormat:@"%@ %@",app.firstcreated,@"2M"];
 //    cell.appImage.image = app.image;
     
     UIImage *image = [UIImage imageNamed:@"3"];
@@ -147,7 +181,6 @@
 
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-//    NSLog(@" cell will display...");
     TableViewCell* tbCell = (TableViewCell*)cell;
     if ([self isAppDownloadedBefore:[NSString stringWithFormat:@"%@%@",tbCell.appName.text,tbCell.appVersion.text]]) {
         [tbCell.button setTitle:@"已下载" forState:UIControlStateNormal];
@@ -157,6 +190,9 @@
     
     // 记录每个cell的index
     tbCell.myCellIndex = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+    TakoApp* app = (TakoApp*)[self.listData objectAtIndex:indexPath.row];
+    tbCell.appId = app.appid;
+    tbCell.downloadUrl = app.url;
 }
 
 

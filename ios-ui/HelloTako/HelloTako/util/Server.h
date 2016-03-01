@@ -14,8 +14,12 @@
 
 +(TakoVersion*)fetchVersion;
 
-+(NSArray*)fetchApp;
++(NSMutableArray*)fetchApp:(NSString*)cursor;
 
-+(TakoUser*)auth;
++(TakoUser*)authEmail:(NSString*)email password:(NSString*)password;
+
++(NSData*)postWithDict:(NSDictionary*)dict url:(NSString*)methodUrl;
+
++(NSData*) getWithUrl:(NSString*)methodUrl;
 
 @end

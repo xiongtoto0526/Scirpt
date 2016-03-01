@@ -15,6 +15,11 @@
 
 @interface DownloadWorker : NSObject
 
+@property (nonatomic) BOOL isFree;
+
+// 请求标示
+@property (nonatomic, copy) NSString  *tag;
+
 @property(nonatomic, strong)id<XHtDownLoadDelegate> delegate;
 
 
@@ -22,10 +27,10 @@
 - (void)startWithUrl:(NSURL*) url delegate:(id<XHtDownLoadDelegate>)delegate tag:(NSString*)tag;
 
 // 暂停
-- (void)pause ;
+- (void)pause:(NSString*)tag;
 
 // 停止（下次将重新下载）
-- (void)stop ;
+- (void)stop:(NSString*)tag;
 
 @end
 

@@ -22,4 +22,8 @@
 
 + (void)clearAllUserDefaultsData;
 
++ (id) objectWithJsonStr: (NSString*) jsonStr byKey: (NSString*) key;
+
++(void) setDictValue:(NSMutableDictionary*) dict withObject:(id)object forKey:(NSString*)key;
+
 @end

@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIProgressView *progressControl;
 @property (weak, nonatomic) IBOutlet UILabel *textDownload;
 @property (nonatomic,copy) NSString* myCellIndex;
+@property (weak, nonatomic) NSString *appId;
+@property (weak, nonatomic) NSString *downloadUrl;
 
 // progress info
 @property BOOL isStarted;

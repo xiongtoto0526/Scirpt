@@ -45,8 +45,7 @@
 
     
      [XHTUIHelper clearAllUserDefaultsData]; // 调试用
-    
-    
+
     TakoVersion* takoVersion = [TakoServer fetchVersion];
     
     

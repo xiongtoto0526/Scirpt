@@ -116,12 +116,12 @@
     // 模拟鉴权过程
     [self performSelector:@selector(authFinish) withObject:nil afterDelay:3.0]; //使用延时进行限制。
   
-    TakoUser* user = [TakoServer auth];
+    TakoUser* user = [TakoServer authEmail:userName password:password];
     if (user==nil) {
         return NO;
     }
 
-    self.authUserName=user.name;
+    self.authUserName=user.nickName;
     self.authUserIcon=nil;
     return YES;
 }

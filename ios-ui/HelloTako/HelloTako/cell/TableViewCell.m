@@ -27,7 +27,7 @@ NSMutableDictionary* workerDict = nil;
     // Initialization code
     self.isStarted=NO;
     [XHTUIHelper addBorderonButton:self.button];
-   
+    
     // tableView设置为不可点击
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -39,7 +39,7 @@ NSMutableDictionary* workerDict = nil;
     
     [self.button addTarget:self action:@selector(showDownload) forControlEvents:UIControlEventTouchDown];
     [self.btnCancel addTarget:self action:@selector(stopDownload) forControlEvents:UIControlEventTouchDown];
-
+    
     // t:不能再此处动态设置cell，应该在tableview的 willDisplayCell 回调中处理。
 }
 
@@ -52,7 +52,7 @@ NSMutableDictionary* workerDict = nil;
     }else{
         [self countinueDownload];
     }
-
+    
     // 显示下载栏
     [self.btnCancel setHidden:NO];
     [self.progressControl setHidden:NO];
@@ -62,55 +62,33 @@ NSMutableDictionary* workerDict = nil;
 // 启动下载
 -(void)startDownload{
     NSLog(@"will start download...");
-    self.isPaused = false;
+    self.isPaused = NO;
     self.isStarted=YES;
     [self.button setTitle:@"暂停" forState:UIControlStateNormal];    // 修改下载按钮的文本显示
-
-    [[XHtDownLoadQueue share] add:@"http://1.zip" tag:self.myCellIndex delegate:self];
-    //    [self runWorker];
+    
+    [[XHtDownLoadQueue share] add:self.downloadUrl tag:self.appId delegate:self];
 }
 
-
--(void)runWorker{
-    
-    if (workerDict==nil ) {
-        workerDict = [NSMutableDictionary new];
-    }
-    
-    if([workerDict objectForKey:self.myCellIndex]==nil){
-        [workerDict setObject:[DownloadWorker new] forKey:self.myCellIndex];
-    }
-    
-    // 每个cell分配一个worker。
-    DownloadWorker* worker = [workerDict objectForKey:self.myCellIndex];
-    
-    [worker startWithUrl:[NSURL URLWithString:@"http://han/1/hello.zip"]  delegate:self tag:self.myCellIndex];
-}
 
 // 继续下载
 -(void)countinueDownload{
     NSLog(@"will pause download...");
     [self.button setTitle:@"暂停" forState:UIControlStateNormal];
-    self.isPaused = false;
-//    [self runWorker];
-    [[XHtDownLoadQueue share] add:@"http://1.zip" tag:self.myCellIndex delegate:self];
-
+    self.isPaused = NO;
+    [[XHtDownLoadQueue share] add:@"http://1.zip" tag:self.appId delegate:self];
 }
 
 
 
 // 暂停下载
 -(void)pauseDownload{
-     NSLog(@"will pause download...");
+    NSLog(@"will pause download...");
     [self.button setTitle:@"继续" forState:UIControlStateNormal];
-    self.isPaused = true;
-
-//    DownloadWorker* worker = [workerDict objectForKey:self.myCellIndex];
-//    [worker pause];
-    [[XHtDownLoadQueue share] pause:self.myCellIndex];
-
+    self.isPaused = YES;
+    [[XHtDownLoadQueue share] pause:self.appId];
 }
 
+// 停止下载
 -(void) stopDownload{
     
     // 弹出确认取消下载提示框
@@ -131,9 +109,7 @@ NSMutableDictionary* workerDict = nil;
         self.isStarted=NO;
         
         // 停止下载器
-//         DownloadWorker* worker = [workerDict objectForKey:self.myCellIndex];
-//        [worker stop];
-        [[XHtDownLoadQueue share] pause:self.myCellIndex];
+        [[XHtDownLoadQueue share] stop:self.appId];
         
     }];
     
@@ -141,13 +117,13 @@ NSMutableDictionary* workerDict = nil;
     [alertController addAction:okAction];
     UIViewController* currentVC = [XHTUIHelper getCurrentVC];
     [currentVC presentViewController:alertController animated:YES completion:nil];
-  
+    
 }
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -156,24 +132,32 @@ NSMutableDictionary* workerDict = nil;
 -(void)downloadFinish:(BOOL)isSuccess tag:(NSString *)tag{
     NSLog(@"收到回调通知：文件下载完成。");
     
-    if ([tag isEqualToString:self.myCellIndex]) {
-    // todo: 可抽取为公共方法。
-    [self.button setTitle:@"已下载" forState:UIControlStateNormal];
-    [self.button.layer setBorderColor:(__bridge CGColorRef _Nullable)([UIColor grayColor])];
-    self.button.enabled = NO;
-    
-    [self.progressControl setHidden:YES];
-    [self.btnCancel setHidden:YES];
-    [self.textDownload setHidden:YES];
-    
-    NSString* newAppId = [NSString stringWithFormat:@"%@%@",self.appName.text,self.appVersion.text];
-    NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_KEY];
-    if (downloadAppDict==nil) {
-        downloadAppDict = [NSMutableDictionary new];
-    }
-    NSMutableDictionary* newDict = [NSMutableDictionary dictionaryWithDictionary:downloadAppDict];
-    [newDict setValue:@"1" forKey:newAppId];
-    [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_KEY withObject:newDict];
+    if ([tag isEqualToString:self.appId]) {
+        // todo: 可抽取为公共方法。
+        if (isSuccess) {
+            [self.button setTitle:@"已下载" forState:UIControlStateNormal];
+            [self.button.layer setBorderColor:(__bridge CGColorRef _Nullable)([UIColor grayColor])];
+            self.button.enabled = NO;
+            
+            // 记录已下载情况
+            NSString* newAppId = [NSString stringWithFormat:@"%@%@",self.appName.text,self.appVersion.text];
+            NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_KEY];
+            if (downloadAppDict==nil) {
+                downloadAppDict = [NSMutableDictionary new];
+            }
+            NSMutableDictionary* newDict = [NSMutableDictionary dictionaryWithDictionary:downloadAppDict];
+            [newDict setValue:@"1" forKey:newAppId];
+            [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_KEY withObject:newDict];
+            
+        }else{
+            [self.button setTitle:@"重下载" forState:UIControlStateNormal];
+            self.isStarted=NO;
+        }
+        
+        
+        [self.progressControl setHidden:YES];
+        [self.btnCancel setHidden:YES];
+        [self.textDownload setHidden:YES];
     }
 }
 
@@ -182,11 +166,11 @@ NSMutableDictionary* workerDict = nil;
     NSLog(@"收到回调通知：当前进度为:%f,tag:%@",prg,tag);
     
     // 仅刷新匹配的行
-    if ([tag isEqualToString:self.myCellIndex]) {
-         [self.progressControl setProgress:prg];
-         self.progress = [NSString stringWithFormat:@"%.1lf",prg*100];
+    if ([tag isEqualToString:self.appId]) {
+        [self.progressControl setProgress:prg];
+        self.progress = [NSString stringWithFormat:@"%.1lf",prg*100];
         self.textDownload.text = [NSString stringWithFormat:@"当前进度:%@%%",self.progress];
     }
-   }
+}
 
 @end

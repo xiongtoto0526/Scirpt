@@ -8,6 +8,7 @@
 @property (nonatomic, copy) NSString* url;
 @property (nonatomic, copy) NSString* tag;
 @property (nonatomic) BOOL isExecuting;
+@property (nonatomic) BOOL isSuspend;
 @property(nonatomic, strong)id<XHtDownLoadDelegate> delegate;
 @end
 
