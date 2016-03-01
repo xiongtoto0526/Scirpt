@@ -12,6 +12,7 @@
 #import "Constant.h"
 //#import "RequestQueue.h"
 #import "DownloadQueue.h"
+#import "Server.h"
 
 @interface TableViewCell()<XHtDownLoadDelegate>
 
@@ -45,6 +46,23 @@ NSMutableDictionary* workerDict = nil;
 
 
 -(void) showDownload{
+    if(self.isNeedPassword){
+        [self showPasswordConfirm];
+    }else{
+        [self downloadApp];
+    }
+}
+
+-(void)downloadApp{
+    
+    self.downloadUrl = [TakoServer fetchDownloadUrl:self.versionId password:self.downloadPassword];
+    if (self.downloadUrl==nil) {
+        NSLog(@"get downloadurl failed...");
+        [XHTUIHelper alertWithNoChoice:@"下载密码不正确!" view:[XHTUIHelper getCurrentVC]];
+        return;
+    }
+    
+    NSLog(@"will download from :%@",self.downloadUrl);
     if (!self.isStarted) {
         [self startDownload];
     }else if(!self.isPaused){
@@ -76,6 +94,42 @@ NSMutableDictionary* workerDict = nil;
     [self.button setTitle:@"暂停" forState:UIControlStateNormal];
     self.isPaused = NO;
     [[XHtDownLoadQueue share] add:@"http://1.zip" tag:self.appId delegate:self];
+}
+
+-(void)showPasswordConfirm{
+    
+    // 弹出确认取消下载提示框
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"您需要输入下载密码。" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"您取消了本次下载...");
+    }];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"密码已输入...");
+        UITextField *password = alertController.textFields.firstObject;
+        NSLog(@"download password is: %@",password.text);
+        self.downloadPassword = password.text;
+        if (self.downloadPassword==nil) {
+            NSLog(@"下载密码无效。");
+            [XHTUIHelper alertWithNoChoice:@"下载密码不能为空!" view:[XHTUIHelper getCurrentVC]];
+            return;
+        }
+        [self downloadApp];
+        
+    }];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
+        textField.placeholder = @"请输入下载密码";
+        textField.secureTextEntry = YES;
+    }];
+    
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
+    UIViewController* currentVC = [XHTUIHelper getCurrentVC];
+    [currentVC presentViewController:alertController animated:YES completion:nil];
+    
+    
 }
 
 

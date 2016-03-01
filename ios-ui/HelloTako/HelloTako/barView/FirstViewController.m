@@ -37,7 +37,7 @@
             NSLog(@"enter login view");
         }];
     }
-   
+    
 }
 
 
@@ -60,7 +60,7 @@
     
     // 未登录时不显示
     [self.tableview setHidden:![ShareEntity shareInstance].isLogined];
-
+    
     // 初始化刷新控制器
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [UIColor whiteColor];
@@ -68,7 +68,7 @@
     [self.refreshControl addTarget:self
                             action:@selector(reloadDataWhenRefresh)
                   forControlEvents:UIControlEventValueChanged];
-
+    
     // 隐藏刷新按钮
     [self.refreshControl endRefreshing];
     
@@ -80,14 +80,14 @@
     
     // 注册cell
     [self.tableview registerNib:[UINib nibWithNibName:@"TableViewCell" bundle:nil] forCellReuseIdentifier:@"fTablecell"];
-   
+    
     self.tableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
-
-
+    
+    
     
     // todo : 获取用户所有游戏，需取top10，分页。
     // 未登录时不显示tableView
-//    [self.tableview setHidden:![ShareEntity shareInstance].isLogined];
+    //    [self.tableview setHidden:![ShareEntity shareInstance].isLogined];
     if ([ShareEntity shareInstance].isLogined) {
         [self loadMoreData];
     }
@@ -100,7 +100,7 @@
 {
     // 1.添加假数据
     NSArray* newdata = [self fetchDataFromServer];
-   
+    
     [self.listData addObjectsFromArray:newdata];
     [self.tableview reloadData];
     [self.tableview.mj_footer endRefreshing];
@@ -108,15 +108,15 @@
     
     // 更新游标
     self.cursor = [NSString stringWithFormat:@"%lu",(unsigned long)[self.listData count]];
-   
-//    
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3), dispatch_get_main_queue(), ^{
-//        // 刷新表格
-//        [self.tableview reloadData];
-//        
-//        // 拿到当前的上拉刷新控件，结束刷新状态
-//        [self.tableview.mj_footer endRefreshing];
-//    });
+    
+    //
+    //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3), dispatch_get_main_queue(), ^{
+    //        // 刷新表格
+    //        [self.tableview reloadData];
+    //
+    //        // 拿到当前的上拉刷新控件，结束刷新状态
+    //        [self.tableview.mj_footer endRefreshing];
+    //    });
 }
 
 
@@ -151,9 +151,9 @@
 
 // 点击单元格，暂时关闭该页面。如需激活该方法，需要修改cell中设置。
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    NSLog(@"即将进入“游戏详情”页面...");
-//    GameDetailViewController* gameDetailView = [[GameDetailViewController alloc] init];
-//    [self presentViewController:gameDetailView animated:YES completion:nil];
+    //    NSLog(@"即将进入“游戏详情”页面...");
+    //    GameDetailViewController* gameDetailView = [[GameDetailViewController alloc] init];
+    //    [self presentViewController:gameDetailView animated:YES completion:nil];
 }
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -165,15 +165,21 @@
         cell=[[[NSBundle mainBundle] loadNibNamed:@"TableViewCell" owner:self options:nil] lastObject];
     }
     
-
-    // todo: 需要加载不同的游戏数据。 使用for 遍历
+    
     TakoApp *app = [self.listData objectAtIndex:indexPath.row];
     cell.appName.text=app.appname;
     cell.appVersion.text = app.version;
     cell.otherInfo.text = [NSString stringWithFormat:@"%@ %@",app.firstcreated,@"2M"];
-//    cell.appImage.image = app.image;
     
-    UIImage *image = [UIImage imageNamed:@"3"];
+    UIImage* image = nil;
+    // app没有logo时，显示默认logo
+    if(app.logourl==nil || app.logourl.length==0){
+        image = [UIImage imageNamed:@"3"];
+    }else{
+        NSURL *url = [NSURL URLWithString: app.logourl];
+        image = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];
+    }
+    
     cell.appImage.image = image;
     
     return cell;
@@ -193,6 +199,9 @@
     TakoApp* app = (TakoApp*)[self.listData objectAtIndex:indexPath.row];
     tbCell.appId = app.appid;
     tbCell.downloadUrl = app.url;
+    tbCell.isNeedPassword = [app.password isEqualToString:@"false"];
+    tbCell.versionId = app.versionId;
+    tbCell.logourl = app.logourl;
 }
 
 
@@ -200,7 +209,7 @@
     BOOL isExist = NO;
     NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_KEY];
     for (NSString *key in downloadAppDict) {
-//        NSLog(@"dict key: %@ value: %@", key, downloadAppDict[key]);
+        //        NSLog(@"dict key: %@ value: %@", key, downloadAppDict[key]);
         if ([key isEqualToString:newAppId]) {
             NSLog(@"该应用已保存在下载记录中...");
             isExist = YES;

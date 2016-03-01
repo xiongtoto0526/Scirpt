@@ -16,6 +16,8 @@
 
 +(NSMutableArray*)fetchApp:(NSString*)cursor;
 
++(NSString*)fetchDownloadUrl:(NSString*)versionId password:(NSString*)password;
+
 +(TakoUser*)authEmail:(NSString*)email password:(NSString*)password;
 
 +(NSData*)postWithDict:(NSDictionary*)dict url:(NSString*)methodUrl;

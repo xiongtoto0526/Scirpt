@@ -65,6 +65,37 @@
     return result;
 }
 
++(NSString*)fetchDownloadUrl:(NSString*)versionId password:(NSString*)password{
+    NSString* result=nil;
+    NSData* response=nil;
+    if (password==nil) {
+    response = [self getWithUrl:[NSString stringWithFormat:@"/app/version/url?id=%@",versionId]];
+    }else{
+    response = [self getWithUrl:[NSString stringWithFormat:@"/app/version/url?id=%@&password=%@",versionId,password]];
+    }
+    
+    // 处理http结果
+    if(response == nil){
+        NSLog(@"http error...");
+        return result;
+    }
+    
+    NSString* retjson = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+    NSLog(@"http response is ...%@",retjson);
+    if([XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_RET_KEY]==nil){
+        NSLog(@"http error...");
+        return result;
+    }
+    
+    NSNumber* resultCode = (NSNumber*)[XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_RET_KEY];
+    if(resultCode!=0){
+        NSLog(@"http failed...");
+        return result;
+    }
+    result = (NSString*)[XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_DATA_KEY];
+    return result;
+}
+
 // 模拟数据
 +(NSMutableArray*)mockApps{
     NSMutableArray* result = [NSMutableArray new];
@@ -140,6 +171,7 @@
     
     NSError* error = nil;
     NSData* retData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
+
     return retData;
 }
 

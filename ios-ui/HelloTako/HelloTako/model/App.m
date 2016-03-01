@@ -21,8 +21,12 @@
   
     // todo: 此处需要server端增加字段，以简化解析。
     if ([key isEqualToString:@"releaseversion"]) {
-        value = [(NSDictionary*)[(NSDictionary*)value objectForKey:@"package"] objectForKey:@"version"];
-        [super setValue:value forKey:@"version"];
+        
+        NSString* versionName = [(NSDictionary*)[(NSDictionary*)value objectForKey:@"package"] objectForKey:@"version"];
+        [super setValue:versionName forKey:@"version"];
+        
+        NSString* versionId = (NSString*)[(NSDictionary*)value objectForKey:@"id"];
+        [super setValue:versionId forKey:@"versionId"];
         return;
     }
    
