@@ -25,7 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     listData = @[@"app1",@"app2",@"app3"];
-    
+   
+
     // 初始化刷新控制器.
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [UIColor whiteColor];

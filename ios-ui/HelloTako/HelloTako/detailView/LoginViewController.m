@@ -17,8 +17,6 @@
 
 @interface LoginViewController ()
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator ;
-
-
 @property (copy,nonatomic) NSString* authUserName;
 @property (weak, nonatomic) UIImageView *authUserIcon;
 
@@ -70,6 +68,7 @@
         NSLog(@"格式校验不通过!");
         [self showLoginFailed:[validate.errorMsg objectAtIndex:0]];
         self.loginBt.selected = NO;
+        [self authFinish];
         return;
     }
     
@@ -79,10 +78,6 @@
         NSLog(@"登陆成功。");
         [XHTUIHelper writeNSUserDefaultsWithKey:USER_ACCOUNT_KEY withValue:userAccount];
         [XHTUIHelper writeNSUserDefaultsWithKey:USER_NAME_KEY withValue:self.authUserName];
-
-        // todo: icon本地化
-        // [XHTUIHelper writeNSUserDefaultsWithKey:USER_IMAGE_KEY withObject:self.authUserIcon];
-        
         [XHTUIHelper writeNSUserDefaultsWithKey:LOGIN_KEY withValue:LOGIN_SUCCESS_KEY];
         [ShareEntity shareInstance].isLogined=true;
         [ShareEntity shareInstance].userAccount=userAccount;
@@ -120,7 +115,6 @@
     }
     self.authUserName=user.nickName;
     self.authUserIcon=nil;
-    [self authFinish];
     return YES;
 }
 
@@ -149,6 +143,7 @@
 -(IBAction) gotoParentView:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
     
+//    [self authFinish];
     // 通知上层view刷新视图
     [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_BACK_TO_USER_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];

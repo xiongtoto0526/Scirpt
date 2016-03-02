@@ -38,8 +38,12 @@
         }];
     }
     
+    [super viewDidAppear:animated];
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+}
 
 -(void)receiveLoginBackNotification{
     BOOL isLogined = [ShareEntity shareInstance].isLogined;
@@ -51,6 +55,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tabBarItem.image = [UIImage imageNamed:@"icon_test_unselected"];
+    self.tabBarItem.selectedImage = [UIImage imageNamed:@"icon_test_selected"];
+    UIImage* aaa = self.tabBarItem.image;
+    NSLog(@"first: width:%f,height:%f",aaa.size.width,aaa.size.height);
     self.listData =[NSMutableArray new];
     
     [self.loginBt setHidden:YES];// 登陆按钮暂不展示。

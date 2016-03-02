@@ -19,17 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="del-Sc-LNm" userLabel="登录|注册">
-                                <rect key="frame" x="0.0" y="262" width="320" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="7Sz-tK-6bd"/>
-                                    <constraint firstAttribute="height" constant="44" id="hhX-de-jpQ"/>
-                                </constraints>
-                                <state key="normal" title="您尚未登录，请点击登录~"/>
-                                <connections>
-                                    <action selector="gotoLoginView:" destination="9pv-A4-QxB" eventType="touchDown" id="am7-bQ-2pw"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="84" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CgI-oF-94s">
                                 <rect key="frame" x="0.0" y="60" width="600" height="491"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,7 +38,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="CgI-oF-94s" secondAttribute="trailing" id="37L-Xf-eu6"/>
-                            <constraint firstItem="CgI-oF-94s" firstAttribute="leading" secondItem="del-Sc-LNm" secondAttribute="leading" id="59B-Mx-sAp"/>
                             <constraint firstItem="lYe-b6-i5t" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="topMargin" id="6wA-hR-ME1"/>
                             <constraint firstItem="CgI-oF-94s" firstAttribute="bottom" secondItem="4ug-Mw-9AY" secondAttribute="top" id="8u2-pY-20Q"/>
                             <constraint firstItem="CgI-oF-94s" firstAttribute="bottom" secondItem="4ug-Mw-9AY" secondAttribute="top" id="Ikz-i3-8ES"/>
@@ -59,14 +47,12 @@
                             <constraint firstItem="CgI-oF-94s" firstAttribute="leading" secondItem="lYe-b6-i5t" secondAttribute="leading" id="RAd-Ii-JJq"/>
                             <constraint firstItem="CgI-oF-94s" firstAttribute="trailing" secondItem="lYe-b6-i5t" secondAttribute="trailing" id="VOG-Pi-2lH"/>
                             <constraint firstItem="lYe-b6-i5t" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="Xoi-86-Cpc"/>
-                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="del-Sc-LNm" secondAttribute="bottom" constant="245" id="Xux-Y2-H87"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CgI-oF-94s" secondAttribute="trailing" constant="-20" id="fH1-FV-Yfq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lYe-b6-i5t" secondAttribute="centerXWithinMargins" constant="-20" id="fio-xT-XfH"/>
                             <constraint firstItem="CgI-oF-94s" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="fkr-t3-NDK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lYe-b6-i5t" secondAttribute="trailing" id="g5I-B7-G7E"/>
                             <constraint firstItem="lYe-b6-i5t" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="topMargin" id="iFB-Ux-2iv"/>
                             <constraint firstItem="CgI-oF-94s" firstAttribute="top" secondItem="lYe-b6-i5t" secondAttribute="bottom" id="js0-WZ-QZ5"/>
-                            <constraint firstItem="CgI-oF-94s" firstAttribute="leading" secondItem="del-Sc-LNm" secondAttribute="leading" id="pdq-4d-388"/>
                             <constraint firstItem="CgI-oF-94s" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="-20" id="sjs-ZO-bCX"/>
                         </constraints>
                         <variation key="default">
@@ -80,14 +66,12 @@
                                 <exclude reference="Ikz-i3-8ES"/>
                                 <exclude reference="fH1-FV-Yfq"/>
                                 <exclude reference="js0-WZ-QZ5"/>
-                                <exclude reference="pdq-4d-388"/>
                                 <exclude reference="sjs-ZO-bCX"/>
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="测试" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="测试" image="ic_my_u" id="acW-dT-cKf"/>
                     <connections>
-                        <outlet property="loginBt" destination="del-Sc-LNm" id="h9I-4y-6tm"/>
                         <outlet property="tableview" destination="CgI-oF-94s" id="OlL-11-WiV"/>
                     </connections>
                 </viewController>
@@ -441,7 +425,7 @@
         <scene sceneID="rag-B6-MAz">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4Me-kX-O35" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我的" image="icon_tabbar_mine" id="n3P-ql-cJo"/>
+                    <tabBarItem key="tabBarItem" title="我的" image="icon_tabbar_mine" selectedImage="icon_tabbar_mine_selected" id="n3P-ql-cJo"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uLe-Qz-m1s">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -458,8 +442,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
+        <image name="ic_my_u" width="1080" height="1919"/>
         <image name="icon_tabbar_mine" width="26" height="26"/>
+        <image name="icon_tabbar_mine_selected" width="26" height="26"/>
         <image name="second" width="30" height="30"/>
         <image name="user" width="338" height="374"/>
     </resources>

@@ -42,14 +42,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+//    int b=4;
+//    UITabBarController *bar = self.window.rootViewController;
+//    [bar childViewControllers]
+//    
     [NSThread sleepForTimeInterval:LAUNCH_SCREEN_TIME];//设置闪屏页面时间
-
     
      [XHTUIHelper clearAllUserDefaultsData]; // 调试用
 
     TakoVersion* takoVersion = [TakoServer fetchVersion];
-    
-    
     NSLog(@"老版本:%@",[XHTUIHelper readNSUserDefaultsObjectWithkey:APP_VERSION_KEY]);
     
     // 首次下载,写入版本号
@@ -63,16 +64,16 @@
         NSLog(@"检测到新版本....");
     }
     
-    // 启动httpserver
+    // 启动 httpserver
     httpServer = [[HTTPServer alloc] init];
     [httpServer setType:@"_http._tcp."];
     [httpServer setPort:HTTP_SERVER_PORT];
-    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *homePath = [paths firstObject];
     //    filepath = [homePath  stringByAppendingPathComponent:@"xgtakofiles"];
     [httpServer setDocumentRoot:homePath];
     [self startServer];
+    
     return YES;
 }
 

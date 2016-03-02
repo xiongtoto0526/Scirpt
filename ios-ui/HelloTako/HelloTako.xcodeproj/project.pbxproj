@@ -68,20 +68,6 @@
 		AD0E36D81C8001F800714FF3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36841C8001F800714FF3 /* main.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36D91C8001F800714FF3 /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36871C8001F800714FF3 /* App.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36DA1C8001F800714FF3 /* ShareEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36891C8001F800714FF3 /* ShareEntity.m */; settings = {ASSET_TAGS = (); }; };
-		AD0E36DB1C8001F800714FF3 /* icon_pull_animation_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD0E368B1C8001F800714FF3 /* icon_pull_animation_1@2x.png */; settings = {ASSET_TAGS = (); }; };
-		AD0E36DC1C8001F800714FF3 /* icon_pull_animation_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD0E368C1C8001F800714FF3 /* icon_pull_animation_2@2x.png */; settings = {ASSET_TAGS = (); }; };
-		AD0E36DD1C8001F800714FF3 /* icon_pull_animation_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD0E368D1C8001F800714FF3 /* icon_pull_animation_3@2x.png */; settings = {ASSET_TAGS = (); }; };
-		AD0E36DE1C8001F800714FF3 /* icon_pull_animation_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD0E368E1C8001F800714FF3 /* icon_pull_animation_4@2x.png */; settings = {ASSET_TAGS = (); }; };
-		AD0E36DF1C8001F800714FF3 /* icon_pull_animation_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD0E368F1C8001F800714FF3 /* icon_pull_animation_5@2x.png */; settings = {ASSET_TAGS = (); }; };
-		AD0E36E01C8001F800714FF3 /* icon_shake_animation_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36901C8001F800714FF3 /* icon_shake_animation_1@2x.png */; settings = {ASSET_TAGS = (); }; };
-		AD0E36E11C8001F800714FF3 /* icon_shake_animation_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36911C8001F800714FF3 /* icon_shake_animation_2@2x.png */; settings = {ASSET_TAGS = (); }; };
-		AD0E36E21C8001F800714FF3 /* icon_shake_animation_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36921C8001F800714FF3 /* icon_shake_animation_3@2x.png */; settings = {ASSET_TAGS = (); }; };
-		AD0E36E31C8001F800714FF3 /* icon_shake_animation_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36931C8001F800714FF3 /* icon_shake_animation_4@2x.png */; settings = {ASSET_TAGS = (); }; };
-		AD0E36E41C8001F800714FF3 /* icon_shake_animation_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36941C8001F800714FF3 /* icon_shake_animation_5@2x.png */; settings = {ASSET_TAGS = (); }; };
-		AD0E36E51C8001F800714FF3 /* icon_shake_animation_6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36951C8001F800714FF3 /* icon_shake_animation_6@2x.png */; settings = {ASSET_TAGS = (); }; };
-		AD0E36E61C8001F800714FF3 /* icon_shake_animation_7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36961C8001F800714FF3 /* icon_shake_animation_7@2x.png */; settings = {ASSET_TAGS = (); }; };
-		AD0E36E71C8001F800714FF3 /* icon_shake_animation_8@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36971C8001F800714FF3 /* icon_shake_animation_8@2x.png */; settings = {ASSET_TAGS = (); }; };
-		AD0E36E81C8001F800714FF3 /* icon_transform_animation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36981C8001F800714FF3 /* icon_transform_animation@2x.png */; settings = {ASSET_TAGS = (); }; };
 		AD0E36E91C8001F800714FF3 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E369B1C8001F800714FF3 /* UIHelper.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36EA1C8001F800714FF3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E369D1C8001F800714FF3 /* ViewController.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36EE1C80354B00714FF3 /* validation.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36ED1C80354B00714FF3 /* validation.m */; settings = {ASSET_TAGS = (); }; };
@@ -108,7 +94,9 @@
 		AD4E93A81C858E21007BA86C /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93931C858E21007BA86C /* UIScrollView+MJExtension.m */; settings = {ASSET_TAGS = (); }; };
 		AD4E93A91C858E21007BA86C /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93951C858E21007BA86C /* UIScrollView+MJRefresh.m */; settings = {ASSET_TAGS = (); }; };
 		AD4E93AA1C858E21007BA86C /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93971C858E21007BA86C /* UIView+MJExtension.m */; settings = {ASSET_TAGS = (); }; };
-		AD4E93AE1C86A1DB007BA86C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4E93AD1C86A1DB007BA86C /* Default.png */; settings = {ASSET_TAGS = (); }; };
+		AD4E93B21C86A8E0007BA86C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4E93B11C86A8E0007BA86C /* Default.png */; settings = {ASSET_TAGS = (); }; };
+		AD4E93B91C86C691007BA86C /* icon_test_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4E93B71C86C691007BA86C /* icon_test_selected.png */; settings = {ASSET_TAGS = (); }; };
+		AD4E93BA1C86C691007BA86C /* icon_test_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4E93B81C86C691007BA86C /* icon_test_unselected.png */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -218,20 +206,6 @@
 		AD0E36871C8001F800714FF3 /* App.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = App.m; sourceTree = "<group>"; };
 		AD0E36881C8001F800714FF3 /* ShareEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareEntity.h; sourceTree = "<group>"; };
 		AD0E36891C8001F800714FF3 /* ShareEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareEntity.m; sourceTree = "<group>"; };
-		AD0E368B1C8001F800714FF3 /* icon_pull_animation_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_pull_animation_1@2x.png"; sourceTree = "<group>"; };
-		AD0E368C1C8001F800714FF3 /* icon_pull_animation_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_pull_animation_2@2x.png"; sourceTree = "<group>"; };
-		AD0E368D1C8001F800714FF3 /* icon_pull_animation_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_pull_animation_3@2x.png"; sourceTree = "<group>"; };
-		AD0E368E1C8001F800714FF3 /* icon_pull_animation_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_pull_animation_4@2x.png"; sourceTree = "<group>"; };
-		AD0E368F1C8001F800714FF3 /* icon_pull_animation_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_pull_animation_5@2x.png"; sourceTree = "<group>"; };
-		AD0E36901C8001F800714FF3 /* icon_shake_animation_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_shake_animation_1@2x.png"; sourceTree = "<group>"; };
-		AD0E36911C8001F800714FF3 /* icon_shake_animation_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_shake_animation_2@2x.png"; sourceTree = "<group>"; };
-		AD0E36921C8001F800714FF3 /* icon_shake_animation_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_shake_animation_3@2x.png"; sourceTree = "<group>"; };
-		AD0E36931C8001F800714FF3 /* icon_shake_animation_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_shake_animation_4@2x.png"; sourceTree = "<group>"; };
-		AD0E36941C8001F800714FF3 /* icon_shake_animation_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_shake_animation_5@2x.png"; sourceTree = "<group>"; };
-		AD0E36951C8001F800714FF3 /* icon_shake_animation_6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_shake_animation_6@2x.png"; sourceTree = "<group>"; };
-		AD0E36961C8001F800714FF3 /* icon_shake_animation_7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_shake_animation_7@2x.png"; sourceTree = "<group>"; };
-		AD0E36971C8001F800714FF3 /* icon_shake_animation_8@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_shake_animation_8@2x.png"; sourceTree = "<group>"; };
-		AD0E36981C8001F800714FF3 /* icon_transform_animation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_transform_animation@2x.png"; sourceTree = "<group>"; };
 		AD0E369A1C8001F800714FF3 /* UIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIHelper.h; sourceTree = "<group>"; };
 		AD0E369B1C8001F800714FF3 /* UIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIHelper.m; sourceTree = "<group>"; };
 		AD0E369C1C8001F800714FF3 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -284,8 +258,10 @@
 		AD4E93951C858E21007BA86C /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		AD4E93961C858E21007BA86C /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		AD4E93971C858E21007BA86C /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
-		AD4E93AD1C86A1DB007BA86C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = HelloTako/Assets.xcassets/Default.png; sourceTree = "<group>"; };
-		ADE01D651C181077009F425E /* HelloTako.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTako.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD4E93B11C86A8E0007BA86C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		AD4E93B71C86C691007BA86C /* icon_test_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_test_selected.png; sourceTree = "<group>"; };
+		AD4E93B81C86C691007BA86C /* icon_test_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_test_unselected.png; sourceTree = "<group>"; };
+		ADE01D651C181077009F425E /* Tako.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tako.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -547,20 +523,9 @@
 		AD0E368A1C8001F800714FF3 /* png */ = {
 			isa = PBXGroup;
 			children = (
-				AD0E368B1C8001F800714FF3 /* icon_pull_animation_1@2x.png */,
-				AD0E368C1C8001F800714FF3 /* icon_pull_animation_2@2x.png */,
-				AD0E368D1C8001F800714FF3 /* icon_pull_animation_3@2x.png */,
-				AD0E368E1C8001F800714FF3 /* icon_pull_animation_4@2x.png */,
-				AD0E368F1C8001F800714FF3 /* icon_pull_animation_5@2x.png */,
-				AD0E36901C8001F800714FF3 /* icon_shake_animation_1@2x.png */,
-				AD0E36911C8001F800714FF3 /* icon_shake_animation_2@2x.png */,
-				AD0E36921C8001F800714FF3 /* icon_shake_animation_3@2x.png */,
-				AD0E36931C8001F800714FF3 /* icon_shake_animation_4@2x.png */,
-				AD0E36941C8001F800714FF3 /* icon_shake_animation_5@2x.png */,
-				AD0E36951C8001F800714FF3 /* icon_shake_animation_6@2x.png */,
-				AD0E36961C8001F800714FF3 /* icon_shake_animation_7@2x.png */,
-				AD0E36971C8001F800714FF3 /* icon_shake_animation_8@2x.png */,
-				AD0E36981C8001F800714FF3 /* icon_transform_animation@2x.png */,
+				AD4E93B71C86C691007BA86C /* icon_test_selected.png */,
+				AD4E93B81C86C691007BA86C /* icon_test_unselected.png */,
+				AD4E93B11C86A8E0007BA86C /* Default.png */,
 			);
 			path = png;
 			sourceTree = "<group>";
@@ -689,7 +654,6 @@
 		ADE01D5C1C181077009F425E = {
 			isa = PBXGroup;
 			children = (
-				AD4E93AD1C86A1DB007BA86C /* Default.png */,
 				AD0E360E1C8001F800714FF3 /* HelloTako */,
 				ADE01D661C181077009F425E /* Products */,
 			);
@@ -698,7 +662,7 @@
 		ADE01D661C181077009F425E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ADE01D651C181077009F425E /* HelloTako.app */,
+				ADE01D651C181077009F425E /* Tako.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -720,7 +684,7 @@
 			);
 			name = HelloTako;
 			productName = HelloTako;
-			productReference = ADE01D651C181077009F425E /* HelloTako.app */;
+			productReference = ADE01D651C181077009F425E /* Tako.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -760,40 +724,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD0E36E31C8001F800714FF3 /* icon_shake_animation_4@2x.png in Resources */,
 				AD0E36B21C8001F800714FF3 /* LoginViewController.xib in Resources */,
 				AD0E36D61C8001F800714FF3 /* README.txt in Resources */,
 				AD0E36D71C8001F800714FF3 /* Info.plist in Resources */,
 				AD0E36A81C8001F800714FF3 /* ReportTableViewCell.xib in Resources */,
 				AD0E36CE1C8001F800714FF3 /* About.txt in Resources */,
-				AD0E36E51C8001F800714FF3 /* icon_shake_animation_6@2x.png in Resources */,
-				AD4E93AE1C86A1DB007BA86C /* Default.png in Resources */,
 				AD0E36B01C8001F800714FF3 /* GameDetailViewController.xib in Resources */,
 				AD0E36B41C8001F800714FF3 /* ReportViewController.xib in Resources */,
 				AD0E36AA1C8001F800714FF3 /* TableViewCell.xib in Resources */,
-				AD0E36E11C8001F800714FF3 /* icon_shake_animation_2@2x.png in Resources */,
 				AD0E36A41C8001F800714FF3 /* Main.storyboard in Resources */,
 				AD0E36B71C8001F800714FF3 /* ShareViewController.xib in Resources */,
-				AD0E36E21C8001F800714FF3 /* icon_shake_animation_3@2x.png in Resources */,
-				AD0E36DC1C8001F800714FF3 /* icon_pull_animation_2@2x.png in Resources */,
 				AD0E369F1C8001F800714FF3 /* Assets.xcassets in Resources */,
-				AD0E36DE1C8001F800714FF3 /* icon_pull_animation_4@2x.png in Resources */,
-				AD0E36E61C8001F800714FF3 /* icon_shake_animation_7@2x.png in Resources */,
-				AD0E36E71C8001F800714FF3 /* icon_shake_animation_8@2x.png in Resources */,
 				AD0E36A61C8001F800714FF3 /* CollectionViewCell.xib in Resources */,
+				AD4E93BA1C86C691007BA86C /* icon_test_unselected.png in Resources */,
 				AD0E36CC1C8001F800714FF3 /* About.txt in Resources */,
-				AD0E36DD1C8001F800714FF3 /* icon_pull_animation_3@2x.png in Resources */,
 				AD0E36B51C8001F800714FF3 /* ShareView.xib in Resources */,
 				AD0E36A31C8001F800714FF3 /* LaunchScreen.storyboard in Resources */,
 				AD0E36AE1C8001F800714FF3 /* DistributeAppsViewController.xib in Resources */,
-				AD0E36DF1C8001F800714FF3 /* icon_pull_animation_5@2x.png in Resources */,
+				AD4E93B91C86C691007BA86C /* icon_test_selected.png in Resources */,
 				AD0E36AC1C8001F800714FF3 /* TimeLineTableViewCell.xib in Resources */,
-				AD0E36E01C8001F800714FF3 /* icon_shake_animation_1@2x.png in Resources */,
-				AD0E36E41C8001F800714FF3 /* icon_shake_animation_5@2x.png in Resources */,
 				AD4E93A61C858E21007BA86C /* MJRefresh.bundle in Resources */,
-				AD0E36DB1C8001F800714FF3 /* icon_pull_animation_1@2x.png in Resources */,
 				AD0E36B91C8001F800714FF3 /* VersionViewController.xib in Resources */,
-				AD0E36E81C8001F800714FF3 /* icon_transform_animation@2x.png in Resources */,
+				AD4E93B21C86A8E0007BA86C /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -987,7 +939,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.self.HelloTako;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Tako;
 			};
 			name = Debug;
 		};
@@ -999,7 +951,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.self.HelloTako;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Tako;
 			};
 			name = Release;
 		};
