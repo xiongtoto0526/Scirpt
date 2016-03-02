@@ -108,6 +108,7 @@
 		AD4E93A81C858E21007BA86C /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93931C858E21007BA86C /* UIScrollView+MJExtension.m */; settings = {ASSET_TAGS = (); }; };
 		AD4E93A91C858E21007BA86C /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93951C858E21007BA86C /* UIScrollView+MJRefresh.m */; settings = {ASSET_TAGS = (); }; };
 		AD4E93AA1C858E21007BA86C /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93971C858E21007BA86C /* UIView+MJExtension.m */; settings = {ASSET_TAGS = (); }; };
+		AD4E93AE1C86A1DB007BA86C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4E93AD1C86A1DB007BA86C /* Default.png */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -283,6 +284,7 @@
 		AD4E93951C858E21007BA86C /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		AD4E93961C858E21007BA86C /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		AD4E93971C858E21007BA86C /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		AD4E93AD1C86A1DB007BA86C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = HelloTako/Assets.xcassets/Default.png; sourceTree = "<group>"; };
 		ADE01D651C181077009F425E /* HelloTako.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTako.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -687,6 +689,7 @@
 		ADE01D5C1C181077009F425E = {
 			isa = PBXGroup;
 			children = (
+				AD4E93AD1C86A1DB007BA86C /* Default.png */,
 				AD0E360E1C8001F800714FF3 /* HelloTako */,
 				ADE01D661C181077009F425E /* Products */,
 			);
@@ -764,6 +767,7 @@
 				AD0E36A81C8001F800714FF3 /* ReportTableViewCell.xib in Resources */,
 				AD0E36CE1C8001F800714FF3 /* About.txt in Resources */,
 				AD0E36E51C8001F800714FF3 /* icon_shake_animation_6@2x.png in Resources */,
+				AD4E93AE1C86A1DB007BA86C /* Default.png in Resources */,
 				AD0E36B01C8001F800714FF3 /* GameDetailViewController.xib in Resources */,
 				AD0E36B41C8001F800714FF3 /* ReportViewController.xib in Resources */,
 				AD0E36AA1C8001F800714FF3 /* TableViewCell.xib in Resources */,

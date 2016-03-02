@@ -25,6 +25,11 @@
         NSString* versionName = [(NSDictionary*)[(NSDictionary*)value objectForKey:@"package"] objectForKey:@"version"];
         [super setValue:versionName forKey:@"version"];
         
+         NSNumber* size = [(NSDictionary*)[(NSDictionary*)value objectForKey:@"package"] objectForKey:@"size"];
+        double sizeM = (double)((double)[size longLongValue]/1024)/1024;
+        NSString* v = [NSString stringWithFormat:@"%.1f M",sizeM];
+        [super setValue:v forKey:@"size"];
+        
         NSString* versionId = (NSString*)[(NSDictionary*)value objectForKey:@"id"];
         [super setValue:versionId forKey:@"versionId"];
         return;

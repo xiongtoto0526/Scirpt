@@ -106,6 +106,7 @@
         
 }
 
+
 - (void)authFinish{
     [self.activityIndicator stopAnimating];
     self.loginBt.selected = NO;
@@ -113,22 +114,28 @@
 
 
 -(BOOL)authwithUserName:(NSString*)userName password:(NSString*)password{
-    // 模拟鉴权过程
-    [self performSelector:@selector(authFinish) withObject:nil afterDelay:3.0]; //使用延时进行限制。
-  
     TakoUser* user = [TakoServer authEmail:userName password:password];
     if (user==nil) {
         return NO;
     }
-
     self.authUserName=user.nickName;
     self.authUserIcon=nil;
+    [self authFinish];
     return YES;
 }
 
 -(void)showIndicator{
     self.loginBt.selected = YES;
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(100, 100, 60, 60)];
+    
+    // 设置菊花位置
+    CGRect rect = [[UIScreen mainScreen] bounds];
+    CGSize size = rect.size;
+    int indicatorWidth = 60;
+    int indicatorHeight = 60;
+    CGFloat x = size.width/2-indicatorWidth/2;
+    CGFloat y = self.loginBt.frame.origin.y-self.loginBt.frame.size.height/2;
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(x, y, indicatorWidth, indicatorHeight)];
+    
     [self.view addSubview:   self.activityIndicator];
     self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
     [self.activityIndicator startAnimating];

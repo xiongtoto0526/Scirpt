@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="官方网址：http://tako.im" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7on-zt-mkE">
-                    <rect key="frame" x="206" y="209" width="188" height="21"/>
+                    <rect key="frame" x="206" y="229" width="188" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="DnY-kp-sKu"/>
                         <constraint firstAttribute="width" constant="188" id="gON-HP-CwA"/>
@@ -27,7 +27,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QQ群： 278901064" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgE-Cy-CK6">
-                    <rect key="frame" x="224" y="258" width="153" height="21"/>
+                    <rect key="frame" x="229" y="258" width="153" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="153" id="LSL-hb-rSz"/>
                         <constraint firstAttribute="height" constant="21" id="QE3-r2-zit"/>
@@ -37,14 +37,14 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="tCw-Of-ukP">
-                    <rect key="frame" x="237" y="75" width="127" height="80"/>
+                    <rect key="frame" x="250.5" y="75" width="100" height="100"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="127" id="HgJ-aA-1Ha"/>
-                        <constraint firstAttribute="height" constant="80" id="eRw-IM-T9j"/>
+                        <constraint firstAttribute="width" constant="100" id="HgJ-aA-1Ha"/>
+                        <constraint firstAttribute="height" constant="100" id="eRw-IM-T9j"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" tako 0.0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nde-rt-6CL">
-                    <rect key="frame" x="270.5" y="170" width="60" height="21"/>
+                    <rect key="frame" x="270.5" y="190" width="60" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="0oQ-dE-Kd1"/>
                         <constraint firstAttribute="width" constant="60" id="iM5-F7-37v"/>
@@ -58,7 +58,7 @@
             <constraints>
                 <constraint firstItem="tCw-Of-ukP" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="1uI-Zu-CIZ"/>
                 <constraint firstItem="Nde-rt-6CL" firstAttribute="centerX" secondItem="7on-zt-mkE" secondAttribute="centerX" id="2ag-2C-SXY"/>
-                <constraint firstItem="Nde-rt-6CL" firstAttribute="centerX" secondItem="mgE-Cy-CK6" secondAttribute="centerX" id="3kU-in-gC4"/>
+                <constraint firstItem="Nde-rt-6CL" firstAttribute="centerX" secondItem="mgE-Cy-CK6" secondAttribute="centerX" constant="-5" id="3kU-in-gC4"/>
                 <constraint firstAttribute="trailing" secondItem="tCw-Of-ukP" secondAttribute="trailing" constant="236" id="7If-7v-tEZ"/>
                 <constraint firstItem="Nde-rt-6CL" firstAttribute="top" secondItem="tCw-Of-ukP" secondAttribute="bottom" constant="15" id="9oI-N2-WCh"/>
                 <constraint firstItem="7on-zt-mkE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="206" id="CjD-Ip-Ufj"/>
@@ -91,6 +91,6 @@
         </view>
     </objects>
     <resources>
-        <image name="logo" width="92" height="80"/>
+        <image name="logo" width="173" height="173"/>
     </resources>
 </document>

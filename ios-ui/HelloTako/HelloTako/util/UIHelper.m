@@ -32,7 +32,9 @@
 
 
 +(void)alertWithNoChoice:(NSString*)msg view:(UIViewController*)view{
-    
+    if(view==nil){
+        view = [self getCurrentVC];
+    }
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:msg preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];

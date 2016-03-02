@@ -166,10 +166,10 @@ NSMutableDictionary* taskQueueDict = nil;
     [d.delegate downloadingWithTotal:totalSize complete:finishSize tag:tag];
 }
 
--(void)downloadFinish:(BOOL)isSuccess tag:(NSString*)tag{
+-(void)downloadFinish:(BOOL)isSuccess msg:(NSString*)msg tag:(NSString*)tag{
     NSLog(@"finish wrapper in downloadQueue...");
     DownloadInfo* d =  (DownloadInfo*)[taskQueueDict objectForKey:tag];
-    [d.delegate downloadFinish:isSuccess tag:tag];
+    [d.delegate downloadFinish:isSuccess msg:msg tag:tag];
     if (isSuccess) {
         [taskQueueDict removeObjectForKey:tag];
     }

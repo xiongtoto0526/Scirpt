@@ -8,7 +8,7 @@
 @property (nonatomic,copy) NSString *appid;
 @property (nonatomic, copy) NSString *version;//appversion 1.0.1
 @property (nonatomic, copy) NSString *versionId;//appversionid 34343435ssds55
-//@property (nonatomic, copy) NSString *size;
+@property (nonatomic, copy) NSString *size;
 @property (nonatomic, copy) NSString *url;
 @property (nonatomic, copy) NSString *uri;
 @property (nonatomic, copy) NSString *packagename;

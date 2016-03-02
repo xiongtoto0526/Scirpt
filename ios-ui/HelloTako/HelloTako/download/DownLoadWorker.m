@@ -55,8 +55,11 @@
  */
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    NSLog(@"下载结束，结果为失败...%@",error);
-    [self.delegate downloadFinish:NO tag:self.tag];
+    NSString *messageString = [error localizedDescription];
+//    NSString *moreString = [error localizedFailureReason];
+    NSLog(@"下载结束，结果为失败。错误信息: %@",messageString);
+    
+    [self.delegate downloadFinish:NO msg:@"无法连接到服务器，请重试。" tag:self.tag];
 }
 
 
@@ -71,8 +74,18 @@
    
 //    self.homePath = [self.homePath  stringByAppendingPathComponent:@"xgtakofiles"]; // todo:该目录不可写
     NSString* filepath = [self.homePath stringByAppendingPathComponent:response.suggestedFilename];
-    self.filename = response.suggestedFilename;
+
+    if (![[response.suggestedFilename pathExtension] isEqualToString:@"ipa"]) {
+        [self.connection cancel];
+        self.connection = nil;
+        self.isFree = YES;
+        [self.delegate downloadFinish:NO msg:@"文件格式错误。" tag:self.tag];
+        return;
+    }
     
+    
+    self.filename = response.suggestedFilename;
+
     NSLog(@"local file path is:%@",filepath);
     self.localPath = filepath;
     
@@ -141,7 +154,7 @@
     self.writeHandle = nil;
     self.isFree = YES;
     
-    [self.delegate downloadFinish:YES tag:self.tag];
+    [self.delegate downloadFinish:YES msg:nil tag:self.tag];
     
     
     NSLog(@"下载结束，结果为成功...");
@@ -232,7 +245,7 @@
         isAllAvailable = NO;
     }
     
-    if(![delegate respondsToSelector:@selector(downloadFinish:tag:)]){
+    if(![delegate respondsToSelector:@selector(downloadFinish:msg:tag:)]){
         NSLog(@"Error!!! Please implement mehtod < downloadFinish: > in <XHtDownLoadDelegate> first!");
         isAllAvailable = NO;
     }

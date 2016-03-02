@@ -88,7 +88,7 @@
     }
     
     NSNumber* resultCode = (NSNumber*)[XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_RET_KEY];
-    if(resultCode!=0){
+    if([resultCode longLongValue]!=0){
         NSLog(@"http failed...");
         return result;
     }

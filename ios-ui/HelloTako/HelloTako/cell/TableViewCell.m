@@ -183,7 +183,7 @@ NSMutableDictionary* workerDict = nil;
 
 #pragma mark  下载回调
 
--(void)downloadFinish:(BOOL)isSuccess tag:(NSString *)tag{
+-(void)downloadFinish:(BOOL)isSuccess msg:(NSString*)msg tag:(NSString *)tag{
     NSLog(@"收到回调通知：文件下载完成。");
     
     if ([tag isEqualToString:self.appId]) {
@@ -204,6 +204,7 @@ NSMutableDictionary* workerDict = nil;
             [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_KEY withObject:newDict];
             
         }else{
+            [XHTUIHelper alertWithNoChoice:[NSString stringWithFormat:@"下载失败:%@",msg] view:[XHTUIHelper getCurrentVC]];
             [self.button setTitle:@"重下载" forState:UIControlStateNormal];
             self.isStarted=NO;
         }

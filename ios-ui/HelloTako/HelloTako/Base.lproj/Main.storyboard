@@ -441,7 +441,7 @@
         <scene sceneID="rag-B6-MAz">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4Me-kX-O35" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我的" image="icon_tabbar_onsite" id="n3P-ql-cJo"/>
+                    <tabBarItem key="tabBarItem" title="我的" image="icon_tabbar_mine" id="n3P-ql-cJo"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uLe-Qz-m1s">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -459,7 +459,7 @@
     </scenes>
     <resources>
         <image name="first" width="30" height="30"/>
-        <image name="icon_tabbar_onsite" width="26" height="26"/>
+        <image name="icon_tabbar_mine" width="26" height="26"/>
         <image name="second" width="30" height="30"/>
         <image name="user" width="338" height="374"/>
     </resources>

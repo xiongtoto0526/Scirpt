@@ -6,7 +6,7 @@
 @protocol XHtDownLoadDelegate <NSObject>
 
 -(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize tag:(NSString*)tag;
--(void)downloadFinish:(BOOL)isSuccess tag:(NSString*)tag;
+-(void)downloadFinish:(BOOL)isSuccess msg:(NSString*)msg tag:(NSString*)tag;
 
 @end
 

@@ -165,23 +165,6 @@
         cell=[[[NSBundle mainBundle] loadNibNamed:@"TableViewCell" owner:self options:nil] lastObject];
     }
     
-    
-    TakoApp *app = [self.listData objectAtIndex:indexPath.row];
-    cell.appName.text=app.appname;
-    cell.appVersion.text = app.version;
-    cell.otherInfo.text = [NSString stringWithFormat:@"%@ %@",app.firstcreated,@"2M"];
-    
-    UIImage* image = nil;
-    // app没有logo时，显示默认logo
-    if(app.logourl==nil || app.logourl.length==0){
-        image = [UIImage imageNamed:@"3"];
-    }else{
-        NSURL *url = [NSURL URLWithString: app.logourl];
-        image = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];
-    }
-    
-    cell.appImage.image = image;
-    
     return cell;
 }
 
@@ -194,14 +177,30 @@
         tbCell.button.enabled = NO;
     }
     
-    // 记录每个cell的index
+    // 数据绑定
     tbCell.myCellIndex = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
     TakoApp* app = (TakoApp*)[self.listData objectAtIndex:indexPath.row];
     tbCell.appId = app.appid;
     tbCell.downloadUrl = app.url;
-    tbCell.isNeedPassword = [app.password isEqualToString:@"false"];
+    tbCell.isNeedPassword = [app.password isEqualToString:@"true"];
     tbCell.versionId = app.versionId;
     tbCell.logourl = app.logourl;
+    
+    tbCell.appName.text=app.appname;
+    tbCell.appVersion.text = app.version;
+    tbCell.otherInfo.text = [NSString stringWithFormat:@"%@  %@",app.firstcreated,app.size];
+    
+    UIImage* image = nil;
+    // app没有logo时，显示默认logo
+    if(app.logourl==nil || app.logourl.length==0){
+        image = [UIImage imageNamed:@"ic_defaultapp"];
+    }else{
+        NSURL *url = [NSURL URLWithString: app.logourl];
+        image = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];
+    }
+    
+    tbCell.appImage.image = image;
+
 }
 
 

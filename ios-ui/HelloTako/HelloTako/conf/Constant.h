@@ -12,6 +12,8 @@
 // http
 #define HTTP_SERVER_PORT 12345
 
+#define LAUNCH_SCREEN_TIME 2.0
+
 // user default
 #define USER_ACCOUNT_KEY @"user_account"
 #define USER_TOKEN_KEY @"user_token"

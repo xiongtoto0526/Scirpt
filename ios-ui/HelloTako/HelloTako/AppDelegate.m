@@ -42,6 +42,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [NSThread sleepForTimeInterval:LAUNCH_SCREEN_TIME];//设置闪屏页面时间
 
     
      [XHTUIHelper clearAllUserDefaultsData]; // 调试用
