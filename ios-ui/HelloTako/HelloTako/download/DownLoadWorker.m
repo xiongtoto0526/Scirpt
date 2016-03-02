@@ -58,7 +58,7 @@
     NSString *messageString = [error localizedDescription];
 //    NSString *moreString = [error localizedFailureReason];
     NSLog(@"下载结束，结果为失败。错误信息: %@",messageString);
-    
+    self.isFree=YES;
     [self.delegate downloadFinish:NO msg:@"无法连接到服务器，请重试。" tag:self.tag];
 }
 
@@ -84,7 +84,7 @@
     }
     
     
-    self.filename = response.suggestedFilename;
+    self.filename = [NSString stringWithFormat:@"%@.ipa",self.tag];
 
     NSLog(@"local file path is:%@",filepath);
     self.localPath = filepath;
@@ -142,8 +142,12 @@
     [self isDevicefileExist];
     
     // local file server ok
-    NSString* itermServiceUrl =@"itms-services://?action=download-manifest&url=https://doc.xgsdk.com:28443/service/app/ios/local/56c58a86e13823dfca398cc6/56cd25a7e1382365706e5911.plist";
+//      itms-services://?action=download-manifest&url=https://doc.xgsdk.com:28443/service/app/ios/local/56c58a86e13823dfca398cc6/56cd25a7e1382365706e5911.plist
+    NSString* itermServiceUrl = [NSString stringWithFormat:@"itms-services://?action=download-manifest&url=%@/app/ios/local/%@/%@",TASKO_SERVER_HOST,self.appid,self.tag];
 
+    NSString* itermServiceUrlok =@"itms-services://?action=download-manifest&url=https://doc.xgsdk.com:28443/service/app/ios/local/56c58a86e13823dfca398cc6/56cd25a7e1382365706e5911.plist";
+
+     NSLog(@"will install,iterm url is:%@",itermServiceUrl);
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:itermServiceUrl]];
     
     self.currentLength = 0;
@@ -164,7 +168,7 @@
 /*
  启动
  */
-- (void)startWithUrl:(NSURL*) url delegate:(id<XHtDownLoadDelegate>)delegate tag:(NSString*)tag{
+- (void)startWithUrl:(NSURL*) url appid:(NSString*)appid tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate {
     
     if (![self isDelegateAvailable:delegate]) {
         return;
@@ -172,13 +176,14 @@
     
     self.delegate=delegate;
     self.tag = tag;
+    self.appid = appid;
     self.isFree = NO;
     
     // 1.待下载url
-    url = [NSURL URLWithString:@"http://doc.xgsdk.com:28870/static/TakoTest01_resigned.ipa"];
-    url = [NSURL URLWithString:@"http://dlsw.baidu.com/sw-search-sp/soft/9d/25765/sogou_mac_32c_V3.2.0.1437101586.dmg"];
-    url=[NSURL URLWithString: @"http://www.haima.me/Download.ashx?t=1&c=000000036&r=0.7960992017760873"];
-    url = [NSURL URLWithString: @"http://qa.tako.im:28870/m6g3"];
+//    url = [NSURL URLWithString:@"http://doc.xgsdk.com:28870/static/TakoTest01_resigned.ipa"];
+//    url = [NSURL URLWithString:@"http://dlsw.baidu.com/sw-search-sp/soft/9d/25765/sogou_mac_32c_V3.2.0.1437101586.dmg"];
+//    url=[NSURL URLWithString: @"http://www.haima.me/Download.ashx?t=1&c=000000036&r=0.7960992017760873"];
+
 
     
     // 2.请求
@@ -189,6 +194,7 @@
         NSDictionary* t = (NSDictionary*)[XHTUIHelper readNSUserDefaultsObjectWithkey:self.tag];
         self.currentLength = [(NSString*)[t objectForKey:CURRENT_LENGTH_KEY] longLongValue];
         self.totalLength = [(NSString*)[t objectForKey:TOTAL_LENGTH_KEY] longLongValue];
+        self.appid = (NSString*)[t objectForKey:APPID_KEY];
     }else{
         self.currentLength = 0;
     }
@@ -221,6 +227,7 @@
     NSString* totalLength = [NSString stringWithFormat:@"%qi",self.totalLength];
     [dict setObject:currentLength forKey:CURRENT_LENGTH_KEY];
     [dict setObject:totalLength forKey:TOTAL_LENGTH_KEY];
+    [dict setObject:self.appid forKeyedSubscript:APPID_KEY];
     [XHTUIHelper writeNSUserDefaultsWithKey:self.tag withObject:dict];
 }
 

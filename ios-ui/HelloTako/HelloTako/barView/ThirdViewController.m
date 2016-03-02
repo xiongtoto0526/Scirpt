@@ -42,10 +42,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     NSLog(@"view will appear...");
-    UIImage* aaa = self.tabBarItem.image;
-    NSLog(@"second,width:%f,height:%f",aaa.size.width,aaa.size.height);
-
-
 }
 
 - (void)viewDidLoad {

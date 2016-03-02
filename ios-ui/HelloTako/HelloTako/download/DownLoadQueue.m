@@ -34,7 +34,7 @@ NSMutableDictionary* taskQueueDict = nil;
 }
 
 
-- (void)add:(NSString*)url tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate{
+- (void)add:(NSString*)url appid:(NSString*)appid tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate{
     
     if (url==nil) {
         NSLog(@"the download url is invalid...");
@@ -65,7 +65,7 @@ NSMutableDictionary* taskQueueDict = nil;
         return;
     }
     
-    [worker startWithUrl:[NSURL URLWithString:url] delegate:self tag:tag];
+    [worker startWithUrl:[NSURL URLWithString:url] appid:appid tag:tag delegate:self ];
     d.isExecuting=YES;// 更新执行状态
     
     
@@ -81,7 +81,7 @@ NSMutableDictionary* taskQueueDict = nil;
         DownloadInfo* downloadInfo = (DownloadInfo*)value; // 选取任务
         if (!downloadInfo.isExecuting && !downloadInfo.isSuspend) {
             DownloadWorker* worker = [self newWorker];// 选取线程
-            [worker startWithUrl:[NSURL URLWithString:downloadInfo.url] delegate:self tag:downloadInfo.tag];
+            [worker startWithUrl:[NSURL URLWithString:downloadInfo.url] appid:nil tag:downloadInfo.tag  delegate:self];
             downloadInfo.isExecuting=YES;
             break;
         }
@@ -115,7 +115,7 @@ NSMutableDictionary* taskQueueDict = nil;
 // 暂停
 - (void)pause:(NSString*)tag{
     
-    // 从线程池中查找
+    // 从线程池中查找对应的线程
     for (int i = 0; i < [workerThreadPool count]; i++)
     {
         id value = [workerThreadPool objectAtIndex: i];

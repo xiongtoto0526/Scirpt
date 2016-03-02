@@ -26,11 +26,15 @@
 #define APP_VERSION_KEY @"app_version"
 #define APP_VERSION_CREATE_TIME_KEY @"app_version_create_time"
 #define CURRENT_LENGTH_KEY @"current_length"
+#define APPID_KEY @"appid"
 #define TOTAL_LENGTH_KEY @"total_length"
 
 // notification
 #define LOGIN_BACK_TO_USER_NOTIFICATION @"login_back_to_user"
+#define CLICK_DOWNLOAD_BUTTON_NOTIFICATION @"click_download_button"
+#define CLICK_DOWNLOAD_CANCEL_BUTTON_NOTIFICATION @"click_download_cancel_button"
 #define LOGIN_BACK_TO_TEST_NOTIFICATION @"login_back_to_test"
+#define CELL_INDEX_NOTIFICATION_KEY @"cellIndex"
 
 // download
 #define MAX_DOWNLOAD_THREAD_COUNT 1

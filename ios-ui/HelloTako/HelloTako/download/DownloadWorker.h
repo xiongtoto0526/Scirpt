@@ -20,11 +20,14 @@
 // 请求标示
 @property (nonatomic, copy) NSString  *tag;
 
+@property (nonatomic, copy) NSString  *appid;
+
 @property(nonatomic, strong)id<XHtDownLoadDelegate> delegate;
 
 
 // 启动
-- (void)startWithUrl:(NSURL*) url delegate:(id<XHtDownLoadDelegate>)delegate tag:(NSString*)tag;
+- (void)startWithUrl:(NSURL*) url appid:(NSString*)appid tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate;
+
 
 // 暂停
 - (void)pause:(NSString*)tag;

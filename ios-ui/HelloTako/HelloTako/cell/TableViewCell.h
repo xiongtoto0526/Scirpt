@@ -20,17 +20,17 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnCancel;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressControl;
 @property (weak, nonatomic) IBOutlet UILabel *textDownload;
-@property (nonatomic,copy) NSString* logourl;
-@property (nonatomic,copy) NSString *versionId;
-@property (nonatomic,copy) NSString* myCellIndex;
-@property (nonatomic,copy) NSString *appId;
-@property (nonatomic,copy) NSString *downloadUrl;
-@property (nonatomic) BOOL isNeedPassword;
-@property (nonatomic,copy) NSString* downloadPassword;
+//@property (nonatomic,copy) NSString* logourl;
+//@property (nonatomic,copy) NSString *versionId;
+//@property (nonatomic,copy) NSString* myCellIndex;
+//@property (nonatomic,copy) NSString *appId;
+//@property (nonatomic,copy) NSString *downloadUrl;
+//@property (nonatomic) BOOL isNeedPassword;
+//@property (nonatomic,copy) NSString* downloadPassword;
 
 // progress info
-@property BOOL isStarted;
-@property BOOL isPaused;
-@property NSString* progress;
+//@property BOOL isStarted;
+//@property BOOL isPaused;
+//@property NSString* progress;
 
 @end

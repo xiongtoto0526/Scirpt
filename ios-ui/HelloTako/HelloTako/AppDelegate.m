@@ -41,11 +41,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-//    int b=4;
-//    UITabBarController *bar = self.window.rootViewController;
-//    [bar childViewControllers]
-//    
+    
+    // 强制调整view的加载顺序。todo:是否可设置？
+    UITabBarController *bar = (UITabBarController*)self.window.rootViewController;
+    NSArray* all = [bar childViewControllers];
+    NSMutableArray* newItems = [NSMutableArray new];
+    [newItems addObject:all[1]];
+    [newItems addObject:all[0]];
+    bar.viewControllers = newItems;
+    
     [NSThread sleepForTimeInterval:LAUNCH_SCREEN_TIME];//设置闪屏页面时间
     
      [XHTUIHelper clearAllUserDefaultsData]; // 调试用

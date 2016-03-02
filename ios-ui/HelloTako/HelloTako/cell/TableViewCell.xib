@@ -258,11 +258,6 @@
                         <exclude reference="u1K-a0-uaO"/>
                         <exclude reference="ujF-o0-4hw"/>
                         <exclude reference="xeu-r5-8sr"/>
-                        <exclude reference="Jum-iu-KXn"/>
-                        <exclude reference="XQS-qg-rf2"/>
-                        <exclude reference="cOw-Gc-JD5"/>
-                        <exclude reference="dmL-Mx-sK9"/>
-                        <exclude reference="m3n-kk-fQc"/>
                         <exclude reference="2J0-JI-Qn0"/>
                         <exclude reference="E1Y-ai-L9p"/>
                         <exclude reference="IfT-lp-IkM"/>
@@ -278,6 +273,11 @@
                         <exclude reference="vmW-03-QOq"/>
                         <exclude reference="xL0-JH-3hJ"/>
                         <exclude reference="zrm-I8-jyw"/>
+                        <exclude reference="Jum-iu-KXn"/>
+                        <exclude reference="XQS-qg-rf2"/>
+                        <exclude reference="cOw-Gc-JD5"/>
+                        <exclude reference="dmL-Mx-sK9"/>
+                        <exclude reference="m3n-kk-fQc"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

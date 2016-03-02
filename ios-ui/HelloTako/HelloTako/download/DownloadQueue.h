@@ -18,7 +18,7 @@
 + (instancetype)share;
 
 // 添加
-- (void)add:(NSString*)url tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate;
+- (void)add:(NSString*)url appid:(NSString*)appid tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate;
 
 // 暂停
 - (void)pause:(NSString*)tag ;

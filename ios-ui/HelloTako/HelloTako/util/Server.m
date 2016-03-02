@@ -69,9 +69,9 @@
     NSString* result=nil;
     NSData* response=nil;
     if (password==nil) {
-    response = [self getWithUrl:[NSString stringWithFormat:@"/app/version/url?id=%@",versionId]];
+    response = [self getWithUrl:[NSString stringWithFormat:@"/app/version/download/url?id=%@",versionId]];
     }else{
-    response = [self getWithUrl:[NSString stringWithFormat:@"/app/version/url?id=%@&password=%@",versionId,password]];
+    response = [self getWithUrl:[NSString stringWithFormat:@"/app/version/download/url?id=%@&password=%@",versionId,password]];
     }
     
     // 处理http结果

@@ -16,6 +16,14 @@
 @property (nonatomic, copy) NSString *firstcreated;
 @property (nonatomic, copy) NSString *password;
 
+// properties for cell
+@property (nonatomic,copy) NSString* myCellIndex;
+@property (nonatomic,copy) NSString *downloadUrl;
+@property (nonatomic) BOOL isNeedPassword;
+@property (nonatomic,copy) NSString* downloadPassword;
+@property BOOL isStarted;
+@property BOOL isPaused;
+@property NSString* progress;
 
 @property (nonatomic) NSArray* propertykeys;
 
