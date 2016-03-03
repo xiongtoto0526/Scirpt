@@ -37,9 +37,7 @@
 		AD0E36C91C8001F800714FF3 /* HTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36671C8001F800714FF3 /* HTTPFileResponse.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36CA1C8001F800714FF3 /* HTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36691C8001F800714FF3 /* HTTPRedirectResponse.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36CB1C8001F800714FF3 /* WebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E366B1C8001F800714FF3 /* WebSocket.m */; settings = {ASSET_TAGS = (); }; };
-		AD0E36CC1C8001F800714FF3 /* About.txt in Resources */ = {isa = PBXBuildFile; fileRef = AD0E366E1C8001F800714FF3 /* About.txt */; settings = {ASSET_TAGS = (); }; };
 		AD0E36CD1C8001F800714FF3 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36701C8001F800714FF3 /* GCDAsyncSocket.m */; settings = {ASSET_TAGS = (); }; };
-		AD0E36CE1C8001F800714FF3 /* About.txt in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36721C8001F800714FF3 /* About.txt */; settings = {ASSET_TAGS = (); }; };
 		AD0E36CF1C8001F800714FF3 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36741C8001F800714FF3 /* DDAbstractDatabaseLogger.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36D01C8001F800714FF3 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36761C8001F800714FF3 /* DDASLLogger.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36D11C8001F800714FF3 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36781C8001F800714FF3 /* DDFileLogger.m */; settings = {ASSET_TAGS = (); }; };
@@ -47,7 +45,6 @@
 		AD0E36D31C8001F800714FF3 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E367C1C8001F800714FF3 /* DDTTYLogger.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36D41C8001F800714FF3 /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E367F1C8001F800714FF3 /* ContextFilterLogFormatter.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36D51C8001F800714FF3 /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36811C8001F800714FF3 /* DispatchQueueLogFormatter.m */; settings = {ASSET_TAGS = (); }; };
-		AD0E36D61C8001F800714FF3 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36821C8001F800714FF3 /* README.txt */; settings = {ASSET_TAGS = (); }; };
 		AD0E36D81C8001F800714FF3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36841C8001F800714FF3 /* main.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36D91C8001F800714FF3 /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36871C8001F800714FF3 /* App.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36DA1C8001F800714FF3 /* ShareEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36891C8001F800714FF3 /* ShareEntity.m */; settings = {ASSET_TAGS = (); }; };
@@ -750,13 +747,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD0E36B21C8001F800714FF3 /* LoginViewController.xib in Resources */,
-				AD0E36D61C8001F800714FF3 /* README.txt in Resources */,
-				AD0E36CE1C8001F800714FF3 /* About.txt in Resources */,
 				AD0E36AA1C8001F800714FF3 /* TableViewCell.xib in Resources */,
 				AD0E36A41C8001F800714FF3 /* Main.storyboard in Resources */,
 				AD0E369F1C8001F800714FF3 /* Assets.xcassets in Resources */,
 				AD4E93BA1C86C691007BA86C /* icon_test_unselected.png in Resources */,
-				AD0E36CC1C8001F800714FF3 /* About.txt in Resources */,
 				AD0E36A31C8001F800714FF3 /* LaunchScreen.storyboard in Resources */,
 				AD4E93B91C86C691007BA86C /* icon_test_selected.png in Resources */,
 				AD4E93A61C858E21007BA86C /* MJRefresh.bundle in Resources */,

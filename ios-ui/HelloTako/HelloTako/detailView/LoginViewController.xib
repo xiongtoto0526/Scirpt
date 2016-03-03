@@ -33,32 +33,16 @@
                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0z6-Zq-M2c">
                     <rect key="frame" x="85" y="153" width="30" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="7it-re-vh0"/>
                         <constraint firstAttribute="width" constant="30" id="KzD-q2-cpv"/>
                     </constraints>
                     <state key="normal" title="登录"/>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="7it-re-vh0"/>
-                        </mask>
-                    </variation>
                     <connections>
                         <action selector="signin:" destination="-1" eventType="touchUpInside" id="uTX-3G-GUS"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X3R-Pf-HbX">
                     <rect key="frame" x="485" y="153" width="30" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="30" id="wKw-51-Axk"/>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="45" id="wfI-VN-SDg"/>
-                    </constraints>
                     <state key="normal" title="注册"/>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="wKw-51-Axk"/>
-                            <exclude reference="wfI-VN-SDg"/>
-                        </mask>
-                    </variation>
                     <connections>
                         <action selector="signup:" destination="-1" eventType="touchUpInside" id="EdE-L4-NAj"/>
                     </connections>
@@ -73,39 +57,19 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="X3R-Pf-HbX" firstAttribute="leading" secondItem="0z6-Zq-M2c" secondAttribute="trailing" constant="80" id="4yL-4A-c9N"/>
-                <constraint firstItem="0z6-Zq-M2c" firstAttribute="baseline" secondItem="X3R-Pf-HbX" secondAttribute="baseline" id="5p0-kK-O3z"/>
                 <constraint firstItem="gzv-RY-YNH" firstAttribute="top" secondItem="5lP-MJ-r57" secondAttribute="bottom" constant="10" id="8BG-Yc-RJP"/>
                 <constraint firstItem="0z6-Zq-M2c" firstAttribute="top" secondItem="BEQ-8a-Ipt" secondAttribute="bottom" constant="23" id="E0n-Gt-4H5"/>
                 <constraint firstItem="5lP-MJ-r57" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="GJe-9h-uep"/>
                 <constraint firstItem="BEQ-8a-Ipt" firstAttribute="leading" secondItem="gzv-RY-YNH" secondAttribute="leading" id="Js5-4i-CF7"/>
                 <constraint firstItem="gzv-RY-YNH" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="LTr-tW-ejY"/>
                 <constraint firstItem="gzv-RY-YNH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="MCo-dT-Ef5"/>
-                <constraint firstAttribute="trailing" secondItem="gzv-RY-YNH" secondAttribute="trailing" constant="40" id="MLI-5m-NsL"/>
                 <constraint firstItem="BEQ-8a-Ipt" firstAttribute="trailing" secondItem="gzv-RY-YNH" secondAttribute="trailing" id="TGB-Gb-RS9"/>
-                <constraint firstItem="0z6-Zq-M2c" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="153" id="VEk-dt-qpM"/>
                 <constraint firstItem="0z6-Zq-M2c" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="85" id="XAK-Hb-Pmz"/>
-                <constraint firstItem="gzv-RY-YNH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="ebl-84-tdf"/>
-                <constraint firstItem="0z6-Zq-M2c" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="85" id="gL0-z5-TLO"/>
                 <constraint firstItem="0z6-Zq-M2c" firstAttribute="baseline" secondItem="X3R-Pf-HbX" secondAttribute="baseline" id="iDp-4Q-wPR"/>
                 <constraint firstAttribute="trailing" secondItem="X3R-Pf-HbX" secondAttribute="trailing" constant="85" id="rsm-hk-QAO"/>
                 <constraint firstItem="0z6-Zq-M2c" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="153" id="u3J-Ta-jR9"/>
-                <constraint firstAttribute="trailing" secondItem="X3R-Pf-HbX" secondAttribute="trailing" constant="85" id="yqV-LF-wcq"/>
-                <constraint firstItem="gzv-RY-YNH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="62" id="zOw-sT-fqv"/>
                 <constraint firstItem="BEQ-8a-Ipt" firstAttribute="top" secondItem="gzv-RY-YNH" secondAttribute="bottom" constant="8" symbolic="YES" id="ziK-Sd-UKG"/>
             </constraints>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="MLI-5m-NsL"/>
-                    <exclude reference="ebl-84-tdf"/>
-                    <exclude reference="zOw-sT-fqv"/>
-                    <exclude reference="5p0-kK-O3z"/>
-                    <exclude reference="VEk-dt-qpM"/>
-                    <exclude reference="gL0-z5-TLO"/>
-                    <exclude reference="4yL-4A-c9N"/>
-                    <exclude reference="yqV-LF-wcq"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="222" y="226"/>
         </view>
     </objects>
