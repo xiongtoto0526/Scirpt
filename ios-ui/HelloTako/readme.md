@@ -1,7 +1,7 @@
 ### 注意事项：
 
 - 1. 需要添加 httpEnable 选项
-
+- 2. 支持ios系统7.0
 
 ### todo:
 - 1. 特殊logo无法显示。http://tako.kssws.ks-cdn.com/test/logo/99f4a84b-9049-4af7-4da0-ed504e9ece74.png

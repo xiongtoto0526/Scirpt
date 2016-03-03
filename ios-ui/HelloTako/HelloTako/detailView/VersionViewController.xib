@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="官方网址：http://tako.im" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7on-zt-mkE">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="官方网址：http://tako.im" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7on-zt-mkE">
                     <rect key="frame" x="206" y="229" width="188" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="DnY-kp-sKu"/>
@@ -26,7 +26,7 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QQ群： 278901064" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgE-Cy-CK6">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QQ群： 278901064" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgE-Cy-CK6">
                     <rect key="frame" x="229" y="258" width="153" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="153" id="LSL-hb-rSz"/>
@@ -43,7 +43,7 @@
                         <constraint firstAttribute="height" constant="100" id="eRw-IM-T9j"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" tako 0.0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nde-rt-6CL">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" tako 0.0.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nde-rt-6CL">
                     <rect key="frame" x="270.5" y="190" width="60" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="0oQ-dE-Kd1"/>
@@ -57,36 +57,14 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="tCw-Of-ukP" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="1uI-Zu-CIZ"/>
-                <constraint firstItem="Nde-rt-6CL" firstAttribute="centerX" secondItem="7on-zt-mkE" secondAttribute="centerX" id="2ag-2C-SXY"/>
                 <constraint firstItem="Nde-rt-6CL" firstAttribute="centerX" secondItem="mgE-Cy-CK6" secondAttribute="centerX" constant="-5" id="3kU-in-gC4"/>
-                <constraint firstAttribute="trailing" secondItem="tCw-Of-ukP" secondAttribute="trailing" constant="236" id="7If-7v-tEZ"/>
                 <constraint firstItem="Nde-rt-6CL" firstAttribute="top" secondItem="tCw-Of-ukP" secondAttribute="bottom" constant="15" id="9oI-N2-WCh"/>
-                <constraint firstItem="7on-zt-mkE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="206" id="CjD-Ip-Ufj"/>
                 <constraint firstItem="tCw-Of-ukP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="Ryt-8O-Chu"/>
                 <constraint firstItem="mgE-Cy-CK6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="258" id="Uvc-yN-Uer"/>
                 <constraint firstItem="7on-zt-mkE" firstAttribute="top" secondItem="Nde-rt-6CL" secondAttribute="bottom" constant="18" id="VEY-db-1jf"/>
-                <constraint firstAttribute="trailing" secondItem="7on-zt-mkE" secondAttribute="trailing" constant="206" id="Xar-ob-ICY"/>
-                <constraint firstItem="mgE-Cy-CK6" firstAttribute="top" secondItem="7on-zt-mkE" secondAttribute="bottom" constant="28" id="ad6-Hf-Ljb"/>
-                <constraint firstItem="7on-zt-mkE" firstAttribute="top" secondItem="Nde-rt-6CL" secondAttribute="bottom" constant="18" id="eHx-ZF-hNy"/>
-                <constraint firstItem="tCw-Of-ukP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="237" id="fMJ-IS-tvm"/>
-                <constraint firstItem="Nde-rt-6CL" firstAttribute="top" secondItem="tCw-Of-ukP" secondAttribute="bottom" constant="15" id="gco-Wm-SPa"/>
                 <constraint firstItem="tCw-Of-ukP" firstAttribute="centerX" secondItem="7on-zt-mkE" secondAttribute="centerX" id="gw8-cQ-7Bh"/>
-                <constraint firstItem="tCw-Of-ukP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="qQC-q4-12o"/>
                 <constraint firstItem="tCw-Of-ukP" firstAttribute="centerX" secondItem="Nde-rt-6CL" secondAttribute="centerX" id="xEq-8U-VYI"/>
             </constraints>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="7If-7v-tEZ"/>
-                    <exclude reference="fMJ-IS-tvm"/>
-                    <exclude reference="qQC-q4-12o"/>
-                    <exclude reference="CjD-Ip-Ufj"/>
-                    <exclude reference="Xar-ob-ICY"/>
-                    <exclude reference="eHx-ZF-hNy"/>
-                    <exclude reference="2ag-2C-SXY"/>
-                    <exclude reference="gco-Wm-SPa"/>
-                    <exclude reference="ad6-Hf-Ljb"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="280" y="312"/>
         </view>
     </objects>

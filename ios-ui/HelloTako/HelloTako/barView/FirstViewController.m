@@ -346,7 +346,7 @@
     }
     
     if ([self isAppDownloadedBefore:app.versionId]) {
-//        NSLog(@"重复应用信息,名称，%@，版本，%@",cell.appName.text,app.versionId);
+        NSLog(@"重复应用信息,名称，%@，版本，%@",cell.appName.text,app.versionId);
         [XHTUIHelper disableDownloadButton:cell.button];
     }
     
