@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ShareEntity.h"
+
+// 对应底部的 “测试”栏
 @interface FirstViewController : UIViewController
-@property BOOL isLogin;
-@property (weak, nonatomic) IBOutlet UIButton *loginBt;
 
 @end
 

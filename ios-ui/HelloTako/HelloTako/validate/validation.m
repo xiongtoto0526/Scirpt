@@ -83,7 +83,7 @@
         return ;
     }else{
         [self.minLengthError replaceObjectAtIndex:0 withObject:@"1"];
-        NSString *msg = [NSString stringWithFormat:@"%@%@%i%@",textFieldName,@"最小长度是", length , @" 个字符."];
+        NSString *msg = [NSString stringWithFormat:@"%@%@%li%@",textFieldName,@"最小长度是", (long)length , @" 个字符."];
         [self.minLengthErrorMsg addObject:msg];
         return;
     }
@@ -97,7 +97,7 @@
         return;
     }else{
         [self.maxLengthError replaceObjectAtIndex:0 withObject:@"1"];
-        NSString *msg = [NSString stringWithFormat:@"%@%@%i%@",textFieldName,@"最大长度是", length , @"个字符."];
+        NSString *msg = [NSString stringWithFormat:@"%@%@%li%@",textFieldName,@"最大长度是", (long)length , @"个字符."];
         [self.maxLengthErrorMsg addObject:msg];
     }
 }

@@ -10,24 +10,24 @@
 
 @end
 
-//typedef void (^MyBlock)(int,NSString*);
 
 
 @interface DownloadWorker : NSObject
 
 @property (nonatomic) BOOL isFree;
 
-// 请求标示
+// 请求标示，即appVersionId
 @property (nonatomic, copy) NSString  *tag;
 
 @property (nonatomic, copy) NSString  *appid;
+
+@property (nonatomic, copy) NSString  *password;
 
 @property(nonatomic, strong)id<XHtDownLoadDelegate> delegate;
 
 
 // 启动
-- (void)startWithUrl:(NSURL*) url appid:(NSString*)appid tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate;
-
+- (void)startWithUrl:(NSURL*) url appid:(NSString*)appid password:(NSString*)password tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate;
 
 // 暂停
 - (void)pause:(NSString*)tag;

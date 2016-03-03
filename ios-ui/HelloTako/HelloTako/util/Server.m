@@ -30,6 +30,38 @@
     return version;
 }
 
++(NSString*)fetchItermUrl:(NSString*)versionId password:(NSString*)password{
+    //http://qa.tako.im:28870/service/app/version/url?id=56c53802e138233c4ae48304&local=true&password=ifexisted
+
+    NSString* result = nil;
+    NSString* url = nil;
+    if (password!=nil) {
+        url = [NSString stringWithFormat:@"/app/version/url?id=%@&local=true&password=%@",versionId,password];
+    }else{
+        url = [NSString stringWithFormat:@"/app/version/url?id=%@&local=true",versionId];
+    }
+    
+    NSData* returnData = [self getWithUrl:url];
+    if (returnData==nil) {
+        return result;
+    }
+    // 解析结果
+    NSString* retjson = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    NSLog(@"http response is ...%@",retjson);
+    if([XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_RET_KEY]==nil){
+        NSLog(@"fetch iterm url error...");
+        return result;
+    }
+    
+    NSNumber* resultCode = (NSNumber*)[XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_RET_KEY];
+    if ([resultCode longValue] == 0) {
+        NSLog(@"fetch iterm url success....");
+       result = (NSString*)[XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_DATA_KEY];
+    }
+    
+    return result;
+    
+}
 
 +(NSMutableArray*)fetchApp:(NSString*)cursor{
     
@@ -59,7 +91,6 @@
             NSDictionary* temp = (NSDictionary*)[apps objectAtIndex:i];
             TakoApp* app =  [[TakoApp new] initWithDictionary:temp];
             [result addObject:app];
-            NSLog(@"app time is:%@",app.firstcreated);
         }
     }
     return result;
@@ -69,9 +100,9 @@
     NSString* result=nil;
     NSData* response=nil;
     if (password==nil) {
-    response = [self getWithUrl:[NSString stringWithFormat:@"/app/version/download/url?id=%@",versionId]];
+        response = [self getWithUrl:[NSString stringWithFormat:@"/app/version/download/url?id=%@",versionId]];
     }else{
-    response = [self getWithUrl:[NSString stringWithFormat:@"/app/version/download/url?id=%@&password=%@",versionId,password]];
+        response = [self getWithUrl:[NSString stringWithFormat:@"/app/version/download/url?id=%@&password=%@",versionId,password]];
     }
     
     // 处理http结果
@@ -171,7 +202,7 @@
     
     NSError* error = nil;
     NSData* retData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
-
+    
     return retData;
 }
 

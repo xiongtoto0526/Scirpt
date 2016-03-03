@@ -10,18 +10,23 @@
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 #import "UIHelper.h"
+#import "Constant.h"
 
 @implementation XHTUIHelper
 
 
 // notes: this mehod maybe do nothing if your xib is auto-layout enabled
 +(void) addBorderonButton:(UIButton*) btn{
-    
     btn.layer.borderColor = [UIColor blueColor].CGColor;
     btn.layer.borderWidth = 1.0;
     btn.layer.cornerRadius = 8;
 }
 
++ (void) disableDownloadButton:(UIButton*) btn{
+    [btn setTitle:@"已下载" forState:UIControlStateNormal];
+    [btn.layer setBorderColor:(__bridge CGColorRef _Nullable)([UIColor grayColor])];
+    btn.enabled = NO;
+}
 
 + (void)setExtraCellLineHidden: (UITableView *)tableView
 {
@@ -155,5 +160,15 @@
         [dict setObject:object forKey:key];
     }
 }
+
+
++(BOOL)isLogined{
+    NSString* key = [XHTUIHelper readNSUserDefaultsWithkey:LOGIN_KEY];
+    if (key==nil) {
+        return NO;
+    }
+    return [key isEqualToString:LOGIN_SUCCESS_KEY];
+}
+
 
 @end

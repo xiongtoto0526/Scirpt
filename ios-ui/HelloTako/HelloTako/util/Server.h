@@ -14,6 +14,8 @@
 
 +(TakoVersion*)fetchVersion;
 
++(NSString*)fetchItermUrl:(NSString*)versionId password:(NSString*)password;
+
 +(NSMutableArray*)fetchApp:(NSString*)cursor;
 
 +(NSString*)fetchDownloadUrl:(NSString*)versionId password:(NSString*)password;

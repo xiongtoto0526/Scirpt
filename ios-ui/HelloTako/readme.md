@@ -16,7 +16,20 @@
 - 7. 增加icon
 - 8. 第二个导航栏未全屏。
 - 9. ios图片大小不影响分辨率
+- 10. app的下载状态，先放在内存中。
+- 11. 使用数据库
+- 12. 图片解析错误：ako[3462] <Error>: ImageIO: PNG invalid PNG file: iDOT doesn't point to valid IDAT chunk
+- 13. 增加管理员登陆
+- 14. 启动cocohttpserver， 设备和mac同一网络下，mac可访问iPhone的文件。
+- 15. 日志优化，去除warning
+
+
+
+### 测试场景
+- 1 带密码，不带密码
+- 2 多线程下载
 - 
+
 
 
 

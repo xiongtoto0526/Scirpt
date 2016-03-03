@@ -118,6 +118,6 @@
         </view>
     </objects>
     <resources>
-        <image name="logo" width="92" height="80"/>
+        <image name="logo" width="173" height="173"/>
     </resources>
 </document>

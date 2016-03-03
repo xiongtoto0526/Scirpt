@@ -14,8 +14,6 @@
 @interface ShareEntity : NSObject 
 +(ShareEntity*) shareInstance;
 @property (copy, nonatomic) NSString* userName;
-@property (weak, nonatomic) UIImageView* userImage;
 @property (copy, nonatomic) NSString* userAccount;
-@property (nonatomic) BOOL  isLogined;
 @end
 #endif /* ShareEntity_h */

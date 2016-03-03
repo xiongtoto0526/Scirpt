@@ -38,28 +38,27 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 
 -(IBAction) signin:(id)sender{
     
     if(self.loginBt.selected) return;
-   
+    
     self.loginBt.selected = YES;
-
+    
     NSString *userAccount = self.userNameTxt.text;
     NSString *password = self.userPwd.text;
-    // todo: 输入txt的格式校验。
-    XHtValidation *validate=[[XHtValidation alloc] init];
     
-    //====== Pass In the textField and desired textFieldName for each validation method
+    // 输入校验
+    XHtValidation *validate=[[XHtValidation alloc] init];
     [validate Email:userAccount FieldName:@"账号:"];
     [validate Required:userAccount FieldName:@"账号:"];
     [validate Required:password FieldName:@"密码:"];
@@ -76,10 +75,12 @@
     
     if([self authwithUserName:userAccount password:password]){
         NSLog(@"登陆成功。");
+        
+        // 记录用户信息
         [XHTUIHelper writeNSUserDefaultsWithKey:USER_ACCOUNT_KEY withValue:userAccount];
         [XHTUIHelper writeNSUserDefaultsWithKey:USER_NAME_KEY withValue:self.authUserName];
         [XHTUIHelper writeNSUserDefaultsWithKey:LOGIN_KEY withValue:LOGIN_SUCCESS_KEY];
-        [ShareEntity shareInstance].isLogined=true;
+        
         [ShareEntity shareInstance].userAccount=userAccount;
         [ShareEntity shareInstance].userName=self.authUserName;
         [self gotoParentView:nil];
@@ -94,11 +95,11 @@
 -(void) showLoginFailed:(NSString*) failedMsg{
     
     if (failedMsg==nil) {
-     failedMsg = @"登录失败,请重试~";
+        failedMsg = @"登录失败,请重试~";
     }
-
+    
     [XHTUIHelper alertWithNoChoice:failedMsg view:self];
-        
+    
 }
 
 
@@ -133,7 +134,7 @@
     [self.view addSubview:   self.activityIndicator];
     self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
     [self.activityIndicator startAnimating];
-
+    
 }
 
 -(IBAction) signup:(id)sender{
@@ -143,13 +144,11 @@
 -(IBAction) gotoParentView:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
     
-//    [self authFinish];
+    //    [self authFinish];
     // 通知上层view刷新视图
     [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_BACK_TO_USER_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];
-
+    
 }
-
-
 
 @end

@@ -3,6 +3,7 @@
 
 #import "UIHelper.h"
 #import "Constant.h"
+#import "Server.h"
 
 @interface DownloadWorker ()<NSURLConnectionDataDelegate>
 
@@ -20,16 +21,14 @@
 
 @property (nonatomic, strong) NSURLConnection *connection;
 
-// 下载到本地的路径
-@property (nonatomic, copy) NSString  *localPath;
-
-
 // 本地home路径
 @property (nonatomic, copy) NSString  *homePath;
 
-// 下载文件的文件名
-@property (nonatomic, copy) NSString  *filename;
+// 下载到本地的路径
+@property (nonatomic, copy) NSString  *localPath;
 
+// 下载文件保存到本地时的文件名
+@property (nonatomic, copy) NSString  *filename;
 
 @end
 
@@ -50,13 +49,11 @@
 
 /**
  *  请求失败时调用（请求超时、网络异常）
- *
- *  @param error      错误原因
  */
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     NSString *messageString = [error localizedDescription];
-//    NSString *moreString = [error localizedFailureReason];
+    //    NSString *moreString = [error localizedFailureReason];
     NSLog(@"下载结束，结果为失败。错误信息: %@",messageString);
     self.isFree=YES;
     [self.delegate downloadFinish:NO msg:@"无法连接到服务器，请重试。" tag:self.tag];
@@ -65,16 +62,12 @@
 
 
 /**
- *  1.接收到服务器的响应就会调用
- *
- *  @param response   响应
+ *  1.接收到服务器的响应就会进入该回调
  */
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-   
-//    self.homePath = [self.homePath  stringByAppendingPathComponent:@"xgtakofiles"]; // todo:该目录不可写
-    NSString* filepath = [self.homePath stringByAppendingPathComponent:response.suggestedFilename];
-
+    
+    // 校验下载链接是否为ipa文件。
     if (![[response.suggestedFilename pathExtension] isEqualToString:@"ipa"]) {
         [self.connection cancel];
         self.connection = nil;
@@ -85,11 +78,12 @@
     
     
     self.filename = [NSString stringWithFormat:@"%@.ipa",self.tag];
-
+    //    self.homePath = [self.homePath  stringByAppendingPathComponent:@"xgtakofiles"]; // todo:该目录不可写,暂不设置子目录
+    NSString* filepath = [self.homePath stringByAppendingPathComponent:self.filename];
     NSLog(@"local file path is:%@",filepath);
     self.localPath = filepath;
     
-    // 若文件不存在，则创建一个空的文件到沙盒中
+    // 若文件不存在，则创建一个空的文件到沙盒中。只有首次下载时,才会创建新文件。
     NSFileManager* mgr = [NSFileManager defaultManager];
     if (![mgr fileExistsAtPath:filepath]) {
         [mgr createFileAtPath:filepath contents:nil attributes:nil];
@@ -100,20 +94,13 @@
     
     // 只有首次下载时，才需要刷新总大小。
     if (self.currentLength==0) {
-    self.totalLength = response.expectedContentLength;
+        self.totalLength = response.expectedContentLength;
     }
-
-    
-    NSLog(@"current length is:%qi",self.currentLength);
-    NSLog(@"total length is:%qi",self.totalLength);
-    
 }
 
 
 /**
- *  2.当接收到服务器返回的实体数据时调用（具体内容，这个方法可能会被调用多次）
- *
- *  @param data       这次返回的数据
+ *  2.当接收到服务器返回的实体数据时调用（这个方法可能会被调用多次）
  */
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
@@ -138,18 +125,15 @@
  */
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    NSLog(@"下载完成。");
-    [self isDevicefileExist];
+    NSLog(@"download worker:下载完成。");
     
-    // local file server ok
-//      itms-services://?action=download-manifest&url=https://doc.xgsdk.com:28443/service/app/ios/local/56c58a86e13823dfca398cc6/56cd25a7e1382365706e5911.plist
-    NSString* itermServiceUrl = [NSString stringWithFormat:@"itms-services://?action=download-manifest&url=%@/app/ios/local/%@/%@",TASKO_SERVER_HOST,self.appid,self.tag];
-
-    NSString* itermServiceUrlok =@"itms-services://?action=download-manifest&url=https://doc.xgsdk.com:28443/service/app/ios/local/56c58a86e13823dfca398cc6/56cd25a7e1382365706e5911.plist";
-
-     NSLog(@"will install,iterm url is:%@",itermServiceUrl);
+    [self isDevicefileExist];// 调试用
+    
+    NSString* itermServiceUrl = [TakoServer fetchItermUrl:self.tag password:self.password];
+    NSLog(@"will install,iterm url is:%@",itermServiceUrl);
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:itermServiceUrl]];
     
+    // 重置状态
     self.currentLength = 0;
     self.totalLength = 0;
     
@@ -160,7 +144,6 @@
     
     [self.delegate downloadFinish:YES msg:nil tag:self.tag];
     
-    
     NSLog(@"下载结束，结果为成功...");
     
 }
@@ -168,7 +151,7 @@
 /*
  启动
  */
-- (void)startWithUrl:(NSURL*) url appid:(NSString*)appid tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate {
+- (void)startWithUrl:(NSURL*) url appid:(NSString*)appid password:(NSString*)password tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate {
     
     if (![self isDelegateAvailable:delegate]) {
         return;
@@ -177,24 +160,18 @@
     self.delegate=delegate;
     self.tag = tag;
     self.appid = appid;
+    self.password = password;
     self.isFree = NO;
     
-    // 1.待下载url
-//    url = [NSURL URLWithString:@"http://doc.xgsdk.com:28870/static/TakoTest01_resigned.ipa"];
-//    url = [NSURL URLWithString:@"http://dlsw.baidu.com/sw-search-sp/soft/9d/25765/sogou_mac_32c_V3.2.0.1437101586.dmg"];
-//    url=[NSURL URLWithString: @"http://www.haima.me/Download.ashx?t=1&c=000000036&r=0.7960992017760873"];
-
-
-    
-    // 2.请求
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
     // 若之前有下载记录，则直接读取之前的进度。
     if([XHTUIHelper readNSUserDefaultsObjectWithkey:self.tag]!=nil){
         NSDictionary* t = (NSDictionary*)[XHTUIHelper readNSUserDefaultsObjectWithkey:self.tag];
-        self.currentLength = [(NSString*)[t objectForKey:CURRENT_LENGTH_KEY] longLongValue];
-        self.totalLength = [(NSString*)[t objectForKey:TOTAL_LENGTH_KEY] longLongValue];
-        self.appid = (NSString*)[t objectForKey:APPID_KEY];
+        self.currentLength = [(NSString*)[t objectForKey:DOWNLOAD_CURRENT_LENGTH_KEY] longLongValue];
+        self.totalLength = [(NSString*)[t objectForKey:DOWNLOAD_TOTAL_LENGTH_KEY] longLongValue];
+        self.appid = (NSString*)[t objectForKey:DOWNLOAD_APPID_KEY];
+        self.password = (NSString*)[t objectForKey:DOWNLOAD_PASSWORD_KEY];
     }else{
         self.currentLength = 0;
     }
@@ -225,9 +202,9 @@
     NSMutableDictionary* dict = [NSMutableDictionary new];
     NSString* currentLength = [NSString stringWithFormat:@"%qi",self.currentLength];
     NSString* totalLength = [NSString stringWithFormat:@"%qi",self.totalLength];
-    [dict setObject:currentLength forKey:CURRENT_LENGTH_KEY];
-    [dict setObject:totalLength forKey:TOTAL_LENGTH_KEY];
-    [dict setObject:self.appid forKeyedSubscript:APPID_KEY];
+    [dict setObject:currentLength forKey:DOWNLOAD_CURRENT_LENGTH_KEY];
+    [dict setObject:totalLength forKey:DOWNLOAD_TOTAL_LENGTH_KEY];
+    [dict setObject:self.appid forKeyedSubscript:DOWNLOAD_APPID_KEY];
     [XHTUIHelper writeNSUserDefaultsWithKey:self.tag withObject:dict];
 }
 
@@ -248,12 +225,12 @@
     BOOL isAllAvailable = YES;
     
     if(![delegate respondsToSelector:@selector(downloadingWithTotal:complete:tag:)]){
-        NSLog(@"Error!!! Please implement mehtod < downloadingWithTotal:complete: > in <XHtDownLoadDelegate> first!");
+        NSLog(@"Error!!! Please implement mehtod < downloadingWithTotal:complete:tag: > in <XHtDownLoadDelegate> first!");
         isAllAvailable = NO;
     }
     
     if(![delegate respondsToSelector:@selector(downloadFinish:msg:tag:)]){
-        NSLog(@"Error!!! Please implement mehtod < downloadFinish: > in <XHtDownLoadDelegate> first!");
+        NSLog(@"Error!!! Please implement mehtod < downloadFinish:msg:tag: > in <XHtDownLoadDelegate> first!");
         isAllAvailable = NO;
     }
     return isAllAvailable;
@@ -261,23 +238,15 @@
 
 
 
--(BOOL)isfileExist:(NSString*)file{
-    NSFileManager* mgr = [NSFileManager defaultManager];
-    return [mgr fileExistsAtPath:file];
-}
-
-
 // t:调试用
 -(void)isDevicefileExist{
-    NSString* path = self.localPath;
     NSFileManager* mgr = [NSFileManager defaultManager];
-    if ([mgr fileExistsAtPath:path]==YES) {
+    if ([mgr fileExistsAtPath:self.localPath]==YES) {
         NSLog(@"device File exists");
-        NSLog(@"file is:%@",path);
+        NSLog(@"file is:%@",self.localPath);
     }else{
         NSLog(@"device File not exists");
     }
-    
 }
 
 

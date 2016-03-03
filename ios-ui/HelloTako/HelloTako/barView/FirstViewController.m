@@ -19,6 +19,7 @@
 #import "Server.h"
 #import "MJRefresh.h"
 #import "DownloadQueue.h"
+#import "UIImageView+WebCache.h"
 
 @interface FirstViewController ()<UITableViewDataSource,UITableViewDelegate,XHtDownLoadDelegate>
 @property UIRefreshControl* refreshControl;
@@ -35,7 +36,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     // t:此处不能模态alter窗口,否则崩溃。
-    if (![ShareEntity shareInstance].isLogined) {
+    if (![XHTUIHelper isLogined]) {
         [self presentViewController:[LoginViewController new] animated:NO completion:^{
             NSLog(@"enter login view");
         }];
@@ -49,7 +50,7 @@
 }
 
 -(void)receiveLoginBackNotification{
-    BOOL isLogined = [ShareEntity shareInstance].isLogined;
+    BOOL isLogined = [XHTUIHelper isLogined];
     [self.tableview setHidden:!isLogined];
     if (isLogined && [self.listData count]==0) {
         [self loadMoreData];
@@ -59,14 +60,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 设置底部bar图片
     self.tabBarItem.image = [UIImage imageNamed:@"icon_test_unselected"];
     self.tabBarItem.selectedImage = [UIImage imageNamed:@"icon_test_selected"];
     
+    // 表格的源数据
     self.listData =[NSMutableArray new];
     
-    [self.loginBt setHidden:YES];// 登陆按钮暂不展示。
-    
-    // 1.添加监听
+    // 添加监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveClickDownloadNotification:) name:CLICK_DOWNLOAD_BUTTON_NOTIFICATION object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveCancelDownloadNotification:) name:CLICK_DOWNLOAD_CANCEL_BUTTON_NOTIFICATION object:nil];
@@ -74,8 +75,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveLoginBackNotification) name:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];
     
     
-    // 未登录时不显示
-    [self.tableview setHidden:![ShareEntity shareInstance].isLogined];
+    // 未登录时不显示tableview
+    [self.tableview setHidden:![XHTUIHelper isLogined]];
     
     // 初始化刷新控制器
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -85,10 +86,7 @@
                             action:@selector(reloadDataWhenRefresh)
                   forControlEvents:UIControlEventValueChanged];
     
-    // 隐藏刷新按钮
-    [self.refreshControl endRefreshing];
-    
-    // 添加refresh
+    [self.refreshControl endRefreshing];    // 初始化时隐藏刷新控件
     [self.tableview addSubview:self.refreshControl];
     
     // 隐藏tableview中多余的单元格线条
@@ -97,23 +95,28 @@
     // 注册cell
     [self.tableview registerNib:[UINib nibWithNibName:@"TableViewCell" bundle:nil] forCellReuseIdentifier:@"fTablecell"];
     
+    // 注册 "加载更多"
     self.tableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     
-    if ([ShareEntity shareInstance].isLogined) {
+    if ([XHTUIHelper isLogined]) {
         [self loadMoreData];
     }
     
 }
 
 
-
+// 接收到cell的下载按钮点击事件
 -(void)receiveClickDownloadNotification:(NSNotification*)notice{
+    NSLog(@"receive click download button event...");
+    
+    // 定位到当前的cell
     TableViewCell* cell = (TableViewCell*)[notice.userInfo objectForKey:CELL_INDEX_NOTIFICATION_KEY];
     self.currentCell = cell;
     NSInteger row = [self.tableview indexPathForCell:cell].row;
     TakoApp* app = [self.listData objectAtIndex:row];
     self.currentApp = app;
     
+    // 处理
     if(app.isNeedPassword){
         [self showPasswordConfirm];
     }else{
@@ -122,15 +125,18 @@
 }
 
 
-
+// 接收到cell的取消按钮点击事件
 -(void)receiveCancelDownloadNotification:(NSNotification*)notice{
+    NSLog(@"receive cancel download button event...");
+    
+    // 定位到当前的cell
     TableViewCell* cell = (TableViewCell*)[notice.userInfo objectForKey:CELL_INDEX_NOTIFICATION_KEY];
     self.currentCell = cell;
     NSInteger row = [self.tableview indexPathForCell:cell].row;
     TakoApp* app = [self.listData objectAtIndex:row];
     self.currentApp = app;
     
-    // 弹出确认取消下载提示框
+    // 处理
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"确认要取消下载任务？" preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
@@ -138,7 +144,6 @@
         NSLog(@"您即将取消本次下载...");
         
         // 恢复下载按钮的文本显示
-        
         TableViewCell *cell = self.currentCell;
         [cell.button setTitle:@"下载" forState:UIControlStateNormal];
         
@@ -158,7 +163,6 @@
     [alertController addAction:okAction];
     UIViewController* currentVC = [XHTUIHelper getCurrentVC];
     [currentVC presentViewController:alertController animated:YES completion:nil];
-    
 }
 
 
@@ -174,10 +178,11 @@
         NSLog(@"密码已输入...");
         UITextField *password = alertController.textFields.firstObject;
         NSLog(@"download password is: %@",password.text);
-        self.currentApp.downloadPassword = password.text;
+        self.currentApp.downloadPassword = password.text;//缓存密码
+        
         if (self.currentApp.downloadPassword==nil) {
             NSLog(@"下载密码无效。");
-            [XHTUIHelper alertWithNoChoice:@"下载密码不能为空!" view:[XHTUIHelper getCurrentVC]];
+            [XHTUIHelper alertWithNoChoice:@"下载密码不能为空!" view:self];
             return;
         }
         [self downloadApp];
@@ -186,29 +191,26 @@
     
     [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
         textField.placeholder = @"请输入下载密码";
-        textField.secureTextEntry = YES;
+        //        textField.secureTextEntry = YES; // 暂时不做掩码
     }];
-    
     
     [alertController addAction:cancelAction];
     [alertController addAction:okAction];
-    UIViewController* currentVC = [XHTUIHelper getCurrentVC];
-    [currentVC presentViewController:alertController animated:YES completion:nil];
-    
-    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 
 -(void)downloadApp{
     
+    // 从server端获取下载地址。
     self.currentApp.downloadUrl = [TakoServer fetchDownloadUrl:self.currentApp.versionId password:self.currentApp.downloadPassword];
     if (self.currentApp.downloadUrl==nil) {
         NSLog(@"get downloadurl failed...");
-        [XHTUIHelper alertWithNoChoice:@"下载密码不正确!" view:[XHTUIHelper getCurrentVC]];
+        [XHTUIHelper alertWithNoChoice:@"下载密码不正确!" view:self];
         return;
     }
     
-    NSLog(@"will download from :%@",self.currentApp.downloadUrl);
+    NSLog(@"password is ok, will download from :%@",self.currentApp.downloadUrl);
     if (!self.currentApp.isStarted) {
         [self startDownload];
     }else if(!self.currentApp.isPaused){
@@ -217,7 +219,7 @@
         [self countinueDownload];
     }
     
-    // 显示下载栏.todo:是否可正常显示？
+    // 更新cell
     TableViewCell *cell =  self.currentCell;
     [cell.btnCancel setHidden:NO];
     [cell.progressControl setHidden:NO];
@@ -230,18 +232,23 @@
     NSLog(@"will start download...");
     self.currentApp.isPaused = NO;
     self.currentApp.isStarted=YES;
-    [self.currentCell.button setTitle:@"暂停" forState:UIControlStateNormal];    // 修改下载按钮的文本显示
+    [self.currentCell.button setTitle:@"暂停" forState:UIControlStateNormal];  // 修改下载按钮的文本显示
     
-    [[XHtDownLoadQueue share] add:self.currentApp.downloadUrl appid:self.currentApp.appid tag:self.currentApp.versionId delegate:self];
+    /* 添加到下载队列。注：
+     1. 下载队列无界，可无限添加，但每次只能有1个（constant.h中可配置梳理）活跃线程下载。允许重复添加（程序会自动识别）。
+     2. 当某个应用暂停后，程序会保存当前进度。即使退出应用，下次进入时，仍可继续下。
+     3. 参数tag说明: tag 为每个下载记录的唯一标识。
+     */
+    [[XHtDownLoadQueue share] add:self.currentApp.downloadUrl appid:self.currentApp.appid password:self.currentApp.downloadPassword tag:self.currentApp.versionId delegate:self];
 }
 
 
 // 继续下载
 -(void)countinueDownload{
-    NSLog(@"will pause download...");
+    NSLog(@"will continue download...");
     [self.currentCell.button setTitle:@"暂停" forState:UIControlStateNormal];
     self.currentApp.isPaused = NO;
-    [[XHtDownLoadQueue share] add:@"http://1.zip" appid:self.currentApp.appid tag:self.currentApp.versionId delegate:self];
+    [[XHtDownLoadQueue share] add:self.currentApp.downloadUrl appid:self.currentApp.appid password:self.currentApp.downloadPassword tag:self.currentApp.versionId delegate:self];
 }
 
 
@@ -258,7 +265,7 @@
 #pragma mark 上拉加载更多数据
 - (void)loadMoreData
 {
-    // 1.添加假数据
+    // 从server端拉取数据
     NSArray* newdata = [self fetchDataFromServer];
     
     // 初始化其他属性
@@ -271,10 +278,8 @@
     [self.tableview reloadData];
     [self.tableview.mj_footer endRefreshing];
     
-    
     // 更新游标
     self.cursor = [NSString stringWithFormat:@"%lu",(unsigned long)[self.listData count]];
-    
 }
 
 
@@ -293,9 +298,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(BOOL)checkIsLogin{
-    return [ShareEntity shareInstance].isLogined;
-}
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [self.listData count];
@@ -316,58 +318,45 @@
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    static NSString *CellIdentifier = @"fTablecell";
-    TableViewCell *tbCell = (TableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (tbCell==nil) {
-        tbCell=[[[NSBundle mainBundle] loadNibNamed:@"TableViewCell" owner:self options:nil] lastObject];
+    //根据indexPath准确地取出一行，而不是从cell重用队列中取出
+    TableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (cell==nil) {
+        cell=[[[NSBundle mainBundle] loadNibNamed:@"TableViewCell" owner:self options:nil] lastObject];
     }
-    
-    // 记录index todo: 设置无效
-    tbCell.tag = indexPath.row;
-    NSLog(@"tag is:%ld",(long)tbCell.tag);
-    
     
     // 数据绑定
     TakoApp* app = (TakoApp*)[self.listData objectAtIndex:indexPath.row];
-    tbCell.appName.text=app.appname;
-    tbCell.appVersion.text = app.version;
-    tbCell.otherInfo.text = [NSString stringWithFormat:@"%@  %@",app.firstcreated,app.size];
+    cell.appName.text=app.appname;
+    cell.appVersion.text = app.version;
+    cell.otherInfo.text = [NSString stringWithFormat:@"%@  %@",app.firstcreated,app.size];
     
     UIImage* image = nil;
-    if(app.logourl==nil || app.logourl.length==0){    // app没有logo时，显示默认logo
-        image = [UIImage imageNamed:@"ic_defaultapp"];
+    if(app.logourl==nil || app.logourl.length==0){
+        image = [UIImage imageNamed:@"ic_defaultapp"];// 没有logourl时，显示默认logo
+        cell.appImage.image = image;
     }else{
-        // todo: 使用 sdwebimage 优化速度
-        if(tbCell.appImage.image==nil){
-            NSURL *url = [NSURL URLWithString: app.logourl];
-            image = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];
-        }
+        [cell.appImage sd_setImageWithURL:[NSURL URLWithString:app.logourl]
+                         placeholderImage:[UIImage imageNamed:@"ic_defaultapp"]];
     }
-    tbCell.appImage.image = image;
     
     if ([self isAppDownloadedBefore:app.versionId]) {
-        NSLog(@"重复应用信息,名称，%@，版本，%@",tbCell.appName.text,app.versionId);
-        [tbCell.button setTitle:@"已下载" forState:UIControlStateNormal];
-        [tbCell.button.layer setBorderColor:(__bridge CGColorRef _Nullable)([UIColor grayColor])];
-        tbCell.button.enabled = NO;
+        NSLog(@"重复应用信息,名称，%@，版本，%@",cell.appName.text,app.versionId);
+        [XHTUIHelper disableDownloadButton:cell.button];
     }
     
-    return tbCell;
+    return cell;
 }
 
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
 }
 
-
+// 判断app是否下载过
 -(BOOL)isAppDownloadedBefore:(NSString*) versionId{
     BOOL isExist = NO;
-    NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_KEY];
+    NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_VERSION_KEY];
     for (NSString *key in downloadAppDict) {
-        //        NSLog(@"dict key: %@ value: %@", key, downloadAppDict[key]);
         if ([key isEqualToString:versionId]) {
             NSLog(@"该应用已保存在下载记录中...");
             isExist = YES;
@@ -379,25 +368,16 @@
     return isExist;
 }
 
+// 显示下载进度栏
 -(void) showDownload:(TableViewCell*) cell{
-    // 显示下载栏
     [cell.btnCancel setHidden:NO];
     [cell.progressControl setHidden:NO];
     [cell.textDownload setHidden:NO];
 }
 
 
-
--(IBAction) gotoLoginView:(id)sender{
-    [self presentViewController:[LoginViewController new] animated:NO completion:^{
-        NSLog(@"enter login view");
-    }];
-}
-
-
 - (void)reloadDataWhenRefresh
 {
-    // Reload table data
     [self.tableview reloadData];
     
     if (self.refreshControl) {
@@ -419,49 +399,69 @@
 
 
 #pragma mark  下载回调
-
+// 下载结束回调
 -(void)downloadFinish:(BOOL)isSuccess msg:(NSString*)msg tag:(NSString *)tag{
     NSLog(@"收到回调通知：文件下载完成。");
     
-    if ([tag isEqualToString:self.currentApp.versionId]) {
-        // todo: 可抽取为公共方法。
-        if (isSuccess) {
-            [self.currentCell.button setTitle:@"已下载" forState:UIControlStateNormal];
-            [self.currentCell.button.layer setBorderColor:(__bridge CGColorRef _Nullable)([UIColor grayColor])];
-            self.currentCell.button.enabled = NO;
-            
-            // 记录已下载情况
-            NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_KEY];
-            if (downloadAppDict==nil) {
-                downloadAppDict = [NSMutableDictionary new];
-            }
-            NSMutableDictionary* newDict = [NSMutableDictionary dictionaryWithDictionary:downloadAppDict];
-            [newDict setValue:@"1" forKey:self.currentApp.versionId];
-            [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_KEY withObject:newDict];
-            
-        }else{
-            [XHTUIHelper alertWithNoChoice:[NSString stringWithFormat:@"下载失败:%@",msg] view:[XHTUIHelper getCurrentVC]];
-            [self.currentCell.button setTitle:@"重下载" forState:UIControlStateNormal];
-            self.currentApp.isStarted=NO;
+    TableViewCell* cell = nil;
+    TakoApp* app = nil;
+    
+    // 找到对应的cell,app
+    for (int i=0; i<[self.listData count]; i++) {
+        app = (TakoApp*)[self.listData objectAtIndex:i];
+        if ([app.versionId isEqualToString:tag]) {
+            NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:0];
+            cell = [self.tableview cellForRowAtIndexPath:path];
+            break;
         }
-        
-        
-        [self.currentCell.progressControl setHidden:YES];
-        [self.currentCell.btnCancel setHidden:YES];
-        [self.currentCell.textDownload setHidden:YES];
     }
+    
+    if (isSuccess) {
+        // 更新cell
+        [XHTUIHelper disableDownloadButton:cell.button];
+        
+        // 记录已下载情况
+        NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_VERSION_KEY];//userDefault只允许返回NSDictionary
+        if (downloadAppDict==nil) {
+            downloadAppDict = [NSDictionary new];
+        }
+        NSMutableDictionary* newDict = [NSMutableDictionary dictionaryWithDictionary:downloadAppDict];
+        [newDict setValue:@"1" forKey:app.versionId];
+        [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_VERSION_KEY withObject:newDict];
+    }else {
+        [XHTUIHelper alertWithNoChoice:[NSString stringWithFormat:@"下载失败:%@",msg] view:[XHTUIHelper getCurrentVC]];
+        [cell.button setTitle:@"重下载" forState:UIControlStateNormal];
+        app.isStarted=NO;
+    }
+    
+    // 更新cell
+    [cell.progressControl setHidden:YES];
+    [cell.btnCancel setHidden:YES];
+    [cell.textDownload setHidden:YES];
 }
 
+
+// 下载进度回调
 -(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize tag:(NSString *)tag{
     float prg = (float)finishSize/totalSize;
     NSLog(@"收到回调通知：当前进度为:%f,tag:%@",prg,tag);
     
-    // 仅刷新匹配的行
-    if ([tag isEqualToString:self.currentApp.versionId]) {
-        [self.currentCell.progressControl setProgress:prg];
-        NSString* progress = [NSString stringWithFormat:@"%.1lf",prg*100];
-        self.currentCell.textDownload.text = [NSString stringWithFormat:@"当前进度:%@%%",progress];
+    TableViewCell* cell = nil;
+    
+    // 找到对应的cell
+    for (int i=0; i<[self.listData count]; i++) {
+        TakoApp* app = (TakoApp*)[self.listData objectAtIndex:i];
+        if ([app.versionId isEqualToString:tag]) {
+            NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:0];
+            cell = [self.tableview cellForRowAtIndexPath:path];
+            break;
+        }
     }
+    
+    // 更新cell
+    [cell.progressControl setProgress:prg];
+    NSString* progress = [NSString stringWithFormat:@"%.1lf",prg*100];
+    cell.textDownload.text = [NSString stringWithFormat:@"当前进度:%@%%",progress];
 }
 
 

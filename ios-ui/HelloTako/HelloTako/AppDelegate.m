@@ -24,7 +24,7 @@
 
 - (void)startServer
 {
-    // Start the server (and check for problems)
+    // 启动cocoaHttpServer
     NSError *error;
     if([httpServer start:&error])
     {
@@ -42,7 +42,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    // 强制调整view的加载顺序。todo:是否可设置？
+    // 强制调整view的加载顺序。todo:是否可优化为配置？
     UITabBarController *bar = (UITabBarController*)self.window.rootViewController;
     NSArray* all = [bar childViewControllers];
     NSMutableArray* newItems = [NSMutableArray new];
@@ -76,6 +76,7 @@
     NSString *homePath = [paths firstObject];
     //    filepath = [homePath  stringByAppendingPathComponent:@"xgtakofiles"];
     [httpServer setDocumentRoot:homePath];
+    NSLog(@"root path is:%@",homePath);
     [self startServer];
     
     return YES;

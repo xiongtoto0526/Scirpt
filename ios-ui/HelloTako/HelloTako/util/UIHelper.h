@@ -10,12 +10,22 @@
 @interface XHTUIHelper : NSObject
 
 + (void) addBorderonButton:(UIButton*) btn;
+
 + (void) setExtraCellLineHidden: (UITableView *)tableView;
+
+//button圆角化
++ (void) disableDownloadButton:(UIButton*) btn;
+
 + (UIViewController *)getCurrentVC;
+
 + (CGSize) viewSizeWith: (UIView*) view;
+
 + (NSString*) readNSUserDefaultsWithkey:(NSString*) key;
+
 +(id)readNSUserDefaultsObjectWithkey:(NSString*) key;
+
 + (void) writeNSUserDefaultsWithKey:(NSString*) key withValue:(NSString*) value;
+
 + (void)writeNSUserDefaultsWithKey:(NSString*) key withObject:(id) value;
 
 +(void)alertWithNoChoice:(NSString*)msg view:(UIViewController*)view;
@@ -25,5 +35,7 @@
 + (id) objectWithJsonStr: (NSString*) jsonStr byKey: (NSString*) key;
 
 +(void) setDictValue:(NSMutableDictionary*) dict withObject:(id)object forKey:(NSString*)key;
+
++(BOOL)isLogined;
 
 @end
