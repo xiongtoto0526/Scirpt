@@ -17,7 +17,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"sandbox:%@",NSHomeDirectory());
    
     
 //    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-services://?action=download-manifest&url=https://doc.xgsdk.com:28443/static/takotest01.plist"]];

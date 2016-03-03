@@ -38,7 +38,7 @@
                         </variation>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPs-aO-2G5">
-                        <rect key="frame" x="166" y="32" width="100" height="21"/>
+                        <rect key="frame" x="187" y="32" width="100" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="H4F-4L-hRe"/>
                             <constraint firstAttribute="width" constant="100" id="qtX-k5-gGf"/>
@@ -54,11 +54,11 @@
                         </variation>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80r-ra-7Y2">
-                        <rect key="frame" x="124" y="32" width="29" height="21"/>
+                        <rect key="frame" x="124" y="32" width="50" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="KS0-R7-GaF"/>
                             <constraint firstAttribute="width" constant="69" id="KzK-wP-KEX"/>
-                            <constraint firstAttribute="width" constant="28.5" id="zx2-tW-6Zm"/>
+                            <constraint firstAttribute="width" constant="50" id="zx2-tW-6Zm"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

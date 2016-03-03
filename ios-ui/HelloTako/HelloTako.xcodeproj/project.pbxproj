@@ -13,25 +13,10 @@
 		AD0E36A21C8001F800714FF3 /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36181C8001F800714FF3 /* ThirdViewController.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36A31C8001F800714FF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36191C8001F800714FF3 /* LaunchScreen.storyboard */; settings = {ASSET_TAGS = (); }; };
 		AD0E36A41C8001F800714FF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD0E361B1C8001F800714FF3 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
-		AD0E36A51C8001F800714FF3 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E361F1C8001F800714FF3 /* CollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
-		AD0E36A61C8001F800714FF3 /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36201C8001F800714FF3 /* CollectionViewCell.xib */; settings = {ASSET_TAGS = (); }; };
-		AD0E36A71C8001F800714FF3 /* ReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36221C8001F800714FF3 /* ReportTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
-		AD0E36A81C8001F800714FF3 /* ReportTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36231C8001F800714FF3 /* ReportTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		AD0E36A91C8001F800714FF3 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36251C8001F800714FF3 /* TableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36AA1C8001F800714FF3 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36261C8001F800714FF3 /* TableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
-		AD0E36AB1C8001F800714FF3 /* TimeLineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36281C8001F800714FF3 /* TimeLineTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
-		AD0E36AC1C8001F800714FF3 /* TimeLineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36291C8001F800714FF3 /* TimeLineTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
-		AD0E36AD1C8001F800714FF3 /* DistributeAppsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E362E1C8001F800714FF3 /* DistributeAppsViewController.m */; settings = {ASSET_TAGS = (); }; };
-		AD0E36AE1C8001F800714FF3 /* DistributeAppsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD0E362F1C8001F800714FF3 /* DistributeAppsViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		AD0E36AF1C8001F800714FF3 /* GameDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36311C8001F800714FF3 /* GameDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
-		AD0E36B01C8001F800714FF3 /* GameDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36321C8001F800714FF3 /* GameDetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		AD0E36B11C8001F800714FF3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36341C8001F800714FF3 /* LoginViewController.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36B21C8001F800714FF3 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36351C8001F800714FF3 /* LoginViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		AD0E36B31C8001F800714FF3 /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36371C8001F800714FF3 /* ReportViewController.m */; settings = {ASSET_TAGS = (); }; };
-		AD0E36B41C8001F800714FF3 /* ReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36381C8001F800714FF3 /* ReportViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		AD0E36B51C8001F800714FF3 /* ShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36391C8001F800714FF3 /* ShareView.xib */; settings = {ASSET_TAGS = (); }; };
-		AD0E36B61C8001F800714FF3 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E363B1C8001F800714FF3 /* ShareViewController.m */; settings = {ASSET_TAGS = (); }; };
-		AD0E36B71C8001F800714FF3 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD0E363C1C8001F800714FF3 /* ShareViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		AD0E36B81C8001F800714FF3 /* VersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E363E1C8001F800714FF3 /* VersionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		AD0E36B91C8001F800714FF3 /* VersionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD0E363F1C8001F800714FF3 /* VersionViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		AD0E36BA1C8001F800714FF3 /* DownLoadWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36421C8001F800714FF3 /* DownLoadWorker.m */; settings = {ASSET_TAGS = (); }; };
@@ -124,35 +109,13 @@
 		AD0E36181C8001F800714FF3 /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
 		AD0E361A1C8001F800714FF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD0E361C1C8001F800714FF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		AD0E361E1C8001F800714FF3 /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
-		AD0E361F1C8001F800714FF3 /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
-		AD0E36201C8001F800714FF3 /* CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
-		AD0E36211C8001F800714FF3 /* ReportTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportTableViewCell.h; sourceTree = "<group>"; };
-		AD0E36221C8001F800714FF3 /* ReportTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportTableViewCell.m; sourceTree = "<group>"; };
-		AD0E36231C8001F800714FF3 /* ReportTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportTableViewCell.xib; sourceTree = "<group>"; };
 		AD0E36241C8001F800714FF3 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		AD0E36251C8001F800714FF3 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 		AD0E36261C8001F800714FF3 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
-		AD0E36271C8001F800714FF3 /* TimeLineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLineTableViewCell.h; sourceTree = "<group>"; };
-		AD0E36281C8001F800714FF3 /* TimeLineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeLineTableViewCell.m; sourceTree = "<group>"; };
-		AD0E36291C8001F800714FF3 /* TimeLineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeLineTableViewCell.xib; sourceTree = "<group>"; };
 		AD0E362B1C8001F800714FF3 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
-		AD0E362D1C8001F800714FF3 /* DistributeAppsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistributeAppsViewController.h; sourceTree = "<group>"; };
-		AD0E362E1C8001F800714FF3 /* DistributeAppsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistributeAppsViewController.m; sourceTree = "<group>"; };
-		AD0E362F1C8001F800714FF3 /* DistributeAppsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DistributeAppsViewController.xib; sourceTree = "<group>"; };
-		AD0E36301C8001F800714FF3 /* GameDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameDetailViewController.h; sourceTree = "<group>"; };
-		AD0E36311C8001F800714FF3 /* GameDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameDetailViewController.m; sourceTree = "<group>"; };
-		AD0E36321C8001F800714FF3 /* GameDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameDetailViewController.xib; sourceTree = "<group>"; };
 		AD0E36331C8001F800714FF3 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		AD0E36341C8001F800714FF3 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		AD0E36351C8001F800714FF3 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		AD0E36361C8001F800714FF3 /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
-		AD0E36371C8001F800714FF3 /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewController.m; sourceTree = "<group>"; };
-		AD0E36381C8001F800714FF3 /* ReportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportViewController.xib; sourceTree = "<group>"; };
-		AD0E36391C8001F800714FF3 /* ShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareView.xib; sourceTree = "<group>"; };
-		AD0E363A1C8001F800714FF3 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
-		AD0E363B1C8001F800714FF3 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
-		AD0E363C1C8001F800714FF3 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
 		AD0E363D1C8001F800714FF3 /* VersionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionViewController.h; sourceTree = "<group>"; };
 		AD0E363E1C8001F800714FF3 /* VersionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionViewController.m; sourceTree = "<group>"; };
 		AD0E363F1C8001F800714FF3 /* VersionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VersionViewController.xib; sourceTree = "<group>"; };
@@ -362,18 +325,9 @@
 		AD0E361D1C8001F800714FF3 /* cell */ = {
 			isa = PBXGroup;
 			children = (
-				AD0E361E1C8001F800714FF3 /* CollectionViewCell.h */,
-				AD0E361F1C8001F800714FF3 /* CollectionViewCell.m */,
-				AD0E36201C8001F800714FF3 /* CollectionViewCell.xib */,
-				AD0E36211C8001F800714FF3 /* ReportTableViewCell.h */,
-				AD0E36221C8001F800714FF3 /* ReportTableViewCell.m */,
-				AD0E36231C8001F800714FF3 /* ReportTableViewCell.xib */,
 				AD0E36241C8001F800714FF3 /* TableViewCell.h */,
 				AD0E36251C8001F800714FF3 /* TableViewCell.m */,
 				AD0E36261C8001F800714FF3 /* TableViewCell.xib */,
-				AD0E36271C8001F800714FF3 /* TimeLineTableViewCell.h */,
-				AD0E36281C8001F800714FF3 /* TimeLineTableViewCell.m */,
-				AD0E36291C8001F800714FF3 /* TimeLineTableViewCell.xib */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -389,23 +343,10 @@
 		AD0E362C1C8001F800714FF3 /* detailView */ = {
 			isa = PBXGroup;
 			children = (
-				AD0E362D1C8001F800714FF3 /* DistributeAppsViewController.h */,
-				AD0E362E1C8001F800714FF3 /* DistributeAppsViewController.m */,
-				AD0E36301C8001F800714FF3 /* GameDetailViewController.h */,
-				AD0E36311C8001F800714FF3 /* GameDetailViewController.m */,
-				AD0E36321C8001F800714FF3 /* GameDetailViewController.xib */,
 				AD0E36331C8001F800714FF3 /* LoginViewController.h */,
 				AD0E36341C8001F800714FF3 /* LoginViewController.m */,
 				AD0E36351C8001F800714FF3 /* LoginViewController.xib */,
-				AD0E36361C8001F800714FF3 /* ReportViewController.h */,
-				AD0E362F1C8001F800714FF3 /* DistributeAppsViewController.xib */,
-				AD0E36371C8001F800714FF3 /* ReportViewController.m */,
-				AD0E36391C8001F800714FF3 /* ShareView.xib */,
-				AD0E363A1C8001F800714FF3 /* ShareViewController.h */,
-				AD0E363B1C8001F800714FF3 /* ShareViewController.m */,
-				AD0E363C1C8001F800714FF3 /* ShareViewController.xib */,
 				AD0E363D1C8001F800714FF3 /* VersionViewController.h */,
-				AD0E36381C8001F800714FF3 /* ReportViewController.xib */,
 				AD0E363E1C8001F800714FF3 /* VersionViewController.m */,
 				AD0E363F1C8001F800714FF3 /* VersionViewController.xib */,
 			);
@@ -812,22 +753,14 @@
 				AD0E36B21C8001F800714FF3 /* LoginViewController.xib in Resources */,
 				AD0E36D61C8001F800714FF3 /* README.txt in Resources */,
 				AD0E36D71C8001F800714FF3 /* Info.plist in Resources */,
-				AD0E36A81C8001F800714FF3 /* ReportTableViewCell.xib in Resources */,
 				AD0E36CE1C8001F800714FF3 /* About.txt in Resources */,
-				AD0E36B01C8001F800714FF3 /* GameDetailViewController.xib in Resources */,
-				AD0E36B41C8001F800714FF3 /* ReportViewController.xib in Resources */,
 				AD0E36AA1C8001F800714FF3 /* TableViewCell.xib in Resources */,
 				AD0E36A41C8001F800714FF3 /* Main.storyboard in Resources */,
-				AD0E36B71C8001F800714FF3 /* ShareViewController.xib in Resources */,
 				AD0E369F1C8001F800714FF3 /* Assets.xcassets in Resources */,
-				AD0E36A61C8001F800714FF3 /* CollectionViewCell.xib in Resources */,
 				AD4E93BA1C86C691007BA86C /* icon_test_unselected.png in Resources */,
 				AD0E36CC1C8001F800714FF3 /* About.txt in Resources */,
-				AD0E36B51C8001F800714FF3 /* ShareView.xib in Resources */,
 				AD0E36A31C8001F800714FF3 /* LaunchScreen.storyboard in Resources */,
-				AD0E36AE1C8001F800714FF3 /* DistributeAppsViewController.xib in Resources */,
 				AD4E93B91C86C691007BA86C /* icon_test_selected.png in Resources */,
-				AD0E36AC1C8001F800714FF3 /* TimeLineTableViewCell.xib in Resources */,
 				AD4E93A61C858E21007BA86C /* MJRefresh.bundle in Resources */,
 				AD0E36B91C8001F800714FF3 /* VersionViewController.xib in Resources */,
 				AD4E93B21C86A8E0007BA86C /* Default.png in Resources */,
@@ -845,14 +778,12 @@
 				AD4E93EA1C87C9E9007BA86C /* UIImage+WebP.m in Sources */,
 				AD0E36C81C8001F800714FF3 /* HTTPErrorResponse.m in Sources */,
 				AD4E93E21C87C9E9007BA86C /* SDWebImageDecoder.m in Sources */,
-				AD0E36A51C8001F800714FF3 /* CollectionViewCell.m in Sources */,
 				AD0E36C31C8001F800714FF3 /* MultipartMessageHeader.m in Sources */,
 				AD0E36BD1C8001F800714FF3 /* DDRange.m in Sources */,
 				AD4E93A31C858E21007BA86C /* MJRefreshGifHeader.m in Sources */,
 				AD4E93E61C87C9E9007BA86C /* SDWebImagePrefetcher.m in Sources */,
 				AD0E36C11C8001F800714FF3 /* HTTPServer.m in Sources */,
 				AD0E36E91C8001F800714FF3 /* UIHelper.m in Sources */,
-				AD0E36AF1C8001F800714FF3 /* GameDetailViewController.m in Sources */,
 				AD0E36EA1C8001F800714FF3 /* ViewController.m in Sources */,
 				AD4E93E31C87C9E9007BA86C /* SDWebImageDownloader.m in Sources */,
 				AD4E939C1C858E21007BA86C /* MJRefreshHeader.m in Sources */,
@@ -870,14 +801,12 @@
 				AD4E93981C858E21007BA86C /* MJRefreshAutoFooter.m in Sources */,
 				AD4E93A01C858E21007BA86C /* MJRefreshBackGifFooter.m in Sources */,
 				AD0E36BA1C8001F800714FF3 /* DownLoadWorker.m in Sources */,
-				AD0E36AD1C8001F800714FF3 /* DistributeAppsViewController.m in Sources */,
 				AD0E36CA1C8001F800714FF3 /* HTTPRedirectResponse.m in Sources */,
 				AD0E36CB1C8001F800714FF3 /* WebSocket.m in Sources */,
 				AD0E36D81C8001F800714FF3 /* main.m in Sources */,
 				AD4E93E91C87C9E9007BA86C /* UIImage+MultiFormat.m in Sources */,
 				AD4E939B1C858E21007BA86C /* MJRefreshFooter.m in Sources */,
 				AD0E36D31C8001F800714FF3 /* DDTTYLogger.m in Sources */,
-				AD0E36AB1C8001F800714FF3 /* TimeLineTableViewCell.m in Sources */,
 				AD4E93A81C858E21007BA86C /* UIScrollView+MJExtension.m in Sources */,
 				AD4E93EB1C87C9E9007BA86C /* UIImageView+HighlightedWebCache.m in Sources */,
 				AD0E36C71C8001F800714FF3 /* HTTPDynamicFileResponse.m in Sources */,
@@ -889,7 +818,6 @@
 				AD4E93691C8459CC007BA86C /* DownLoadQueue.m in Sources */,
 				AD0E36EE1C80354B00714FF3 /* validation.m in Sources */,
 				AD4E93A91C858E21007BA86C /* UIScrollView+MJRefresh.m in Sources */,
-				AD0E36B31C8001F800714FF3 /* ReportViewController.m in Sources */,
 				AD0E36C01C8001F800714FF3 /* HTTPMessage.m in Sources */,
 				AD4E93A71C858E21007BA86C /* MJRefreshConst.m in Sources */,
 				AD4E93ED1C87C9E9007BA86C /* UIView+WebCacheOperation.m in Sources */,
@@ -902,7 +830,6 @@
 				AD4E93E51C87C9E9007BA86C /* SDWebImageManager.m in Sources */,
 				AD4E93AA1C858E21007BA86C /* UIView+MJExtension.m in Sources */,
 				AD4E939A1C858E21007BA86C /* MJRefreshComponent.m in Sources */,
-				AD0E36B61C8001F800714FF3 /* ShareViewController.m in Sources */,
 				AD4E93A41C858E21007BA86C /* MJRefreshNormalHeader.m in Sources */,
 				AD0E36D21C8001F800714FF3 /* DDLog.m in Sources */,
 				AD4E93A11C858E21007BA86C /* MJRefreshBackNormalFooter.m in Sources */,
@@ -915,7 +842,6 @@
 				AD0E36B11C8001F800714FF3 /* LoginViewController.m in Sources */,
 				AD4E93DF1C87C9E9007BA86C /* NSData+ImageContentType.m in Sources */,
 				AD0E36C21C8001F800714FF3 /* MultipartFormDataParser.m in Sources */,
-				AD0E36A71C8001F800714FF3 /* ReportTableViewCell.m in Sources */,
 				AD4E93A21C858E21007BA86C /* MJRefreshBackStateFooter.m in Sources */,
 				AD0E36C41C8001F800714FF3 /* MultipartMessageHeaderField.m in Sources */,
 				AD0E36BF1C8001F800714FF3 /* HTTPConnection.m in Sources */,

@@ -19,7 +19,7 @@
         return;
     }
   
-    // todo: 此处需要server端增加字段，以简化解析。
+    // refactor: 此处需要server端增加字段，以简化解析。
     if ([key isEqualToString:@"releaseversion"]) {
         
         NSString* versionName = [(NSDictionary*)[(NSDictionary*)value objectForKey:@"package"] objectForKey:@"version"];
@@ -39,6 +39,9 @@
     // 截取到日
     if ([key isEqualToString:@"firstcreated"]) {
         NSString* t = [(NSString*)value substringToIndex:10];
+        if([t isEqualToString:@"0001-01-01"]){
+            t = @"2015-01-01";
+        }
         [super setValue:t forKey:key];
         return;
     }

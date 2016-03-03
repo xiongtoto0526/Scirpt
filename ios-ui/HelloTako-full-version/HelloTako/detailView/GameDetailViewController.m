@@ -56,7 +56,7 @@
 }
 
 
-//改变行的高度,todo: 为何自定义的cell本身未生效？
+//改变行的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 84;
 }

@@ -47,7 +47,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"sandbox:%@",NSHomeDirectory());
     
     UIButton* bt = [UIButton new];
     bt.selected = true;
@@ -88,13 +87,13 @@
     // 如果文件已经存在，不执行以下操作
     if (self.currentLength) return;
     // 文件路径
-//    NSString* ceches = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-//    NSString* filepath = [ceches stringByAppendingPathComponent:response.suggestedFilename];
+    //    NSString* ceches = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+    //    NSString* filepath = [ceches stringByAppendingPathComponent:response.suggestedFilename];
     
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *homePath = [paths firstObject];
-//    filepath = [homePath  stringByAppendingPathComponent:@"xgtakofiles"];
+    //    filepath = [homePath  stringByAppendingPathComponent:@"xgtakofiles"];
     NSString* filepath = [homePath stringByAppendingPathComponent:response.suggestedFilename];
     self.filename = response.suggestedFilename;
     
@@ -105,13 +104,13 @@
     // 创建一个空的文件到沙盒中
     NSFileManager* mgr = [NSFileManager defaultManager];
     [mgr createFileAtPath:filepath contents:nil attributes:nil];
-
+    
     // 创建一个用来写数据的文件句柄对象
     self.writeHandle = [NSFileHandle fileHandleForWritingAtPath:filepath];
     
     // 获得文件的总大小
     self.totalLength = response.expectedContentLength;
-
+    
 }
 /**
  *  2.当接收到服务器返回的实体数据时调用（具体内容，这个方法可能会被调用多次）
@@ -143,28 +142,27 @@
     
     [self isDevicefileExist];
     
-    // kingsoft ok
-     NSString* ser1 = @"itms-services://?action=download-manifest&url=https://doc.xgsdk.com:28443/service/app/ios/56c58a86e13823dfca398cc6/56cd25a7e1382365706e5911.plist";
-    
-    // local file server ok
-    NSString* ser2 =@"itms-services://?action=download-manifest&url=https://doc.xgsdk.com:28443/service/app/ios/local/56c58a86e13823dfca398cc6/56cd25a7e1382365706e5911.plist";
-    
-    // local file failed
-    NSArray* appidList = [self.localPath componentsSeparatedByString:@"/"];
-    NSLog(@"appid is :%@",appidList[6]);
-    NSString* ser4 = [NSString stringWithFormat:@"itms-services://?action=download-manifest&url=https://doc.xgsdk.com:28443/service/app/ios/file/%@/56c58a86e13823dfca398cc6/56cd25a7e1382365706e5911.plist",appidList[6]];
-    
-    NSLog(@"request url is:%@",ser4);
-    
-    [self isDevicefileExist];
-    NSString* urlstr = [NSString stringWithFormat:@"http://192.168.3.18:12345/%@",self.filename];
-    NSLog(@"web server file name is:%@",urlstr);
-    
-    
-    NSString* testLocalFile = [NSString stringWithFormat:@"file:///var/mobile/Containers/Data/%@/Documents/TakoTest01_resigned.ipa",appidList[6]];
-    
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ser2]];
-    
+//    // kingsoft ok
+//    NSString* ser1 = @"itms-services://?action=download-manifest&url=https://doc.xgsdk.com:28443/service/app/ios/56c58a86e13823dfca398cc6/56cd25a7e1382365706e5911.plist";
+//    
+//    // local file server ok
+//    NSString* ser2 =@"itms-services://?action=download-manifest&url=https://doc.xgsdk.com:28443/service/app/ios/local/56c58a86e13823dfca398cc6/56cd25a7e1382365706e5911.plist";
+//    
+//    // local file failed
+//    NSArray* appidList = [self.localPath componentsSeparatedByString:@"/"];
+//    NSLog(@"appid is :%@",appidList[6]);
+//    NSString* ser4 = [NSString stringWithFormat:@"itms-services://?action=download-manifest&url=https://doc.xgsdk.com:28443/service/app/ios/file/%@/56c58a86e13823dfca398cc6/56cd25a7e1382365706e5911.plist",appidList[6]];
+//    
+//    NSLog(@"request url is:%@",ser4);
+//    
+//    [self isDevicefileExist];
+//    NSString* urlstr = [NSString stringWithFormat:@"http://192.168.3.18:12345/%@",self.filename];
+//    NSLog(@"web server file name is:%@",urlstr);
+//    
+//    
+//    
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ser2]];
+//    
     
     self.currentLength = 0;
     self.totalLength = 0;
@@ -180,47 +178,35 @@
     
     // 状态取反
     sender.selected = !sender.isSelected;
-    // 断点续传
-    // 断点下载
     
-//    if (sender.selected) { // 继续（开始）下载
-        // 1.URL
-
-         NSURL* url = [NSURL URLWithString:@"http://dlsw.baidu.com/sw-search-sp/soft/9d/25765/sogou_mac_32c_V3.2.0.1437101586.dmg"];
-//        url = [NSURL URLWithString:@"file:///Users/xionghaitao/Library/Developer/CoreSimulator/Devices/0F7D04C7-A015-4B90-AE50-75A6EA9D206B/data/Containers/Data/Application/F788D6E2-2CAF-4500-969D-B7D6692225BF/Documents/TakoTest01_resigned.ipa"];
-       
+    NSURL* url = [NSURL URLWithString:@"http://dlsw.baidu.com/sw-search-sp/soft/9d/25765/sogou_mac_32c_V3.2.0.1437101586.dmg"];
+    
+    url = [NSURL URLWithString:@"http://doc.xgsdk.com:28870/static/TakoTest01_resigned.ipa"];
     
     
-//       url = [NSURL URLWithString:@"http://dlsw.baidu.com/sw-search-sp/soft/9d/25765/sogou_mac_32c_V3.2.0.1437101586.dmg"];
-
+    // 2.请求
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
-        url = [NSURL URLWithString:@"http://doc.xgsdk.com:28870/static/TakoTest01_resigned.ipa"];
+    // 设置请求头
+    NSString *range = [NSString stringWithFormat:@"bytes=%lld-", self.currentLength];
+    [request setValue:range forHTTPHeaderField:@"Range"];
     
-        
-        // 2.请求
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        
-        // 设置请求头
-        NSString *range = [NSString stringWithFormat:@"bytes=%lld-", self.currentLength];
-        [request setValue:range forHTTPHeaderField:@"Range"];
-        
-        // 3.下载
-        self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
-//    } else { // 暂停
+    // 3.下载
+    self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
     
-//        [self.connection cancel];
-//        self.connection = nil;
-//    }
 }
 
 
 -(void)isDevicefileExist{
-    NSString* path1 = self.localPath;
     
     NSFileManager* mgr = [NSFileManager defaultManager];
-    if ([mgr fileExistsAtPath:path1]==YES) {
+    if ([mgr fileExistsAtPath:self.localPath]==YES) {
         NSLog(@"device File exists");
-        NSLog(@"file is:%@",path1);
+        NSLog(@"file is:%@",self.localPath);
+        NSString* urlstr = [NSString stringWithFormat:@"http://localhost:%d",22334];
+        NSLog(@"safa url is:%@",urlstr);
+        NSURL* url = [NSURL URLWithString:urlstr];
+        [[UIApplication sharedApplication] openURL:url];
     }else{
         NSLog(@"device File not exists");
     }

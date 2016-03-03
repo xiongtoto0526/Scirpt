@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD4E93F51C87F475007BA86C /* Web in Resources */ = {isa = PBXBuildFile; fileRef = AD4E93F41C87F475007BA86C /* Web */; settings = {ASSET_TAGS = (); }; };
 		AD5B89441C7D89C3005E446E /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5B89261C7D89C3005E446E /* DDData.m */; settings = {ASSET_TAGS = (); }; };
 		AD5B89451C7D89C3005E446E /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5B89281C7D89C3005E446E /* DDNumber.m */; settings = {ASSET_TAGS = (); }; };
 		AD5B89461C7D89C3005E446E /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5B892A1C7D89C3005E446E /* DDRange.m */; settings = {ASSET_TAGS = (); }; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AD4E93F41C87F475007BA86C /* Web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Web; sourceTree = "<group>"; };
 		AD5B89251C7D89C3005E446E /* DDData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDData.h; sourceTree = "<group>"; };
 		AD5B89261C7D89C3005E446E /* DDData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDData.m; sourceTree = "<group>"; };
 		AD5B89271C7D89C3005E446E /* DDNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNumber.h; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				C0BCDA8F1B9D34D900DFA53B /* HFConnection.m */,
 				C0BCDA911B9D367E00DFA53B /* HFSession.h */,
 				C0BCDA921B9D367E00DFA53B /* HFSession.m */,
+				AD4E93F41C87F475007BA86C /* Web */,
 				C0BCDA6F1B9D21D200DFA53B /* Main.storyboard */,
 				C0BCDA721B9D21D200DFA53B /* Images.xcassets */,
 				C0BCDA741B9D21D200DFA53B /* LaunchScreen.xib */,
@@ -391,6 +394,7 @@
 				AD5B89641C7D89FE005E446E /* About.txt in Resources */,
 				C0BCDA731B9D21D200DFA53B /* Images.xcassets in Resources */,
 				AD5B896C1C7D89FE005E446E /* README.txt in Resources */,
+				AD4E93F51C87F475007BA86C /* Web in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

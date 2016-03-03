@@ -27,6 +27,7 @@
     {
         int port = [httpServer listeningPort];
         NSLog(@"Started HTTP Server on port %d", port);
+       
     }
     else
     {
@@ -39,15 +40,21 @@
     // Override point for customization after application launch.
     httpServer = [[HTTPServer alloc] init];
     [httpServer setType:@"_http._tcp."];
-    [httpServer setPort:12345];
-//    NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
-//    NSLog(@"Setting document root: %@", webPath);
-//    [httpServer setDocumentRoot:webPath];
+    [httpServer setPort:22334];
+
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *homePath = [paths firstObject];
-    //    filepath = [homePath  stringByAppendingPathComponent:@"xgtakofiles"];
-    [httpServer setDocumentRoot:homePath];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *homePath = [paths firstObject];
+//    //    filepath = [homePath  stringByAppendingPathComponent:@"xgtakofiles"];
+//    [httpServer setDocumentRoot:homePath];
+//    NSLog(@"root path is:%@",homePath);
+    
+    
+    NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
+    NSLog(@"Setting document root: %@", webPath);
+    
+    [httpServer setDocumentRoot:webPath];
+    
     
     [self startServer];
     return YES;

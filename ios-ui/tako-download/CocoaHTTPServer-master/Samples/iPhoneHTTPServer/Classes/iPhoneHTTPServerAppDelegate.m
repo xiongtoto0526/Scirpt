@@ -22,7 +22,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 	{
         int port = [httpServer listeningPort];
 		DDLogInfo(@"Started HTTP Server on port %d", port);
-        NSString* urlstr = [NSString stringWithFormat:@"http://localhost:%d",port];
+        NSString* urlstr = [NSString stringWithFormat:@"http://10.29.64.132:%d/%@",port,@"TakoTest01_resigned.ipa"];
         NSURL* url = [NSURL URLWithString:urlstr];
         [[UIApplication sharedApplication] openURL:url];
 	}

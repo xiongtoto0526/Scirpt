@@ -6,14 +6,9 @@
 //  Copyright © 2015年 熊海涛. All rights reserved.
 //
 
-/*
- todo: 有必要将tableview和view，label，checkbox分开成不同的类文件，防止viewControl内容过多，或控件太乱。
- 可参考：accessory 官方demo. /Users/xionghaitao/my_git_rep/script/ios-ui/apple-demo
- */
 
 #import "ThirdViewController.h"
 #import "VersionViewController.h"
-#import "DistributeAppsViewController.h"
 #import "LoginViewController.h"
 #import "UIHelper.h"
 #import "ShareEntity.h"
