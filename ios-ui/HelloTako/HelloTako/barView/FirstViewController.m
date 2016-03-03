@@ -98,6 +98,7 @@
     // 注册 "加载更多"
     self.tableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     
+    
     if ([XHTUIHelper isLogined]) {
         [self loadMoreData];
     }
@@ -268,6 +269,12 @@
     // 从server端拉取数据
     NSArray* newdata = [self fetchDataFromServer];
     
+    // 没有新数据提示
+    if ([newdata count]==0) {
+     [self.tableview.mj_footer endRefreshingWithNoMoreData];
+        return;
+    }
+    
     // 初始化其他属性
     for(int i=0;i<[newdata count];i++){
         TakoApp* app = (TakoApp*)[newdata objectAtIndex:i];
@@ -340,7 +347,7 @@
     }
     
     if ([self isAppDownloadedBefore:app.versionId]) {
-        NSLog(@"重复应用信息,名称，%@，版本，%@",cell.appName.text,app.versionId);
+//        NSLog(@"重复应用信息,名称，%@，版本，%@",cell.appName.text,app.versionId);
         [XHTUIHelper disableDownloadButton:cell.button];
     }
     

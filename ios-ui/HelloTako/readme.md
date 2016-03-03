@@ -21,7 +21,7 @@
 - 12. 图片解析错误：ako[3462] <Error>: ImageIO: PNG invalid PNG file: iDOT doesn't point to valid IDAT chunk
 - 13. 增加管理员登陆
 - 14. 启动cocohttpserver， 设备和mac同一网络下，mac可访问iPhone的文件。
-- 15. 日志优化，去除warning
+- 15. 日志优化，去除warning -- ok 
 
 
 

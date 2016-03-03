@@ -31,8 +31,7 @@
 }
 
 +(NSString*)fetchItermUrl:(NSString*)versionId password:(NSString*)password{
-    //http://qa.tako.im:28870/service/app/version/url?id=56c53802e138233c4ae48304&local=true&password=ifexisted
-
+    
     NSString* result = nil;
     NSString* url = nil;
     if (password!=nil) {
@@ -56,7 +55,7 @@
     NSNumber* resultCode = (NSNumber*)[XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_RET_KEY];
     if ([resultCode longValue] == 0) {
         NSLog(@"fetch iterm url success....");
-       result = (NSString*)[XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_DATA_KEY];
+        result = (NSString*)[XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_DATA_KEY];
     }
     
     return result;
@@ -75,7 +74,7 @@
     
     // 解析结果
     NSString* retjson = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-    NSLog(@"http response is ...%@",retjson);
+//    NSLog(@"http response is ...%@",retjson);// 量太大,暂时不log
     if([XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_RET_KEY]==nil){
         NSLog(@"fetch error...");
         return result;
@@ -142,7 +141,6 @@
 }
 
 +(TakoUser*)authEmail:(NSString*)email password:(NSString*)password{
-    
     email = @"carson510@126.com";
     password = @"123456";
     NSMutableDictionary* dict = [NSMutableDictionary new];
@@ -156,7 +154,7 @@
         return nil;
     }else{
         NSString* retjson = [[NSString alloc] initWithData:retData encoding:NSUTF8StringEncoding];
-        NSLog(@"http response is ...%@",retjson);
+        NSLog(@"http response is ...%@",retjson);// 敏感信息,暂时不log
         if([XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_RET_KEY]==nil){
             NSLog(@"auth error...");
             return nil;
@@ -187,19 +185,17 @@
 }
 
 +(NSData*)postWithDict:(NSDictionary*)dict url:(NSString*)methodUrl{
-    
     NSData* bodyData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
-    NSString* serverUrl = [NSString stringWithFormat:@"%@%@",TASKO_SERVER_HOST,methodUrl];
+    NSString* serverUrl = [NSString stringWithFormat:@"%@%@",TAKO_SERVER_HOST,methodUrl];
     NSURL* url = [[NSURL alloc] initWithString:serverUrl];
     NSLog(@"url is %@", url);
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:TASKO_SERVER_TIME_OUT];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:TAKO_SERVER_TIME_OUT];
     
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    //    [request setValue:@"gzip" forHTTPHeaderField:@"Content-Encoding"];
     [request setHTTPBody:bodyData];
     NSLog(@"setHTTPBody data = %@",[[NSString alloc]initWithData:bodyData encoding:NSUTF8StringEncoding]);
-    
+
     NSError* error = nil;
     NSData* retData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
     
@@ -210,10 +206,9 @@
 
 +(NSData*) getWithUrl:(NSString*)methodUrl
 {
-    
-    NSString* urlstr = [NSString stringWithFormat:@"%@%@",TASKO_SERVER_HOST,methodUrl];
+    NSString* urlstr = [NSString stringWithFormat:@"%@%@",TAKO_SERVER_HOST,methodUrl];
     NSURL* url = [[NSURL alloc] initWithString:urlstr];
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:TASKO_SERVER_TIME_OUT];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:TAKO_SERVER_TIME_OUT];
     [request setHTTPMethod:@"GET"];
     NSLog(@"request is %@",request);
     NSData* returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];

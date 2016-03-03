@@ -53,7 +53,7 @@
     sectionTitleArray = [NSArray arrayWithObjects:@"",nil];
     sectionTextArray =[NSArray arrayWithObjects:[NSArray arrayWithObjects:@"关于Tako",@"退出登录",nil],nil];
     
-    // 未登录时的显示内容
+    [XHTUIHelper addBorderonButton:self.loginBtn];    // button圆角化
     [self.loginBtn setHidden:[XHTUIHelper isLogined]];
     self.userAccount.text = [ShareEntity shareInstance].userAccount;
     self.userName.text = [ShareEntity shareInstance].userName;
@@ -100,7 +100,7 @@
 
 // 单元格选中时
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+
     if(indexPath.section==0 && indexPath.row==0){
         NSLog(@"即将进入“关于Tako”页面...");
         UIViewController* versionView = [[VersionViewController alloc] init];

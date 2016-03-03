@@ -9,7 +9,7 @@
 #ifndef Constant_h
 #define Constant_h
 
-// http
+// cocoahttpserver
 #define HTTP_SERVER_PORT 12345
 
 #define LAUNCH_SCREEN_TIME 2.0
@@ -41,7 +41,8 @@
 #define MAX_DOWNLOAD_THREAD_COUNT 1
 
 // tako server
-#define TASKO_SERVER_HOST @"http://qa.tako.im:28870/service"
-#define TASKO_SERVER_TIME_OUT 30
+#define TAKO_SERVER_HOST @"http://qa.tako.im:28870/service"
+#define TAKO_SERVER_HOST_KEY @"tako_server_host"
+#define TAKO_SERVER_TIME_OUT 30
 
 #endif /* Constant_h */

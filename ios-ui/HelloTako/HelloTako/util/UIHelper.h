@@ -38,4 +38,8 @@
 
 +(BOOL)isLogined;
 
++ (id) infoPlistValueForKey:(NSString *) key;
+
++(NSString*) hostFromInfoPlist;
+
 @end

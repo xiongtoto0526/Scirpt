@@ -70,7 +70,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="测试" image="icon_test_unselected.png" selectedImage="82BD180F-8037-4E3A-98F3-D464B79853AF" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="测试" image="icon_test_unselected.png" selectedImage="B3DCB7C1-611E-4FFF-8222-34FA7853D6FF" id="acW-dT-cKf"/>
                     <navigationItem key="navigationItem" title="测试" id="Eoe-hR-mcj"/>
                     <connections>
                         <outlet property="tableview" destination="CgI-oF-94s" id="OlL-11-WiV"/>
@@ -177,14 +177,15 @@
                                         </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WYW-Na-wqk">
-                                        <rect key="frame" x="299" y="29" width="60" height="30"/>
+                                        <rect key="frame" x="279" y="29" width="60" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="Bpd-CK-dlg"/>
                                             <constraint firstAttribute="height" constant="30" id="b6x-NR-4Re"/>
                                             <constraint firstAttribute="width" constant="60" id="euC-Dc-P9e"/>
                                             <constraint firstAttribute="height" constant="30" id="jCl-Vp-Zco"/>
                                         </constraints>
-                                        <state key="normal" title="点击登录"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="重新登录"/>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="Bpd-CK-dlg"/>
@@ -231,7 +232,7 @@
                                     <constraint firstAttribute="bottom" secondItem="rQk-5Z-9Ai" secondAttribute="bottom" constant="20" id="KMp-Vs-l00"/>
                                     <constraint firstItem="UyO-Zg-eFL" firstAttribute="top" secondItem="obg-FM-fp2" secondAttribute="top" constant="11" id="LCN-Ae-LJd"/>
                                     <constraint firstAttribute="trailing" secondItem="WYW-Na-wqk" secondAttribute="trailing" constant="162" id="LtN-qO-tfe"/>
-                                    <constraint firstItem="WYW-Na-wqk" firstAttribute="leading" secondItem="rQk-5Z-9Ai" secondAttribute="trailing" constant="-20" id="M3x-H4-3Sf"/>
+                                    <constraint firstItem="WYW-Na-wqk" firstAttribute="leading" secondItem="rQk-5Z-9Ai" secondAttribute="trailing" constant="-40" id="M3x-H4-3Sf"/>
                                     <constraint firstItem="21b-RC-Mgf" firstAttribute="top" secondItem="obg-FM-fp2" secondAttribute="top" constant="19" id="MXw-sk-h5o"/>
                                     <constraint firstItem="WYW-Na-wqk" firstAttribute="leading" secondItem="ezF-RV-UsE" secondAttribute="trailing" constant="60" id="RJb-82-hop"/>
                                     <constraint firstItem="rQk-5Z-9Ai" firstAttribute="top" secondItem="ezF-RV-UsE" secondAttribute="bottom" constant="4" id="SB1-LB-1oC"/>
@@ -417,7 +418,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="82BD180F-8037-4E3A-98F3-D464B79853AF" width="26" height="26">
+        <image name="B3DCB7C1-611E-4FFF-8222-34FA7853D6FF" width="26" height="26">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

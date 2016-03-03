@@ -87,7 +87,7 @@
 -(IBAction)  segmentAction:(UISegmentedControl *)Seg{
     NSInteger Index = Seg.selectedSegmentIndex;
     
-    NSLog(@"Index %i", Index);
+    NSLog(@"Index %li", (long)Index);
     
     switch (Index) {
         case 0:

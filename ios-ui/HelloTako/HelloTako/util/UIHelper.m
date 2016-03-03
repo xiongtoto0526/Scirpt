@@ -170,5 +170,19 @@
     return [key isEqualToString:LOGIN_SUCCESS_KEY];
 }
 
++(NSString*) hostFromInfoPlist{
+    return [self infoPlistValueForKey:TAKO_SERVER_HOST_KEY];
+}
+
++ (id) infoPlistValueForKey:(NSString *) key
+{
+    if (key==nil)
+    {
+        return nil;
+    }
+    
+    return [[[NSBundle mainBundle] infoDictionary] objectForKey:key];
+}
+
 
 @end
