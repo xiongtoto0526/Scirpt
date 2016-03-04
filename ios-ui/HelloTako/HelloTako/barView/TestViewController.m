@@ -6,9 +6,9 @@
 //  Copyright © 2015年 熊海涛. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "TestViewController.h"
 #import "TableViewCell.h"
-#import "ThirdViewController.h"
+#import "MineViewController.h"
 #import "LoginViewController.h"
 #import "ShareEntity.h"
 #import "UIHelper.h"
@@ -20,7 +20,7 @@
 #import "DownloadQueue.h"
 #import "UIImageView+WebCache.h"
 
-@interface FirstViewController ()<UITableViewDataSource,UITableViewDelegate,XHtDownLoadDelegate>
+@interface TestViewController ()<UITableViewDataSource,UITableViewDelegate,XHtDownLoadDelegate>
 @property UIRefreshControl* refreshControl;
 @property NSMutableArray* listData;
 @property NSString* cursor;
@@ -30,7 +30,7 @@
 @end
 
 
-@implementation FirstViewController
+@implementation TestViewController
 
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -258,7 +258,7 @@
     NSLog(@"will pause download...");
     [self.currentCell.button setTitle:@"继续" forState:UIControlStateNormal];
     self.currentApp.isPaused = YES;
-    [[XHtDownLoadQueue share] pause:self.currentApp.appid];
+    [[XHtDownLoadQueue share] pause:self.currentApp.versionId];
 }
 
 
@@ -345,7 +345,7 @@
                          placeholderImage:[UIImage imageNamed:@"ic_defaultapp"]];
     }
     
-    if ([self isAppDownloadedBefore:app.versionId]) {
+    if (app.isSuccessed) {
         NSLog(@"重复应用信息,名称，%@，版本，%@",cell.appName.text,app.versionId);
         [XHTUIHelper disableDownloadButton:cell.button];
     }
@@ -356,22 +356,6 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     
-}
-
-// 判断app是否下载过
--(BOOL)isAppDownloadedBefore:(NSString*) versionId{
-    BOOL isExist = NO;
-    NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_VERSION_KEY];
-    for (NSString *key in downloadAppDict) {
-        if ([key isEqualToString:versionId]) {
-            NSLog(@"该应用已保存在下载记录中...");
-            isExist = YES;
-            NSLog(@"versionId is:%@",versionId);
-            NSLog(@"downloadAppDict is:%@",downloadAppDict);
-            break;
-        }
-    }
-    return isExist;
 }
 
 // 显示下载进度栏
@@ -423,10 +407,11 @@
     }
     
     if (isSuccess) {
+        
         // 更新cell
         [XHTUIHelper disableDownloadButton:cell.button];
-        
         // 记录已下载情况
+        app.isSuccessed=YES;
         NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_VERSION_KEY];//userDefault只允许返回NSDictionary
         if (downloadAppDict==nil) {
             downloadAppDict = [NSDictionary new];

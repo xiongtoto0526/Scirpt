@@ -7,15 +7,15 @@
 //
 
 #import "LoginViewController.h"
-#import "FirstViewController.h"
-#import "ThirdViewController.h"
+#import "TestViewController.h"
+#import "MineViewController.h"
 #import "ShareEntity.h"
 #import "Constant.h"
 #import "UIHelper.h"
 #import "validation.h"
 #import "Server.h"
 
-@interface LoginViewController ()
+@interface LoginViewController ()<UITextFieldDelegate>
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator ;
 @property (copy,nonatomic) NSString* authUserName;
 @property (weak, nonatomic) UIImageView *authUserIcon;
@@ -27,8 +27,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.backBt setHidden:YES];// 返回按钮暂不展示。
+    [XHTUIHelper addBorderonButton:self.loginBt];
+    [self.userNameTxt setDelegate:self];
+    [self.userPwd setDelegate:self];
+    self.userNameTxt.tag=0;
+    self.userPwd.tag=1;
+    self.userNameTxt.borderStyle = UITextBorderStyleNone;
+    self.userPwd.borderStyle = UITextBorderStyleNone;
+
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -56,6 +62,11 @@
     
     NSString *userAccount = self.userNameTxt.text;
     NSString *password = self.userPwd.text;
+    
+    // kingsoft邮箱无需后缀
+    if (![userAccount containsString:@"@"]) {
+        userAccount = [NSString stringWithFormat:@"%@@kingsoft.com",userAccount];
+    }
     
     // 输入校验
     XHtValidation *validate=[[XHtValidation alloc] init];
@@ -151,4 +162,14 @@
     
 }
 
+// 当输入框获得焦点时，执行该方法。
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (textField.tag == 0) {
+        [self.emailLineimage setBackgroundColor:[UIColor blueColor]];
+        [self.passwordLineimage setBackgroundColor:[UIColor grayColor]];
+    }else if (textField.tag == 1) {
+        [self.passwordLineimage setBackgroundColor:[UIColor blueColor]];
+        [self.emailLineimage setBackgroundColor:[UIColor grayColor]];
+    }
+}
 @end

@@ -89,6 +89,7 @@
         for (int i=0; i<[apps count]; i++) {
             NSDictionary* temp = (NSDictionary*)[apps objectAtIndex:i];
             TakoApp* app =  [[TakoApp new] initWithDictionary:temp];
+            app.isSuccessed = [self isAppDownloadedBefore:app.versionId];  // 添加下载标志
             [result addObject:app];
         }
     }
@@ -214,6 +215,25 @@
     NSData* returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     return returnData;
 }
+
+
+
+// 判断app是否下载过
++(BOOL)isAppDownloadedBefore:(NSString*) versionId{
+    BOOL isExist = NO;
+    NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_VERSION_KEY];
+    for (NSString *key in downloadAppDict) {
+        if ([key isEqualToString:versionId]) {
+            NSLog(@"该应用已保存在下载记录中...");
+            isExist = YES;
+            NSLog(@"versionId is:%@",versionId);
+            NSLog(@"downloadAppDict is:%@",downloadAppDict);
+            break;
+        }
+    }
+    return isExist;
+}
+
 
 
 @end

@@ -13,5 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *userPwd;
 @property (weak, nonatomic) IBOutlet UIButton *loginBt;
 @property (weak, nonatomic) IBOutlet UIButton *backBt;
+@property (weak, nonatomic) IBOutlet UIImageView *emailLineimage;
+@property (weak, nonatomic) IBOutlet UIImageView *passwordLineimage;
 
 @end

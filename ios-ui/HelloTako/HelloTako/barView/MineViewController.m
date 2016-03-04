@@ -7,14 +7,14 @@
 //
 
 
-#import "ThirdViewController.h"
+#import "MineViewController.h"
 #import "VersionViewController.h"
 #import "LoginViewController.h"
 #import "UIHelper.h"
 #import "ShareEntity.h"
 #import "Constant.h"
 
-@interface ThirdViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface MineViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     NSArray* sectionTitleArray;
     NSArray* sectionTextArray;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation ThirdViewController
+@implementation MineViewController
 
 -(void)receiveLoginBackNotification{
     NSLog(@"receive login back notification...");

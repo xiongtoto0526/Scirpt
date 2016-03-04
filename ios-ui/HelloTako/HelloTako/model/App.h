@@ -21,6 +21,7 @@
 @property (nonatomic,copy) NSString *downloadUrl;
 @property (nonatomic) BOOL isNeedPassword;
 @property (nonatomic,copy) NSString* downloadPassword;
+@property BOOL isSuccessed;
 @property BOOL isStarted;
 @property BOOL isPaused;
 @property NSString* progress;

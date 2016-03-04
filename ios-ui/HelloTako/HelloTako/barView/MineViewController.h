@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 // 对应底部的 “我的”栏
-@interface ThirdViewController : UIViewController
+@interface MineViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userAccount;

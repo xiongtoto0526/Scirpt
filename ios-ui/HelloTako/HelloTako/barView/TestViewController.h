@@ -10,7 +10,7 @@
 #import "ShareEntity.h"
 
 // 对应底部的 “测试”栏
-@interface FirstViewController : UIViewController
+@interface TestViewController : UIViewController
 
 @end
 

@@ -6743,6 +6743,9 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	LogInfo(@"CFStreamThread: Stopped");
 }}
 
+//t:add for warning
+-(void)doNothingAtAll:(NSString*)p{
+}
 
 + (void)scheduleCFStreams:(GCDAsyncSocket *)asyncSocket
 {

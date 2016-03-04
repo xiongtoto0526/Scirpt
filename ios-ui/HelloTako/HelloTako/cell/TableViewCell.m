@@ -36,7 +36,6 @@ NSMutableDictionary* workerDict = nil;
 
     [self.button addTarget:self action:@selector(clickDownload) forControlEvents:UIControlEventTouchDown];
     [self.btnCancel addTarget:self action:@selector(stopDownload) forControlEvents:UIControlEventTouchDown];
-    // t:不能再此处动态设置cell，应该在tableview的 willDisplayCell 回调中处理。
 }
 
 
