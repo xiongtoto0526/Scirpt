@@ -25,9 +25,4 @@ static ShareEntity* share=nil;
    }
 }
 
-+(BOOL)checkLoginFromHistory{
-    NSString* key = [XHTUIHelper readNSUserDefaultsWithkey:LOGIN_KEY];
-    return [key isEqualToString:LOGIN_SUCCESS_KEY];
-}
-
 @end

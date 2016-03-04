@@ -2,6 +2,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+
 // 下载回调协议
 @protocol XHtDownLoadDelegate <NSObject>
 

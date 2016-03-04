@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Version.h"
 #import "User.h"
+#import "App.h"
 
 @interface TakoServer : NSObject
 
@@ -17,6 +18,8 @@
 +(NSString*)fetchItermUrl:(NSString*)versionId password:(NSString*)password;
 
 +(NSMutableArray*)fetchApp:(NSString*)cursor;
+
++(TakoApp*)fetchAppWithid:(NSString*)appid;
 
 +(NSString*)fetchDownloadUrl:(NSString*)versionId password:(NSString*)password;
 

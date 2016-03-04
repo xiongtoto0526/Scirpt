@@ -71,6 +71,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveCancelDownloadNotification:) name:CLICK_DOWNLOAD_CANCEL_BUTTON_NOTIFICATION object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDownloadpageFinishNotification:) name:DOWNLAOD_MANAGE_PAGE_FINISH_NOTIFICATION object:nil];
+    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveLoginBackNotification) name:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];
     
     
@@ -104,6 +107,29 @@
     
 }
 
+-(void)receiveDownloadpageFinishNotification:(NSNotification*)notice{
+    NSLog(@"receive download page finish event...");
+    // 定位到当前的cell
+    NSString* isSuccess = (NSString*)[notice.userInfo objectForKey:DOWNLOAD_RESULT_KEY];
+    NSString* tag = (NSString*)[notice.userInfo objectForKey:DOWNLOAD_TAG_KEY];
+    
+    TakoApp* app = nil;
+    TableViewCell* cell = nil;
+    // 找到对应的cell
+    for (int i=0; i<[self.listData count]; i++) {
+        app = (TakoApp*)[self.listData objectAtIndex:i];
+        if ([app.versionId isEqualToString:tag]) {
+            NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:0];
+            cell = [self.tableview cellForRowAtIndexPath:path];
+            break;
+        }
+    }
+    
+    // 更新cell
+    [self hideProgressUI:YES cell:cell];
+    // 更新app
+    app.isSuccessed = isSuccess;
+}
 
 // 接收到cell的下载按钮点击事件
 -(void)receiveClickDownloadNotification:(NSNotification*)notice{
@@ -221,11 +247,15 @@
     
     // 更新cell
     TableViewCell *cell =  self.currentCell;
-    [cell.btnCancel setHidden:NO];
-    [cell.progressControl setHidden:NO];
-    [cell.textDownload setHidden:NO];
+    [self hideProgressUI:NO cell:cell];
 }
 
+// 是否隐藏下载进度控件
+-(void)hideProgressUI:(BOOL)isShow cell:(TableViewCell*)cell{
+    [cell.btnCancel setHidden:isShow];
+    [cell.progressControl setHidden:isShow];
+    [cell.textDownload setHidden:isShow];
+}
 
 // 启动下载
 -(void)startDownload{
@@ -312,7 +342,7 @@
 
 //改变行的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 84;
+    return 80;
 }
 
 // 点击单元格，暂时关闭该页面。如需激活该方法，需要修改cell中设置。
@@ -348,6 +378,13 @@
     if (app.isSuccessed) {
         NSLog(@"重复应用信息,名称，%@，版本，%@",cell.appName.text,app.versionId);
         [XHTUIHelper disableDownloadButton:cell.button];
+        [self hideProgressUI:YES cell:cell];
+    }else if (app.isPaused) {
+        [cell.button setTitle:@"继续" forState:UIControlStateNormal];
+        [self hideProgressUI:NO cell:cell];
+    }else if (app.isStarted) {
+        [cell.button setTitle:@"暂停" forState:UIControlStateNormal];
+        [self hideProgressUI:NO cell:cell];
     }
     
     return cell;
@@ -366,6 +403,7 @@
 }
 
 
+// todo: 当下载管理中的cell下载进度更新时，需要重新加载本页面。
 - (void)reloadDataWhenRefresh
 {
     [self.tableview reloadData];
@@ -411,7 +449,6 @@
         // 更新cell
         [XHTUIHelper disableDownloadButton:cell.button];
         // 记录已下载情况
-        app.isSuccessed=YES;
         NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_VERSION_KEY];//userDefault只允许返回NSDictionary
         if (downloadAppDict==nil) {
             downloadAppDict = [NSDictionary new];
@@ -426,9 +463,10 @@
     }
     
     // 更新cell
-    [cell.progressControl setHidden:YES];
-    [cell.btnCancel setHidden:YES];
-    [cell.textDownload setHidden:YES];
+    [self hideProgressUI:YES cell:cell];
+    // 更新app
+    app.progress=@"100%";
+    app.isSuccessed=isSuccess;
 }
 
 
@@ -438,10 +476,11 @@
     NSLog(@"收到回调通知：当前进度为:%f,tag:%@",prg,tag);
     
     TableViewCell* cell = nil;
+    TakoApp* app = nil;
     
     // 找到对应的cell
     for (int i=0; i<[self.listData count]; i++) {
-        TakoApp* app = (TakoApp*)[self.listData objectAtIndex:i];
+        app = (TakoApp*)[self.listData objectAtIndex:i];
         if ([app.versionId isEqualToString:tag]) {
             NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:0];
             cell = [self.tableview cellForRowAtIndexPath:path];
@@ -453,7 +492,11 @@
     [cell.progressControl setProgress:prg];
     NSString* progress = [NSString stringWithFormat:@"%.1lf",prg*100];
     cell.textDownload.text = [NSString stringWithFormat:@"当前进度:%@%%",progress];
+  
+    // 更新app
+    app.progress = progress;
 }
+
 
 
 @end

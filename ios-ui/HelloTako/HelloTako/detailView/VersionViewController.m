@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
     
-   NSString* verionName = [XHTUIHelper readNSUserDefaultsObjectWithkey:APP_VERSION_KEY];
+   NSString* verionName = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
     self.version.text = [NSString stringWithFormat:@"Tako %@",verionName];
     // Do any additional setup after loading the view from its nib.
 }

@@ -51,22 +51,12 @@
     bar.viewControllers = newItems;
     
     [NSThread sleepForTimeInterval:LAUNCH_SCREEN_TIME];//设置闪屏页面时间
-    
+//    
      [XHTUIHelper clearAllUserDefaultsData]; // 调试用
 
-    TakoVersion* takoVersion = [TakoServer fetchVersion];
-    NSLog(@"老版本:%@",[XHTUIHelper readNSUserDefaultsObjectWithkey:APP_VERSION_KEY]);
+    NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
+    NSLog(@"当前版本:%@",currentVersion);
     
-    // 首次下载,写入版本号
-    if([XHTUIHelper readNSUserDefaultsObjectWithkey:APP_VERSION_KEY]==nil){
-        [XHTUIHelper writeNSUserDefaultsWithKey:APP_VERSION_KEY withObject:takoVersion.versionName];
-        [XHTUIHelper writeNSUserDefaultsWithKey:APP_VERSION_CREATE_TIME_KEY withObject:takoVersion.createTime];
-    }
-    
-    NSDate* old = [XHTUIHelper readNSUserDefaultsObjectWithkey:APP_VERSION_CREATE_TIME_KEY];
-    if ([takoVersion.createTime timeIntervalSinceDate:old]>0.0) {
-        NSLog(@"检测到新版本....");
-    }
     
     // 启动 httpserver
     httpServer = [[HTTPServer alloc] init];

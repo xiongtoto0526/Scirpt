@@ -10,6 +10,7 @@
 #import "MineViewController.h"
 #import "VersionViewController.h"
 #import "LoginViewController.h"
+#import "DownloadViewController.h"
 #import "UIHelper.h"
 #import "ShareEntity.h"
 #import "Constant.h"
@@ -32,21 +33,30 @@
     [self.loginBtn setHidden:[XHTUIHelper isLogined]];
     self.userName.text = [ShareEntity shareInstance].userName;
     self.userAccount.text = [ShareEntity shareInstance].userAccount;
+    if ([XHTUIHelper isLogined]) {
+        self.userImage.image = [UIImage imageNamed:@"ic_user_head_logged"];
+    }else{
+        self.userImage.image = [UIImage imageNamed:@"ic_user_head_unlogged"];
+    }
     
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     NSLog(@"view will appear...");
+    if ( [XHTUIHelper isLogined]){
+        NSLog(@"logined before...");
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+     self.userImage.image = [UIImage imageNamed:@"ic_user_head_logged"];
     // 1.添加监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveLoginBackNotification) name:LOGIN_BACK_TO_USER_NOTIFICATION object:nil];
     
     sectionTitleArray = [NSArray arrayWithObjects:@"",nil];
-    sectionTextArray =[NSArray arrayWithObjects:[NSArray arrayWithObjects:@"关于Tako",@"退出登录",nil],nil];
+    sectionTextArray =[NSArray arrayWithObjects:[NSArray arrayWithObjects:@"关于Tako",@"下载管理",@"退出登录",nil],nil];
     
     [XHTUIHelper addBorderonButton:self.loginBtn];    // button圆角化
     [self.loginBtn setHidden:[XHTUIHelper isLogined]];
@@ -93,6 +103,11 @@
     return cell;
 }
 
+// 单击一次即可，不允许deselect
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(nonnull NSIndexPath *)indexPat{
+    [self tableView:tableView didSelectRowAtIndexPath:indexPat];
+}
+
 // 单元格选中时
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
@@ -102,6 +117,10 @@
         [self.navigationController pushViewController:versionView animated:YES];
         
     }else if(indexPath.section==0 && indexPath.row==1){
+        NSLog(@"即将进入“下载管理”页面...");
+        UIViewController* downloadView = [[DownloadViewController alloc] init];
+        [self.navigationController pushViewController:downloadView animated:YES];
+    }else if(indexPath.section==0 && indexPath.row==2){
         NSLog(@"即将进入“退出登录”页面...");
         if (![XHTUIHelper isLogined]) {
             [XHTUIHelper alertWithNoChoice:@"您已登出." view:self];
@@ -112,9 +131,10 @@
         
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            NSLog(@"您已登出...");
+            NSLog(@"登出成功...");
             self.userName.text=@"";
             self.userAccount.text=@"";
+            self.userImage.image = [UIImage imageNamed:@"ic_user_head_unlogged"];
             [ShareEntity shareInstance].userName=@"";
             [ShareEntity shareInstance].userAccount=@"";
             [XHTUIHelper writeNSUserDefaultsWithKey:LOGIN_KEY withObject:LOGIN_FAILED_KEY];

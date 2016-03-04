@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="官方网址：http://tako.im" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7on-zt-mkE">
-                    <rect key="frame" x="206" y="229" width="188" height="21"/>
+                    <rect key="frame" x="206" y="291" width="188" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="DnY-kp-sKu"/>
                         <constraint firstAttribute="width" constant="188" id="gON-HP-CwA"/>
@@ -27,7 +27,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QQ群： 278901064" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgE-Cy-CK6">
-                    <rect key="frame" x="229" y="258" width="153" height="21"/>
+                    <rect key="frame" x="229" y="320" width="153" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="153" id="LSL-hb-rSz"/>
                         <constraint firstAttribute="height" constant="21" id="QE3-r2-zit"/>
@@ -37,14 +37,14 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="tCw-Of-ukP">
-                    <rect key="frame" x="250.5" y="75" width="100" height="100"/>
+                    <rect key="frame" x="250.5" y="105" width="100" height="100"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="HgJ-aA-1Ha"/>
                         <constraint firstAttribute="height" constant="100" id="eRw-IM-T9j"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" tako 0.0.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nde-rt-6CL">
-                    <rect key="frame" x="270.5" y="190" width="60" height="21"/>
+                    <rect key="frame" x="270.5" y="220" width="60" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="0oQ-dE-Kd1"/>
                         <constraint firstAttribute="width" constant="60" id="iM5-F7-37v"/>
@@ -59,9 +59,9 @@
                 <constraint firstItem="tCw-Of-ukP" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="1uI-Zu-CIZ"/>
                 <constraint firstItem="Nde-rt-6CL" firstAttribute="centerX" secondItem="mgE-Cy-CK6" secondAttribute="centerX" constant="-5" id="3kU-in-gC4"/>
                 <constraint firstItem="Nde-rt-6CL" firstAttribute="top" secondItem="tCw-Of-ukP" secondAttribute="bottom" constant="15" id="9oI-N2-WCh"/>
-                <constraint firstItem="tCw-Of-ukP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="Ryt-8O-Chu"/>
-                <constraint firstItem="mgE-Cy-CK6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="258" id="Uvc-yN-Uer"/>
-                <constraint firstItem="7on-zt-mkE" firstAttribute="top" secondItem="Nde-rt-6CL" secondAttribute="bottom" constant="18" id="VEY-db-1jf"/>
+                <constraint firstItem="tCw-Of-ukP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="105" id="Ryt-8O-Chu"/>
+                <constraint firstItem="mgE-Cy-CK6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="320" id="Uvc-yN-Uer"/>
+                <constraint firstItem="7on-zt-mkE" firstAttribute="top" secondItem="Nde-rt-6CL" secondAttribute="bottom" constant="50" id="VEY-db-1jf"/>
                 <constraint firstItem="tCw-Of-ukP" firstAttribute="centerX" secondItem="7on-zt-mkE" secondAttribute="centerX" id="gw8-cQ-7Bh"/>
                 <constraint firstItem="tCw-Of-ukP" firstAttribute="centerX" secondItem="Nde-rt-6CL" secondAttribute="centerX" id="xEq-8U-VYI"/>
             </constraints>

@@ -33,7 +33,6 @@
 @end
 
 
-
 @implementation DownloadWorker
 
 
@@ -57,6 +56,7 @@
     NSLog(@"下载结束，结果为失败。错误信息: %@",messageString);
     self.isFree=YES;
     [self.delegate downloadFinish:NO msg:@"无法连接到服务器，请重试。" tag:self.tag];
+    [self saveCurrentProgress:DOWNLOAD_FINISH_FAIL];
 }
 
 
@@ -145,6 +145,7 @@
     [self.delegate downloadFinish:YES msg:nil tag:self.tag];
     
     NSLog(@"下载结束，结果为成功...");
+    [self saveCurrentProgress:DOWNLOAD_FINISH_SUCCESS];
     
 }
 
@@ -165,9 +166,12 @@
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
+    
+     NSDictionary* oldDict = (NSDictionary*)[XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
+    
     // 若之前有下载记录，则直接读取之前的进度。
-    if([XHTUIHelper readNSUserDefaultsObjectWithkey:self.tag]!=nil){
-        NSDictionary* t = (NSDictionary*)[XHTUIHelper readNSUserDefaultsObjectWithkey:self.tag];
+    if([oldDict objectForKey:self.tag]!=nil){
+        NSDictionary* t = (NSDictionary*)[oldDict objectForKey:self.tag];
         self.currentLength = [(NSString*)[t objectForKey:DOWNLOAD_CURRENT_LENGTH_KEY] longLongValue];
         self.totalLength = [(NSString*)[t objectForKey:DOWNLOAD_TOTAL_LENGTH_KEY] longLongValue];
         self.appid = (NSString*)[t objectForKey:DOWNLOAD_APPID_KEY];
@@ -194,18 +198,39 @@
     self.tag=tag;
     
     
-    [self saveCurrentProgress];
+    [self saveCurrentProgress:DOWNLOAD_PAUSE];
 }
 
 // 保存当前进度，以便下次退出应用后，仍可继续。
--(void)saveCurrentProgress{
-    NSMutableDictionary* dict = [NSMutableDictionary new];
+-(void)saveCurrentProgress:(int) status{
+    
+    NSDictionary* oldCurrent =nil;
+    NSMutableDictionary* newCurrent =nil;
+    NSMutableDictionary* newDict = nil;
+    NSDictionary* oldDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
+    
+    if (oldDict==nil) {
+        newDict = [NSMutableDictionary new];
+    }else{
+        newDict = [NSMutableDictionary dictionaryWithDictionary:oldDict];
+    }
+    
+     oldCurrent =[newDict objectForKey:self.tag];
+    if (oldCurrent==nil) {
+        newCurrent = [NSMutableDictionary new];
+    }else{
+        newCurrent = [NSMutableDictionary dictionaryWithDictionary:oldCurrent];
+    }
+    
     NSString* currentLength = [NSString stringWithFormat:@"%qi",self.currentLength];
     NSString* totalLength = [NSString stringWithFormat:@"%qi",self.totalLength];
-    [dict setObject:currentLength forKey:DOWNLOAD_CURRENT_LENGTH_KEY];
-    [dict setObject:totalLength forKey:DOWNLOAD_TOTAL_LENGTH_KEY];
-    [dict setObject:self.appid forKeyedSubscript:DOWNLOAD_APPID_KEY];
-    [XHTUIHelper writeNSUserDefaultsWithKey:self.tag withObject:dict];
+    [newCurrent setObject:currentLength forKey:DOWNLOAD_CURRENT_LENGTH_KEY];
+    [newCurrent setObject:totalLength forKey:DOWNLOAD_TOTAL_LENGTH_KEY];
+    [newCurrent setObject:self.appid forKeyedSubscript:DOWNLOAD_APPID_KEY];
+    [newCurrent setObject:[NSString stringWithFormat:@"%D",status] forKeyedSubscript:DOWNLOAD_STATUS_KEY];
+    
+    [newDict setValue:newCurrent forKey:self.tag];
+    [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_INFO_KEY withObject:newDict];
 }
 
 /*
@@ -218,7 +243,7 @@
     self.isFree = YES;
     self.tag=tag;
     
-    [self saveCurrentProgress];
+    [self saveCurrentProgress:DOWNLOAD_STOP];
 }
 
 -(BOOL) isDelegateAvailable:(id<XHtDownLoadDelegate>) delegate{

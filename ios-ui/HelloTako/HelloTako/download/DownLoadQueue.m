@@ -55,14 +55,16 @@ NSMutableDictionary* taskQueueDict = nil;
         DownloadInfo* d = [DownloadInfo new];
         d.url = url;
         d.tag = tag;
-        d.delegate = delegate;
+       
         d.isSuspend = NO;// 只有被用户主动暂停时，该标志位才会为YES
         d.isExecuting =NO;
         [taskQueueDict setObject:d forKey:tag];
     }
+
     
     // 去除暂停标志。
     DownloadInfo* d = (DownloadInfo*)[taskQueueDict objectForKey:tag];
+    d.delegate = delegate; // 同一个tag可以有两个delegte，所以此处需要重新设置delegate
     d.isSuspend = NO;
     
     DownloadWorker* worker = [self newWorker];

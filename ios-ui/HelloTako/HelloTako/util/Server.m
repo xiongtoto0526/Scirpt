@@ -62,6 +62,34 @@
     
 }
 
++(TakoApp*)fetchAppWithid:(NSString*)appid{
+    NSString* url = [NSString stringWithFormat:@"/app/%@",appid];
+    TakoApp* result = nil;
+    NSData* returnData = [self getWithUrl:url];
+    if (returnData==nil) {
+        return result;
+    }
+    
+    // 解析结果
+    NSString* retjson = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    NSLog(@"http response is ...%@",retjson);
+    if([XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_RET_KEY]==nil){
+        NSLog(@"fetch error...");
+        return result;
+    }
+    
+    NSNumber* resultCode = (NSNumber*)[XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_RET_KEY];
+    if ([resultCode longValue] == 0) {
+        NSLog(@"fetch success....");
+        NSDictionary* dataDict = (NSDictionary*)[XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_DATA_KEY];
+        
+        NSDictionary* appDict = [dataDict objectForKey:@"app"];
+        result =  [[TakoApp new] initWithDictionary:appDict];
+        result.isSuccessed = [self isAppDownloadedBefore:result.versionId];  // 添加下载标志
+    }
+    return result;
+}
+
 +(NSMutableArray*)fetchApp:(NSString*)cursor{
     
     NSMutableArray* result = [NSMutableArray new];
@@ -220,18 +248,14 @@
 
 // 判断app是否下载过
 +(BOOL)isAppDownloadedBefore:(NSString*) versionId{
-    BOOL isExist = NO;
-    NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_VERSION_KEY];
-    for (NSString *key in downloadAppDict) {
-        if ([key isEqualToString:versionId]) {
-            NSLog(@"该应用已保存在下载记录中...");
-            isExist = YES;
-            NSLog(@"versionId is:%@",versionId);
-            NSLog(@"downloadAppDict is:%@",downloadAppDict);
-            break;
-        }
+    
+    NSDictionary* oldDict = (NSDictionary*)[XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
+    if ([oldDict objectForKey:versionId]==nil) {
+        return NO;
     }
-    return isExist;
+    NSDictionary* d = (NSDictionary*)[oldDict objectForKey:versionId];
+    NSString* status = (NSString*)[d objectForKey:DOWNLOAD_STATUS_KEY];
+    return [status intValue] == DOWNLOAD_FINISH_SUCCESS;
 }
 
 

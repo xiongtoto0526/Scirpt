@@ -28,6 +28,7 @@
     btn.enabled = NO;
 }
 
+// 隐藏tableview多余的单元格
 + (void)setExtraCellLineHidden: (UITableView *)tableView
 {
     UIView *view =[ [UIView alloc]init];
@@ -164,6 +165,7 @@
 
 +(BOOL)isLogined{
     NSString* key = [XHTUIHelper readNSUserDefaultsWithkey:LOGIN_KEY];
+    NSLog(@"login key is:%@",key);
     if (key==nil) {
         return NO;
     }
