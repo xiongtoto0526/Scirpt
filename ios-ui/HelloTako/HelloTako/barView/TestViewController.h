@@ -11,6 +11,7 @@
 
 // 对应底部的 “测试”栏
 @interface TestViewController : UIViewController
-
++(TestViewController*)share;
+@property NSMutableArray* listData;
 @end
 

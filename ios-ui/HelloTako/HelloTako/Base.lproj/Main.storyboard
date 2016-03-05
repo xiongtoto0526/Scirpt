@@ -70,7 +70,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="测试" image="icon_test_unselected.png" selectedImage="32D0E788-29AC-4D9E-BDD7-8D7D4E8FE6CE" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="测试" image="icon_test_unselected.png" selectedImage="7A5388E9-C0DC-4080-98D7-89A5F6FA198C" id="acW-dT-cKf"/>
                     <navigationItem key="navigationItem" title="测试" id="Eoe-hR-mcj"/>
                     <connections>
                         <outlet property="tableview" destination="CgI-oF-94s" id="OlL-11-WiV"/>
@@ -418,7 +418,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="32D0E788-29AC-4D9E-BDD7-8D7D4E8FE6CE" width="26" height="26">
+        <image name="7A5388E9-C0DC-4080-98D7-89A5F6FA198C" width="26" height="26">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

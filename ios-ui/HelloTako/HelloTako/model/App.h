@@ -25,6 +25,7 @@
 @property BOOL isStarted;
 @property BOOL isPaused;
 @property NSString* progress;
+@property float progressValue;
 
 @property (nonatomic) NSArray* propertykeys;
 

@@ -10,5 +10,6 @@
 
 @interface DownloadViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
-
+@property  NSMutableArray* listData;
++(DownloadViewController*)share;
 @end

@@ -1,4 +1,4 @@
-//
+    //
 //  DownloadViewController.m
 //  HelloTako
 //
@@ -13,11 +13,11 @@
 #import "Server.h"
 #import "UIImageView+WebCache.h"
 #import "DownloadQueue.h"
+#import "TestViewController.h"
 
 @interface DownloadViewController ()<UITableViewDataSource,UITableViewDelegate,XHtDownLoadDelegate>
 @property TableViewCell* currentCell;
 @property  NSMutableArray* sectionTitleArray;
-@property  NSMutableArray* listData;
 @property TakoApp* currentApp;
 @end
 
@@ -35,12 +35,24 @@
 
 @end
 
-
+DownloadViewController* share = nil;
 @implementation DownloadViewController
+
++(DownloadViewController*)share{
+    return share;
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tableview reloadData];// 重新刷新cell
+}
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+
+    share = self;
     
     // 隐藏tableview中多余的单元格线条
     [XHTUIHelper setExtraCellLineHidden:self.tableview];
@@ -158,9 +170,12 @@
                          placeholderImage:[UIImage imageNamed:@"ic_defaultapp"]];
     }
     
+    
+    // todo: 待删除上面的。
     if (app.isSuccessed) {
         NSLog(@"重复应用信息,名称，%@，版本，%@",cell.appName.text,app.versionId);
         [XHTUIHelper disableDownloadButton:cell.button];
+        [self hideProgressUI:YES cell:cell];
     }else if (app.isPaused) {
         [cell.button setTitle:@"继续" forState:UIControlStateNormal];
         [self hideProgressUI:NO cell:cell];
@@ -168,6 +183,18 @@
         [cell.button setTitle:@"暂停" forState:UIControlStateNormal];
         [self hideProgressUI:NO cell:cell];
     }
+    
+    // todo: 和尚庙的设置重复了，需要删除上面的。
+    if (indexPath.section == 0) {
+        [XHTUIHelper disableDownloadButton:cell.button];
+        [self hideProgressUI:YES cell:cell];
+    }else{
+        [cell.button setTitle:@"继续" forState:UIControlStateNormal];
+        [self hideProgressUI:NO cell:cell];
+    }
+    
+    cell.textDownload.text = app.progress;
+    cell.progressControl.progress = app.progressValue;
     
     return cell;
 }
@@ -428,6 +455,8 @@ viewForFooterInSection:(NSInteger)section {
     // 更新app
     app.progress = @"100%";
     app.isSuccessed=isSuccess;
+    
+   
 }
 
 
@@ -443,7 +472,7 @@ viewForFooterInSection:(NSInteger)section {
     
     // 找到对应的cell
     for (int i=0; i< [cellList count]; i++) {
-        TakoApp* app = (TakoApp*)[cellList objectAtIndex:i];
+             app = (TakoApp*)[cellList objectAtIndex:i];
         if ([app.versionId isEqualToString:tag]) {
             NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:1];
             cell = [self.tableview cellForRowAtIndexPath:path];
@@ -454,10 +483,23 @@ viewForFooterInSection:(NSInteger)section {
     // 更新cell
     [cell.progressControl setProgress:prg];
     NSString* progress = [NSString stringWithFormat:@"%.1lf",prg*100];
-    cell.textDownload.text = [NSString stringWithFormat:@"当前进度:%@%%",progress];
+    progress = [NSString stringWithFormat:@"当前进度:%@%%",progress];
+    cell.textDownload.text = progress;
     
     // 更新app
     app.progress = progress;
+    app.progressValue = prg;
+    
+    // todo:  重构时，此处的listdat中 section 或row 的 index 不一样
+    NSArray* testApps = [TestViewController share].listData;
+    for (int i=0; i<[testApps count]; i++) {
+        TakoApp* temp = [testApps objectAtIndex:i];
+        if ([app.versionId isEqualToString:temp.versionId]) {
+            temp.progress = app.progress;
+            temp.progressValue = app.progressValue;
+            break;
+        }
+    }
 }
 
 @end

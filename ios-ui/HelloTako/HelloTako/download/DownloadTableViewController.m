@@ -1,4 +1,14 @@
 //
+//  DownloadTableViewController.m
+//  HelloTako
+//
+//  Created by 熊海涛 on 16/3/5.
+//  Copyright © 2016年 熊海涛. All rights reserved.
+//
+
+
+
+//
 //  FirstViewController.m
 //  HelloTako
 //
@@ -20,8 +30,9 @@
 #import "DownloadQueue.h"
 #import "UIImageView+WebCache.h"
 #import "DownloadViewController.h"
+#import "DownloadTableViewController.h"
 
-@interface TestViewController ()<UITableViewDataSource,UITableViewDelegate,XHtDownLoadDelegate>
+@interface DownloadTableViewController ()<UITableViewDataSource,UITableViewDelegate,XHtDownLoadDelegate>
 @property UIRefreshControl* refreshControl;
 @property NSString* cursor;
 @property TableViewCell* currentCell;
@@ -29,19 +40,29 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @end
 
-TestViewController* shareTest = nil;
-@implementation TestViewController
+DownloadTableViewController* shareInstance = nil;
+
+#import "DownloadTableViewController.h"
+
+@interface DownloadTableViewController ()
+
+@end
+
+@implementation DownloadTableViewController
 
 
-+(TestViewController*)share{
-    return shareTest;
+
+
+
++(DownloadTableViewController*)share{
+    return shareInstance;
 }
 
 
 -(void)viewDidAppear:(BOOL)animated{
     
     [super viewDidAppear:animated];
-    [self.tableview reloadData];
+    
     // t:此处不能模态alter窗口,否则崩溃。
     if (![XHTUIHelper isLogined]) {
         [self presentViewController:[LoginViewController new] animated:NO completion:^{
@@ -49,7 +70,7 @@ TestViewController* shareTest = nil;
         }];
     }
     
-
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -67,7 +88,7 @@ TestViewController* shareTest = nil;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    shareTest = self;
+    shareInstance = self;
     
     // 设置底部bar图片
     self.tabBarItem.image = [UIImage imageNamed:@"icon_test_unselected"];
@@ -83,7 +104,7 @@ TestViewController* shareTest = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDownloadpageFinishNotification:) name:DOWNLAOD_MANAGE_PAGE_FINISH_NOTIFICATION object:nil];
     
-
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveLoginBackNotification) name:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];
     
     
@@ -310,7 +331,7 @@ TestViewController* shareTest = nil;
     
     // 没有新数据提示
     if ([newdata count]==0) {
-     [self.tableview.mj_footer endRefreshingWithNoMoreData];
+        [self.tableview.mj_footer endRefreshingWithNoMoreData];
         return;
     }
     
@@ -398,7 +419,7 @@ TestViewController* shareTest = nil;
     }
     cell.textDownload.text = app.progress;
     cell.progressControl.progress = app.progressValue;
-
+    
     
     return cell;
 }
@@ -521,6 +542,15 @@ TestViewController* shareTest = nil;
         }
     }
 }
+
+
+
+
+
+
+
+
+
 
 
 
