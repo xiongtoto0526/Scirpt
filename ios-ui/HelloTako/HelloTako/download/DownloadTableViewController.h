@@ -24,9 +24,7 @@
 -(void)receiveCancelDownloadNotification:(NSNotification*)notice;
 -(void)downloadApp;
 -(void)hideProgressUI:(BOOL)isShow cell:(TableViewCell*)cell;
-//-(void)pauseDownload;
-//-(void)countinueDownload;
-//-(void)startDownload;
+
 @end
 
 

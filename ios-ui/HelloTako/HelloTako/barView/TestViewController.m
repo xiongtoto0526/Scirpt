@@ -78,9 +78,6 @@ TestViewController* shareTest = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveCancelDownloadNotification:) name:CLICK_DOWNLOAD_CANCEL_BUTTON_NOTIFICATION object:nil];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDownloadpageFinishNotification:) name:DOWNLAOD_MANAGE_PAGE_FINISH_NOTIFICATION object:nil];
-//    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveLoginBackNotification) name:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];
     
     
@@ -166,24 +163,6 @@ TestViewController* shareTest = nil;
     
     [super receiveClickDownloadNotification:notice];
     
-//    // 更新downloadpage的app
-//    if ([DownloadViewController share].listData == nil) {
-//        return;
-//    }
-//    NSMutableArray* downloadApps = [[DownloadViewController share].listData objectAtIndex:1];
-//    BOOL isNew = YES;
-//    for (int i=0; i<[downloadApps count]; i++) {
-//        TakoApp* temp = [downloadApps objectAtIndex:i];
-//        if ([app.versionId isEqualToString:temp.versionId]) {
-//            temp.isStarted = app.isStarted;
-//            temp.isPaused = app.isPaused;
-//            isNew = NO;
-//            break;
-//        }
-//    }
-//    if (isNew) {
-//        [downloadApps addObject:app];
-//    }
     
 }
 
@@ -213,24 +192,6 @@ TestViewController* shareTest = nil;
     self.currentCell = cell;
     
     [super receiveCancelDownloadNotification:notice];
-    
-//    if ([DownloadViewController share].listData == nil) {
-//        return;
-//    }
-    
-//    // 更新downloadpage的app
-//    NSArray* downloadApps = [[DownloadViewController share].listData objectAtIndex:1];
-//    for (int i=0; i<[downloadApps count]; i++) {
-//        TakoApp* temp = [downloadApps objectAtIndex:i];
-//        if ([app.versionId isEqualToString:temp.versionId]) {
-//            temp.isStarted = app.isStarted;
-//            temp.isPaused = app.isPaused;
-//            temp.isSuccessed = app.isSuccessed;
-//            temp.progress = app.progress;
-//            temp.progressValue = app.progressValue;
-//            break;
-//        }
-//    }
 }
 
 
@@ -255,7 +216,7 @@ TestViewController* shareTest = nil;
         for(int i=0;i<[newdata count];i++){
             TakoApp* app = (TakoApp*)[newdata objectAtIndex:i];
             
-            // 从新加载时，若存在下载管理页，直接从下载管理页中获取最新的appprogress信息
+            // 重新加载时，若存在下载管理页，直接从下载管理页的实例中获取最新的appProgress信息
             BOOL isExist = NO;
             if ([DownloadViewController share].listData!=nil) {
                 NSArray* temp = [[DownloadViewController share].listData objectAtIndex:1];
@@ -338,7 +299,7 @@ TestViewController* shareTest = nil;
 
 // 点击单元格，暂时关闭该页面。如需激活该方法，需要修改cell中设置。
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-  
+    
 }
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -436,6 +397,7 @@ TestViewController* shareTest = nil;
         
         // 更新cell
         [XHTUIHelper disableDownloadButton:cell.button];
+        
         // 记录已下载情况
         NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_VERSION_KEY];//userDefault只允许返回NSDictionary
         if (downloadAppDict==nil) {
@@ -486,15 +448,26 @@ TestViewController* shareTest = nil;
     app.progress = progress;
     app.progressValue = prg;
     
-    //    // todo:  更新downloadpage的app
-    //    NSArray* downloadApps = [[DownloadViewController share].listData objectAtIndex:1];
-    //    for (int i=0; i<[downloadApps count]; i++) {
-    //        TakoApp* temp = [downloadApps objectAtIndex:i];
-    //        if ([app.versionId isEqualToString:temp.versionId]) {
-    //            temp.progress = app.progress;
-    //            temp.progressValue = app.progressValue;
-    //        }
-    //    }
+    
+    // 更新downloadpage的app,若新增了app，需要向管理页面添加新的item
+    if ([DownloadViewController share].listData == nil) {
+        return;
+    }
+    
+    // todo: 待优化，可提前加入app。
+    NSMutableArray* downloadApps = [[DownloadViewController share].listData objectAtIndex:1];
+    BOOL isNew = YES;
+    for (int i=0; i<[downloadApps count]; i++) {
+        TakoApp* temp = [downloadApps objectAtIndex:i];
+        if ([app.versionId isEqualToString:temp.versionId]) {
+            isNew = NO;
+            break;
+        }
+    }
+    if (isNew) {
+        [downloadApps addObject:app];
+    }
+    
 }
 
 

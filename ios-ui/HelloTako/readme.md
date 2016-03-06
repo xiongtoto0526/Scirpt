@@ -18,6 +18,12 @@
 }
 - 8. cell和table的编程规范。 cell变化后，app的信息必须同步更新。
 
+- 9. 保存间隔0.1是否可用？test页面下载完成后，download页面需要移动item在section中的位置
+- 10.  test页面新增任务时（且password正确。），需要向管理页面添加新的item. // todo: 待优化，可提前加入app。
+- 11.     // todo:通过监听处理，以减少viewappear中的事件。
+
+
+
 ### 测试场景
 - 1 带密码，不带密码
 - 2 暂停，恢复，反复测试

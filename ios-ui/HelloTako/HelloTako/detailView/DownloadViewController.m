@@ -1,4 +1,4 @@
-    //
+//
 //  DownloadViewController.m
 //  HelloTako
 //
@@ -29,18 +29,39 @@ DownloadViewController* share = nil;
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+
+    // todo:通过监听处理，以减少viewappear中的事件。
+    NSMutableArray* downloadingList = [self.listData objectAtIndex:1];
+    NSMutableArray* downloadedList = [self.listData objectAtIndex:0];
+    if (downloadingList != nil) {
+        for (int i=0; i<[downloadingList count]; i++) {
+            TakoApp* temp = [downloadingList objectAtIndex:i];
+            if (temp.isSuccessed) {
+                [downloadedList addObject:temp];
+                [downloadingList removeObject:temp];
+                
+                // 设置section title
+                NSString* title1 = [NSString stringWithFormat:@"已下载(%lu)",(unsigned long)[downloadedList count]];
+                NSString* title2 = [NSString stringWithFormat:@"下载中(%lu)",(unsigned long)[downloadingList count]];
+                [self.sectionTitleArray replaceObjectAtIndex:0 withObject:title1];
+                [self.sectionTitleArray replaceObjectAtIndex:1 withObject:title2];
+//                [self.sectionTitleArray objectAtIndex:1]
+            }
+        }
+    }
+    
     [self.tableview reloadData];// 重新刷新cell
 }
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-
+    
     share = self;
     
     // 隐藏tableview中多余的单元格线条
     [XHTUIHelper setExtraCellLineHidden:self.tableview];
-
+    
     // 添加监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveClickDownloadNotification:) name:CLICK_DOWNLOAD_BUTTON_NOTIFICATION object:nil];
     
@@ -48,15 +69,17 @@ DownloadViewController* share = nil;
     
     // 加载 listData
     self.listData = [NSMutableArray new];
+    NSMutableArray* downloadedList = [NSMutableArray new];
+    NSMutableArray* downloadingList = [NSMutableArray new];
     self.sectionTitleArray = [NSMutableArray new];
     NSDictionary* dict =[XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
     if (dict==nil) {
         self.sectionTitleArray = [[NSMutableArray alloc]initWithObjects:@"已下载(0)",@"下载中(0)",nil];
+        [self.listData addObject:downloadedList];
+        [self.listData addObject:downloadingList];
         return;
     }
     
-    NSMutableArray* downloadedList = [NSMutableArray new];
-    NSMutableArray* downloadingList = [NSMutableArray new];
     for (NSString* key in dict) {
         DownloadHistoryInfo* info = [DownloadHistoryInfo new];
         NSDictionary* d = (NSDictionary*)[dict objectForKey:key];
@@ -84,17 +107,6 @@ DownloadViewController* share = nil;
             [downloadedList addObject:app];
         }else if(status == DOWNLOAD_START || status == DOWNLOAD_PAUSE){
             [downloadingList addObject:app];
-            
-//            // 首次加载时，必须从外层刷controller里面的listdata中，拿到最新的appprogress信息
-//            NSArray* temp = [TestViewController share].listData;
-//            for (int i=0; i<[[TestViewController share].listData count]; i++) {
-//                TakoApp* tempApp = [temp objectAtIndex:i];
-//                if ([app.versionId isEqualToString:tempApp.versionId]) {
-//                    app.progress = tempApp.progress;
-//                    app.progressValue = tempApp.progressValue;
-//                    break;
-//                }
-//            }
         }
     }
     
@@ -102,14 +114,14 @@ DownloadViewController* share = nil;
     [self.listData addObject:downloadedList];
     [self.listData addObject:downloadingList];
     
-
+    
     // 设置section title
     NSString* title1 = [NSString stringWithFormat:@"已下载(%lu)",(unsigned long)[downloadedList count]];
     NSString* title2 = [NSString stringWithFormat:@"下载中(%lu)",(unsigned long)[downloadingList count]];
     [self.sectionTitleArray addObject:title1];
     [self.sectionTitleArray addObject:title2];
-
-
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -175,15 +187,21 @@ DownloadViewController* share = nil;
         [cell.appImage sd_setImageWithURL:[NSURL URLWithString:app.logourl]
                          placeholderImage:[UIImage imageNamed:@"ic_defaultapp"]];
     }
-
+    
     
     if (indexPath.section == 0) {
         [XHTUIHelper disableDownloadButton:cell.button];
         [self hideProgressUI:YES cell:cell];
     }else{
-        [cell.button setTitle:@"继续" forState:UIControlStateNormal];
-        [self hideProgressUI:NO cell:cell];//todo:暂时无法获取第一次的进度
-    }
+        if (app.isSuccessed) {
+            [XHTUIHelper disableDownloadButton:cell.button];
+            [self hideProgressUI:YES cell:cell];
+        }else{
+            [cell.button setTitle:@"继续" forState:UIControlStateNormal];
+            [self hideProgressUI:NO cell:cell];
+
+        }
+}
     
     cell.textDownload.text = app.progress;
     cell.progressControl.progress = app.progressValue;
@@ -227,16 +245,6 @@ viewForFooterInSection:(NSInteger)section {
     
     [super receiveClickDownloadNotification:notice];
     
-//    // 更新testviewController的app
-//    NSArray* testApps = [TestViewController share].listData;
-//    for (int i=0; i<[testApps count]; i++) {
-//        TakoApp* temp = [testApps objectAtIndex:i];
-//        if ([app.versionId isEqualToString:temp.versionId]) {
-//            temp.isStarted = app.isStarted;
-//            temp.isPaused = app.isPaused;
-//            break;
-//        }
-//    }
 }
 
 
@@ -268,19 +276,6 @@ viewForFooterInSection:(NSInteger)section {
     
     [super receiveCancelDownloadNotification:notice];
     
-//    // 更新testviewController的app
-//    NSArray* testApps = [TestViewController share].listData;
-//    for (int i=0; i<[testApps count]; i++) {
-//        TakoApp* temp = [testApps objectAtIndex:i];
-//        if ([app.versionId isEqualToString:temp.versionId]) {
-//            temp.isStarted = app.isStarted;
-//            temp.isPaused = app.isPaused;
-//            temp.isSuccessed = app.isSuccessed;
-//            temp.progress = app.progress;
-//            temp.progressValue = app.progressValue;
-//            break;
-//        }
-//    }
 }
 
 
@@ -294,11 +289,6 @@ viewForFooterInSection:(NSInteger)section {
     NSString* value = isSuccess? @"1":@"0";
     [dict setObject:value forKey:DOWNLOAD_RESULT_KEY];
     [dict setObject:tag forKey:DOWNLOAD_TAG_KEY];
-    
-//    // 发送事件
-//    NSNotification *notification =[NSNotification notificationWithName:DOWNLAOD_MANAGE_PAGE_FINISH_NOTIFICATION object:nil userInfo:dict];
-//    [[NSNotificationCenter defaultCenter] postNotification:notification];
-//
     
     TableViewCell* cell = nil;
     TakoApp* app = nil;
@@ -342,7 +332,7 @@ viewForFooterInSection:(NSInteger)section {
     app.progress = @"100%";
     app.isSuccessed=isSuccess;
     
-   
+    
 }
 
 
@@ -358,7 +348,7 @@ viewForFooterInSection:(NSInteger)section {
     
     // 找到对应的cell
     for (int i=0; i< [cellList count]; i++) {
-             app = (TakoApp*)[cellList objectAtIndex:i];
+        app = (TakoApp*)[cellList objectAtIndex:i];
         if ([app.versionId isEqualToString:tag]) {
             NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:1];
             cell = [self.tableview cellForRowAtIndexPath:path];
@@ -375,17 +365,6 @@ viewForFooterInSection:(NSInteger)section {
     // 更新app
     app.progress = progress;
     app.progressValue = prg;
-
-//    // 更新testController的app
-//    NSArray* testApps = [TestViewController share].listData;
-//    for (int i=0; i<[testApps count]; i++) {
-//        TakoApp* temp = [testApps objectAtIndex:i];
-//        if ([app.versionId isEqualToString:temp.versionId]) {
-//            temp.progress = app.progress;
-//            temp.progressValue = app.progressValue;
-//            break;
-//        }
-//    }
 }
 
 @end

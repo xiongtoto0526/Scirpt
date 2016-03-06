@@ -115,7 +115,9 @@
     
     // 下载进度
     double newProgress = (double)self.currentLength / self.totalLength;
-    if (newProgress - self.progress > 0.1) {
+    
+    // todo: 下载进度保存间隔。
+    if (newProgress - self.progress > DOWNLOAD_PROGRESS_SAVE_INTERVAL) {
         [self saveCurrentProgress:DOWNLOAD_PAUSE];
     }
     self.progress = newProgress;

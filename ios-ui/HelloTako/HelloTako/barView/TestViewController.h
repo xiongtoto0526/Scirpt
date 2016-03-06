@@ -12,6 +12,8 @@
 
 // 对应底部的 “测试”栏
 @interface TestViewController : DownloadTableViewController
+
 +(TestViewController*)share;
+
 @end
 

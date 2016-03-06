@@ -23,7 +23,7 @@
 #import "DownloadViewController.h"
 #import "DownloadTableViewController.h"
 
-@interface DownloadTableViewController ()<UITableViewDataSource,UITableViewDelegate,XHtDownLoadDelegate>
+@interface DownloadTableViewController ()<XHtDownLoadDelegate>
 
 @end
 
@@ -197,7 +197,7 @@
     NSLog(@"will start download...");
     self.currentApp.isPaused = NO;
     self.currentApp.isStarted=YES;
-    [self.currentCell.button setTitle:@"暂停" forState:UIControlStateNormal];  // 修改下载按钮的文本显示
+    [self.currentCell.button setTitle:@"暂停" forState:UIControlStateNormal];
     
     /* 添加到下载队列。注：
      1. 下载队列无界，可无限添加，但每次只能有1个（constant.h中可配置梳理）活跃线程下载。允许重复添加（程序会自动识别）。
@@ -370,15 +370,6 @@
     app.progress = progress;
     app.progressValue = prg;
     
-    // todo:  更新downloadpage的app
-    NSArray* downloadApps = [[DownloadViewController share].listData objectAtIndex:1];
-    for (int i=0; i<[downloadApps count]; i++) {
-        TakoApp* temp = [downloadApps objectAtIndex:i];
-        if ([app.versionId isEqualToString:temp.versionId]) {
-            temp.progress = app.progress;
-            temp.progressValue = app.progressValue;
-        }
-    }
 }
 
 
