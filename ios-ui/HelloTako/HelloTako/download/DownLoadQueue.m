@@ -5,6 +5,8 @@
 @interface DownloadInfo : NSObject
 @property (nonatomic, copy) NSString* url;
 @property (nonatomic, copy) NSString* tag;
+@property (nonatomic, copy) NSString* appid;
+@property (nonatomic, copy) NSString* password;
 @property (nonatomic) BOOL isExecuting;
 @property (nonatomic) BOOL isSuspend;
 @property(nonatomic, strong)id<XHtDownLoadDelegate> delegate;
@@ -55,7 +57,8 @@ NSMutableDictionary* taskQueueDict = nil;
         DownloadInfo* d = [DownloadInfo new];
         d.url = url;
         d.tag = tag;
-       
+        d.appid = appid;
+        d.password = password;
         d.isSuspend = NO;// 只有被用户主动暂停时，该标志位才会为YES
         d.isExecuting =NO;
         [taskQueueDict setObject:d forKey:tag];
@@ -91,7 +94,7 @@ NSMutableDictionary* taskQueueDict = nil;
         
         if (!downloadInfo.isExecuting && !downloadInfo.isSuspend) {
             DownloadWorker* worker = [self newWorker];// 选取线程
-            [worker startWithUrl:[NSURL URLWithString:downloadInfo.url] appid:nil password:nil tag:downloadInfo.tag  delegate:self];
+            [worker startWithUrl:[NSURL URLWithString:downloadInfo.url] appid:downloadInfo.appid password:downloadInfo.password tag:downloadInfo.tag  delegate:self];
             downloadInfo.isExecuting=YES;
             break;
         }

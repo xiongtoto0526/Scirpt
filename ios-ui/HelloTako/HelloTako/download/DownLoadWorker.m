@@ -169,6 +169,9 @@
     self.delegate=delegate;
     self.tag = tag;
     self.appid = appid;
+    if(self.appid == nil){
+        NSLog(@"ddd");
+    }
     self.password = password;
     self.isFree = NO;
     
@@ -183,6 +186,9 @@
         self.currentLength = [(NSString*)[t objectForKey:DOWNLOAD_CURRENT_LENGTH_KEY] longLongValue];
         self.totalLength = [(NSString*)[t objectForKey:DOWNLOAD_TOTAL_LENGTH_KEY] longLongValue];
         self.appid = (NSString*)[t objectForKey:DOWNLOAD_APPID_KEY];
+        if(self.appid == nil){
+            NSLog(@"ddd");
+        }
         self.password = (NSString*)[t objectForKey:DOWNLOAD_PASSWORD_KEY];
     }else{
         self.currentLength = 0;
@@ -234,6 +240,9 @@
     NSString* totalLength = [NSString stringWithFormat:@"%qi",self.totalLength];
     [newCurrent setObject:currentLength forKey:DOWNLOAD_CURRENT_LENGTH_KEY];
     [newCurrent setObject:totalLength forKey:DOWNLOAD_TOTAL_LENGTH_KEY];
+    if(self.appid == nil){
+        NSLog(@"ddd");
+    }
     [newCurrent setObject:self.appid forKey:DOWNLOAD_APPID_KEY];
     [newCurrent setObject:[NSString stringWithFormat:@"%d",status] forKey:DOWNLOAD_STATUS_KEY];
     
