@@ -114,8 +114,14 @@
     self.currentLength += data.length;
     
     // 下载进度
-    self.progress = (double)self.currentLength / self.totalLength;
+    double newProgress = (double)self.currentLength / self.totalLength;
+    if (newProgress - self.progress > 0.1) {
+        [self saveCurrentProgress:DOWNLOAD_PAUSE];
+    }
+    self.progress = newProgress;
     NSLog(@"当前下载进度:%lld",self.progress);
+    
+    
     [self.delegate downloadingWithTotal:self.totalLength complete:self.currentLength tag:self.tag];
 }
 
@@ -226,8 +232,8 @@
     NSString* totalLength = [NSString stringWithFormat:@"%qi",self.totalLength];
     [newCurrent setObject:currentLength forKey:DOWNLOAD_CURRENT_LENGTH_KEY];
     [newCurrent setObject:totalLength forKey:DOWNLOAD_TOTAL_LENGTH_KEY];
-    [newCurrent setObject:self.appid forKeyedSubscript:DOWNLOAD_APPID_KEY];
-    [newCurrent setObject:[NSString stringWithFormat:@"%D",status] forKeyedSubscript:DOWNLOAD_STATUS_KEY];
+    [newCurrent setObject:self.appid forKey:DOWNLOAD_APPID_KEY];
+    [newCurrent setObject:[NSString stringWithFormat:@"%d",status] forKey:DOWNLOAD_STATUS_KEY];
     
     [newDict setValue:newCurrent forKey:self.tag];
     [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_INFO_KEY withObject:newDict];

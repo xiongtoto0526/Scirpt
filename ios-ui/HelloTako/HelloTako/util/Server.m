@@ -85,7 +85,7 @@
         
         NSDictionary* appDict = [dataDict objectForKey:@"app"];
         result =  [[TakoApp new] initWithDictionary:appDict];
-        result.isSuccessed = [self isAppDownloadedBefore:result.versionId];  // 添加下载标志
+//        result.isSuccessed = [self isAppDownloadedBefore:result.versionId];  // 添加下载标志
     }
     return result;
 }

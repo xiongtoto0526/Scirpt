@@ -52,7 +52,7 @@
     
     [NSThread sleepForTimeInterval:LAUNCH_SCREEN_TIME];//设置闪屏页面时间
 //    
-     [XHTUIHelper clearAllUserDefaultsData]; // 调试用
+//     [XHTUIHelper clearAllUserDefaultsData]; // 调试用
 
     NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
     NSLog(@"当前版本:%@",currentVersion);

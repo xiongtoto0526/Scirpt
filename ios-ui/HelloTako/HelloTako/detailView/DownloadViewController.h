@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DownloadTableViewController.h"
 
-@interface DownloadViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UITableView *tableview;
-@property  NSMutableArray* listData;
+@interface DownloadViewController : DownloadTableViewController
 +(DownloadViewController*)share;
 @end
