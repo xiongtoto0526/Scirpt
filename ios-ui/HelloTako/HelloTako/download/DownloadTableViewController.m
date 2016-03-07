@@ -205,6 +205,9 @@
      3. 参数tag说明: tag 为每个下载记录的唯一标识。
      */
     [[XHtDownLoadQueue share] add:self.currentApp.downloadUrl appid:self.currentApp.appid password:self.currentApp.downloadPassword tag:self.currentApp.versionId delegate:self];
+    
+    // todo: 通知下载管理界面刷新数据
+    
 }
 
 
@@ -213,6 +216,7 @@
     NSLog(@"will continue download...");
     [self.currentCell.button setTitle:@"暂停" forState:UIControlStateNormal];
     self.currentApp.isPaused = NO;
+    self.currentApp.isStarted = YES;
     [[XHtDownLoadQueue share] add:self.currentApp.downloadUrl appid:self.currentApp.appid password:self.currentApp.downloadPassword tag:self.currentApp.versionId delegate:self];
 }
 
@@ -223,6 +227,7 @@
     NSLog(@"will pause download...");
     [self.currentCell.button setTitle:@"继续" forState:UIControlStateNormal];
     self.currentApp.isPaused = YES;
+    self.currentApp.isStarted = YES;
     [[XHtDownLoadQueue share] pause:self.currentApp.versionId];
 }
 
