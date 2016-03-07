@@ -108,6 +108,7 @@
     if (failedMsg==nil) {
         failedMsg = @"登录失败,请重试~";
     }
+    [self authFinish];
     
     [XHTUIHelper alertWithNoChoice:failedMsg view:self];
     

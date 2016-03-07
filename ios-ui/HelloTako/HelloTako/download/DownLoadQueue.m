@@ -175,7 +175,7 @@ NSMutableDictionary* taskQueueDict = nil;
 
 // 下载过程中，先进入该回调，然后再转发至viewController
 -(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize tag:(NSString*)tag{
-    NSLog(@"progress wrapper in downloadQueue...");
+//    NSLog(@"progress wrapper in downloadQueue...");
     DownloadInfo* d =  (DownloadInfo*)[taskQueueDict objectForKey:tag];
     [d.delegate downloadingWithTotal:totalSize complete:finishSize tag:tag];
 }

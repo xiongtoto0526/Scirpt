@@ -22,16 +22,12 @@
 #import "UIImageView+WebCache.h"
 #import "DownloadViewController.h"
 #import "DownloadTableViewController.h"
-
-@interface DownloadTableViewController ()<XHtDownLoadDelegate>
-
-@end
-
-
+#import "SharedInstallManager.h"
+#import "InstallingModel.h"
 #import "DownloadTableViewController.h"
 
-@interface DownloadTableViewController ()
-
+@interface DownloadTableViewController ()<XHtDownLoadDelegate,XHTInstallProgressDelegate>
+@property (nonatomic,strong) NSTimer* timer;
 @end
 
 
@@ -43,38 +39,6 @@
 @implementation DownloadTableViewController
 
 
--(void)receiveLoginBackNotification{
-    BOOL isLogined = [XHTUIHelper isLogined];
-    [self.tableview setHidden:!isLogined];
-    if (isLogined && [self.listData count]==0) {
-        [self loadMoreData];
-    }
-}
-
-
--(void)receiveDownloadpageFinishNotification:(NSNotification*)notice{
-    NSLog(@"receive download page finish event...");
-    // 定位到当前的cell
-    NSString* isSuccess = (NSString*)[notice.userInfo objectForKey:DOWNLOAD_RESULT_KEY];
-    NSString* tag = (NSString*)[notice.userInfo objectForKey:DOWNLOAD_TAG_KEY];
-    
-    TakoApp* app = nil;
-    TableViewCell* cell = nil;
-    // 找到对应的cell
-    for (int i=0; i<[self.listData count]; i++) {
-        app = (TakoApp*)[self.listData objectAtIndex:i];
-        if ([app.versionId isEqualToString:tag]) {
-            NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:0];
-            cell = [self.tableview cellForRowAtIndexPath:path];
-            break;
-        }
-    }
-    
-    // 更新cell
-    [self hideProgressUI:YES cell:cell];
-    // 更新app
-    app.isSuccessed = isSuccess;
-}
 
 // 接收到cell的下载按钮点击事件
 -(void)receiveClickDownloadNotification:(NSNotification*)notice{
@@ -105,13 +69,9 @@
         [cell.button setTitle:@"下载" forState:UIControlStateNormal];
         
         // 隐藏下载栏
-        [cell.btnCancel setHidden:YES];
+        [self hideProgressUI:YES cell:cell];
         [cell.progressControl setProgress:0];
-        [cell.progressControl setHidden:YES];
-        [cell.textDownload setHidden:YES];
-        self.currentApp.isStarted=NO;
-        self.currentApp.isPaused=NO;
-        self.currentApp.isSuccessed=NO;
+        self.currentApp.status = INITED;
         self.currentApp.progress = @"当前进度:0%";
         self.currentApp.progressValue=0;
         
@@ -171,17 +131,41 @@
     }
     
     NSLog(@"password is ok, will download from :%@",self.currentApp.downloadUrl);
-    if (!self.currentApp.isStarted) {
-        [self startDownload];
-    }else if(!self.currentApp.isPaused){
-        [self pauseDownload];
-    }else{
-        [self continueDownload];
+    
+    
+    switch (self.currentApp.status) {
+    
+        case INITED:
+            [self startDownload];
+            break;
+       case DOWNLOADED:
+            [self beginInstall];
+            break;
+        case DOWNLOADED_FAIL:
+            [self startDownload];
+            break;
+        case STARTED:
+            [self pauseDownload];
+            break;
+        case PAUSED:
+            [self continueDownload];
+            break;
+            
+        default:
+            break;
     }
     
-    // 更新cell
-    TableViewCell *cell =  self.currentCell;
-    [self hideProgressUI:NO cell:cell];
+    [self updateApp:self.currentApp cell:self.currentCell status:self.currentApp.status];
+   
+}
+
+-(void)beginInstall{
+    // 开启线程监控。
+    [SharedInstallManager shareInstWithdelegate:self];
+    NSString* itermServiceUrl = [TakoServer fetchItermUrl:self.currentApp.versionId password:self.currentApp.downloadPassword];
+    NSLog(@"will install,iterm url is:%@",itermServiceUrl);
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:itermServiceUrl]];
+
 }
 
 // 是否隐藏下载进度控件
@@ -195,9 +179,7 @@
 // 启动下载
 -(void)startDownload{
     NSLog(@"will start download...");
-    self.currentApp.isPaused = NO;
-    self.currentApp.isStarted=YES;
-    [self.currentCell.button setTitle:@"暂停" forState:UIControlStateNormal];
+    self.currentApp.status=STARTED;
     
     /* 添加到下载队列。注：
      1. 下载队列无界，可无限添加，但每次只能有1个（constant.h中可配置梳理）活跃线程下载。允许重复添加（程序会自动识别）。
@@ -205,18 +187,13 @@
      3. 参数tag说明: tag 为每个下载记录的唯一标识。
      */
     [[XHtDownLoadQueue share] add:self.currentApp.downloadUrl appid:self.currentApp.appid password:self.currentApp.downloadPassword tag:self.currentApp.versionId delegate:self];
-    
-    // todo: 通知下载管理界面刷新数据
-    
 }
 
 
 // 继续下载
 -(void)continueDownload{
     NSLog(@"will continue download...");
-    [self.currentCell.button setTitle:@"暂停" forState:UIControlStateNormal];
-    self.currentApp.isPaused = NO;
-    self.currentApp.isStarted = YES;
+    self.currentApp.status = STARTED;
     [[XHtDownLoadQueue share] add:self.currentApp.downloadUrl appid:self.currentApp.appid password:self.currentApp.downloadPassword tag:self.currentApp.versionId delegate:self];
 }
 
@@ -225,48 +202,10 @@
 // 暂停下载
 -(void)pauseDownload{
     NSLog(@"will pause download...");
-    [self.currentCell.button setTitle:@"继续" forState:UIControlStateNormal];
-    self.currentApp.isPaused = YES;
-    self.currentApp.isStarted = YES;
+    self.currentApp.status = PAUSED;
     [[XHtDownLoadQueue share] pause:self.currentApp.versionId];
 }
 
-
-#pragma mark 上拉加载更多数据
-- (void)loadMoreData
-{
-    // 从server端拉取数据
-    NSArray* newdata = [self fetchDataFromServer];
-    
-    // 没有新数据提示
-    if ([newdata count]==0) {
-        [self.tableview.mj_footer endRefreshingWithNoMoreData];
-        return;
-    }
-    
-    // 初始化其他属性
-    for(int i=0;i<[newdata count];i++){
-        TakoApp* app = (TakoApp*)[newdata objectAtIndex:i];
-        app.isStarted=NO;
-    }
-    
-    [self.listData addObjectsFromArray:newdata];
-    [self.tableview reloadData];
-    [self.tableview.mj_footer endRefreshing];
-    
-    // 更新游标
-    self.cursor = [NSString stringWithFormat:@"%lu",(unsigned long)[self.listData count]];
-}
-
-
--(NSMutableArray*)fetchDataFromServer{
-    if (self.cursor==nil) {
-        self.cursor=@"0";
-    }
-    
-    NSMutableArray* data = [TakoServer fetchApp:self.cursor];
-    return data;
-}
 
 
 - (void)didReceiveMemoryWarning {
@@ -280,101 +219,157 @@
 }
 
 
-// todo: 当下载管理中的cell下载进度更新时，需要重新加载本页面。
-- (void)reloadDataWhenRefresh
-{
-    [self.tableview reloadData];
-    
-    if (self.refreshControl) {
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyy-MM-dd,hh:mm a"];
-        NSString *title = [NSString stringWithFormat:@"松开刷新，上次更新时间: %@", [formatter stringFromDate:[NSDate date]]];
-        
-        // 黑色字体
-        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor blackColor]
-                                                                    forKey:NSForegroundColorAttributeName];
-        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
-        self.refreshControl.attributedTitle = attributedTitle;
-        
-        // 隐藏刷新栏
-        [self.refreshControl endRefreshing];
-    }
-}
-
 
 #pragma mark  下载回调
 // 下载结束回调
 -(void)downloadFinish:(BOOL)isSuccess msg:(NSString*)msg tag:(NSString *)tag{
-    NSLog(@"收到回调通知：文件下载完成。");
-    
-    TableViewCell* cell = nil;
-    TakoApp* app = nil;
-    
-    // 找到对应的cell,app
-    for (int i=0; i<[self.listData count]; i++) {
-        app = (TakoApp*)[self.listData objectAtIndex:i];
-        if ([app.versionId isEqualToString:tag]) {
-            NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:0];
-            cell = [self.tableview cellForRowAtIndexPath:path];
-            break;
-        }
-    }
-    
-    if (isSuccess) {
-        
-        // 更新cell
-        [XHTUIHelper disableDownloadButton:cell.button];
-        // 记录已下载情况
-        NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_VERSION_KEY];//userDefault只允许返回NSDictionary
-        if (downloadAppDict==nil) {
-            downloadAppDict = [NSDictionary new];
-        }
-        NSMutableDictionary* newDict = [NSMutableDictionary dictionaryWithDictionary:downloadAppDict];
-        [newDict setValue:@"1" forKey:app.versionId];
-        [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_VERSION_KEY withObject:newDict];
-    }else {
-        [XHTUIHelper alertWithNoChoice:[NSString stringWithFormat:@"下载失败:%@",msg] view:[XHTUIHelper getCurrentVC]];
-        [cell.button setTitle:@"重下载" forState:UIControlStateNormal];
-        app.isStarted=NO;
-    }
-    
-    // 更新cell
-    [self hideProgressUI:YES cell:cell];
-    // 更新app
-    app.progress=@"100%";
-    app.isSuccessed=isSuccess;
+    NSLog(@"empty impliment...");
 }
 
 
 // 下载进度回调
 -(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize tag:(NSString *)tag{
-    float prg = (float)finishSize/totalSize;
-    NSLog(@"收到回调通知：当前进度为:%f,tag:%@",prg,tag);
-    
-    TableViewCell* cell = nil;
-    TakoApp* app = nil;
-    
-    // 找到对应的cell
-    for (int i=0; i<[self.listData count]; i++) {
-        app = (TakoApp*)[self.listData objectAtIndex:i];
-        if ([app.versionId isEqualToString:tag]) {
-            NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:0];
-            cell = [self.tableview cellForRowAtIndexPath:path];
+    NSLog(@"empty impliment...");
+}
+
+
+// 通过bundleid找到对应的index
+-(NSInteger)cellIndexWithbundleId:(NSString*)bundleId{
+    NSMutableArray* apps = self.listData;
+    TakoApp* updateApp = nil;
+    for (TakoApp* app in apps) {
+        if ([app.bundleid isEqualToString:bundleId]) {
+            // updateApp 逻辑上不可能为空
+            updateApp = app;
             break;
         }
     }
+    if (updateApp == nil) {
+        // 原来就存在无法安装的应用，忽略。
+        return -1;
+    }
     
-    // 更新cell
-    [cell.progressControl setProgress:prg];
-    NSString* progress = [NSString stringWithFormat:@"%.1lf",prg*100];
-    progress = [NSString stringWithFormat:@"当前进度:%@%%",progress];
-    cell.textDownload.text = progress;
+    return (NSInteger)[apps indexOfObject:updateApp];
+}
+
+
+#pragma mark 安装进度监听
+
+// 安装完成
+-(void) finishInstall:(NSArray*)models{
     
-    // 更新app
-    app.progress = progress;
-    app.progressValue = prg;
+    TableViewCell* updateCell = nil;
+    TakoApp* updateApp = nil;
+    for (InstallingModel* model in models) {
+        // updateCell,updateApp 逻辑上不可能为空
+        NSInteger cellIndex = [self cellIndexWithbundleId:model.bundleID];
+        if (cellIndex == -1) {
+            return ;
+        }
+        NSIndexPath *path = [NSIndexPath indexPathForRow:cellIndex inSection:0];
+        updateCell = [self.tableview cellForRowAtIndexPath:path];
+        updateApp = [self.listData objectAtIndex:cellIndex];
+        NSLog(@"app %@ install finished",updateApp.appname);
+        
+        [updateCell.button setTitle:@"已安装" forState:UIControlStateNormal];
+        [XHTUIHelper disableDownloadButton:updateCell.button];
+        updateApp.status = INSTALLED;
+
+    }
     
+}
+
+// 安装进度更新
+-(void) currentInstallProgress:(NSArray*)models{
+    TableViewCell* updateCell = nil;
+    TakoApp* updateApp = nil;
+    for (InstallingModel* model in models) {
+        // updateCell,updateApp 逻辑上不可能为空
+        NSInteger cellIndex = [self cellIndexWithbundleId:model.bundleID];
+        if (cellIndex == -1) {
+            return ;
+        }
+        NSIndexPath *path = [NSIndexPath indexPathForRow:cellIndex inSection:0];
+        updateCell = [self.tableview cellForRowAtIndexPath:path];
+        updateApp = [self.listData objectAtIndex:cellIndex];
+        NSLog(@"app %@ install progress update,new progress is:%@",updateApp.appname,updateApp.progress);
+        
+        [updateCell.button setTitle:@"安装ing" forState:UIControlStateNormal];
+        updateApp.status = INSTALLING;
+        
+    }
+}
+
+// 安装开始
+-(void) newInstall:(NSArray*)models{
+    TableViewCell* updateCell = nil;
+    TakoApp* updateApp = nil;
+    for (InstallingModel* model in models) {
+        // updateCell,updateApp 逻辑上不可能为空
+        NSInteger cellIndex = [self cellIndexWithbundleId:model.bundleID];
+        if (cellIndex == -1) {
+            return ;
+        }
+        
+        NSIndexPath *path = [NSIndexPath indexPathForRow:cellIndex inSection:0];
+        updateCell = [self.tableview cellForRowAtIndexPath:path];
+        updateApp = [self.listData objectAtIndex:cellIndex];
+        NSLog(@"app %@ install begin...",updateApp.appname);
+        
+        [updateCell.button setTitle:@"安装中" forState:UIControlStateNormal];
+        updateApp.status = INSTALLING;
+        
+    }
+}
+
+
+// 根据app的执行状态动态更新cell和数据源
+-(void)updateApp:(TakoApp*)app cell:(TableViewCell*)cell status:(enum APPSTATUS)status{
+    
+    app.status = status;
+    switch (status) {
+        case INITED:
+            NSLog(@"app is in init status...");
+            app.progress=@"0%";
+            [cell.button setTitle:@"下载" forState:UIControlStateNormal];
+            break;
+        case STARTED:
+            NSLog(@"app is in start status...");
+            [cell.button setTitle:@"暂停" forState:UIControlStateNormal];
+            [self hideProgressUI:NO cell:cell];
+            break;
+        case PAUSED:
+            NSLog(@"app is in pause status...");
+            [cell.button setTitle:@"继续" forState:UIControlStateNormal];
+            [self hideProgressUI:NO cell:cell];
+            break;
+        case DOWNLOADED:
+            NSLog(@"app is in downloaded status...");
+            app.progress=@"100%";
+            [cell.button setTitle:@"安装" forState:UIControlStateNormal];
+            [self hideProgressUI:YES cell:cell];
+            break;
+        case DOWNLOADED_FAIL:
+            NSLog(@"app is in downloaded failed status...");
+            app.progress=@"0%";
+            [cell.button setTitle:@"重下载" forState:UIControlStateNormal];
+            [self hideProgressUI:YES cell:cell];
+            break;
+        case INSTALLING:
+            NSLog(@"app is in installing status...");
+            [cell.button setTitle:@"安装中" forState:UIControlStateNormal];
+            [self hideProgressUI:YES cell:cell];
+            break;
+        case INSTALLED:
+            NSLog(@"app is in indtalled status...");
+            [cell.button setTitle:@"已安装" forState:UIControlStateNormal];
+            [XHTUIHelper disableDownloadButton:cell.button];
+            [self hideProgressUI:YES cell:cell];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 

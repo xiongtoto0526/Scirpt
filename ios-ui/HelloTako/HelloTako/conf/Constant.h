@@ -36,6 +36,7 @@
 #define CLICK_DOWNLOAD_CANCEL_BUTTON_NOTIFICATION @"click_download_cancel_button"
 #define LOGIN_BACK_TO_TEST_NOTIFICATION @"login_back_to_test"
 #define DOWNLAOD_MANAGE_PAGE_FINISH_NOTIFICATION @"download_manage_page_finish"
+#define APPLICATION_WILL_TERMINATE_NOTIFICATION @"application_will_terminate"
 
 // notification key
 #define CELL_INDEX_NOTIFICATION_KEY @"cellIndex"
@@ -44,8 +45,8 @@
 #define DOWNLOAD_TAG_KEY @"download_tag"
 
 // download worker
-#define MAX_DOWNLOAD_THREAD_COUNT 1
-#define DOWNLOAD_PROGRESS_SAVE_INTERVAL 0.1 //每十个百分点保存一次
+#define MAX_DOWNLOAD_THREAD_COUNT 2
+//#define DOWNLOAD_PROGRESS_SAVE_INTERVAL 0.001 //每1个百分点保存一次
 
 // tako server
 #define TAKO_SERVER_HOST @"http://qa.tako.im:28870/service"
@@ -61,6 +62,16 @@ enum DOWNLOADSTATUS{
     DOWNLOAD_PAUSE,
     DOWNLOAD_FINISH_SUCCESS,
     DOWNLOAD_FINISH_FAIL,
+};
+
+enum APPSTATUS{
+    INITED = 0,
+    STARTED,
+    PAUSED,
+    DOWNLOADED,
+    DOWNLOADED_FAIL,
+    INSTALLING,
+    INSTALLED,
 };
 
 #endif /* Constant_h */

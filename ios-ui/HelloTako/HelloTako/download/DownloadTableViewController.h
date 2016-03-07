@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TableViewCell.h"
 #import "App.h"
+#import "Constant.h"
 
 @interface DownloadTableViewController : UIViewController
 
@@ -24,6 +25,7 @@
 -(void)receiveCancelDownloadNotification:(NSNotification*)notice;
 -(void)downloadApp;
 -(void)hideProgressUI:(BOOL)isShow cell:(TableViewCell*)cell;
+-(void)updateApp:(TakoApp*)app cell:(TableViewCell*)cell status:(enum APPSTATUS)status;
 
 @end
 

@@ -94,6 +94,8 @@
 		AD4E93EB1C87C9E9007BA86C /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93D91C87C9E9007BA86C /* UIImageView+HighlightedWebCache.m */; settings = {ASSET_TAGS = (); }; };
 		AD4E93EC1C87C9E9007BA86C /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93DB1C87C9E9007BA86C /* UIImageView+WebCache.m */; settings = {ASSET_TAGS = (); }; };
 		AD4E93ED1C87C9E9007BA86C /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93DD1C87C9E9007BA86C /* UIView+WebCacheOperation.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6941C8D8EFA0098BE52 /* InstallingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD9D68F1C8D8EFA0098BE52 /* InstallingModel.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6951C8D8EFA0098BE52 /* SharedInstallManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD9D6931C8D8EFA0098BE52 /* SharedInstallManager.m */; settings = {ASSET_TAGS = (); }; };
 		ADE04ED31C892367000AD4B9 /* ic_mail.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE04ED11C892367000AD4B9 /* ic_mail.png */; settings = {ASSET_TAGS = (); }; };
 		ADE04ED41C892367000AD4B9 /* ic_pwd.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE04ED21C892367000AD4B9 /* ic_pwd.png */; settings = {ASSET_TAGS = (); }; };
 		ADE04ED61C8923FF000AD4B9 /* ic_startup_rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE04ED51C8923FF000AD4B9 /* ic_startup_rocket.png */; settings = {ASSET_TAGS = (); }; };
@@ -276,6 +278,12 @@
 		AD4E93DB1C87C9E9007BA86C /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		AD4E93DC1C87C9E9007BA86C /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		AD4E93DD1C87C9E9007BA86C /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		ADD9D68E1C8D8EFA0098BE52 /* InstallingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstallingModel.h; sourceTree = "<group>"; };
+		ADD9D68F1C8D8EFA0098BE52 /* InstallingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstallingModel.m; sourceTree = "<group>"; };
+		ADD9D6901C8D8EFA0098BE52 /* LSApplicationProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSApplicationProxy.h; sourceTree = "<group>"; };
+		ADD9D6911C8D8EFA0098BE52 /* LSApplicationWorkspace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSApplicationWorkspace.h; sourceTree = "<group>"; };
+		ADD9D6921C8D8EFA0098BE52 /* SharedInstallManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedInstallManager.h; sourceTree = "<group>"; };
+		ADD9D6931C8D8EFA0098BE52 /* SharedInstallManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedInstallManager.m; sourceTree = "<group>"; };
 		ADE01D651C181077009F425E /* Tako.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tako.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE04ED11C892367000AD4B9 /* ic_mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_mail.png; sourceTree = "<group>"; };
 		ADE04ED21C892367000AD4B9 /* ic_pwd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_pwd.png; sourceTree = "<group>"; };
@@ -562,6 +570,7 @@
 		AD4E936A1C858E21007BA86C /* third */ = {
 			isa = PBXGroup;
 			children = (
+				ADD9D68D1C8D8EFA0098BE52 /* MobileInstall */,
 				AD4E93BC1C87C9E9007BA86C /* SDWebImage */,
 				AD4E936B1C858E21007BA86C /* MJRefresh */,
 			);
@@ -701,6 +710,19 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		ADD9D68D1C8D8EFA0098BE52 /* MobileInstall */ = {
+			isa = PBXGroup;
+			children = (
+				ADD9D68E1C8D8EFA0098BE52 /* InstallingModel.h */,
+				ADD9D68F1C8D8EFA0098BE52 /* InstallingModel.m */,
+				ADD9D6901C8D8EFA0098BE52 /* LSApplicationProxy.h */,
+				ADD9D6911C8D8EFA0098BE52 /* LSApplicationWorkspace.h */,
+				ADD9D6921C8D8EFA0098BE52 /* SharedInstallManager.h */,
+				ADD9D6931C8D8EFA0098BE52 /* SharedInstallManager.m */,
+			);
+			path = MobileInstall;
+			sourceTree = "<group>";
+		};
 		ADE01D5C1C181077009F425E = {
 			isa = PBXGroup;
 			children = (
@@ -748,7 +770,7 @@
 				TargetAttributes = {
 					ADE01D641C181077009F425E = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = L6X9DMN9D4;
+						DevelopmentTeam = A86X72GCF4;
 					};
 				};
 			};
@@ -803,6 +825,7 @@
 			files = (
 				AD0E36A91C8001F800714FF3 /* TableViewCell.m in Sources */,
 				AD4E93EA1C87C9E9007BA86C /* UIImage+WebP.m in Sources */,
+				ADD9D6941C8D8EFA0098BE52 /* InstallingModel.m in Sources */,
 				AD0E36C81C8001F800714FF3 /* HTTPErrorResponse.m in Sources */,
 				AD4E93E21C87C9E9007BA86C /* SDWebImageDecoder.m in Sources */,
 				AD0E36C31C8001F800714FF3 /* MultipartMessageHeader.m in Sources */,
@@ -874,6 +897,7 @@
 				AD4E93A21C858E21007BA86C /* MJRefreshBackStateFooter.m in Sources */,
 				AD0E36C41C8001F800714FF3 /* MultipartMessageHeaderField.m in Sources */,
 				AD0E36BF1C8001F800714FF3 /* HTTPConnection.m in Sources */,
+				ADD9D6951C8D8EFA0098BE52 /* SharedInstallManager.m in Sources */,
 				AD4E93E81C87C9E9007BA86C /* UIImage+GIF.m in Sources */,
 				AD0E36D41C8001F800714FF3 /* ContextFilterLogFormatter.m in Sources */,
 				AD0E36C91C8001F800714FF3 /* HTTPFileResponse.m in Sources */,
@@ -995,7 +1019,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xishanju.xgsdkapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ksg.tako.qa;
 				PRODUCT_NAME = Tako;
 			};
 			name = Debug;
@@ -1009,7 +1033,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xishanju.xgsdkapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ksg.tako.qa;
 				PRODUCT_NAME = Tako;
 			};
 			name = Release;

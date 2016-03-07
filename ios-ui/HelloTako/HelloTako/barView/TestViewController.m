@@ -132,7 +132,9 @@ TestViewController* shareTest = nil;
     // 更新cell
     [self hideProgressUI:YES cell:cell];
     // 更新app
-    app.isSuccessed = isSuccess;
+    if ([isSuccess isEqualToString:@"1"]) {
+        app.status = DOWNLOADED;
+    }
 }
 
 // 接收到cell的下载按钮点击事件
@@ -246,9 +248,9 @@ TestViewController* shareTest = nil;
                     info.status = [d objectForKey:DOWNLOAD_STATUS_KEY];
                     int status = [info.status intValue];
                     if (status == DOWNLOAD_FINISH_SUCCESS) {
-                        app.isSuccessed = YES;
+                        app.status = DOWNLOADED;
                     }else if(status == DOWNLOAD_START || status == DOWNLOAD_PAUSE){
-                        app.isPaused = YES;
+                        app.status = STARTED;
                         float currentL = [info.currentLength floatValue];
                         float totalL = [info.TotalLength floatValue];
                         app.progressValue = (float)currentL/totalL;
@@ -316,28 +318,26 @@ TestViewController* shareTest = nil;
     cell.appVersion.text = app.version;
     cell.otherInfo.text = [NSString stringWithFormat:@"%@  %@",app.firstcreated,app.size];
     
-    UIImage* image = nil;
-    if(app.logourl==nil || app.logourl.length==0){
-        image = [UIImage imageNamed:@"ic_defaultapp"];// 没有logourl时，显示默认logo
-        cell.appImage.image = image;
-    }else{
-        [cell.appImage sd_setImageWithURL:[NSURL URLWithString:app.logourl]
+    [cell.appImage sd_setImageWithURL:[NSURL URLWithString:app.logourl]
                          placeholderImage:[UIImage imageNamed:@"ic_defaultapp"]];
-    }
     
-    if (app.isSuccessed) {
-        NSLog(@"重复应用信息,名称，%@，版本，%@",cell.appName.text,app.versionId);
-        [XHTUIHelper disableDownloadButton:cell.button];
-        [super hideProgressUI:YES cell:cell];
-    }else if (app.isPaused) {
-        [cell.button setTitle:@"继续" forState:UIControlStateNormal];
-        [super hideProgressUI:NO cell:cell];
-    }else if (app.isStarted) {
-        [cell.button setTitle:@"暂停" forState:UIControlStateNormal];
-        [super hideProgressUI:NO cell:cell];
-    }else if (!app.isStarted){
-        [super hideProgressUI:YES cell:cell];
-    }
+    [super updateApp:app cell:cell status:app.status];
+//    if (app.isInstalled) {
+//        [XHTUIHelper disableDownloadButton:cell.button];
+//        [cell.button setTitle:@"已安装" forState:UIControlStateNormal];
+//        [super hideProgressUI:YES cell:cell];
+//    }else if(app.status == DOWNLOADED) {
+//        [cell.button setTitle:@"安装" forState:UIControlStateNormal];
+//        [super hideProgressUI:YES cell:cell];
+//    }else if (app.isPaused) {
+//        [cell.button setTitle:@"继续" forState:UIControlStateNormal];
+//        [super hideProgressUI:NO cell:cell];
+//    }else if (app.isStarted) {
+//        [cell.button setTitle:@"暂停" forState:UIControlStateNormal];
+//        [super hideProgressUI:NO cell:cell];
+//    }else if (!app.isStarted){
+//        [super hideProgressUI:YES cell:cell];
+//    }
     cell.textDownload.text = app.progress;
     cell.progressControl.progress = app.progressValue;
     
@@ -394,10 +394,8 @@ TestViewController* shareTest = nil;
     }
     
     if (isSuccess) {
-        
-        // 更新cell
-        [XHTUIHelper disableDownloadButton:cell.button];
-        
+         [super updateApp:app cell:cell status:DOWNLOADED];
+
         // 记录已下载情况
         NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_VERSION_KEY];//userDefault只允许返回NSDictionary
         if (downloadAppDict==nil) {
@@ -407,23 +405,17 @@ TestViewController* shareTest = nil;
         [newDict setValue:@"1" forKey:app.versionId];
         [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_VERSION_KEY withObject:newDict];
     }else {
+         [super updateApp:app cell:cell status:DOWNLOADED_FAIL];
         [XHTUIHelper alertWithNoChoice:[NSString stringWithFormat:@"下载失败:%@",msg] view:[XHTUIHelper getCurrentVC]];
-        [cell.button setTitle:@"重下载" forState:UIControlStateNormal];
-        app.isStarted=NO;
     }
-    
-    // 更新cell
-    [self hideProgressUI:YES cell:cell];
-    // 更新app
-    app.progress=@"100%";
-    app.isSuccessed=isSuccess;
+
 }
 
 
 // 下载进度回调
 -(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize tag:(NSString *)tag{
     float prg = (float)finishSize/totalSize;
-    NSLog(@"收到回调通知：当前进度为:%f,tag:%@",prg,tag);
+//    NSLog(@"收到回调通知：当前进度为:%f,tag:%@",prg,tag);
     
     TableViewCell* cell = nil;
     TakoApp* app = nil;

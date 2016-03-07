@@ -17,7 +17,7 @@
 @property (nonatomic, assign) long long  currentLength;
 
 // 下载进度百分比
-@property (nonatomic, assign) long long  progress;
+@property (nonatomic, assign) double  progress;
 
 @property (nonatomic, strong) NSURLConnection *connection;
 
@@ -41,6 +41,10 @@
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         self.homePath =[paths firstObject];
     }
+    
+    // 添加监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveCurrentProgressBeforeTerminate) name:APPLICATION_WILL_TERMINATE_NOTIFICATION object:nil];
+    
     return self;
 }
 
@@ -116,12 +120,8 @@
     // 下载进度
     double newProgress = (double)self.currentLength / self.totalLength;
     
-    // todo: 下载进度保存间隔。
-    if (newProgress - self.progress > DOWNLOAD_PROGRESS_SAVE_INTERVAL) {
-        [self saveCurrentProgress:DOWNLOAD_PAUSE];
-    }
     self.progress = newProgress;
-    NSLog(@"当前下载进度:%lld",self.progress);
+//    NSLog(@"当前下载进度:%f",self.progress);
     
     
     [self.delegate downloadingWithTotal:self.totalLength complete:self.currentLength tag:self.tag];
@@ -137,10 +137,10 @@
     
     [self isDevicefileExist];// 调试用
     
-    NSString* itermServiceUrl = [TakoServer fetchItermUrl:self.tag password:self.password];
-    NSLog(@"will install,iterm url is:%@",itermServiceUrl);
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:itermServiceUrl]];
-    
+//    NSString* itermServiceUrl = [TakoServer fetchItermUrl:self.tag password:self.password];
+//    NSLog(@"will install,iterm url is:%@",itermServiceUrl);
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:itermServiceUrl]];
+//    
     // 重置状态
     self.currentLength = 0;
     self.totalLength = 0;
@@ -207,6 +207,13 @@
     
     
     [self saveCurrentProgress:DOWNLOAD_PAUSE];
+}
+
+
+-(void)saveCurrentProgressBeforeTerminate{
+    if (!self.isFree) {
+        [self saveCurrentProgress:DOWNLOAD_START];
+    }
 }
 
 // 保存当前进度，以便下次退出应用后，仍可继续。

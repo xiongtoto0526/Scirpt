@@ -15,17 +15,21 @@
 @property (nonatomic, copy) NSString *logourl;
 @property (nonatomic, copy) NSString *firstcreated;
 @property (nonatomic, copy) NSString *password;
+@property (nonatomic, copy) NSString *bundleid;
 
 // properties for cell
 @property (nonatomic,copy) NSString* myCellIndex;
 @property (nonatomic,copy) NSString *downloadUrl;
 @property (nonatomic) BOOL isNeedPassword;
 @property (nonatomic,copy) NSString* downloadPassword;
-@property BOOL isSuccessed;
-@property BOOL isStarted;
-@property BOOL isPaused;
+//@property BOOL isSuccessed;
+//@property BOOL isStarted;
+//@property BOOL isPaused;
+//@property BOOL isInstalling;
+//@property BOOL isInstalled;
 @property NSString* progress;
 @property float progressValue;
+@property enum APPSTATUS status;
 
 @property (nonatomic) NSArray* propertykeys;
 

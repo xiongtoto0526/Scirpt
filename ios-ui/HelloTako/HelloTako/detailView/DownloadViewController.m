@@ -36,7 +36,7 @@ DownloadViewController* share = nil;
     if (downloadingList != nil) {
         for (int i=0; i<[downloadingList count]; i++) {
             TakoApp* temp = [downloadingList objectAtIndex:i];
-            if (temp.isSuccessed) {
+            if (temp.status == DOWNLOADED) {
                 [downloadedList addObject:temp];
                 [downloadingList removeObject:temp];
                 
@@ -178,22 +178,17 @@ DownloadViewController* share = nil;
     cell.appVersion.text = app.version;
     cell.otherInfo.text = [NSString stringWithFormat:@"%@  %@",app.firstcreated,app.size];
     
-    
-    UIImage* image = nil;
-    if(app.logourl==nil || app.logourl.length==0){
-        image = [UIImage imageNamed:@"ic_defaultapp"];// 没有logourl时，显示默认logo
-        cell.appImage.image = image;
-    }else{
-        [cell.appImage sd_setImageWithURL:[NSURL URLWithString:app.logourl]
+   
+    [cell.appImage sd_setImageWithURL:[NSURL URLWithString:app.logourl]
                          placeholderImage:[UIImage imageNamed:@"ic_defaultapp"]];
-    }
+    
     
     
     if (indexPath.section == 0) {
         [XHTUIHelper disableDownloadButton:cell.button];
         [self hideProgressUI:YES cell:cell];
     }else{
-        if (app.isSuccessed) {
+        if (app.status == DOWNLOADED) {
             [XHTUIHelper disableDownloadButton:cell.button];
             [self hideProgressUI:YES cell:cell];
         }else{
@@ -307,9 +302,8 @@ viewForFooterInSection:(NSInteger)section {
     }
     
     if (isSuccess) {
+        [super updateApp:app cell:cell status:DOWNLOADED];
         
-        // 更新cell
-        [XHTUIHelper disableDownloadButton:cell.button];
         // 记录已下载情况
         NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_VERSION_KEY];//userDefault只允许返回NSDictionary
         if (downloadAppDict==nil) {
@@ -319,27 +313,17 @@ viewForFooterInSection:(NSInteger)section {
         [newDict setValue:@"1" forKey:app.versionId];
         [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_VERSION_KEY withObject:newDict];
     }else {
-        [XHTUIHelper alertWithNoChoice:[NSString stringWithFormat:@"下载失败:%@",msg] view:[XHTUIHelper getCurrentVC]];
-        [cell.button setTitle:@"重下载" forState:UIControlStateNormal];
+        [super updateApp:app cell:cell status:DOWNLOADED_FAIL];
         
-        // 更新app
-        app.isStarted=NO;
+        [XHTUIHelper alertWithNoChoice:[NSString stringWithFormat:@"下载失败:%@",msg] view:[XHTUIHelper getCurrentVC]];
     }
-    
-    // 更新cell
-    [self hideProgressUI:YES cell:cell];
-    // 更新app
-    app.progress = @"100%";
-    app.isSuccessed=isSuccess;
-    
-    
 }
 
 
 // 下载进度回调
 -(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize tag:(NSString *)tag{
     float prg = (float)finishSize/totalSize;
-    NSLog(@"收到回调通知：当前进度为:%f,tag:%@",prg,tag);
+//    NSLog(@"收到回调通知：当前进度为:%f,tag:%@",prg,tag);
     
     TableViewCell* cell = nil;
     TakoApp* app = nil;

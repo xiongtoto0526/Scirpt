@@ -32,6 +32,9 @@
         NSString* v = [NSString stringWithFormat:@"%.1f M",sizeM];
         [super setValue:v forKey:@"size"];
         
+         NSString* bundleid = [(NSDictionary*)[(NSDictionary*)value objectForKey:@"package"] objectForKey:@"bundleid"];
+        [super setValue:bundleid forKey:@"bundleid"];
+        
         NSString* versionId = (NSString*)[(NSDictionary*)value objectForKey:@"id"];
         [super setValue:versionId forKey:@"versionId"];
         return;

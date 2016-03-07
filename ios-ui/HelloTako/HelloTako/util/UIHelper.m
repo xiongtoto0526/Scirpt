@@ -23,7 +23,6 @@
 }
 
 + (void) disableDownloadButton:(UIButton*) btn{
-    [btn setTitle:@"已下载" forState:UIControlStateNormal];
     [btn.layer setBorderColor:(__bridge CGColorRef _Nullable)([UIColor grayColor])];
     btn.enabled = NO;
 }

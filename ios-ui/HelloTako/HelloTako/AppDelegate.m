@@ -98,6 +98,11 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+
+    // 发送事件
+    NSNotification *notification =[NSNotification notificationWithName:APPLICATION_WILL_TERMINATE_NOTIFICATION object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+
 }
 
 @end

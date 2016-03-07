@@ -94,7 +94,7 @@
     
     NSMutableArray* result = [NSMutableArray new];
     
-    NSString* url = [NSString stringWithFormat:@"/getmyapps?cursor=%@&count=%@&pid=%@",cursor,@"5",@"1"];
+    NSString* url = [NSString stringWithFormat:@"/gettaskapps?cursor=%@&count=%@&pid=%@",cursor,@"5",@"1"];
     NSData* returnData = [self getWithUrl:url];
     if (returnData==nil) {
         return result;
@@ -117,7 +117,10 @@
         for (int i=0; i<[apps count]; i++) {
             NSDictionary* temp = (NSDictionary*)[apps objectAtIndex:i];
             TakoApp* app =  [[TakoApp new] initWithDictionary:temp];
-            app.isSuccessed = [self isAppDownloadedBefore:app.versionId];  // 添加下载标志
+            // 添加下载标志
+            if([self isAppDownloadedBefore:app.versionId]){
+                app.status = DOWNLOADED;
+            }
             [result addObject:app];
         }
     }
@@ -170,8 +173,15 @@
 }
 
 +(TakoUser*)authEmail:(NSString*)email password:(NSString*)password{
-    email = @"carson510@126.com";
-    password = @"123456";
+    if ([email isEqualToString: @"c@kingsoft.com"]) {
+        email = @"carson510@126.com";
+        password = @"123456";
+    }else if ([email isEqualToString: @"x@kingsoft.com"]){
+        email = @"547610328@qq.com";
+        password = @"123456";
+    }
+//    email = @"carson510@126.com";
+//    password = @"123456";
     NSMutableDictionary* dict = [NSMutableDictionary new];
     [dict setObject:email forKey:LOGIN_EMAIL_KEY];
     [dict setObject:password forKey:LOGIN_PASSWORD_KEY];
@@ -235,12 +245,24 @@
 
 +(NSData*) getWithUrl:(NSString*)methodUrl
 {
+    
+    
+//    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+//    NSLog(@"before login....");
+//    for (NSHTTPCookie *cookie in [cookieJar cookies]) {
+//        NSLog(@"%@", cookie);
+//    }
+//    
+//  
+    
     NSString* urlstr = [NSString stringWithFormat:@"%@%@",TAKO_SERVER_HOST,methodUrl];
+    NSLog(@"url is:%@",urlstr);
     NSURL* url = [[NSURL alloc] initWithString:urlstr];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:TAKO_SERVER_TIME_OUT];
     [request setHTTPMethod:@"GET"];
     NSLog(@"request is %@",request);
     NSData* returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    
     return returnData;
 }
 
