@@ -59,9 +59,10 @@ enum APPSTATUS{
     STARTED,
     PAUSED,
     DOWNLOADED,
-    DOWNLOADED_FAIL,
+    DOWNLOADED_FAILED,
     INSTALLING,
     INSTALLED,
+    INSTALL_FAILED,
 };
 
 #endif /* Constant_h */

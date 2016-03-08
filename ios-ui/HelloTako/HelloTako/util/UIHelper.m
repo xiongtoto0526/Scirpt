@@ -12,6 +12,15 @@
 #import "UIHelper.h"
 #import "Constant.h"
 
+// add for local ip
+#include <ifaddrs.h>
+#include <sys/socket.h> // Per msqr
+#include <sys/sysctl.h>
+#include <net/if.h>
+#include <net/if_dl.h>
+#include <arpa/inet.h>
+#include <net/if.h>
+
 @implementation XHTUIHelper
 
 
@@ -183,6 +192,44 @@
     }
     
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:key];
+}
+
+
+//获取本机的IP
++ (NSString *)localIPAddress
+{
+    NSString *localIP = nil;
+    struct ifaddrs *addrs;
+    if (getifaddrs(&addrs)==0) {
+        const struct ifaddrs *cursor = addrs;
+        while (cursor != NULL) {
+            if (cursor->ifa_addr->sa_family == AF_INET && (cursor->ifa_flags & IFF_LOOPBACK) == 0)
+            {
+                localIP = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)cursor->ifa_addr)->sin_addr)];
+                break;
+            }
+            cursor = cursor->ifa_next;
+        }
+        freeifaddrs(addrs);
+    }
+    return localIP;
+}
+
++(BOOL)isDevicefileExist:(NSString*) file{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* homePath =[paths firstObject];
+    NSString* filepath = [homePath stringByAppendingPathComponent:file];
+
+    NSFileManager* mgr = [NSFileManager defaultManager];
+    if ([mgr fileExistsAtPath:filepath]==YES) {
+        NSLog(@"device File exists");
+        NSLog(@"file is:%@",filepath);
+        return YES;
+    }else{
+        NSLog(@"device File not exists");
+        return NO;
+    }
+
 }
 
 

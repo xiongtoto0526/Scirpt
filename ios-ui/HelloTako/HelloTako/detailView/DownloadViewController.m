@@ -300,8 +300,8 @@ viewForFooterInSection:(NSInteger)section {
         [super updateApp:app cell:cell status:DOWNLOADED];
         [super saveCurrentAppStatus:DOWNLOADED tag:app.appid];
     }else {
-        [super updateApp:app cell:cell status:DOWNLOADED_FAIL];
-        [super saveCurrentAppStatus:DOWNLOADED_FAIL tag:app.appid];
+        [super updateApp:app cell:cell status:DOWNLOADED_FAILED];
+        [super saveCurrentAppStatus:DOWNLOADED_FAILED tag:app.appid];
         [XHTUIHelper alertWithNoChoice:[NSString stringWithFormat:@"下载失败:%@",msg] view:[XHTUIHelper getCurrentVC]];
     }
 }

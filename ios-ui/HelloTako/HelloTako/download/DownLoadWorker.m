@@ -60,7 +60,7 @@
     NSLog(@"下载结束，结果为失败。错误信息: %@",messageString);
     self.isFree=YES;
     [self.delegate downloadFinish:NO msg:@"无法连接到服务器，请重试。" tag:self.tag];
-    [self saveCurrentProgress:DOWNLOADED_FAIL];
+    [self saveCurrentProgress:DOWNLOADED_FAILED];
 }
 
 

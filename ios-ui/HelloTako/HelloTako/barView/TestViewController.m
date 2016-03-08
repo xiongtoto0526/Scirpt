@@ -223,7 +223,7 @@ TestViewController* shareTest = nil;
                     info.TotalLength = [d objectForKey:DOWNLOAD_TOTAL_LENGTH_KEY];
                     info.status = [d objectForKey:DOWNLOAD_STATUS_KEY];
                     int status = [info.status intValue];
-                    if (status == DOWNLOADED || status == INSTALLING) {
+                    if (status == DOWNLOADED || status == INSTALLING || status == INSTALL_FAILED) {
                         app.status = DOWNLOADED;
                     }else if(status == STARTED || status == PAUSED){
                         app.status = PAUSED;
@@ -362,7 +362,7 @@ TestViewController* shareTest = nil;
 //        [super saveCurrentAppStatus:DOWNLOADED tag:app.appid];
     }else {
 //         [super updateApp:app cell:cell status:DOWNLOADED_FAIL];
-         [super saveCurrentAppStatus:DOWNLOADED_FAIL tag:app.appid];
+         [super saveCurrentAppStatus:DOWNLOADED_FAILED tag:app.appid];
         [XHTUIHelper alertWithNoChoice:[NSString stringWithFormat:@"下载失败:%@",msg] view:[XHTUIHelper getCurrentVC]];
     }
 }

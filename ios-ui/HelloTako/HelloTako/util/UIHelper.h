@@ -42,4 +42,7 @@
 
 +(NSString*) hostFromInfoPlist;
 
++(BOOL)isDevicefileExist:(NSString*) file;
+
++ (NSString *)localIPAddress;
 @end

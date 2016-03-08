@@ -124,13 +124,14 @@
     
     if (self.currentApp.status == INSTALLING) {
         NSLog(@"app is installing ,please wait...");
+        [XHTUIHelper alertWithNoChoice:@"正在安装请等待..." view:self];
         return;
     }
     
     if (self.currentApp.downloadUrl == nil) {
-         self.currentApp.downloadUrl = [TakoServer fetchDownloadUrl:self.currentApp.versionId password:self.currentApp.downloadPassword];
+        self.currentApp.downloadUrl = [TakoServer fetchDownloadUrl:self.currentApp.versionId password:self.currentApp.downloadPassword];
     }
-   
+    
     if (self.currentApp.downloadUrl==nil) {
         NSLog(@"get downloadurl failed...");
         [XHTUIHelper alertWithNoChoice:@"下载密码不正确!" view:self];
@@ -141,14 +142,14 @@
     
     
     switch (self.currentApp.status) {
-    
+            
         case INITED:
             [self startDownload];
             break;
-       case DOWNLOADED:
+        case DOWNLOADED:
             [self beginInstall];
             break;
-        case DOWNLOADED_FAIL:
+        case DOWNLOADED_FAILED:
             [self startDownload];
             break;
         case STARTED:
@@ -157,13 +158,16 @@
         case PAUSED:
             [self continueDownload];
             break;
+        case INSTALL_FAILED:
+            [self beginInstall];
+            break;
             
         default:
             break;
     }
     
     [self updateApp:self.currentApp cell:self.currentCell status:self.currentApp.status];
-   
+    
 }
 
 -(void)beginInstall{
@@ -171,8 +175,19 @@
     [SharedInstallManager shareInstWithdelegate:self];
     NSString* itermServiceUrl = [TakoServer fetchItermUrl:self.currentApp.versionId password:self.currentApp.downloadPassword];
     NSLog(@"will install,iterm url is:%@",itermServiceUrl);
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:itermServiceUrl]];
-
+    NSString* testFile = [NSString stringWithFormat:@"%@.ipa",self.currentApp.versionId];
+    BOOL isFileReady = [XHTUIHelper isDevicefileExist:testFile];
+    NSString* testUrl = [NSString stringWithFormat:@"%@:%d/%@",[XHTUIHelper localIPAddress],HTTP_SERVER_PORT,testFile];
+    if (isFileReady) {
+        NSLog(@"file is ready ,will install...try the test url in browse:%@",testUrl);
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:itermServiceUrl]];
+    }else{
+        NSString* testUrl = [NSString stringWithFormat:@"http://%@:%d/%@",[XHTUIHelper localIPAddress],HTTP_SERVER_PORT,testFile];
+        NSLog(@"File is not ready ,maybe you should download again...,try the test url in browse:%@",testUrl);
+        [self updateApp:self.currentApp cell:self.currentCell status:INITED];
+        [self saveCurrentAppStatus:INITED tag:self.currentApp.appid];
+    }
+    
 }
 
 // 是否隐藏下载进度控件
@@ -286,22 +301,48 @@
     
 }
 
+-(void)failedInstall:(NSArray *)models{
+    TableViewCell* updateCell = nil;
+    TakoApp* updateApp = nil;
+    for (InstallingModel* model in models) {
+        
+        // updateCell,updateApp 逻辑上不可能为空
+        NSInteger cellIndex = [self cellIndexWithbundleId:model.bundleID];
+        if (cellIndex == -1) {
+            continue ;
+        }
+        NSIndexPath *path = [NSIndexPath indexPathForRow:cellIndex inSection:0];
+        updateCell = [self.tableview cellForRowAtIndexPath:path];
+        updateApp = [self.listData objectAtIndex:cellIndex];
+        updateApp.installProgress = @"0%";
+        NSLog(@"app %@ install failed...",updateApp.appname);
+        updateApp.status = INSTALL_FAILED;
+//        [self saveCurrentAppStatus:INSTALL_FAILED tag:updateApp.appid];
+        [self updateApp:updateApp cell:updateCell status:INSTALL_FAILED];
+    }
+
+}
+
 // 安装进度更新
 -(void) currentInstallProgress:(NSArray*)models{
     TableViewCell* updateCell = nil;
     TakoApp* updateApp = nil;
     for (InstallingModel* model in models) {
+        
         // updateCell,updateApp 逻辑上不可能为空
         NSInteger cellIndex = [self cellIndexWithbundleId:model.bundleID];
         if (cellIndex == -1) {
-            return ;
+            continue ;
         }
         NSIndexPath *path = [NSIndexPath indexPathForRow:cellIndex inSection:0];
         updateCell = [self.tableview cellForRowAtIndexPath:path];
         updateApp = [self.listData objectAtIndex:cellIndex];
-        NSLog(@"app %@ install progress update,new progress is:%@",updateApp.appname,updateApp.progress);
+        updateApp.installProgress = model.progress;
+        NSLog(@"app %@ install progress update,new install progress is:%@",updateApp.appname,updateApp.installProgress);
         
-        [updateCell.button setTitle:@"安装ing" forState:UIControlStateNormal];
+//        NSString* newTitle = [NSString stringWithFormat:@"安装中 %@",updateApp.progress];
+//        [updateCell.button setTitle:newTitle forState:UIControlStateNormal];
+        [updateCell.button setTitle:@"安装中" forState:UIControlStateNormal];
         updateApp.status = INSTALLING;
     }
 }
@@ -322,10 +363,9 @@
         updateApp = [self.listData objectAtIndex:cellIndex];
         NSLog(@"app %@ install begin...",updateApp.appname);
         
-// 显示安装进度（暂不开启）。
-//        NSString* newTitle = [NSString stringWithFormat:@"安装中 %@",model.progress];
         updateApp.status = INSTALLING;
         [updateCell.button setTitle:@"安装中" forState:UIControlStateNormal];
+        updateApp.installProgress = model.progress;
         [self saveCurrentAppStatus:INSTALLING tag:updateApp.appid];
     }
 }
@@ -357,7 +397,7 @@
             [cell.button setTitle:@"安装" forState:UIControlStateNormal];
             [self hideProgressUI:YES cell:cell];
             break;
-        case DOWNLOADED_FAIL:
+        case DOWNLOADED_FAILED:
             NSLog(@"app is in downloaded failed status...");
             app.progress=@"0%";
             [cell.button setTitle:@"重下载" forState:UIControlStateNormal];
@@ -373,6 +413,12 @@
             [cell.button setTitle:@"已安装" forState:UIControlStateNormal];
             [XHTUIHelper disableDownloadButton:cell.button];
             [self hideProgressUI:YES cell:cell];
+            break;
+        case INSTALL_FAILED:
+            NSLog(@"app is in indtalled failed status...");
+            [cell.button setTitle:@"安装失败" forState:UIControlStateNormal];
+            [self hideProgressUI:YES cell:cell];
+            [XHTUIHelper disableDownloadButton:cell.button];
             break;
             
         default:
@@ -390,7 +436,6 @@
     NSMutableDictionary* newDict = nil;
     NSDictionary* oldDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
     
-    NSLog(@"old dict is:%@",oldDict);
     if (oldDict==nil) {
         newDict = [NSMutableDictionary new];
     }else{
@@ -408,9 +453,7 @@
     [newCurrent setObject:statusStr forKey:DOWNLOAD_STATUS_KEY];
     
     [newDict setValue:newCurrent forKey:tag];
-    NSLog(@"new dict befor write is:%@",newDict);
     [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_INFO_KEY withObject:newDict];
-    NSLog(@"new dict after write is:%@",[XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY]);
 }
 
 

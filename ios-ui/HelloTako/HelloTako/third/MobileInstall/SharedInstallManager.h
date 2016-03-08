@@ -12,6 +12,7 @@
 @protocol XHTInstallProgressDelegate <NSObject>
 
 -(void) finishInstall:(NSArray*)models;
+-(void) failedInstall:(NSArray*)models;
 -(void) currentInstallProgress:(NSArray*)models;
 -(void) newInstall:(NSArray*)models;
 
@@ -25,6 +26,7 @@
 +(SharedInstallManager *)shareInstWithdelegate:(id<XHTInstallProgressDelegate>)delegate;
 
 - (void)run;
+- (void)stop;
 
 -(void)updateInstallList;
 

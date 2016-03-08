@@ -13,6 +13,7 @@
 @property (nonatomic, copy) NSString *uri;
 @property (nonatomic, copy) NSString *packagename;
 @property (nonatomic, copy) NSString *logourl;
+@property (nonatomic,copy)  NSString *installProgress;
 @property (nonatomic, copy) NSString *firstcreated;
 @property (nonatomic, copy) NSString *password;
 @property (nonatomic, copy) NSString *bundleid;

@@ -17,6 +17,7 @@
 
 @implementation SharedInstallManager
 
+NSTimer* timer = nil;
 
 +(SharedInstallManager *)shareInstWithdelegate:(id<XHTInstallProgressDelegate>)delegate{
 
@@ -50,9 +51,15 @@
     return self;
 }
 
+- (void)stop{
+    if (timer) {
+        [timer invalidate];
+        timer=nil;
+    }
+}
 
 - (void)run{
-    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(updateInstallList) userInfo:nil repeats:YES];
+   timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(updateInstallList) userInfo:nil repeats:YES];
 }
 
 -(void)updateInstallList{
@@ -61,6 +68,7 @@
     
     NSMutableArray* newInstallItems = [NSMutableArray new];
     NSMutableArray* currentInstallItems = [NSMutableArray new];
+    NSMutableArray* failedItems = [NSMutableArray new];
     NSMutableArray* finishedInstallItems = [NSMutableArray new];
     
     if (lib)
@@ -76,20 +84,33 @@
                 
                 LSApplicationProxy *LSApplicationProxy = [arrApp objectAtIndex:i];
                 NSString* bundleId =[LSApplicationProxy applicationIdentifier];
-               
                 
+               
                 NSProgress *progress = (NSProgress *)[LSApplicationProxy installProgress];
+                
+//                NSLog(@"arry count is:%lu,bundleid is:%@ ",(unsigned long)[arrApp count],bundleId);
+//
+//                if ([bundleId isEqualToString:@"com.ukids.coloreddots"]) {
+//                    NSLog(@"hello,color progress is:%@,count is:%lu",progress,(unsigned long)[arrApp count]);
+//                }
                 InstallingModel *model = [self getInstallModel:bundleId];
 
                 if (progress)
                 {
                     if (model) {
+                        NSString* newProgress = [[progress localizedDescription] substringToIndex:2];
                         
+                        if ([newProgress isEqualToString:@"0%"] && ![model.progress isEqualToString:newProgress]) {
+                            // 安装失败
+                            [failedItems addObject:model];
+                        }
+                        else if (![model.progress isEqualToString:newProgress]) {
+                            // 更新安装进度
+                            [currentInstallItems addObject:model];
+                        }
+                        NSLog(@"所有应用的安装进度, app:%@,progress:%@",model.bundleID,model.progress);
                         model.progress = [[progress localizedDescription] substringToIndex:2];
                         model.status  =  [NSString stringWithFormat:@"%@",[[progress userInfo] valueForKey:@"installState"]];
-                        
-                        // 更新安装进度
-                        [currentInstallItems addObject:model];
                         
                     }else{
                         InstallingModel *model = [[InstallingModel alloc] init];
@@ -116,6 +137,10 @@
             }
         }
         
+        NSLog(@"_installAry count:%lu",(unsigned long)_installAry.count);
+        for (InstallingModel* temp in _installAry) {
+            NSLog(@"bundleid:%@,progress:%@,status:%@",temp.bundleID,temp.progress,temp.status);
+        }
         if (lib) dlclose(lib);
     }
 
@@ -130,6 +155,10 @@
     if ([finishedInstallItems count] > 0) {
         NSLog(@"发现新的安装任务结束：%lu",(unsigned long)[finishedInstallItems count]);
         [self.delegate finishInstall:finishedInstallItems];
+    }
+    if ([failedItems count] > 0) {
+        NSLog(@"发现新的安装任务失败：%lu",(unsigned long)[failedItems count]);
+        [self.delegate failedInstall:failedItems];
     }
     
 }
