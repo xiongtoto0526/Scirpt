@@ -94,7 +94,7 @@
     
     NSMutableArray* result = [NSMutableArray new];
     
-    NSString* url = [NSString stringWithFormat:@"/gettaskapps?cursor=%@&count=%@&pid=%@",cursor,@"5",@"1"];
+    NSString* url = [NSString stringWithFormat:@"/gettaskapps?cursor=%@&count=%@&pid=%@",cursor,TAKO_SERVER_FETCH_SIZE,@"1"];
     NSData* returnData = [self getWithUrl:url];
     if (returnData==nil) {
         return result;
@@ -225,7 +225,7 @@
 
 +(NSData*)postWithDict:(NSDictionary*)dict url:(NSString*)methodUrl{
     NSData* bodyData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
-    NSString* serverUrl = [NSString stringWithFormat:@"%@%@",TAKO_SERVER_HOST,methodUrl];
+    NSString* serverUrl = [NSString stringWithFormat:@"%@%@",[XHTUIHelper hostFromInfoPlist],methodUrl];
     NSURL* url = [[NSURL alloc] initWithString:serverUrl];
     NSLog(@"url is %@", url);
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:TAKO_SERVER_TIME_OUT];
@@ -246,7 +246,6 @@
 +(NSData*) getWithUrl:(NSString*)methodUrl
 {
     
-    
 //    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
 //    NSLog(@"before login....");
 //    for (NSHTTPCookie *cookie in [cookieJar cookies]) {
@@ -255,7 +254,7 @@
 //    
 //  
     
-    NSString* urlstr = [NSString stringWithFormat:@"%@%@",TAKO_SERVER_HOST,methodUrl];
+    NSString* urlstr = [NSString stringWithFormat:@"%@%@",[XHTUIHelper hostFromInfoPlist],methodUrl];
     NSLog(@"url is:%@",urlstr);
     NSURL* url = [[NSURL alloc] initWithString:urlstr];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:TAKO_SERVER_TIME_OUT];

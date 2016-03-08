@@ -12,6 +12,7 @@
 // cocoahttpserver
 #define HTTP_SERVER_PORT 12345
 
+// screen
 #define LAUNCH_SCREEN_TIME 2.0
 
 // user default
@@ -49,9 +50,10 @@
 //#define DOWNLOAD_PROGRESS_SAVE_INTERVAL 0.001 //每1个百分点保存一次
 
 // tako server
-#define TAKO_SERVER_HOST @"http://qa.tako.im:28870/service"
+//#define TAKO_SERVER_HOST @"http://qa.tako.im:28870/service"
 #define TAKO_SERVER_HOST_KEY @"tako_server_host"
 #define TAKO_SERVER_TIME_OUT 30
+#define TAKO_SERVER_FETCH_SIZE @"10"
 
 
 

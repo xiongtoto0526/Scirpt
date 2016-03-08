@@ -96,6 +96,102 @@
 		AD4E93ED1C87C9E9007BA86C /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93DD1C87C9E9007BA86C /* UIView+WebCacheOperation.m */; settings = {ASSET_TAGS = (); }; };
 		ADD9D6941C8D8EFA0098BE52 /* InstallingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD9D68F1C8D8EFA0098BE52 /* InstallingModel.m */; settings = {ASSET_TAGS = (); }; };
 		ADD9D6951C8D8EFA0098BE52 /* SharedInstallManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD9D6931C8D8EFA0098BE52 /* SharedInstallManager.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6981C8E7D5C0098BE52 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36251C8001F800714FF3 /* TableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6991C8E7D5C0098BE52 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93D71C87C9E9007BA86C /* UIImage+WebP.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D69A1C8E7D5C0098BE52 /* InstallingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD9D68F1C8D8EFA0098BE52 /* InstallingModel.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D69B1C8E7D5C0098BE52 /* HTTPErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36651C8001F800714FF3 /* HTTPErrorResponse.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D69C1C8E7D5C0098BE52 /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93C61C87C9E9007BA86C /* SDWebImageDecoder.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D69D1C8E7D5C0098BE52 /* MultipartMessageHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E365A1C8001F800714FF3 /* MultipartMessageHeader.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D69E1C8E7D5C0098BE52 /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E364B1C8001F800714FF3 /* DDRange.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D69F1C8E7D5C0098BE52 /* MJRefreshGifHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93891C858E21007BA86C /* MJRefreshGifHeader.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6A01C8E7D5C0098BE52 /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93CF1C87C9E9007BA86C /* SDWebImagePrefetcher.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6A11C8E7D5C0098BE52 /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36551C8001F800714FF3 /* HTTPServer.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6A21C8E7D5C0098BE52 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E369B1C8001F800714FF3 /* UIHelper.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6A31C8E7D5C0098BE52 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E369D1C8001F800714FF3 /* ViewController.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6A41C8E7D5C0098BE52 /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93C81C87C9E9007BA86C /* SDWebImageDownloader.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6A51C8E7D5C0098BE52 /* MJRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93761C858E21007BA86C /* MJRefreshHeader.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6A61C8E7D5C0098BE52 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36101C8001F800714FF3 /* AppDelegate.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6A71C8E7D5C0098BE52 /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36871C8001F800714FF3 /* App.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6A81C8E7D5C0098BE52 /* ShareEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36891C8001F800714FF3 /* ShareEntity.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6A91C8E7D5C0098BE52 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93DB1C87C9E9007BA86C /* UIImageView+WebCache.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6AA1C8E7D5C0098BE52 /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36F31C804AC100714FF3 /* Server.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6AB1C8E7D5C0098BE52 /* MJRefreshAutoGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E937B1C858E21007BA86C /* MJRefreshAutoGifFooter.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6AC1C8E7D5C0098BE52 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93BE1C87C9E9007BA86C /* MKAnnotationView+WebCache.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6AD1C8E7D5C0098BE52 /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93701C858E21007BA86C /* MJRefreshBackFooter.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6AE1C8E7D5C0098BE52 /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93CA1C87C9E9007BA86C /* SDWebImageDownloaderOperation.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6AF1C8E7D5C0098BE52 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36701C8001F800714FF3 /* GCDAsyncSocket.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6B01C8E7D5C0098BE52 /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36471C8001F800714FF3 /* DDData.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6B11C8E7D5C0098BE52 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E936E1C858E21007BA86C /* MJRefreshAutoFooter.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6B21C8E7D5C0098BE52 /* MJRefreshBackGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93821C858E21007BA86C /* MJRefreshBackGifFooter.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6B31C8E7D5C0098BE52 /* DownLoadWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36421C8001F800714FF3 /* DownLoadWorker.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6B41C8E7D5C0098BE52 /* HTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36691C8001F800714FF3 /* HTTPRedirectResponse.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6B51C8E7D5C0098BE52 /* WebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E366B1C8001F800714FF3 /* WebSocket.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6B61C8E7D5C0098BE52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36841C8001F800714FF3 /* main.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6B71C8E7D5C0098BE52 /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93D51C87C9E9007BA86C /* UIImage+MultiFormat.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6B81C8E7D5C0098BE52 /* MJRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93741C858E21007BA86C /* MJRefreshFooter.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6B91C8E7D5C0098BE52 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E367C1C8001F800714FF3 /* DDTTYLogger.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6BA1C8E7D5C0098BE52 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93931C858E21007BA86C /* UIScrollView+MJExtension.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6BB1C8E7D5C0098BE52 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93D91C87C9E9007BA86C /* UIImageView+HighlightedWebCache.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6BC1C8E7D5C0098BE52 /* HTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36631C8001F800714FF3 /* HTTPDynamicFileResponse.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6BD1C8E7D5C0098BE52 /* VersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E363E1C8001F800714FF3 /* VersionViewController.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6BE1C8E7D5C0098BE52 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36181C8001F800714FF3 /* MineViewController.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6BF1C8E7D5C0098BE52 /* MJRefreshStateHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E938D1C858E21007BA86C /* MJRefreshStateHeader.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6C01C8E7D5C0098BE52 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93C21C87C9E9007BA86C /* SDImageCache.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6C11C8E7D5C0098BE52 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36761C8001F800714FF3 /* DDASLLogger.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6C21C8E7D5C0098BE52 /* DownloadTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD3CD1F51C8A6079000B80F9 /* DownloadTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6C31C8E7D5C0098BE52 /* DownLoadQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93681C8459CC007BA86C /* DownLoadQueue.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6C41C8E7D5C0098BE52 /* validation.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36ED1C80354B00714FF3 /* validation.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6C51C8E7D5C0098BE52 /* DownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE04EDD1C89534B000AD4B9 /* DownloadViewController.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6C61C8E7D5C0098BE52 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93951C858E21007BA86C /* UIScrollView+MJRefresh.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6C71C8E7D5C0098BE52 /* HTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36521C8001F800714FF3 /* HTTPMessage.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6C81C8E7D5C0098BE52 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93911C858E21007BA86C /* MJRefreshConst.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6C91C8E7D5C0098BE52 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93DD1C87C9E9007BA86C /* UIView+WebCacheOperation.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6CA1C8E7D5C0098BE52 /* Version.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36F61C804B9400714FF3 /* Version.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6CB1C8E7D5C0098BE52 /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36491C8001F800714FF3 /* DDNumber.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6CC1C8E7D5C0098BE52 /* MJRefreshAutoNormalFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E937D1C858E21007BA86C /* MJRefreshAutoNormalFooter.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6CD1C8E7D5C0098BE52 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36141C8001F800714FF3 /* TestViewController.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6CE1C8E7D5C0098BE52 /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36811C8001F800714FF3 /* DispatchQueueLogFormatter.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6CF1C8E7D5C0098BE52 /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93C41C87C9E9007BA86C /* SDWebImageCompat.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6D01C8E7D5C0098BE52 /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93CC1C87C9E9007BA86C /* SDWebImageManager.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6D11C8E7D5C0098BE52 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93971C858E21007BA86C /* UIView+MJExtension.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6D21C8E7D5C0098BE52 /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93721C858E21007BA86C /* MJRefreshComponent.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6D31C8E7D5C0098BE52 /* MJRefreshNormalHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E938B1C858E21007BA86C /* MJRefreshNormalHeader.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6D41C8E7D5C0098BE52 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E367A1C8001F800714FF3 /* DDLog.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6D51C8E7D5C0098BE52 /* MJRefreshBackNormalFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93841C858E21007BA86C /* MJRefreshBackNormalFooter.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6D61C8E7D5C0098BE52 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93D11C87C9E9007BA86C /* UIButton+WebCache.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6D71C8E7D5C0098BE52 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36F91C80597300714FF3 /* User.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6D81C8E7D5C0098BE52 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36781C8001F800714FF3 /* DDFileLogger.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6D91C8E7D5C0098BE52 /* HTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E364D1C8001F800714FF3 /* HTTPAuthenticationRequest.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6DA1C8E7D5C0098BE52 /* HTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36611C8001F800714FF3 /* HTTPDataResponse.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6DB1C8E7D5C0098BE52 /* MJRefreshAutoStateFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E937F1C858E21007BA86C /* MJRefreshAutoStateFooter.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6DC1C8E7D5C0098BE52 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36341C8001F800714FF3 /* LoginViewController.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6DD1C8E7D5C0098BE52 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93C01C87C9E9007BA86C /* NSData+ImageContentType.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6DE1C8E7D5C0098BE52 /* MultipartFormDataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36581C8001F800714FF3 /* MultipartFormDataParser.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6DF1C8E7D5C0098BE52 /* MJRefreshBackStateFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93861C858E21007BA86C /* MJRefreshBackStateFooter.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6E01C8E7D5C0098BE52 /* MultipartMessageHeaderField.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E365C1C8001F800714FF3 /* MultipartMessageHeaderField.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6E11C8E7D5C0098BE52 /* HTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E364F1C8001F800714FF3 /* HTTPConnection.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6E21C8E7D5C0098BE52 /* SharedInstallManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD9D6931C8D8EFA0098BE52 /* SharedInstallManager.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6E31C8E7D5C0098BE52 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93D31C87C9E9007BA86C /* UIImage+GIF.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6E41C8E7D5C0098BE52 /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E367F1C8001F800714FF3 /* ContextFilterLogFormatter.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6E51C8E7D5C0098BE52 /* HTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36671C8001F800714FF3 /* HTTPFileResponse.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6E61C8E7D5C0098BE52 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36741C8001F800714FF3 /* DDAbstractDatabaseLogger.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6E71C8E7D5C0098BE52 /* HTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E365F1C8001F800714FF3 /* HTTPAsyncFileResponse.m */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6EA1C8E7D5C0098BE52 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36351C8001F800714FF3 /* LoginViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6EB1C8E7D5C0098BE52 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36261C8001F800714FF3 /* TableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6EC1C8E7D5C0098BE52 /* DownloadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADE04EDE1C89534B000AD4B9 /* DownloadViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6ED1C8E7D5C0098BE52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD0E361B1C8001F800714FF3 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6EE1C8E7D5C0098BE52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36111C8001F800714FF3 /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6EF1C8E7D5C0098BE52 /* icon_test_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4E93B81C86C691007BA86C /* icon_test_unselected.png */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6F01C8E7D5C0098BE52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD0E36191C8001F800714FF3 /* LaunchScreen.storyboard */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6F11C8E7D5C0098BE52 /* icon_test_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4E93B71C86C691007BA86C /* icon_test_selected.png */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6F21C8E7D5C0098BE52 /* ic_startup_rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE04ED51C8923FF000AD4B9 /* ic_startup_rocket.png */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6F31C8E7D5C0098BE52 /* ic_user_head_logged.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE04ED71C893A76000AD4B9 /* ic_user_head_logged.png */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6F41C8E7D5C0098BE52 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AD4E938E1C858E21007BA86C /* MJRefresh.bundle */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6F51C8E7D5C0098BE52 /* VersionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD0E363F1C8001F800714FF3 /* VersionViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6F61C8E7D5C0098BE52 /* ic_user_head_unlogged.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE04ED81C893A76000AD4B9 /* ic_user_head_unlogged.png */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6F71C8E7D5C0098BE52 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4E93B11C86A8E0007BA86C /* Default.png */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6F81C8E7D5C0098BE52 /* ic_mail.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE04ED11C892367000AD4B9 /* ic_mail.png */; settings = {ASSET_TAGS = (); }; };
+		ADD9D6F91C8E7D5C0098BE52 /* ic_pwd.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE04ED21C892367000AD4B9 /* ic_pwd.png */; settings = {ASSET_TAGS = (); }; };
 		ADE04ED31C892367000AD4B9 /* ic_mail.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE04ED11C892367000AD4B9 /* ic_mail.png */; settings = {ASSET_TAGS = (); }; };
 		ADE04ED41C892367000AD4B9 /* ic_pwd.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE04ED21C892367000AD4B9 /* ic_pwd.png */; settings = {ASSET_TAGS = (); }; };
 		ADE04ED61C8923FF000AD4B9 /* ic_startup_rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE04ED51C8923FF000AD4B9 /* ic_startup_rocket.png */; settings = {ASSET_TAGS = (); }; };
@@ -284,6 +380,8 @@
 		ADD9D6911C8D8EFA0098BE52 /* LSApplicationWorkspace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSApplicationWorkspace.h; sourceTree = "<group>"; };
 		ADD9D6921C8D8EFA0098BE52 /* SharedInstallManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedInstallManager.h; sourceTree = "<group>"; };
 		ADD9D6931C8D8EFA0098BE52 /* SharedInstallManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedInstallManager.m; sourceTree = "<group>"; };
+		ADD9D6FD1C8E7D5C0098BE52 /* Tako_qa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tako_qa.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADD9D6FE1C8E7D5C0098BE52 /* HelloTako copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "HelloTako copy-Info.plist"; path = "/Users/xionghaitao/my_git_rep/script/ios-ui/HelloTako/HelloTako copy-Info.plist"; sourceTree = "<absolute>"; };
 		ADE01D651C181077009F425E /* Tako.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tako.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE04ED11C892367000AD4B9 /* ic_mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_mail.png; sourceTree = "<group>"; };
 		ADE04ED21C892367000AD4B9 /* ic_pwd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_pwd.png; sourceTree = "<group>"; };
@@ -296,6 +394,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		ADD9D6E81C8E7D5C0098BE52 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ADE01D621C181077009F425E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -728,6 +833,7 @@
 			children = (
 				AD0E360E1C8001F800714FF3 /* HelloTako */,
 				ADE01D661C181077009F425E /* Products */,
+				ADD9D6FE1C8E7D5C0098BE52 /* HelloTako copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -735,6 +841,7 @@
 			isa = PBXGroup;
 			children = (
 				ADE01D651C181077009F425E /* Tako.app */,
+				ADD9D6FD1C8E7D5C0098BE52 /* Tako_qa.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -742,6 +849,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		ADD9D6961C8E7D5C0098BE52 /* HelloTako-QA */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADD9D6FA1C8E7D5C0098BE52 /* Build configuration list for PBXNativeTarget "HelloTako-QA" */;
+			buildPhases = (
+				ADD9D6971C8E7D5C0098BE52 /* Sources */,
+				ADD9D6E81C8E7D5C0098BE52 /* Frameworks */,
+				ADD9D6E91C8E7D5C0098BE52 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "HelloTako-QA";
+			productName = HelloTako;
+			productReference = ADD9D6FD1C8E7D5C0098BE52 /* Tako_qa.app */;
+			productType = "com.apple.product-type.application";
+		};
 		ADE01D641C181077009F425E /* HelloTako */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = ADE01D7F1C181077009F425E /* Build configuration list for PBXNativeTarget "HelloTako" */;
@@ -788,11 +912,35 @@
 			projectRoot = "";
 			targets = (
 				ADE01D641C181077009F425E /* HelloTako */,
+				ADD9D6961C8E7D5C0098BE52 /* HelloTako-QA */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		ADD9D6E91C8E7D5C0098BE52 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADD9D6EA1C8E7D5C0098BE52 /* LoginViewController.xib in Resources */,
+				ADD9D6EB1C8E7D5C0098BE52 /* TableViewCell.xib in Resources */,
+				ADD9D6EC1C8E7D5C0098BE52 /* DownloadViewController.xib in Resources */,
+				ADD9D6ED1C8E7D5C0098BE52 /* Main.storyboard in Resources */,
+				ADD9D6EE1C8E7D5C0098BE52 /* Assets.xcassets in Resources */,
+				ADD9D6EF1C8E7D5C0098BE52 /* icon_test_unselected.png in Resources */,
+				ADD9D6F01C8E7D5C0098BE52 /* LaunchScreen.storyboard in Resources */,
+				ADD9D6F11C8E7D5C0098BE52 /* icon_test_selected.png in Resources */,
+				ADD9D6F21C8E7D5C0098BE52 /* ic_startup_rocket.png in Resources */,
+				ADD9D6F31C8E7D5C0098BE52 /* ic_user_head_logged.png in Resources */,
+				ADD9D6F41C8E7D5C0098BE52 /* MJRefresh.bundle in Resources */,
+				ADD9D6F51C8E7D5C0098BE52 /* VersionViewController.xib in Resources */,
+				ADD9D6F61C8E7D5C0098BE52 /* ic_user_head_unlogged.png in Resources */,
+				ADD9D6F71C8E7D5C0098BE52 /* Default.png in Resources */,
+				ADD9D6F81C8E7D5C0098BE52 /* ic_mail.png in Resources */,
+				ADD9D6F91C8E7D5C0098BE52 /* ic_pwd.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ADE01D631C181077009F425E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -819,6 +967,93 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		ADD9D6971C8E7D5C0098BE52 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADD9D6981C8E7D5C0098BE52 /* TableViewCell.m in Sources */,
+				ADD9D6991C8E7D5C0098BE52 /* UIImage+WebP.m in Sources */,
+				ADD9D69A1C8E7D5C0098BE52 /* InstallingModel.m in Sources */,
+				ADD9D69B1C8E7D5C0098BE52 /* HTTPErrorResponse.m in Sources */,
+				ADD9D69C1C8E7D5C0098BE52 /* SDWebImageDecoder.m in Sources */,
+				ADD9D69D1C8E7D5C0098BE52 /* MultipartMessageHeader.m in Sources */,
+				ADD9D69E1C8E7D5C0098BE52 /* DDRange.m in Sources */,
+				ADD9D69F1C8E7D5C0098BE52 /* MJRefreshGifHeader.m in Sources */,
+				ADD9D6A01C8E7D5C0098BE52 /* SDWebImagePrefetcher.m in Sources */,
+				ADD9D6A11C8E7D5C0098BE52 /* HTTPServer.m in Sources */,
+				ADD9D6A21C8E7D5C0098BE52 /* UIHelper.m in Sources */,
+				ADD9D6A31C8E7D5C0098BE52 /* ViewController.m in Sources */,
+				ADD9D6A41C8E7D5C0098BE52 /* SDWebImageDownloader.m in Sources */,
+				ADD9D6A51C8E7D5C0098BE52 /* MJRefreshHeader.m in Sources */,
+				ADD9D6A61C8E7D5C0098BE52 /* AppDelegate.m in Sources */,
+				ADD9D6A71C8E7D5C0098BE52 /* App.m in Sources */,
+				ADD9D6A81C8E7D5C0098BE52 /* ShareEntity.m in Sources */,
+				ADD9D6A91C8E7D5C0098BE52 /* UIImageView+WebCache.m in Sources */,
+				ADD9D6AA1C8E7D5C0098BE52 /* Server.m in Sources */,
+				ADD9D6AB1C8E7D5C0098BE52 /* MJRefreshAutoGifFooter.m in Sources */,
+				ADD9D6AC1C8E7D5C0098BE52 /* MKAnnotationView+WebCache.m in Sources */,
+				ADD9D6AD1C8E7D5C0098BE52 /* MJRefreshBackFooter.m in Sources */,
+				ADD9D6AE1C8E7D5C0098BE52 /* SDWebImageDownloaderOperation.m in Sources */,
+				ADD9D6AF1C8E7D5C0098BE52 /* GCDAsyncSocket.m in Sources */,
+				ADD9D6B01C8E7D5C0098BE52 /* DDData.m in Sources */,
+				ADD9D6B11C8E7D5C0098BE52 /* MJRefreshAutoFooter.m in Sources */,
+				ADD9D6B21C8E7D5C0098BE52 /* MJRefreshBackGifFooter.m in Sources */,
+				ADD9D6B31C8E7D5C0098BE52 /* DownLoadWorker.m in Sources */,
+				ADD9D6B41C8E7D5C0098BE52 /* HTTPRedirectResponse.m in Sources */,
+				ADD9D6B51C8E7D5C0098BE52 /* WebSocket.m in Sources */,
+				ADD9D6B61C8E7D5C0098BE52 /* main.m in Sources */,
+				ADD9D6B71C8E7D5C0098BE52 /* UIImage+MultiFormat.m in Sources */,
+				ADD9D6B81C8E7D5C0098BE52 /* MJRefreshFooter.m in Sources */,
+				ADD9D6B91C8E7D5C0098BE52 /* DDTTYLogger.m in Sources */,
+				ADD9D6BA1C8E7D5C0098BE52 /* UIScrollView+MJExtension.m in Sources */,
+				ADD9D6BB1C8E7D5C0098BE52 /* UIImageView+HighlightedWebCache.m in Sources */,
+				ADD9D6BC1C8E7D5C0098BE52 /* HTTPDynamicFileResponse.m in Sources */,
+				ADD9D6BD1C8E7D5C0098BE52 /* VersionViewController.m in Sources */,
+				ADD9D6BE1C8E7D5C0098BE52 /* MineViewController.m in Sources */,
+				ADD9D6BF1C8E7D5C0098BE52 /* MJRefreshStateHeader.m in Sources */,
+				ADD9D6C01C8E7D5C0098BE52 /* SDImageCache.m in Sources */,
+				ADD9D6C11C8E7D5C0098BE52 /* DDASLLogger.m in Sources */,
+				ADD9D6C21C8E7D5C0098BE52 /* DownloadTableViewController.m in Sources */,
+				ADD9D6C31C8E7D5C0098BE52 /* DownLoadQueue.m in Sources */,
+				ADD9D6C41C8E7D5C0098BE52 /* validation.m in Sources */,
+				ADD9D6C51C8E7D5C0098BE52 /* DownloadViewController.m in Sources */,
+				ADD9D6C61C8E7D5C0098BE52 /* UIScrollView+MJRefresh.m in Sources */,
+				ADD9D6C71C8E7D5C0098BE52 /* HTTPMessage.m in Sources */,
+				ADD9D6C81C8E7D5C0098BE52 /* MJRefreshConst.m in Sources */,
+				ADD9D6C91C8E7D5C0098BE52 /* UIView+WebCacheOperation.m in Sources */,
+				ADD9D6CA1C8E7D5C0098BE52 /* Version.m in Sources */,
+				ADD9D6CB1C8E7D5C0098BE52 /* DDNumber.m in Sources */,
+				ADD9D6CC1C8E7D5C0098BE52 /* MJRefreshAutoNormalFooter.m in Sources */,
+				ADD9D6CD1C8E7D5C0098BE52 /* TestViewController.m in Sources */,
+				ADD9D6CE1C8E7D5C0098BE52 /* DispatchQueueLogFormatter.m in Sources */,
+				ADD9D6CF1C8E7D5C0098BE52 /* SDWebImageCompat.m in Sources */,
+				ADD9D6D01C8E7D5C0098BE52 /* SDWebImageManager.m in Sources */,
+				ADD9D6D11C8E7D5C0098BE52 /* UIView+MJExtension.m in Sources */,
+				ADD9D6D21C8E7D5C0098BE52 /* MJRefreshComponent.m in Sources */,
+				ADD9D6D31C8E7D5C0098BE52 /* MJRefreshNormalHeader.m in Sources */,
+				ADD9D6D41C8E7D5C0098BE52 /* DDLog.m in Sources */,
+				ADD9D6D51C8E7D5C0098BE52 /* MJRefreshBackNormalFooter.m in Sources */,
+				ADD9D6D61C8E7D5C0098BE52 /* UIButton+WebCache.m in Sources */,
+				ADD9D6D71C8E7D5C0098BE52 /* User.m in Sources */,
+				ADD9D6D81C8E7D5C0098BE52 /* DDFileLogger.m in Sources */,
+				ADD9D6D91C8E7D5C0098BE52 /* HTTPAuthenticationRequest.m in Sources */,
+				ADD9D6DA1C8E7D5C0098BE52 /* HTTPDataResponse.m in Sources */,
+				ADD9D6DB1C8E7D5C0098BE52 /* MJRefreshAutoStateFooter.m in Sources */,
+				ADD9D6DC1C8E7D5C0098BE52 /* LoginViewController.m in Sources */,
+				ADD9D6DD1C8E7D5C0098BE52 /* NSData+ImageContentType.m in Sources */,
+				ADD9D6DE1C8E7D5C0098BE52 /* MultipartFormDataParser.m in Sources */,
+				ADD9D6DF1C8E7D5C0098BE52 /* MJRefreshBackStateFooter.m in Sources */,
+				ADD9D6E01C8E7D5C0098BE52 /* MultipartMessageHeaderField.m in Sources */,
+				ADD9D6E11C8E7D5C0098BE52 /* HTTPConnection.m in Sources */,
+				ADD9D6E21C8E7D5C0098BE52 /* SharedInstallManager.m in Sources */,
+				ADD9D6E31C8E7D5C0098BE52 /* UIImage+GIF.m in Sources */,
+				ADD9D6E41C8E7D5C0098BE52 /* ContextFilterLogFormatter.m in Sources */,
+				ADD9D6E51C8E7D5C0098BE52 /* HTTPFileResponse.m in Sources */,
+				ADD9D6E61C8E7D5C0098BE52 /* DDAbstractDatabaseLogger.m in Sources */,
+				ADD9D6E71C8E7D5C0098BE52 /* HTTPAsyncFileResponse.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ADE01D611C181077009F425E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -928,6 +1163,34 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		ADD9D6FB1C8E7D5C0098BE52 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "HelloTako copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ksg.tako.qa;
+				PRODUCT_NAME = Tako_qa;
+			};
+			name = Debug;
+		};
+		ADD9D6FC1C8E7D5C0098BE52 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "HelloTako copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ksg.tako.qa;
+				PRODUCT_NAME = Tako_qa;
+			};
+			name = Release;
+		};
 		ADE01D7D1C181077009F425E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1041,6 +1304,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		ADD9D6FA1C8E7D5C0098BE52 /* Build configuration list for PBXNativeTarget "HelloTako-QA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADD9D6FB1C8E7D5C0098BE52 /* Debug */,
+				ADD9D6FC1C8E7D5C0098BE52 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		ADE01D601C181077009F425E /* Build configuration list for PBXProject "HelloTako" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

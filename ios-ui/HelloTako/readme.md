@@ -4,27 +4,22 @@
 - 2. 支持ios系统7.0
 
 ### todo:
-- 1. 特殊logo无法显示。http://tako.kssws.ks-cdn.com/test/logo/99f4a84b-9049-4af7-4da0-ed504e9ece74.png
-- 2. bar中的图片分辨率
-- 3. 玩家logo
-- 4. tableview连续点击
-- 5. 先super ..
-- 6. 测试页面正在下载时，下载页面未更新。
-- 7. 下面的传参格式是否可取？ 两个tableview是否可继承？
+- 特殊logo无法显示。http://tako.kssws.ks-cdn.com/test/logo/99f4a84b-9049-4af7-4da0-ed504e9ece74.png
+- bar中的图片分辨率
+- 测试页面正在下载时，下载页面未更新。
+- 下面的传参格式是否可取？ 两个tableview是否可继承？
 // todo: 是否可取？？？？？
 -(id)init{
     share = [super init];
     return share;
 }
-- 8. cell和table的编程规范。 cell变化后，app的信息必须同步更新。
+- cell和table的编程规范。 cell变化后，app的信息必须同步更新。
 
-- 9. 保存间隔0.1是否可用？test页面下载完成后，download页面需要移动item在section中的位置
-- 10.  test页面新增任务时（且password正确。），需要向管理页面添加新的item. // todo: 待优化，可提前加入app。
-- 11.     // todo:通过监听处理，以减少viewappear中的事件。
+- 保存间隔0.1是否可用？test页面下载完成后，download页面需要移动item在section中的位置  -- todo
+- test页面新增任务时（且password正确。），需要向管理页面添加新的item. // todo: 待优化，可提前加入app。-- todo
+- // todo:通过监听处理，以减少viewappear中的事件。
+- 应用内打开app，暂不支持
 
-- 12. 无法获得当前的下载进度
-- 13. app的下载进度 枚举化
-- 14. 每次加载20
 
 ### 测试场景
 - 1 带密码，不带密码
