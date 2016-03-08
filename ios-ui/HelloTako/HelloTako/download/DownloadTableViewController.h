@@ -26,7 +26,7 @@
 -(void)downloadApp;
 -(void)hideProgressUI:(BOOL)isShow cell:(TableViewCell*)cell;
 -(void)updateApp:(TakoApp*)app cell:(TableViewCell*)cell status:(enum APPSTATUS)status;
-
+-(void)saveCurrentAppStatus:(int) status tag:(NSString*)tag;
 @end
 
 
@@ -36,6 +36,7 @@
 @property (nonatomic,copy) NSString* currentLength;
 @property (nonatomic,copy) NSString* TotalLength;
 @property (nonatomic,copy) NSString* status;
+@property (nonatomic,copy) NSString* versionid;
 @property (nonatomic,copy) NSString* appid;
 @property (nonatomic,copy) NSString* password;
 @end

@@ -111,31 +111,6 @@ TestViewController* shareTest = nil;
     
 }
 
--(void)receiveDownloadpageFinishNotification:(NSNotification*)notice{
-    NSLog(@"receive download page finish event...");
-    // 定位到当前的cell
-    NSString* isSuccess = (NSString*)[notice.userInfo objectForKey:DOWNLOAD_RESULT_KEY];
-    NSString* tag = (NSString*)[notice.userInfo objectForKey:DOWNLOAD_TAG_KEY];
-    
-    TakoApp* app = nil;
-    TableViewCell* cell = nil;
-    // 找到对应的cell
-    for (int i=0; i<[self.listData count]; i++) {
-        app = (TakoApp*)[self.listData objectAtIndex:i];
-        if ([app.versionId isEqualToString:tag]) {
-            NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:0];
-            cell = [self.tableview cellForRowAtIndexPath:path];
-            break;
-        }
-    }
-    
-    // 更新cell
-    [self hideProgressUI:YES cell:cell];
-    // 更新app
-    if ([isSuccess isEqualToString:@"1"]) {
-        app.status = DOWNLOADED;
-    }
-}
 
 // 接收到cell的下载按钮点击事件
 -(void)receiveClickDownloadNotification:(NSNotification*)notice{
@@ -225,7 +200,7 @@ TestViewController* shareTest = nil;
                 NSArray* temp = [[DownloadViewController share].listData objectAtIndex:1];
                 for (int i=0; i<[temp count]; i++) {
                     TakoApp* tempApp = [temp objectAtIndex:i];
-                    if ([app.versionId isEqualToString:tempApp.versionId]) {
+                    if ([app.appid isEqualToString:tempApp.appid]) {
                         app = tempApp;
                         isExist = YES;
                         break;
@@ -241,23 +216,23 @@ TestViewController* shareTest = nil;
             for (NSString* key in dict) {
                 DownloadHistoryInfo* info = [DownloadHistoryInfo new];
                 NSDictionary* d = (NSDictionary*)[dict objectForKey:key];
-                info.appid = [d objectForKey:DOWNLOAD_APPID_KEY];
+                info.appid = key;
                 if([app.appid isEqualToString:info.appid])
                 {
                     info.currentLength = [d objectForKey:DOWNLOAD_CURRENT_LENGTH_KEY];
                     info.TotalLength = [d objectForKey:DOWNLOAD_TOTAL_LENGTH_KEY];
                     info.status = [d objectForKey:DOWNLOAD_STATUS_KEY];
                     int status = [info.status intValue];
-                    if (status == DOWNLOAD_FINISH_SUCCESS || status == DOWNLOAD_INSTALLING) {
+                    if (status == DOWNLOADED || status == INSTALLING) {
                         app.status = DOWNLOADED;
-                    }else if(status == DOWNLOAD_START || status == DOWNLOAD_PAUSE){
-                        app.status = STARTED;
+                    }else if(status == STARTED || status == PAUSED){
+                        app.status = PAUSED;
                         float currentL = [info.currentLength floatValue];
                         float totalL = [info.TotalLength floatValue];
                         app.progressValue = (float)currentL/totalL;
                         NSString* progress = [NSString stringWithFormat:@"%.1lf",app.progressValue*100];
                         app.progress = [NSString stringWithFormat:@"当前进度:%@%%",progress];
-                    }else if(status == DOWNLOAD_INSTALLED){
+                    }else if(status == INSTALLED){
                         app.status = INSTALLED;
                     }
                 }
@@ -374,7 +349,7 @@ TestViewController* shareTest = nil;
     // 找到对应的cell,app
     for (int i=0; i<[self.listData count]; i++) {
         app = (TakoApp*)[self.listData objectAtIndex:i];
-        if ([app.versionId isEqualToString:tag]) {
+        if ([app.appid isEqualToString:tag]) {
             NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:0];
             cell = [self.tableview cellForRowAtIndexPath:path];
             break;
@@ -383,20 +358,13 @@ TestViewController* shareTest = nil;
     
     if (isSuccess) {
          [super updateApp:app cell:cell status:DOWNLOADED];
-
-        // 记录已下载情况
-        NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_VERSION_KEY];//userDefault只允许返回NSDictionary
-        if (downloadAppDict==nil) {
-            downloadAppDict = [NSDictionary new];
-        }
-        NSMutableDictionary* newDict = [NSMutableDictionary dictionaryWithDictionary:downloadAppDict];
-        [newDict setValue:@"1" forKey:app.versionId];
-        [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_VERSION_KEY withObject:newDict];
+         // 记录已下载情况
+//        [super saveCurrentAppStatus:DOWNLOADED tag:app.appid];
     }else {
-         [super updateApp:app cell:cell status:DOWNLOADED_FAIL];
+//         [super updateApp:app cell:cell status:DOWNLOADED_FAIL];
+         [super saveCurrentAppStatus:DOWNLOADED_FAIL tag:app.appid];
         [XHTUIHelper alertWithNoChoice:[NSString stringWithFormat:@"下载失败:%@",msg] view:[XHTUIHelper getCurrentVC]];
     }
-
 }
 
 
@@ -411,7 +379,7 @@ TestViewController* shareTest = nil;
     // 找到对应的cell
     for (int i=0; i<[self.listData count]; i++) {
         app = (TakoApp*)[self.listData objectAtIndex:i];
-        if ([app.versionId isEqualToString:tag]) {
+        if ([app.appid isEqualToString:tag]) {
             NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:0];
             cell = [self.tableview cellForRowAtIndexPath:path];
             break;
@@ -439,7 +407,7 @@ TestViewController* shareTest = nil;
     BOOL isNew = YES;
     for (int i=0; i<[downloadApps count]; i++) {
         TakoApp* temp = [downloadApps objectAtIndex:i];
-        if ([app.versionId isEqualToString:temp.versionId]) {
+        if ([app.appid isEqualToString:temp.appid]) {
             isNew = NO;
             break;
         }

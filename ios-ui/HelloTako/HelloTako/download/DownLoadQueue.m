@@ -5,13 +5,18 @@
 @interface DownloadInfo : NSObject
 @property (nonatomic, copy) NSString* url;
 @property (nonatomic, copy) NSString* tag;
-@property (nonatomic, copy) NSString* appid;
+@property (nonatomic, copy) NSString* versionid;
 @property (nonatomic, copy) NSString* password;
 @property (nonatomic) BOOL isExecuting;
 @property (nonatomic) BOOL isSuspend;
 @property(nonatomic, strong)id<XHtDownLoadDelegate> delegate;
 @end
 
+//enum TASK_STATUS {
+//    WAITING = 0,
+//    EXECUTING,
+//    SUSPENDING,
+//};
 
 @implementation DownloadInfo
 
@@ -43,7 +48,7 @@ NSMutableDictionary* taskQueueDict = nil;
 }
 
 
-- (void)add:(NSString*)url appid:(NSString*)appid password:(NSString*)password tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate{
+- (void)add:(NSString*)url versionid:(NSString*)versionid password:(NSString*)password tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate{
     
     if (url==nil) {
         NSLog(@"the download url is invalid...");
@@ -57,7 +62,7 @@ NSMutableDictionary* taskQueueDict = nil;
         DownloadInfo* d = [DownloadInfo new];
         d.url = url;
         d.tag = tag;
-        d.appid = appid;
+        d.versionid = versionid;
         d.password = password;
         d.isSuspend = NO;// 只有被用户主动暂停时，该标志位才会为YES
         d.isExecuting =NO;
@@ -77,24 +82,20 @@ NSMutableDictionary* taskQueueDict = nil;
         return;
     }
     
-    [worker startWithUrl:[NSURL URLWithString:url] appid:appid password:password tag:tag delegate:self ];
+    [worker startWithUrl:[NSURL URLWithString:url] versionid:versionid password:password tag:tag delegate:self ];
     d.isExecuting=YES;// 更新执行状态
     
     
 }
 
 -(void)startOne{
-    NSUInteger count =[taskQueueDict count];
-    id keys = [taskQueueDict allKeys];
-    for (int i = 0; i < count; i++)
-    {
-        id key = [keys objectAtIndex: i];
-        id value = [taskQueueDict objectForKey: key];
-        DownloadInfo* downloadInfo = (DownloadInfo*)value; // 选取任务
-        
-        if (!downloadInfo.isExecuting && !downloadInfo.isSuspend) {
+    
+    DownloadInfo*  downloadInfo =nil;
+    for (NSString* key in taskQueueDict) {
+       downloadInfo =  [taskQueueDict objectForKey:key]; // 选取任务
+            if (!downloadInfo.isExecuting && !downloadInfo.isSuspend) {
             DownloadWorker* worker = [self newWorker];// 选取线程
-            [worker startWithUrl:[NSURL URLWithString:downloadInfo.url] appid:downloadInfo.appid password:downloadInfo.password tag:downloadInfo.tag  delegate:self];
+            [worker startWithUrl:[NSURL URLWithString:downloadInfo.url] versionid:downloadInfo.versionid password:downloadInfo.password tag:downloadInfo.tag  delegate:self];
             downloadInfo.isExecuting=YES;
             break;
         }
@@ -128,6 +129,11 @@ NSMutableDictionary* taskQueueDict = nil;
 // 暂停
 - (void)pause:(NSString*)tag{
     
+    // 更新队列的状态
+    DownloadInfo* info = [taskQueueDict objectForKey:tag];
+    info.isSuspend = YES;
+    info.isExecuting = NO;
+    
     // 从线程池中查找对应的工作线程
     for (int i = 0; i < [workerThreadPool count]; i++)
     {
@@ -136,10 +142,6 @@ NSMutableDictionary* taskQueueDict = nil;
         if ([worker.tag isEqualToString:tag]) {
             [worker pause:tag];
             
-            // 更新队列信息
-            DownloadInfo* d = (DownloadInfo*)[taskQueueDict objectForKey:tag];
-            d.isExecuting=NO;
-            d.isSuspend=YES;
             [self startOne];
             return;
         }
@@ -151,6 +153,11 @@ NSMutableDictionary* taskQueueDict = nil;
 // 停止（下次将重新下载）
 - (void)stop:(NSString*)tag{
     
+    // 更新队列的状态
+    DownloadInfo* info = [taskQueueDict objectForKey:tag];
+    info.isSuspend = YES;
+    info.isExecuting = NO;
+    
     // 从线程池中查找获取
     for (int i = 0; i < [workerThreadPool count]; i++)
     {
@@ -159,10 +166,6 @@ NSMutableDictionary* taskQueueDict = nil;
         if ([worker.tag isEqualToString:tag]) {
             [worker stop:tag];
             
-            // 更新队列信息
-            DownloadInfo* d = (DownloadInfo*)[taskQueueDict objectForKey:tag];
-            d.isExecuting=NO;
-            d.isSuspend=YES;
             [self startOne];
             return;
         }

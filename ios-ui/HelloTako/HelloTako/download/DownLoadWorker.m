@@ -60,7 +60,7 @@
     NSLog(@"下载结束，结果为失败。错误信息: %@",messageString);
     self.isFree=YES;
     [self.delegate downloadFinish:NO msg:@"无法连接到服务器，请重试。" tag:self.tag];
-    [self saveCurrentProgress:DOWNLOAD_FINISH_FAIL];
+    [self saveCurrentProgress:DOWNLOADED_FAIL];
 }
 
 
@@ -81,7 +81,7 @@
     }
     
     
-    self.filename = [NSString stringWithFormat:@"%@.ipa",self.tag];
+    self.filename = [NSString stringWithFormat:@"%@.ipa",self.versionid];
     //    self.homePath = [self.homePath  stringByAppendingPathComponent:@"xgtakofiles"]; // todo:该目录不可写,暂不设置子目录
     NSString* filepath = [self.homePath stringByAppendingPathComponent:self.filename];
     NSLog(@"local file path is:%@",filepath);
@@ -136,11 +136,7 @@
     NSLog(@"download worker:下载完成。");
     
     [self isDevicefileExist];// 调试用
-    
-//    NSString* itermServiceUrl = [TakoServer fetchItermUrl:self.tag password:self.password];
-//    NSLog(@"will install,iterm url is:%@",itermServiceUrl);
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:itermServiceUrl]];
-//    
+
     // 重置状态
     self.currentLength = 0;
     self.totalLength = 0;
@@ -153,14 +149,14 @@
     [self.delegate downloadFinish:YES msg:nil tag:self.tag];
     
     NSLog(@"下载结束，结果为成功...");
-    [self saveCurrentProgress:DOWNLOAD_FINISH_SUCCESS];
+    [self saveCurrentProgress:DOWNLOADED];
     
 }
 
 /*
  启动
  */
-- (void)startWithUrl:(NSURL*) url appid:(NSString*)appid password:(NSString*)password tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate {
+- (void)startWithUrl:(NSURL*) url versionid:(NSString*)versionid password:(NSString*)password tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate {
     
     if (![self isDelegateAvailable:delegate]) {
         return;
@@ -168,7 +164,7 @@
     
     self.delegate=delegate;
     self.tag = tag;
-    self.appid = appid;
+    self.versionid = versionid;
     self.password = password;
     self.isFree = NO;
     
@@ -182,7 +178,7 @@
         NSDictionary* t = (NSDictionary*)[oldDict objectForKey:self.tag];
         self.currentLength = [(NSString*)[t objectForKey:DOWNLOAD_CURRENT_LENGTH_KEY] longLongValue];
         self.totalLength = [(NSString*)[t objectForKey:DOWNLOAD_TOTAL_LENGTH_KEY] longLongValue];
-        self.appid = (NSString*)[t objectForKey:DOWNLOAD_APPID_KEY];
+        self.versionid = (NSString*)[t objectForKey:DOWNLOAD_APP_VERSION_KEY];
         self.password = (NSString*)[t objectForKey:DOWNLOAD_PASSWORD_KEY];
     }else{
         self.currentLength = 0;
@@ -206,13 +202,13 @@
     self.tag=tag;
     
     
-    [self saveCurrentProgress:DOWNLOAD_PAUSE];
+    [self saveCurrentProgress:PAUSED];
 }
 
 
 -(void)saveCurrentProgressBeforeTerminate{
     if (!self.isFree) {
-        [self saveCurrentProgress:DOWNLOAD_START];
+        [self saveCurrentProgress:STARTED];
     }
 }
 
@@ -241,7 +237,7 @@
     NSString* totalLength = [NSString stringWithFormat:@"%qi",self.totalLength];
     [newCurrent setObject:currentLength forKey:DOWNLOAD_CURRENT_LENGTH_KEY];
     [newCurrent setObject:totalLength forKey:DOWNLOAD_TOTAL_LENGTH_KEY];
-    [newCurrent setObject:self.appid forKey:DOWNLOAD_APPID_KEY];
+    [newCurrent setObject:self.versionid forKey:DOWNLOAD_APP_VERSION_KEY];
     [newCurrent setObject:[NSString stringWithFormat:@"%d",status] forKey:DOWNLOAD_STATUS_KEY];
     
     [newDict setValue:newCurrent forKey:self.tag];
@@ -258,7 +254,7 @@
     self.isFree = YES;
     self.tag=tag;
     
-    [self saveCurrentProgress:DOWNLOAD_STOP];
+    [self saveCurrentProgress:INITED];
 }
 
 -(BOOL) isDelegateAvailable:(id<XHtDownLoadDelegate>) delegate{

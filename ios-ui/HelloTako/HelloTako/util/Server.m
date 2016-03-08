@@ -117,10 +117,6 @@
         for (int i=0; i<[apps count]; i++) {
             NSDictionary* temp = (NSDictionary*)[apps objectAtIndex:i];
             TakoApp* app =  [[TakoApp new] initWithDictionary:temp];
-            // 添加下载标志
-            if([self isAppDownloadedBefore:app.versionId]){
-                app.status = DOWNLOADED;
-            }
             [result addObject:app];
         }
     }
@@ -265,19 +261,19 @@
     return returnData;
 }
 
-
-
-// 判断app是否下载过
-+(BOOL)isAppDownloadedBefore:(NSString*) versionId{
-    
-    NSDictionary* oldDict = (NSDictionary*)[XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
-    if ([oldDict objectForKey:versionId]==nil) {
-        return NO;
-    }
-    NSDictionary* d = (NSDictionary*)[oldDict objectForKey:versionId];
-    NSString* status = (NSString*)[d objectForKey:DOWNLOAD_STATUS_KEY];
-    return [status intValue] == DOWNLOAD_FINISH_SUCCESS;
-}
+//
+//
+//// 判断app是否下载过
+//+(BOOL)isAppDownloadedBefore:(NSString*) versionId{
+//    
+//    NSDictionary* oldDict = (NSDictionary*)[XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
+//    if ([oldDict objectForKey:versionId]==nil) {
+//        return NO;
+//    }
+//    NSDictionary* d = (NSDictionary*)[oldDict objectForKey:versionId];
+//    NSString* status = (NSString*)[d objectForKey:DOWNLOAD_STATUS_KEY];
+//    return [status intValue] == DOWNLOADED;
+//}
 
 
 

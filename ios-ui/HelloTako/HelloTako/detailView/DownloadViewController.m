@@ -86,7 +86,8 @@ DownloadViewController* share = nil;
         info.currentLength = [d objectForKey:DOWNLOAD_CURRENT_LENGTH_KEY];
         info.TotalLength = [d objectForKey:DOWNLOAD_TOTAL_LENGTH_KEY];
         info.status = [d objectForKey:DOWNLOAD_STATUS_KEY];
-        info.appid = [d objectForKey:DOWNLOAD_APPID_KEY];
+        info.versionid = [d objectForKey:DOWNLOAD_APP_VERSION_KEY];
+        info.appid = key; // appid 是 dict 的tag
         
         TakoApp* app = nil;
         // 首次加载时，必须从外层刷controller里面的listdata中，拿到最新的appprogress信息
@@ -103,9 +104,9 @@ DownloadViewController* share = nil;
         }
         
         int status = [info.status intValue];
-        if (status == DOWNLOAD_FINISH_SUCCESS) {
+        if (status == DOWNLOADED) {
             [downloadedList addObject:app];
-        }else if(status == DOWNLOAD_START || status == DOWNLOAD_PAUSE){
+        }else if(status == STARTED || status == PAUSED){
             [downloadingList addObject:app];
         }
     }
@@ -279,12 +280,6 @@ viewForFooterInSection:(NSInteger)section {
 -(void)downloadFinish:(BOOL)isSuccess msg:(NSString*)msg tag:(NSString *)tag{
     NSLog(@"收到回调通知：文件下载完成。");
     
-    // 获取到button对应的cell
-    NSMutableDictionary* dict = [NSMutableDictionary new];
-    NSString* value = isSuccess? @"1":@"0";
-    [dict setObject:value forKey:DOWNLOAD_RESULT_KEY];
-    [dict setObject:tag forKey:DOWNLOAD_TAG_KEY];
-    
     TableViewCell* cell = nil;
     TakoApp* app = nil;
     
@@ -294,7 +289,7 @@ viewForFooterInSection:(NSInteger)section {
     // 找到对应的cell,app
     for (int i=0; i< [cellList count]; i++) {
         app = (TakoApp*)[cellList objectAtIndex:i];
-        if ([app.versionId isEqualToString:tag]) {
+        if ([app.appid isEqualToString:tag]) {
             NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:1];
             cell = [self.tableview cellForRowAtIndexPath:path];
             break;
@@ -303,18 +298,10 @@ viewForFooterInSection:(NSInteger)section {
     
     if (isSuccess) {
         [super updateApp:app cell:cell status:DOWNLOADED];
-        
-        // 记录已下载情况
-        NSDictionary* downloadAppDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_VERSION_KEY];//userDefault只允许返回NSDictionary
-        if (downloadAppDict==nil) {
-            downloadAppDict = [NSDictionary new];
-        }
-        NSMutableDictionary* newDict = [NSMutableDictionary dictionaryWithDictionary:downloadAppDict];
-        [newDict setValue:@"1" forKey:app.versionId];
-        [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_VERSION_KEY withObject:newDict];
+        [super saveCurrentAppStatus:DOWNLOADED tag:app.appid];
     }else {
         [super updateApp:app cell:cell status:DOWNLOADED_FAIL];
-        
+        [super saveCurrentAppStatus:DOWNLOADED_FAIL tag:app.appid];
         [XHTUIHelper alertWithNoChoice:[NSString stringWithFormat:@"下载失败:%@",msg] view:[XHTUIHelper getCurrentVC]];
     }
 }
@@ -333,7 +320,7 @@ viewForFooterInSection:(NSInteger)section {
     // 找到对应的cell
     for (int i=0; i< [cellList count]; i++) {
         app = (TakoApp*)[cellList objectAtIndex:i];
-        if ([app.versionId isEqualToString:tag]) {
+        if ([app.appid isEqualToString:tag]) {
             NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:1];
             cell = [self.tableview cellForRowAtIndexPath:path];
             break;

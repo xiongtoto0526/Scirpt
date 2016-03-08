@@ -849,9 +849,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		ADD9D6961C8E7D5C0098BE52 /* HelloTako-QA */ = {
+		ADD9D6961C8E7D5C0098BE52 /* HelloTako */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ADD9D6FA1C8E7D5C0098BE52 /* Build configuration list for PBXNativeTarget "HelloTako-QA" */;
+			buildConfigurationList = ADD9D6FA1C8E7D5C0098BE52 /* Build configuration list for PBXNativeTarget "HelloTako" */;
 			buildPhases = (
 				ADD9D6971C8E7D5C0098BE52 /* Sources */,
 				ADD9D6E81C8E7D5C0098BE52 /* Frameworks */,
@@ -861,14 +861,14 @@
 			);
 			dependencies = (
 			);
-			name = "HelloTako-QA";
+			name = HelloTako;
 			productName = HelloTako;
 			productReference = ADD9D6FD1C8E7D5C0098BE52 /* Tako_qa.app */;
 			productType = "com.apple.product-type.application";
 		};
-		ADE01D641C181077009F425E /* HelloTako */ = {
+		ADE01D641C181077009F425E /* HelloTako-qa */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ADE01D7F1C181077009F425E /* Build configuration list for PBXNativeTarget "HelloTako" */;
+			buildConfigurationList = ADE01D7F1C181077009F425E /* Build configuration list for PBXNativeTarget "HelloTako-qa" */;
 			buildPhases = (
 				ADE01D611C181077009F425E /* Sources */,
 				ADE01D621C181077009F425E /* Frameworks */,
@@ -878,7 +878,7 @@
 			);
 			dependencies = (
 			);
-			name = HelloTako;
+			name = "HelloTako-qa";
 			productName = HelloTako;
 			productReference = ADE01D651C181077009F425E /* Tako.app */;
 			productType = "com.apple.product-type.application";
@@ -911,8 +911,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				ADE01D641C181077009F425E /* HelloTako */,
-				ADD9D6961C8E7D5C0098BE52 /* HelloTako-QA */,
+				ADE01D641C181077009F425E /* HelloTako-qa */,
+				ADD9D6961C8E7D5C0098BE52 /* HelloTako */,
 			);
 		};
 /* End PBXProject section */
@@ -1304,7 +1304,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		ADD9D6FA1C8E7D5C0098BE52 /* Build configuration list for PBXNativeTarget "HelloTako-QA" */ = {
+		ADD9D6FA1C8E7D5C0098BE52 /* Build configuration list for PBXNativeTarget "HelloTako" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ADD9D6FB1C8E7D5C0098BE52 /* Debug */,
@@ -1322,7 +1322,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ADE01D7F1C181077009F425E /* Build configuration list for PBXNativeTarget "HelloTako" */ = {
+		ADE01D7F1C181077009F425E /* Build configuration list for PBXNativeTarget "HelloTako-qa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ADE01D801C181077009F425E /* Debug */,

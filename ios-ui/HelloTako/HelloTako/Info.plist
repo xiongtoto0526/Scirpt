@@ -59,6 +59,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>tako_server_host</key>
-	<string>http://tako.im/service</string>
+	<string>http://qa.tako.im:28870/service</string>
 </dict>
 </plist>

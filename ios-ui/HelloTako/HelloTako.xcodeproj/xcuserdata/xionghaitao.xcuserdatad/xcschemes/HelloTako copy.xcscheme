@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "ADD9D6961C8E7D5C0098BE52"
-               BuildableName = "HelloTako-QA.app"
-               BlueprintName = "HelloTako-QA"
+               BuildableName = "Tako_qa.app"
+               BlueprintName = "HelloTako"
                ReferencedContainer = "container:HelloTako.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "ADD9D6961C8E7D5C0098BE52"
-            BuildableName = "HelloTako-QA.app"
-            BlueprintName = "HelloTako-QA"
+            BuildableName = "Tako_qa.app"
+            BlueprintName = "HelloTako"
             ReferencedContainer = "container:HelloTako.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -56,8 +56,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "ADD9D6961C8E7D5C0098BE52"
-            BuildableName = "HelloTako-QA.app"
-            BlueprintName = "HelloTako-QA"
+            BuildableName = "Tako_qa.app"
+            BlueprintName = "HelloTako"
             ReferencedContainer = "container:HelloTako.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -75,8 +75,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "ADD9D6961C8E7D5C0098BE52"
-            BuildableName = "HelloTako-QA.app"
-            BlueprintName = "HelloTako-QA"
+            BuildableName = "Tako_qa.app"
+            BlueprintName = "HelloTako"
             ReferencedContainer = "container:HelloTako.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

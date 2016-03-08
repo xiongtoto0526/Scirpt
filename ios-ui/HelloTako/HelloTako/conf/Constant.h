@@ -15,22 +15,22 @@
 // screen
 #define LAUNCH_SCREEN_TIME 2.0
 
-// user default
+// userinfo in userdefault
 #define USER_ACCOUNT_KEY @"user_account"
 #define USER_TOKEN_KEY @"user_token"
 #define USER_NAME_KEY @"user_name"
 #define LOGIN_KEY @"is_tako_logined"
 #define LOGIN_SUCCESS_KEY @"1"
 #define LOGIN_FAILED_KEY @"0"
-#define APP_VERSION_KEY @"app_version"
 
+// appinfo in userdefault
 #define DOWNLOADED_APP_INFO_KEY @"downlaod_app_info"
-#define DOWNLOADED_APP_VERSION_KEY @"downloaded_app_version"
-#define DOWNLOAD_APPID_KEY @"downlaod_appid"
+#define DOWNLOAD_APP_VERSION_KEY @"download_app_version"
 #define DOWNLOAD_PASSWORD_KEY @"download_password"
 #define DOWNLOAD_TOTAL_LENGTH_KEY @"download_total_length"
 #define DOWNLOAD_CURRENT_LENGTH_KEY @"download_current_length"
 #define DOWNLOAD_STATUS_KEY @"downlaod_status"
+
 // notification
 #define LOGIN_BACK_TO_USER_NOTIFICATION @"login_back_to_user"
 #define CLICK_DOWNLOAD_BUTTON_NOTIFICATION @"click_download_button"
@@ -41,13 +41,10 @@
 
 // notification key
 #define CELL_INDEX_NOTIFICATION_KEY @"cellIndex"
-#define DOWNLOAD_RESULT_KEY @"download_result"
-#define DOWNLOAD_PROGRESS_KEY @"download_progress"
-#define DOWNLOAD_TAG_KEY @"download_tag"
+
 
 // download worker
 #define MAX_DOWNLOAD_THREAD_COUNT 2
-//#define DOWNLOAD_PROGRESS_SAVE_INTERVAL 0.001 //每1个百分点保存一次
 
 // tako server
 //#define TAKO_SERVER_HOST @"http://qa.tako.im:28870/service"
@@ -56,17 +53,6 @@
 #define TAKO_SERVER_FETCH_SIZE @"10"
 
 
-
-// 0 停止下载，1 下载中，2下载成功，3下载失败 ...
-enum DOWNLOADSTATUS{
-    DOWNLOAD_STOP = 0,
-    DOWNLOAD_START,
-    DOWNLOAD_PAUSE,
-    DOWNLOAD_FINISH_SUCCESS,
-    DOWNLOAD_FINISH_FAIL,
-    DOWNLOAD_INSTALLING,
-    DOWNLOAD_INSTALLED,
-};
 
 enum APPSTATUS{
     INITED = 0,

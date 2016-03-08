@@ -17,10 +17,10 @@
 
 @property (nonatomic) BOOL isFree;
 
-// 请求标示，即appVersionId
+// 请求标示，即appId
 @property (nonatomic, copy) NSString  *tag;
 
-@property (nonatomic, copy) NSString  *appid;
+@property (nonatomic, copy) NSString  *versionid;
 
 @property (nonatomic, copy) NSString  *password;
 
@@ -28,7 +28,7 @@
 
 
 // 启动
-- (void)startWithUrl:(NSURL*) url appid:(NSString*)appid password:(NSString*)password tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate;
+- (void)startWithUrl:(NSURL*) url versionid:(NSString*)versionid password:(NSString*)password tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate;
 
 // 暂停
 - (void)pause:(NSString*)tag;

@@ -76,7 +76,7 @@
         self.currentApp.progressValue=0;
         
         // 停止下载器
-        [[XHtDownLoadQueue share] stop:self.currentApp.versionId];
+        [[XHtDownLoadQueue share] stop:self.currentApp.appid];
         
     }];
     
@@ -122,8 +122,15 @@
 
 -(void)downloadApp{
     
-    // 从server端获取下载地址。
-    self.currentApp.downloadUrl = [TakoServer fetchDownloadUrl:self.currentApp.versionId password:self.currentApp.downloadPassword];
+    if (self.currentApp.status == INSTALLING) {
+        NSLog(@"app is installing ,please wait...");
+        return;
+    }
+    
+    if (self.currentApp.downloadUrl == nil) {
+         self.currentApp.downloadUrl = [TakoServer fetchDownloadUrl:self.currentApp.versionId password:self.currentApp.downloadPassword];
+    }
+   
     if (self.currentApp.downloadUrl==nil) {
         NSLog(@"get downloadurl failed...");
         [XHTUIHelper alertWithNoChoice:@"下载密码不正确!" view:self];
@@ -186,7 +193,7 @@
      2. 当某个应用暂停后，程序会保存当前进度。即使退出应用，下次进入时，仍可继续下。
      3. 参数tag说明: tag 为每个下载记录的唯一标识。
      */
-    [[XHtDownLoadQueue share] add:self.currentApp.downloadUrl appid:self.currentApp.appid password:self.currentApp.downloadPassword tag:self.currentApp.versionId delegate:self];
+    [[XHtDownLoadQueue share] add:self.currentApp.downloadUrl versionid:self.currentApp.versionId password:self.currentApp.downloadPassword tag:self.currentApp.appid delegate:self];
 }
 
 
@@ -194,7 +201,7 @@
 -(void)continueDownload{
     NSLog(@"will continue download...");
     self.currentApp.status = STARTED;
-    [[XHtDownLoadQueue share] add:self.currentApp.downloadUrl appid:self.currentApp.appid password:self.currentApp.downloadPassword tag:self.currentApp.versionId delegate:self];
+    [[XHtDownLoadQueue share] add:self.currentApp.downloadUrl versionid:self.currentApp.versionId password:self.currentApp.downloadPassword tag:self.currentApp.appid delegate:self];
 }
 
 
@@ -203,7 +210,7 @@
 -(void)pauseDownload{
     NSLog(@"will pause download...");
     self.currentApp.status = PAUSED;
-    [[XHtDownLoadQueue share] pause:self.currentApp.versionId];
+    [[XHtDownLoadQueue share] pause:self.currentApp.appid];
 }
 
 
@@ -274,7 +281,7 @@
         [updateCell.button setTitle:@"已安装" forState:UIControlStateNormal];
         [XHTUIHelper disableDownloadButton:updateCell.button];
         updateApp.status = INSTALLED;
-        [self saveCurrentAppStatus:DOWNLOAD_INSTALLED tag:updateApp.versionId];
+        [self saveCurrentAppStatus:INSTALLED tag:updateApp.appid];
     }
     
 }
@@ -317,9 +324,9 @@
         
 // 显示安装进度（暂不开启）。
 //        NSString* newTitle = [NSString stringWithFormat:@"安装中 %@",model.progress];
-//        [updateCell.button setTitle:newTitle forState:UIControlStateNormal];
         updateApp.status = INSTALLING;
-        [self saveCurrentAppStatus:DOWNLOAD_INSTALLING tag:updateApp.versionId];
+        [updateCell.button setTitle:@"安装中" forState:UIControlStateNormal];
+        [self saveCurrentAppStatus:INSTALLING tag:updateApp.appid];
     }
 }
 
@@ -375,7 +382,7 @@
 
 
 
-// 更新当前app的状态，以便下次退出应用后，仍可继续。
+// 更新当前app的状态,记录到userdefault。
 -(void)saveCurrentAppStatus:(int) status tag:(NSString*)tag{
     
     NSDictionary* oldCurrent =nil;
