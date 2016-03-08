@@ -55,13 +55,15 @@
 
 
 
-// 0 停止下载，1 下载中，2下载成功，3下载失败
+// 0 停止下载，1 下载中，2下载成功，3下载失败 ...
 enum DOWNLOADSTATUS{
     DOWNLOAD_STOP = 0,
     DOWNLOAD_START,
     DOWNLOAD_PAUSE,
     DOWNLOAD_FINISH_SUCCESS,
     DOWNLOAD_FINISH_FAIL,
+    DOWNLOAD_INSTALLING,
+    DOWNLOAD_INSTALLED,
 };
 
 enum APPSTATUS{

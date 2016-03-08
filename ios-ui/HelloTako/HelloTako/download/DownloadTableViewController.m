@@ -274,7 +274,7 @@
         [updateCell.button setTitle:@"已安装" forState:UIControlStateNormal];
         [XHTUIHelper disableDownloadButton:updateCell.button];
         updateApp.status = INSTALLED;
-
+        [self saveCurrentAppStatus:DOWNLOAD_INSTALLED tag:updateApp.versionId];
     }
     
 }
@@ -296,7 +296,6 @@
         
         [updateCell.button setTitle:@"安装ing" forState:UIControlStateNormal];
         updateApp.status = INSTALLING;
-        
     }
 }
 
@@ -316,9 +315,11 @@
         updateApp = [self.listData objectAtIndex:cellIndex];
         NSLog(@"app %@ install begin...",updateApp.appname);
         
-        [updateCell.button setTitle:@"安装中" forState:UIControlStateNormal];
+// 显示安装进度（暂不开启）。
+//        NSString* newTitle = [NSString stringWithFormat:@"安装中 %@",model.progress];
+//        [updateCell.button setTitle:newTitle forState:UIControlStateNormal];
         updateApp.status = INSTALLING;
-        
+        [self saveCurrentAppStatus:DOWNLOAD_INSTALLING tag:updateApp.versionId];
     }
 }
 
@@ -371,6 +372,40 @@
             break;
     }
 }
+
+
+
+// 更新当前app的状态，以便下次退出应用后，仍可继续。
+-(void)saveCurrentAppStatus:(int) status tag:(NSString*)tag{
+    
+    NSDictionary* oldCurrent =nil;
+    NSMutableDictionary* newCurrent =nil;
+    NSMutableDictionary* newDict = nil;
+    NSDictionary* oldDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
+    
+    NSLog(@"old dict is:%@",oldDict);
+    if (oldDict==nil) {
+        newDict = [NSMutableDictionary new];
+    }else{
+        newDict = [NSMutableDictionary dictionaryWithDictionary:oldDict];
+    }
+    
+    oldCurrent =[newDict objectForKey:tag];
+    if (oldCurrent==nil) {
+        newCurrent = [NSMutableDictionary new];
+    }else{
+        newCurrent = [NSMutableDictionary dictionaryWithDictionary:oldCurrent];
+    }
+    
+    NSString* statusStr = [NSString stringWithFormat:@"%d",status];
+    [newCurrent setObject:statusStr forKey:DOWNLOAD_STATUS_KEY];
+    
+    [newDict setValue:newCurrent forKey:tag];
+    NSLog(@"new dict befor write is:%@",newDict);
+    [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_INFO_KEY withObject:newDict];
+    NSLog(@"new dict after write is:%@",[XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY]);
+}
+
 
 
 @end

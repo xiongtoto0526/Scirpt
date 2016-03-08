@@ -84,7 +84,7 @@
                 {
                     if (model) {
                         
-                        model.progress = [progress localizedDescription];
+                        model.progress = [[progress localizedDescription] substringToIndex:2];
                         model.status  =  [NSString stringWithFormat:@"%@",[[progress userInfo] valueForKey:@"installState"]];
                         
                         // 更新安装进度
@@ -94,7 +94,7 @@
                         InstallingModel *model = [[InstallingModel alloc] init];
                         
                         model.bundleID = bundleId;
-                        model.progress = [progress localizedDescription];
+                        model.progress = [[progress localizedDescription] substringToIndex:2];
                         model.status  = [NSString stringWithFormat:@"%@",[[progress userInfo] valueForKey:@"installState"]];
                         
                         [_installAry addObject:model];

@@ -213,6 +213,7 @@ TestViewController* shareTest = nil;
     
     // 检查历史下载记录
     NSDictionary* dict =[XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
+    NSLog(@"start dict is:%@",dict);
     if (dict!=nil) {
         // 初始化其他属性
         for(int i=0;i<[newdata count];i++){
@@ -247,7 +248,7 @@ TestViewController* shareTest = nil;
                     info.TotalLength = [d objectForKey:DOWNLOAD_TOTAL_LENGTH_KEY];
                     info.status = [d objectForKey:DOWNLOAD_STATUS_KEY];
                     int status = [info.status intValue];
-                    if (status == DOWNLOAD_FINISH_SUCCESS) {
+                    if (status == DOWNLOAD_FINISH_SUCCESS || status == DOWNLOAD_INSTALLING) {
                         app.status = DOWNLOADED;
                     }else if(status == DOWNLOAD_START || status == DOWNLOAD_PAUSE){
                         app.status = STARTED;
@@ -256,6 +257,8 @@ TestViewController* shareTest = nil;
                         app.progressValue = (float)currentL/totalL;
                         NSString* progress = [NSString stringWithFormat:@"%.1lf",app.progressValue*100];
                         app.progress = [NSString stringWithFormat:@"当前进度:%@%%",progress];
+                    }else if(status == DOWNLOAD_INSTALLED){
+                        app.status = INSTALLED;
                     }
                 }
             }
@@ -322,22 +325,7 @@ TestViewController* shareTest = nil;
                          placeholderImage:[UIImage imageNamed:@"ic_defaultapp"]];
     
     [super updateApp:app cell:cell status:app.status];
-//    if (app.isInstalled) {
-//        [XHTUIHelper disableDownloadButton:cell.button];
-//        [cell.button setTitle:@"已安装" forState:UIControlStateNormal];
-//        [super hideProgressUI:YES cell:cell];
-//    }else if(app.status == DOWNLOADED) {
-//        [cell.button setTitle:@"安装" forState:UIControlStateNormal];
-//        [super hideProgressUI:YES cell:cell];
-//    }else if (app.isPaused) {
-//        [cell.button setTitle:@"继续" forState:UIControlStateNormal];
-//        [super hideProgressUI:NO cell:cell];
-//    }else if (app.isStarted) {
-//        [cell.button setTitle:@"暂停" forState:UIControlStateNormal];
-//        [super hideProgressUI:NO cell:cell];
-//    }else if (!app.isStarted){
-//        [super hideProgressUI:YES cell:cell];
-//    }
+
     cell.textDownload.text = app.progress;
     cell.progressControl.progress = app.progressValue;
     
