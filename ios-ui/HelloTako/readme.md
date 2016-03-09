@@ -21,8 +21,7 @@
 - test页面新增任务时（且password正确。），需要向管理页面添加新的item. // todo: 待优化，可提前加入app。-- todo
 - // todo:通过监听处理，以减少viewappear中的事件。
 - 应用内打开app，暂不支持
-- 关闭shareInstance线程
-
+- 关闭shareInstance线程。。。。
 
 ### 测试场景
 - 1 带密码，不带密码

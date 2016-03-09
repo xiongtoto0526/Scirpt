@@ -11,6 +11,7 @@
 #import "Constant.h"
 #import "UIHelper.h"
 #import "Server.h"
+#import "SharedInstallManager.h"
 
 @interface AppDelegate (){
 	HTTPServer *httpServer;
@@ -99,9 +100,12 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 
-    // 发送事件
+    // 发送事件,保存进度
     NSNotification *notification =[NSNotification notificationWithName:APPLICATION_WILL_TERMINATE_NOTIFICATION object:nil userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
+    // 停止监听安装进度
+    [SharedInstallManager stop];
 
 }
 

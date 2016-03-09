@@ -51,7 +51,7 @@ NSTimer* timer = nil;
     return self;
 }
 
-- (void)stop{
++ (void)stop{
     if (timer) {
         [timer invalidate];
         timer=nil;
@@ -137,10 +137,10 @@ NSTimer* timer = nil;
             }
         }
         
-        NSLog(@"_installAry count:%lu",(unsigned long)_installAry.count);
-        for (InstallingModel* temp in _installAry) {
-            NSLog(@"bundleid:%@,progress:%@,status:%@",temp.bundleID,temp.progress,temp.status);
-        }
+//        NSLog(@"_installAry count:%lu",(unsigned long)_installAry.count);
+//        for (InstallingModel* temp in _installAry) {
+//            NSLog(@"bundleid:%@,progress:%@,status:%@",temp.bundleID,temp.progress,temp.status);
+//        }
         if (lib) dlclose(lib);
     }
 

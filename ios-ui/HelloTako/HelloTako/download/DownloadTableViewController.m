@@ -171,6 +171,7 @@
 }
 
 -(void)beginInstall{
+
     // 开启线程监控。
     [SharedInstallManager shareInstWithdelegate:self];
     NSString* itermServiceUrl = [TakoServer fetchItermUrl:self.currentApp.versionId password:self.currentApp.downloadPassword];
@@ -181,11 +182,13 @@
     if (isFileReady) {
         NSLog(@"file is ready ,will install...try the test url in browse:%@",testUrl);
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:itermServiceUrl]];
+        [XHTUIHelper alertWithNoChoice:@"安装已启动,可在桌面查看安装进度~" view:self];
     }else{
         NSString* testUrl = [NSString stringWithFormat:@"http://%@:%d/%@",[XHTUIHelper localIPAddress],HTTP_SERVER_PORT,testFile];
         NSLog(@"File is not ready ,maybe you should download again...,try the test url in browse:%@",testUrl);
         [self updateApp:self.currentApp cell:self.currentCell status:INITED];
         [self saveCurrentAppStatus:INITED tag:self.currentApp.appid];
+        [XHTUIHelper alertWithNoChoice:@"安装文件无效，请重新下载~" view:self];
     }
     
 }
@@ -279,7 +282,7 @@
 
 // 安装完成
 -(void) finishInstall:(NSArray*)models{
-    
+
     TableViewCell* updateCell = nil;
     TakoApp* updateApp = nil;
     for (InstallingModel* model in models) {
@@ -293,10 +296,13 @@
         updateApp = [self.listData objectAtIndex:cellIndex];
         NSLog(@"app %@ install finished",updateApp.appname);
         
-        [updateCell.button setTitle:@"已安装" forState:UIControlStateNormal];
-        [XHTUIHelper disableDownloadButton:updateCell.button];
-        updateApp.status = INSTALLED;
-        [self saveCurrentAppStatus:INSTALLED tag:updateApp.appid];
+        // 有一种错误可能，从downloaded状态直接进来。在此过滤掉。
+        if (updateApp.status == INSTALLING) {
+            [updateCell.button setTitle:@"已安装" forState:UIControlStateNormal];
+            [XHTUIHelper disableDownloadButton:updateCell.button];
+            updateApp.status = INSTALLED;
+            [self saveCurrentAppStatus:INSTALLED tag:updateApp.appid];
+        }
     }
     
 }

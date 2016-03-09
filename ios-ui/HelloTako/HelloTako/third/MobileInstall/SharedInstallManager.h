@@ -26,7 +26,7 @@
 +(SharedInstallManager *)shareInstWithdelegate:(id<XHTInstallProgressDelegate>)delegate;
 
 - (void)run;
-- (void)stop;
++ (void)stop;
 
 -(void)updateInstallList;
 
