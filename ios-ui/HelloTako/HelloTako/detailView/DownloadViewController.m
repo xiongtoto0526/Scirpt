@@ -39,17 +39,10 @@ DownloadViewController* share = nil;
             if (temp.status == DOWNLOADED) {
                 [downloadedList addObject:temp];
                 [downloadingList removeObject:temp];
-                
-                // 设置section title
-                NSString* title1 = [NSString stringWithFormat:@"已下载(%lu)",(unsigned long)[downloadedList count]];
-                NSString* title2 = [NSString stringWithFormat:@"下载中(%lu)",(unsigned long)[downloadingList count]];
-                [self.sectionTitleArray replaceObjectAtIndex:0 withObject:title1];
-                [self.sectionTitleArray replaceObjectAtIndex:1 withObject:title2];
-//                [self.sectionTitleArray objectAtIndex:1]
             }
         }
     }
-    
+    [self refreshTableTitle];
     [self.tableview reloadData];// 重新刷新cell
 }
 
@@ -329,5 +322,21 @@ viewForFooterInSection:(NSInteger)section {
     app.progress = progress;
     app.progressValue = prg;
 }
+
+
+// 更新下载数量
+-(void)refreshTableTitle{
+    NSMutableArray* downloadingList = [self.listData objectAtIndex:1];
+    NSMutableArray* downloadedList = [self.listData objectAtIndex:0];
+    
+    // 设置section title
+    NSString* title1 = [NSString stringWithFormat:@"已下载(%lu)",(unsigned long)[downloadedList count]];
+    NSString* title2 = [NSString stringWithFormat:@"下载中(%lu)",(unsigned long)[downloadingList count]];
+    
+    [self.sectionTitleArray replaceObjectAtIndex:0 withObject:title1];
+    [self.sectionTitleArray replaceObjectAtIndex:1 withObject:title2];
+    [self.sectionTitleArray objectAtIndex:1];
+}
+
 
 @end
