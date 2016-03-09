@@ -24,6 +24,8 @@
 
 @end
 
+BOOL isShowDownloadManagePage = YES;
+
 @implementation MineViewController
 
 -(void)receiveLoginBackNotification{
@@ -56,8 +58,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveLoginBackNotification) name:LOGIN_BACK_TO_USER_NOTIFICATION object:nil];
     
     sectionTitleArray = [NSArray arrayWithObjects:@"",nil];
-//    sectionTextArray =[NSArray arrayWithObjects:[NSArray arrayWithObjects:@"关于Tako",@"下载管理",@"退出登录",nil],nil];
     sectionTextArray =[NSArray arrayWithObjects:[NSArray arrayWithObjects:@"关于Tako",@"退出登录",nil],nil];
+    
+    if (isShowDownloadManagePage) {
+        sectionTextArray =[NSArray arrayWithObjects:[NSArray arrayWithObjects:@"关于Tako",@"下载管理",@"退出登录",nil],nil];
+    }
+    
     
     [XHTUIHelper addBorderonButton:self.loginBtn];    // button圆角化
     [self.loginBtn setHidden:[XHTUIHelper isLogined]];
@@ -119,13 +125,14 @@
         
     }
     
-//    else if(indexPath.section==0 && indexPath.row==1){
-//        NSLog(@"即将进入“下载管理”页面...");
-//        UIViewController* downloadView = [[DownloadViewController alloc] init];
-//        [self.navigationController pushViewController:downloadView animated:YES];
-//    }
-    
+//     //** isShowDownloadManagePage **/
     else if(indexPath.section==0 && indexPath.row==1){
+        NSLog(@"即将进入“下载管理”页面...");
+        UIViewController* downloadView = [[DownloadViewController alloc] init];
+        [self.navigationController pushViewController:downloadView animated:YES];
+    }
+    
+    else if(indexPath.section==0 && indexPath.row==2){
         NSLog(@"即将进入“退出登录”页面...");
         if (![XHTUIHelper isLogined]) {
             [XHTUIHelper alertWithNoChoice:@"您已登出." view:self];

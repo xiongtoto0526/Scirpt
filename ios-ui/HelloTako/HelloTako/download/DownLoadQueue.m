@@ -1,6 +1,6 @@
 
 #import "DownloadQueue.h"
-
+#import "UIHelper.h"
 
 @interface DownloadInfo : NSObject
 @property (nonatomic, copy) NSString* url;
@@ -176,18 +176,49 @@ NSMutableDictionary* taskQueueDict = nil;
 
 #pragma mark delegate
 
+//#define XHT_DOWNLOAD_PROGERSS_NOTIFICATION @"XHT_download_progress"
+//#define XHT_DOWNLOAD_FINISH_NOTIFICATION @"XHT_download_finish"
+
+
 // 下载过程中，先进入该回调，然后再转发至viewController
 -(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize tag:(NSString*)tag{
 //    NSLog(@"progress wrapper in downloadQueue...");
-    DownloadInfo* d =  (DownloadInfo*)[taskQueueDict objectForKey:tag];
-    [d.delegate downloadingWithTotal:totalSize complete:finishSize tag:tag];
+//    DownloadInfo* d =  (DownloadInfo*)[taskQueueDict objectForKey:tag];
+//    [d.delegate downloadingWithTotal:totalSize complete:finishSize tag:tag];
+//    
+    
+    // 获取到button对应的cell
+    NSMutableDictionary* dict = [NSMutableDictionary new];
+    [dict setObject:[XHTUIHelper stringWithLong:totalSize] forKey:@"totalSize"];
+    [dict setObject:[XHTUIHelper stringWithLong:finishSize] forKey:@"finishSize"];
+    [dict setObject:tag forKey:@"tag"];
+    
+    // 发送事件
+    NSNotification *notification =[NSNotification notificationWithName:XHT_DOWNLOAD_PROGERSS_NOTIFICATION object:nil userInfo:dict];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
 }
 
 // 下载结束时，先进入该回调，然后再转发至viewController
 -(void)downloadFinish:(BOOL)isSuccess msg:(NSString*)msg tag:(NSString*)tag{
-    NSLog(@"finish wrapper in downloadQueue...");
-    DownloadInfo* d =  (DownloadInfo*)[taskQueueDict objectForKey:tag];
-    [d.delegate downloadFinish:isSuccess msg:msg tag:tag];
+    
+    /* 使用 delegate 发送事件*/
+//    NSLog(@"finish wrapper in downloadQueue...");
+//    DownloadInfo* d =  (DownloadInfo*)[taskQueueDict objectForKey:tag];
+//    [d.delegate downloadFinish:isSuccess msg:msg tag:tag];
+
+    /* 使用 notification 发送事件*/
+    NSString* ret = isSuccess?@"1":@"0";
+    // 获取到button对应的cell
+    NSMutableDictionary* dict = [NSMutableDictionary new];
+    [dict setObject:ret forKey:@"isSuccess"];
+    [dict setObject:msg forKey:@"msg"];
+    [dict setObject:tag forKey:@"tag"];
+    
+    // 发送事件
+    NSNotification *notification =[NSNotification notificationWithName:XHT_DOWNLOAD_FINISH_NOTIFICATION object:nil userInfo:dict];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
     if (isSuccess) {
         [taskQueueDict removeObjectForKey:tag];
     }

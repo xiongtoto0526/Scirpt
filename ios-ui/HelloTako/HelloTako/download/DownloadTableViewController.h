@@ -27,6 +27,11 @@
 -(void)hideProgressUI:(BOOL)isShow cell:(TableViewCell*)cell;
 -(void)updateApp:(TakoApp*)app cell:(TableViewCell*)cell status:(enum APPSTATUS)status;
 -(void)saveCurrentAppStatus:(int) status tag:(NSString*)tag;
+
+
+// 下载回调
+-(void)receiveDownloadProgressNotification:(NSNotification*)notice;
+-(void)receiveDownloadFinishNotification:(NSNotification*)notice;
 @end
 
 

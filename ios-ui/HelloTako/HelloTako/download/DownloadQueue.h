@@ -9,7 +9,10 @@
 
 + (instancetype)share;
 
-// 添加
+/* （为支持多view同步更新，delegate暂时禁用，请监听以下事件来获取进度
+ #define XHT_DOWNLOAD_PROGERSS_NOTIFICATION
+ #define XHT_DOWNLOAD_FINISH_NOTIFICATION
+*/
 - (void)add:(NSString*)url versionid:(NSString*)versionid password:(NSString*)password tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate;
 
 // 暂停

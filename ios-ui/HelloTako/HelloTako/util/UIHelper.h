@@ -45,4 +45,6 @@
 +(BOOL)isDevicefileExist:(NSString*) file;
 
 + (NSString *)localIPAddress;
+
++(NSString*)stringWithLong:(long long)longvalue;
 @end

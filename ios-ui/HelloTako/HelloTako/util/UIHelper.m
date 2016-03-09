@@ -194,6 +194,9 @@
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:key];
 }
 
++(NSString*)stringWithLong:(long long)longvalue{
+  return [NSString stringWithFormat:@"%qi",longvalue];
+}
 
 //获取本机的IP
 + (NSString *)localIPAddress

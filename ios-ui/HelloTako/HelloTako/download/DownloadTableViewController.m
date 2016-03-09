@@ -194,10 +194,12 @@
 }
 
 // 是否隐藏下载进度控件
--(void)hideProgressUI:(BOOL)isShow cell:(TableViewCell*)cell{
-    [cell.btnCancel setHidden:isShow];
-    [cell.progressControl setHidden:isShow];
-    [cell.textDownload setHidden:isShow];
+-(void)hideProgressUI:(BOOL)isHide cell:(TableViewCell*)cell{
+    [cell.btnCancel setHidden:isHide];
+    [cell.progressControl setHidden:isHide];
+    [cell.textDownload setHidden:isHide];
+    [cell.appVersion setHidden:!isHide];
+    [cell.otherInfo setHidden:!isHide];
 }
 
 
@@ -463,5 +465,25 @@
 }
 
 
+-(void)receiveDownloadProgressNotification:(NSNotification*)notice{
+    
+    // 定位到当前的cell
+    NSString* totalSize = (NSString*)[notice.userInfo objectForKey:@"totalSize"];
+    long long totalSizeLong = [totalSize longLongValue];
+    NSString* finishSize = (NSString*)[notice.userInfo objectForKey:@"finishSize"];
+    long long finishSizeLong = [finishSize longLongValue];
+    NSString* tag = (NSString*)[notice.userInfo objectForKey:@"tag"];
+    [self downloadingWithTotal:totalSizeLong complete:finishSizeLong tag:tag];
+}
+
+
+-(void)receiveDownloadFinishNotification:(NSNotification*)notice{
+    // 定位到当前的cell
+    NSString* isSuccess = (NSString*)[notice.userInfo objectForKey:@"isSuccess"];
+    BOOL isSuccessBool = [isSuccess isEqualToString:@"1"]?YES:NO;
+    NSString* msg = (NSString*)[notice.userInfo objectForKey:@"msg"];
+    NSString* tag = (NSString*)[notice.userInfo objectForKey:@"tag"];
+    [self downloadFinish:isSuccessBool msg:msg tag:tag];
+}
 
 @end

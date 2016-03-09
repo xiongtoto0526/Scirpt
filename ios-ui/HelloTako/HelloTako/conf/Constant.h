@@ -36,8 +36,10 @@
 #define CLICK_DOWNLOAD_BUTTON_NOTIFICATION @"click_download_button"
 #define CLICK_DOWNLOAD_CANCEL_BUTTON_NOTIFICATION @"click_download_cancel_button"
 #define LOGIN_BACK_TO_TEST_NOTIFICATION @"login_back_to_test"
-#define DOWNLAOD_MANAGE_PAGE_FINISH_NOTIFICATION @"download_manage_page_finish"
+//#define DOWNLAOD_MANAGE_PAGE_FINISH_NOTIFICATION @"download_manage_page_finish"
 #define APPLICATION_WILL_TERMINATE_NOTIFICATION @"application_will_terminate"
+#define XHT_DOWNLOAD_PROGERSS_NOTIFICATION @"XHT_download_progress"
+#define XHT_DOWNLOAD_FINISH_NOTIFICATION @"XHT_download_finish"
 
 // notification key
 #define CELL_INDEX_NOTIFICATION_KEY @"cellIndex"

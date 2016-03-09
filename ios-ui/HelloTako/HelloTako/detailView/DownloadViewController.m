@@ -62,10 +62,16 @@ DownloadViewController* share = nil;
     // 隐藏tableview中多余的单元格线条
     [XHTUIHelper setExtraCellLineHidden:self.tableview];
     
-    // 添加监听
+    // 添加按钮点击监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveClickDownloadNotification:) name:CLICK_DOWNLOAD_BUTTON_NOTIFICATION object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveCancelDownloadNotification:) name:CLICK_DOWNLOAD_CANCEL_BUTTON_NOTIFICATION object:nil];
+    
+    // 添加下载进度监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDownloadProgressNotification:) name:XHT_DOWNLOAD_PROGERSS_NOTIFICATION object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDownloadFinishNotification:) name:XHT_DOWNLOAD_FINISH_NOTIFICATION object:nil];
+    
     
     // 加载 listData
     self.listData = [NSMutableArray new];
@@ -184,21 +190,7 @@ DownloadViewController* share = nil;
                          placeholderImage:[UIImage imageNamed:@"ic_defaultapp"]];
     
     
-    
-    if (indexPath.section == 0) {
-        [XHTUIHelper disableDownloadButton:cell.button];
-        [self hideProgressUI:YES cell:cell];
-    }else{
-        if (app.status == DOWNLOADED) {
-            [XHTUIHelper disableDownloadButton:cell.button];
-            [self hideProgressUI:YES cell:cell];
-        }else{
-            [cell.button setTitle:@"继续" forState:UIControlStateNormal];
-            [self hideProgressUI:NO cell:cell];
-
-        }
-}
-    
+    [super updateApp:app cell:cell status:app.status];
     cell.textDownload.text = app.progress;
     cell.progressControl.progress = app.progressValue;
     
@@ -230,11 +222,7 @@ viewForFooterInSection:(NSInteger)section {
     // 区别2：两个controller的数据源维度不一样。
     TakoApp* app = nil;
     NSIndexPath* indexPath = [self.tableview indexPathForCell:cell];
-    if (indexPath.section==1) {
-        app = [[self.listData objectAtIndex:1] objectAtIndex:indexPath.row];
-    }else{
-        app = [self.listData objectAtIndex:indexPath.row];
-    }
+    app = [[self.listData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
     self.currentApp = app;
     self.currentCell = cell;
@@ -276,6 +264,8 @@ viewForFooterInSection:(NSInteger)section {
 
 
 #pragma mark  下载回调
+
+
 // 下载结束回调
 -(void)downloadFinish:(BOOL)isSuccess msg:(NSString*)msg tag:(NSString *)tag{
     NSLog(@"收到回调通知：文件下载完成。");
@@ -309,6 +299,8 @@ viewForFooterInSection:(NSInteger)section {
 
 // 下载进度回调
 -(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize tag:(NSString *)tag{
+    
+
     float prg = (float)finishSize/totalSize;
 //    NSLog(@"收到回调通知：当前进度为:%f,tag:%@",prg,tag);
     

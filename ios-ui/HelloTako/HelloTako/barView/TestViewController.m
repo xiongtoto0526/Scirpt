@@ -80,6 +80,12 @@ TestViewController* shareTest = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveLoginBackNotification) name:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];
     
+    // 添加下载进度监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDownloadProgressNotification:) name:XHT_DOWNLOAD_PROGERSS_NOTIFICATION object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDownloadFinishNotification:) name:XHT_DOWNLOAD_FINISH_NOTIFICATION object:nil];
+    
+
     
     // 未登录时不显示tableview
     [self.tableview setHidden:![XHTUIHelper isLogined]];
@@ -343,6 +349,12 @@ TestViewController* shareTest = nil;
 -(void)downloadFinish:(BOOL)isSuccess msg:(NSString*)msg tag:(NSString *)tag{
     NSLog(@"收到回调通知：文件下载完成。");
     
+//    // 转发消息，同步更新管理界面
+//    if ([DownloadViewController share]) {
+//        [[DownloadViewController share] downloadFinish:isSuccess msg:msg tag:tag];
+//    }
+    
+    
     TableViewCell* cell = nil;
     TakoApp* app = nil;
     
@@ -358,10 +370,7 @@ TestViewController* shareTest = nil;
     
     if (isSuccess) {
          [super updateApp:app cell:cell status:DOWNLOADED];
-         // 记录已下载情况
-//        [super saveCurrentAppStatus:DOWNLOADED tag:app.appid];
     }else {
-//         [super updateApp:app cell:cell status:DOWNLOADED_FAIL];
          [super saveCurrentAppStatus:DOWNLOADED_FAILED tag:app.appid];
         [XHTUIHelper alertWithNoChoice:[NSString stringWithFormat:@"下载失败:%@",msg] view:[XHTUIHelper getCurrentVC]];
     }
@@ -370,6 +379,13 @@ TestViewController* shareTest = nil;
 
 // 下载进度回调
 -(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize tag:(NSString *)tag{
+//    
+//    // 转发消息，同步更新管理界面
+//    if ([DownloadViewController share]) {
+//        [[DownloadViewController share] downloadingWithTotal:totalSize complete:finishSize tag:tag];
+//    }
+    
+    
     float prg = (float)finishSize/totalSize;
 //    NSLog(@"收到回调通知：当前进度为:%f,tag:%@",prg,tag);
     
