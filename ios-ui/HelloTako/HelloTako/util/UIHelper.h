@@ -47,4 +47,7 @@
 + (NSString *)localIPAddress;
 
 +(NSString*)stringWithLong:(long long)longvalue;
+
++ (NSString*)formatByteCount:(long long)size;
+
 @end

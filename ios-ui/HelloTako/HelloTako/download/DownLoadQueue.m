@@ -181,7 +181,7 @@ NSMutableDictionary* taskQueueDict = nil;
 
 
 // 下载过程中，先进入该回调，然后再转发至viewController
--(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize tag:(NSString*)tag{
+-(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize speed:(NSString *)speed tag:(NSString*)tag{
 //    NSLog(@"progress wrapper in downloadQueue...");
 //    DownloadInfo* d =  (DownloadInfo*)[taskQueueDict objectForKey:tag];
 //    [d.delegate downloadingWithTotal:totalSize complete:finishSize tag:tag];
@@ -191,6 +191,7 @@ NSMutableDictionary* taskQueueDict = nil;
     NSMutableDictionary* dict = [NSMutableDictionary new];
     [dict setObject:[XHTUIHelper stringWithLong:totalSize] forKey:@"totalSize"];
     [dict setObject:[XHTUIHelper stringWithLong:finishSize] forKey:@"finishSize"];
+    [dict setObject:speed forKey:@"speed"];
     [dict setObject:tag forKey:@"tag"];
     
     // 发送事件

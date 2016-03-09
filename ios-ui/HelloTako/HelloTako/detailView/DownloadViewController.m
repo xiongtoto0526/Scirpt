@@ -291,14 +291,18 @@ viewForFooterInSection:(NSInteger)section {
 
 
 // 下载进度回调
--(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize tag:(NSString *)tag{
+-(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize speed:(NSString *)speed tag:(NSString *)tag{
     
 
     float prg = (float)finishSize/totalSize;
 //    NSLog(@"收到回调通知：当前进度为:%f,tag:%@",prg,tag);
+    NSString* finishStr = [XHTUIHelper formatByteCount:finishSize];
+    NSString* totalStr = [XHTUIHelper formatByteCount:totalSize];
+    NSString* percent = [NSString stringWithFormat:@"%@/%@",finishStr,totalStr];
     
     TableViewCell* cell = nil;
     TakoApp* app = nil;
+    
     // 只遍历第二个section
     NSArray* cellList = [self.listData objectAtIndex:1];
     
@@ -314,12 +318,10 @@ viewForFooterInSection:(NSInteger)section {
     
     // 更新cell
     [cell.progressControl setProgress:prg];
-    NSString* progress = [NSString stringWithFormat:@"%.1lf",prg*100];
-    progress = [NSString stringWithFormat:@"当前进度:%@%%",progress];
-    cell.textDownload.text = progress;
+    cell.textDownload.text = percent;
+    cell.downloadSpeed.text = speed;
     
     // 更新app
-    app.progress = progress;
     app.progressValue = prg;
 }
 

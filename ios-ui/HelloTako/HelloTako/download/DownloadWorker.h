@@ -6,7 +6,7 @@
 // 下载回调协议
 @protocol XHtDownLoadDelegate <NSObject>
 
--(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize tag:(NSString*)tag;
+-(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize speed:(NSString*)speed tag:(NSString*)tag;
 -(void)downloadFinish:(BOOL)isSuccess msg:(NSString*)msg tag:(NSString*)tag;
 
 @end

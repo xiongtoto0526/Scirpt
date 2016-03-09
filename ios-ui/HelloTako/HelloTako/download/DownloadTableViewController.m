@@ -77,7 +77,7 @@
             self.currentApp.status = INITED;
         }
         [self updateApp:self.currentApp cell:self.currentCell status:self.currentApp.status];
-        self.currentApp.progress = @"当前进度:0%";
+        self.currentApp.progress = @"0%";
         self.currentApp.progressValue=0;
         
         // 停止下载器
@@ -208,6 +208,7 @@
     [cell.textDownload setHidden:isHide];
     [cell.appVersion setHidden:!isHide];
     [cell.otherInfo setHidden:!isHide];
+    [cell.downloadSpeed setHidden:isHide];
 }
 
 
@@ -263,7 +264,7 @@
 
 
 // 下载进度回调
--(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize tag:(NSString *)tag{
+-(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize speed:(NSString *)speed tag:(NSString *)tag{
     NSLog(@"empty impliment...");
 }
 
@@ -486,7 +487,8 @@
     NSString* finishSize = (NSString*)[notice.userInfo objectForKey:@"finishSize"];
     long long finishSizeLong = [finishSize longLongValue];
     NSString* tag = (NSString*)[notice.userInfo objectForKey:@"tag"];
-    [self downloadingWithTotal:totalSizeLong complete:finishSizeLong tag:tag];
+    NSString* speed = (NSString*)[notice.userInfo objectForKey:@"speed"];
+    [self downloadingWithTotal:totalSizeLong complete:finishSizeLong speed:speed tag:tag];
 }
 
 

@@ -45,8 +45,14 @@ BOOL isShowDownloadManagePage = YES;
 
 -(void)viewWillAppear:(BOOL)animated{
     NSLog(@"view will appear...");
-    if ( [XHTUIHelper isLogined]){
-        NSLog(@"logined before...");
+    // 刷新页面。
+    [self.loginBtn setHidden:[XHTUIHelper isLogined]];
+    self.userName.text = [ShareEntity shareInstance].userName;
+    self.userAccount.text = [ShareEntity shareInstance].userAccount;
+    if ([XHTUIHelper isLogined]) {
+        self.userImage.image = [UIImage imageNamed:@"ic_user_head_logged"];
+    }else{
+        self.userImage.image = [UIImage imageNamed:@"ic_user_head_unlogged"];
     }
 }
 
@@ -54,8 +60,6 @@ BOOL isShowDownloadManagePage = YES;
     [super viewDidLoad];
     
      self.userImage.image = [UIImage imageNamed:@"ic_user_head_logged"];
-    // 1.添加监听
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveLoginBackNotification) name:LOGIN_BACK_TO_USER_NOTIFICATION object:nil];
     
     sectionTitleArray = [NSArray arrayWithObjects:@"",nil];
     sectionTextArray =[NSArray arrayWithObjects:[NSArray arrayWithObjects:@"关于Tako",@"退出登录",nil],nil];
@@ -151,9 +155,10 @@ BOOL isShowDownloadManagePage = YES;
             [ShareEntity shareInstance].userAccount=@"";
             [XHTUIHelper writeNSUserDefaultsWithKey:LOGIN_KEY withObject:LOGIN_FAILED_KEY];
             
-            // 通知上层view刷新视图
-            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_BACK_TO_USER_NOTIFICATION object:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];
+            [self gotoLoginView:nil];
+//            // 通知上层view刷新视图
+//            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_BACK_TO_USER_NOTIFICATION object:nil];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];
         }];
         
         [alertController addAction:cancelAction];

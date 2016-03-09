@@ -30,6 +30,11 @@
 // 下载文件保存到本地时的文件名
 @property (nonatomic, copy) NSString  *filename;
 
+@property (nonatomic, copy) NSString  *downloadspeed;
+
+@property (nonatomic, retain)NSDate*  lastDate;
+@property (nonatomic,assign)long long lastSize;
+
 @end
 
 
@@ -118,13 +123,32 @@
     self.currentLength += data.length;
     
     // 下载进度
-    double newProgress = (double)self.currentLength / self.totalLength;
-    
+    double newProgress = (double)self.currentLength / self.totalLength;    
     self.progress = newProgress;
-    //    NSLog(@"当前下载进度:%f",self.progress);
     
+    // 计算下载速度
+    NSDate *currentDate = [NSDate date];
+    if (self.lastDate==nil) {
+        self.lastDate = currentDate;
+    }
+    if (self.lastSize == 0) {
+        self.lastSize = self.currentLength;
+    }
     
-    [self.delegate downloadingWithTotal:self.totalLength complete:self.currentLength tag:self.tag];
+    if ([currentDate timeIntervalSinceDate:self.lastDate] >= 1) {
+        double time = [currentDate timeIntervalSinceDate:self.lastDate];
+        self.downloadspeed = [XHTUIHelper formatByteCount:(self.currentLength-self.lastSize)/time];
+        self.lastDate = currentDate;
+        self.lastSize = self.currentLength;
+        NSLog(@"current speend is:%@/s",self.downloadspeed);
+    }
+    
+    if (self.downloadspeed==nil) {
+        self.downloadspeed = @"0k";
+    }
+    
+    [self.delegate downloadingWithTotal:self.totalLength complete:self.currentLength speed:[NSString stringWithFormat:@"%@/s",self.downloadspeed] tag:self.tag];
+
 }
 
 
@@ -167,6 +191,8 @@
     self.versionid = versionid;
     self.password = password;
     self.isFree = NO;
+    self.lastSize=0;
+    self.lastDate=nil;
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
@@ -259,6 +285,8 @@
 - (void)stop:(NSString*)tag{
     [self.connection cancel];
     self.connection=nil;
+    self.lastSize = 0;
+    self.lastDate = nil;
     self.currentLength=0;
     self.isFree = YES;
     self.tag=tag;
@@ -269,7 +297,7 @@
 -(BOOL) isDelegateAvailable:(id<XHtDownLoadDelegate>) delegate{
     BOOL isAllAvailable = YES;
     
-    if(![delegate respondsToSelector:@selector(downloadingWithTotal:complete:tag:)]){
+    if(![delegate respondsToSelector:@selector(downloadingWithTotal:complete:speed:tag:)]){
         NSLog(@"Error!!! Please implement mehtod < downloadingWithTotal:complete:tag: > in <XHtDownLoadDelegate> first!");
         isAllAvailable = NO;
     }

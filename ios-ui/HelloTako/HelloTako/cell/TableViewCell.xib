@@ -68,7 +68,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEf-pj-kOc">
-                        <rect key="frame" x="212" y="41" width="17" height="17"/>
+                        <rect key="frame" x="238" y="35" width="17" height="17"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="T9q-VJ-rJd"/>
                             <constraint firstAttribute="width" constant="17" id="l98-9j-gXs"/>
@@ -77,30 +77,59 @@
                         <state key="normal" title="X"/>
                     </button>
                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yI1-5c-01v">
-                        <rect key="frame" x="104" y="49" width="100" height="2"/>
+                        <rect key="frame" x="104" y="49" width="131" height="2"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="2" id="QS4-O0-3nL"/>
                             <constraint firstAttribute="width" constant="100" id="RBc-Gz-jn4"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="RBc-Gz-jn4"/>
+                            </mask>
+                        </variation>
                     </progressView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前进度: 0%" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S1b-aN-LGR">
-                        <rect key="frame" x="104" y="51" width="120" height="21"/>
+                        <rect key="frame" x="104" y="51" width="135" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="fmN-Wn-suF"/>
-                            <constraint firstAttribute="width" constant="120" id="ru3-KS-TmL"/>
+                            <constraint firstAttribute="width" constant="135" id="ru3-KS-TmL"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="10"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ag-kd-peQ">
+                        <rect key="frame" x="185" y="31" width="50" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="2LM-1I-9bC"/>
+                            <constraint firstAttribute="height" constant="21" id="Pgp-95-hwo"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="Qbr-At-CHg"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="eTl-l8-DzU"/>
+                            <constraint firstAttribute="height" constant="21" id="o68-nw-vqM"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Pgp-95-hwo"/>
+                                <exclude reference="Qbr-At-CHg"/>
+                                <exclude reference="eTl-l8-DzU"/>
+                            </mask>
+                        </variation>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="EPs-aO-2G5" firstAttribute="leading" secondItem="80r-ra-7Y2" secondAttribute="trailing" constant="13" id="0sf-Nf-b2I"/>
                     <constraint firstItem="VXh-wr-kls" firstAttribute="leading" secondItem="zmQ-Pk-IAc" secondAttribute="trailing" constant="21" id="2KZ-vO-DFk"/>
                     <constraint firstItem="VXh-wr-kls" firstAttribute="top" secondItem="80r-ra-7Y2" secondAttribute="bottom" constant="1" id="2vQ-wa-8rS"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="yI1-5c-01v" secondAttribute="trailing" constant="100" id="9In-A5-mdo"/>
+                    <constraint firstItem="yI1-5c-01v" firstAttribute="top" secondItem="7ag-kd-peQ" secondAttribute="bottom" constant="-3" id="Atx-d8-wg6"/>
                     <constraint firstItem="tEf-pj-kOc" firstAttribute="leading" secondItem="S1b-aN-LGR" secondAttribute="trailing" constant="10" id="Bxb-JM-C75"/>
                     <constraint firstItem="VXh-wr-kls" firstAttribute="bottom" secondItem="zmQ-Pk-IAc" secondAttribute="bottom" id="DcI-pb-0Gd"/>
+                    <constraint firstItem="7ag-kd-peQ" firstAttribute="trailing" secondItem="VXh-wr-kls" secondAttribute="trailing" constant="-20" id="Gho-o4-hBe"/>
                     <constraint firstItem="80r-ra-7Y2" firstAttribute="top" secondItem="EPs-aO-2G5" secondAttribute="bottom" constant="1" id="HPI-rO-GME"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="7ag-kd-peQ" secondAttribute="trailing" constant="15" id="Kaq-L1-Zlo"/>
                     <constraint firstItem="zmQ-Pk-IAc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="OT0-gm-qhl"/>
                     <constraint firstItem="S1b-aN-LGR" firstAttribute="top" secondItem="yI1-5c-01v" secondAttribute="bottom" id="P5Q-Ry-1DT"/>
                     <constraint firstItem="S1b-aN-LGR" firstAttribute="leading" secondItem="zmQ-Pk-IAc" secondAttribute="trailing" constant="21" id="Pkg-3h-mK8"/>
@@ -116,10 +145,16 @@
                     <constraint firstItem="VXh-wr-kls" firstAttribute="top" secondItem="80r-ra-7Y2" secondAttribute="bottom" constant="3" id="gDM-V5-qQ5"/>
                     <constraint firstItem="80r-ra-7Y2" firstAttribute="bottom" secondItem="EPs-aO-2G5" secondAttribute="bottom" id="gmw-US-43n"/>
                     <constraint firstItem="VXh-wr-kls" firstAttribute="top" secondItem="tEf-pj-kOc" secondAttribute="bottom" constant="-3" id="hBi-t2-VYj"/>
+                    <constraint firstItem="7ag-kd-peQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="23" id="hSe-Pd-7vM"/>
                     <constraint firstItem="VXh-wr-kls" firstAttribute="top" secondItem="tEf-pj-kOc" secondAttribute="bottom" constant="2" id="hrm-3H-exZ"/>
                     <constraint firstItem="cwq-WU-pSh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="j8K-68-apd"/>
                     <constraint firstItem="S1b-aN-LGR" firstAttribute="bottom" secondItem="zmQ-Pk-IAc" secondAttribute="bottom" id="nAk-7N-hhX"/>
                     <constraint firstItem="EPs-aO-2G5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="s97-pf-vbI"/>
+                    <constraint firstItem="tEf-pj-kOc" firstAttribute="leading" secondItem="7ag-kd-peQ" secondAttribute="trailing" constant="35" id="sxp-fz-LJX"/>
+                    <constraint firstItem="tEf-pj-kOc" firstAttribute="leading" secondItem="7ag-kd-peQ" secondAttribute="trailing" constant="3" id="vHh-1d-KVL"/>
+                    <constraint firstItem="VXh-wr-kls" firstAttribute="top" secondItem="tEf-pj-kOc" secondAttribute="bottom" constant="3" id="w9H-zE-p5m"/>
+                    <constraint firstItem="cwq-WU-pSh" firstAttribute="leading" secondItem="tEf-pj-kOc" secondAttribute="trailing" constant="15" id="wqA-zW-KZi"/>
+                    <constraint firstItem="7ag-kd-peQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="zOv-0m-EoE"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -129,8 +164,14 @@
                         <exclude reference="2vQ-wa-8rS"/>
                         <exclude reference="DcI-pb-0Gd"/>
                         <exclude reference="SmI-T6-Xfz"/>
+                        <exclude reference="hBi-t2-VYj"/>
                         <exclude reference="hrm-3H-exZ"/>
+                        <exclude reference="Gho-o4-hBe"/>
+                        <exclude reference="Kaq-L1-Zlo"/>
+                        <exclude reference="zOv-0m-EoE"/>
                         <exclude reference="Bxb-JM-C75"/>
+                        <exclude reference="bCH-Ua-pzi"/>
+                        <exclude reference="sxp-fz-LJX"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
@@ -140,6 +181,7 @@
                 <outlet property="appVersion" destination="80r-ra-7Y2" id="BP7-Hz-jL1"/>
                 <outlet property="btnCancel" destination="tEf-pj-kOc" id="dZM-gF-EyM"/>
                 <outlet property="button" destination="cwq-WU-pSh" id="qF1-X9-fcA"/>
+                <outlet property="downloadSpeed" destination="7ag-kd-peQ" id="uU3-Wa-D8R"/>
                 <outlet property="otherInfo" destination="VXh-wr-kls" id="fxu-lB-oZ5"/>
                 <outlet property="progressControl" destination="yI1-5c-01v" id="EqF-bV-MEY"/>
                 <outlet property="textDownload" destination="S1b-aN-LGR" id="VES-rU-4Sp"/>

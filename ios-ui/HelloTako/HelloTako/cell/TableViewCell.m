@@ -33,7 +33,7 @@ NSMutableDictionary* workerDict = nil;
     [self.progressControl setHidden:YES];
     [self.textDownload setHidden:YES];
     
-
+    self.downloadSpeed.text = @"";
     [self.button addTarget:self action:@selector(clickDownload) forControlEvents:UIControlEventTouchDown];
     [self.btnCancel addTarget:self action:@selector(stopDownload) forControlEvents:UIControlEventTouchDown];
 }

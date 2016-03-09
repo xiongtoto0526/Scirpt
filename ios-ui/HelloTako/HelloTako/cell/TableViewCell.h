@@ -21,5 +21,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnCancel;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressControl;
 @property (weak, nonatomic) IBOutlet UILabel *textDownload;
+@property (weak, nonatomic) IBOutlet UILabel *downloadSpeed;
 
 @end

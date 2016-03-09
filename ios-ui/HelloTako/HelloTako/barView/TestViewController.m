@@ -36,13 +36,19 @@ TestViewController* shareTest = nil;
 
 
 -(void)viewDidAppear:(BOOL)animated{
+   
     
     [super viewDidAppear:animated];
-    [self.tableview reloadData];
-    // t:此处不能模态alter窗口,否则崩溃。
+    
+    BOOL isLogined = [XHTUIHelper isLogined];
+    [self.tableview setHidden:!isLogined];
+    if (isLogined && [self.listData count]==0) {
+        [self loadMoreData];
+    }
+
     if (![XHTUIHelper isLogined]) {
         [self presentViewController:[LoginViewController new] animated:NO completion:^{
-            NSLog(@"enter login view");
+            NSLog(@"should login first, will enter login view");
         }];
     }
     
@@ -53,13 +59,13 @@ TestViewController* shareTest = nil;
     [super viewWillDisappear:animated];
 }
 
--(void)receiveLoginBackNotification{
-    BOOL isLogined = [XHTUIHelper isLogined];
-    [self.tableview setHidden:!isLogined];
-    if (isLogined && [self.listData count]==0) {
-        [self loadMoreData];
-    }
-}
+//-(void)receiveLoginBackNotification{
+//    BOOL isLogined = [XHTUIHelper isLogined];
+//    [self.tableview setHidden:!isLogined];
+//    if (isLogined && [self.listData count]==0) {
+//        [self loadMoreData];
+//    }
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -78,7 +84,7 @@ TestViewController* shareTest = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveCancelDownloadNotification:) name:CLICK_DOWNLOAD_CANCEL_BUTTON_NOTIFICATION object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveLoginBackNotification) name:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveLoginBackNotification) name:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];
     
     // 添加下载进度监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDownloadProgressNotification:) name:XHT_DOWNLOAD_PROGERSS_NOTIFICATION object:nil];
@@ -247,8 +253,11 @@ TestViewController* shareTest = nil;
                         float currentL = [info.currentLength floatValue];
                         float totalL = [info.TotalLength floatValue];
                         app.progressValue = (float)currentL/totalL;
-                        NSString* progress = [NSString stringWithFormat:@"%.1lf",app.progressValue*100];
-                        app.progress = [NSString stringWithFormat:@"当前进度:%@%%",progress];
+
+                        NSString* finishStr = [XHTUIHelper formatByteCount:currentL];
+                        NSString* totalStr = [XHTUIHelper formatByteCount:totalL];
+                        NSString* percent = [NSString stringWithFormat:@"%@/%@",finishStr,totalStr];
+                        app.progress = percent;
                     }
                     // 下载失败
                     else if(status == INSTALLED){
@@ -389,10 +398,14 @@ TestViewController* shareTest = nil;
 
 
 // 下载进度回调
--(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize tag:(NSString *)tag{
+-(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize speed:(NSString *)speed tag:(NSString *)tag{
     
     float prg = (float)finishSize/totalSize;
     //    NSLog(@"收到回调通知：当前进度为:%f,tag:%@",prg,tag);
+    NSString* finishStr = [XHTUIHelper formatByteCount:finishSize];
+    NSString* totalStr = [XHTUIHelper formatByteCount:totalSize];
+    NSString* percent = [NSString stringWithFormat:@"%@/%@",finishStr,totalStr];
+    
     
     TableViewCell* cell = nil;
     TakoApp* app = nil;
@@ -409,12 +422,11 @@ TestViewController* shareTest = nil;
     
     // 更新cell
     [cell.progressControl setProgress:prg];
-    NSString* progress = [NSString stringWithFormat:@"%.1lf",prg*100];
-    progress = [NSString stringWithFormat:@"当前进度:%@%%",progress];
-    cell.textDownload.text = progress;
+    cell.textDownload.text = percent;
+    cell.downloadSpeed.text = speed;
     
     // 更新app
-    app.progress = progress;
+    app.progress = percent;
     app.progressValue = prg;
     
     
