@@ -27,6 +27,7 @@
 #define DOWNLOADED_APP_INFO_KEY @"downlaod_app_info"
 #define DOWNLOAD_APP_VERSION_KEY @"download_app_version"
 #define DOWNLOAD_PASSWORD_KEY @"download_password"
+#define DOWNLOAD_SUCCESS_KEY @"download_success_flag"
 #define DOWNLOAD_TOTAL_LENGTH_KEY @"download_total_length"
 #define DOWNLOAD_CURRENT_LENGTH_KEY @"download_current_length"
 #define DOWNLOAD_STATUS_KEY @"downlaod_status"
@@ -65,6 +66,7 @@ enum APPSTATUS{
     INSTALLING,
     INSTALLED,
     INSTALL_FAILED,
+    TOBE_UPDATE,
 };
 
 #endif /* Constant_h */

@@ -43,6 +43,7 @@
 @property (nonatomic,copy) NSString* status;
 @property (nonatomic,copy) NSString* versionid;
 @property (nonatomic,copy) NSString* appid;
+@property (nonatomic,copy) NSString* downloadSuccessFlag;
 @property (nonatomic,copy) NSString* password;
 @end
 

@@ -23,11 +23,10 @@
 @property (nonatomic,copy) NSString *downloadUrl;
 @property (nonatomic) BOOL isNeedPassword;
 @property (nonatomic,copy) NSString* downloadPassword;
-//@property BOOL isSuccessed;
-//@property BOOL isStarted;
-//@property BOOL isPaused;
-//@property BOOL isInstalling;
-//@property BOOL isInstalled;
+
+@property (nonatomic) BOOL isDownloadSuccess;
+@property (nonatomic) BOOL isNeedUpdate;
+
 @property NSString* progress;
 @property float progressValue;
 @property enum APPSTATUS status;

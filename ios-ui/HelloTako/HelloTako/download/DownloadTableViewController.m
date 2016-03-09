@@ -71,7 +71,12 @@
         // 隐藏下载栏
         [self hideProgressUI:YES cell:cell];
         [cell.progressControl setProgress:0];
-        self.currentApp.status = INITED;
+        if (self.currentApp.isNeedUpdate) {
+            self.currentApp.status = TOBE_UPDATE;
+        }else{
+            self.currentApp.status = INITED;
+        }
+        [self updateApp:self.currentApp cell:self.currentCell status:self.currentApp.status];
         self.currentApp.progress = @"当前进度:0%";
         self.currentApp.progressValue=0;
         
@@ -160,6 +165,9 @@
             break;
         case INSTALL_FAILED:
             [self beginInstall];
+            break;
+        case TOBE_UPDATE:
+            [self startDownload];
             break;
             
         default:
@@ -417,16 +425,21 @@
             [self hideProgressUI:YES cell:cell];
             break;
         case INSTALLED:
-            NSLog(@"app is in indtalled status...");
+            NSLog(@"app is in installed status...");
             [cell.button setTitle:@"已安装" forState:UIControlStateNormal];
             [XHTUIHelper disableDownloadButton:cell.button];
             [self hideProgressUI:YES cell:cell];
             break;
         case INSTALL_FAILED:
-            NSLog(@"app is in indtalled failed status...");
+            NSLog(@"app is in installed failed status...");
             [cell.button setTitle:@"安装失败" forState:UIControlStateNormal];
             [self hideProgressUI:YES cell:cell];
             [XHTUIHelper disableDownloadButton:cell.button];
+            break;
+        case TOBE_UPDATE:
+            NSLog(@"app is in to-be-update status...");
+            [cell.button setTitle:@"更新" forState:UIControlStateNormal];
+            [self hideProgressUI:YES cell:cell];
             break;
             
         default:

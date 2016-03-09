@@ -85,7 +85,7 @@ TestViewController* shareTest = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDownloadFinishNotification:) name:XHT_DOWNLOAD_FINISH_NOTIFICATION object:nil];
     
-
+    
     
     // 未登录时不显示tableview
     [self.tableview setHidden:![XHTUIHelper isLogined]];
@@ -228,19 +228,36 @@ TestViewController* shareTest = nil;
                     info.currentLength = [d objectForKey:DOWNLOAD_CURRENT_LENGTH_KEY];
                     info.TotalLength = [d objectForKey:DOWNLOAD_TOTAL_LENGTH_KEY];
                     info.status = [d objectForKey:DOWNLOAD_STATUS_KEY];
+                    info.versionid = [d objectForKey:DOWNLOAD_APP_VERSION_KEY];
+                    info.downloadSuccessFlag = [d objectForKey:DOWNLOAD_SUCCESS_KEY];
                     int status = [info.status intValue];
-                    if (status == DOWNLOADED || status == INSTALLING || status == INSTALL_FAILED) {
+                    
+                    // 如果已经下载成功了，且发现新版本，则更新app的状态
+                    if ([info.downloadSuccessFlag isEqualToString:@"1"] && ![app.versionId isEqualToString:info.versionid]) {
+                        app.status = TOBE_UPDATE;
+                        app.isNeedUpdate = YES;
+                    }
+                    // 已下载
+                    else if (status == DOWNLOADED || status == INSTALLING || status == INSTALL_FAILED) {
                         app.status = DOWNLOADED;
-                    }else if(status == STARTED || status == PAUSED){
+                    }
+                    // 尚未下载完
+                    else if(status == STARTED || status == PAUSED){
                         app.status = PAUSED;
                         float currentL = [info.currentLength floatValue];
                         float totalL = [info.TotalLength floatValue];
                         app.progressValue = (float)currentL/totalL;
                         NSString* progress = [NSString stringWithFormat:@"%.1lf",app.progressValue*100];
                         app.progress = [NSString stringWithFormat:@"当前进度:%@%%",progress];
-                    }else if(status == INSTALLED){
+                    }
+                    // 下载失败
+                    else if(status == INSTALLED){
                         app.status = INSTALLED;
                     }
+                    
+                    // 未更新前，需要使用旧的版本id。
+                     app.versionId = info.versionid;
+                    
                 }
             }
             
@@ -303,10 +320,10 @@ TestViewController* shareTest = nil;
     cell.otherInfo.text = [NSString stringWithFormat:@"%@  %@",app.firstcreated,app.size];
     
     [cell.appImage sd_setImageWithURL:[NSURL URLWithString:app.logourl]
-                         placeholderImage:[UIImage imageNamed:@"ic_defaultapp"]];
+                     placeholderImage:[UIImage imageNamed:@"ic_defaultapp"]];
     
     [super updateApp:app cell:cell status:app.status];
-
+    
     cell.textDownload.text = app.progress;
     cell.progressControl.progress = app.progressValue;
     
@@ -349,12 +366,6 @@ TestViewController* shareTest = nil;
 -(void)downloadFinish:(BOOL)isSuccess msg:(NSString*)msg tag:(NSString *)tag{
     NSLog(@"收到回调通知：文件下载完成。");
     
-//    // 转发消息，同步更新管理界面
-//    if ([DownloadViewController share]) {
-//        [[DownloadViewController share] downloadFinish:isSuccess msg:msg tag:tag];
-//    }
-    
-    
     TableViewCell* cell = nil;
     TakoApp* app = nil;
     
@@ -369,9 +380,9 @@ TestViewController* shareTest = nil;
     }
     
     if (isSuccess) {
-         [super updateApp:app cell:cell status:DOWNLOADED];
+        [super updateApp:app cell:cell status:DOWNLOADED];
     }else {
-         [super saveCurrentAppStatus:DOWNLOADED_FAILED tag:app.appid];
+        [super saveCurrentAppStatus:DOWNLOADED_FAILED tag:app.appid];
         [XHTUIHelper alertWithNoChoice:[NSString stringWithFormat:@"下载失败:%@",msg] view:[XHTUIHelper getCurrentVC]];
     }
 }
@@ -379,15 +390,9 @@ TestViewController* shareTest = nil;
 
 // 下载进度回调
 -(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize tag:(NSString *)tag{
-//    
-//    // 转发消息，同步更新管理界面
-//    if ([DownloadViewController share]) {
-//        [[DownloadViewController share] downloadingWithTotal:totalSize complete:finishSize tag:tag];
-//    }
-    
     
     float prg = (float)finishSize/totalSize;
-//    NSLog(@"收到回调通知：当前进度为:%f,tag:%@",prg,tag);
+    //    NSLog(@"收到回调通知：当前进度为:%f,tag:%@",prg,tag);
     
     TableViewCell* cell = nil;
     TakoApp* app = nil;

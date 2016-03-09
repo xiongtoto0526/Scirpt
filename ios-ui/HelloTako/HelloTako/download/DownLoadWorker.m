@@ -121,7 +121,7 @@
     double newProgress = (double)self.currentLength / self.totalLength;
     
     self.progress = newProgress;
-//    NSLog(@"当前下载进度:%f",self.progress);
+    //    NSLog(@"当前下载进度:%f",self.progress);
     
     
     [self.delegate downloadingWithTotal:self.totalLength complete:self.currentLength tag:self.tag];
@@ -135,8 +135,8 @@
 {
     NSLog(@"download worker:下载完成。");
     
-    [self isDevicefileExist];// 调试用
-
+    //    [self isDevicefileExist];// 调试用
+    
     // 重置状态
     self.currentLength = 0;
     self.totalLength = 0;
@@ -146,7 +146,7 @@
     self.writeHandle = nil;
     self.isFree = YES;
     
-    [self.delegate downloadFinish:YES msg:nil tag:self.tag];
+    [self.delegate downloadFinish:YES msg:@"下载成功。" tag:self.tag];
     
     NSLog(@"下载结束，结果为成功...");
     [self saveCurrentProgress:DOWNLOADED];
@@ -171,7 +171,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
     
-     NSDictionary* oldDict = (NSDictionary*)[XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
+    NSDictionary* oldDict = (NSDictionary*)[XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
     
     // 若之前有下载记录，则直接读取之前的进度。
     if([oldDict objectForKey:self.tag]!=nil){
@@ -226,7 +226,7 @@
         newDict = [NSMutableDictionary dictionaryWithDictionary:oldDict];
     }
     
-     oldCurrent =[newDict objectForKey:self.tag];
+    oldCurrent =[newDict objectForKey:self.tag];
     if (oldCurrent==nil) {
         newCurrent = [NSMutableDictionary new];
     }else{
@@ -237,8 +237,17 @@
     NSString* totalLength = [NSString stringWithFormat:@"%qi",self.totalLength];
     [newCurrent setObject:currentLength forKey:DOWNLOAD_CURRENT_LENGTH_KEY];
     [newCurrent setObject:totalLength forKey:DOWNLOAD_TOTAL_LENGTH_KEY];
-    [newCurrent setObject:self.versionid forKey:DOWNLOAD_APP_VERSION_KEY];
     [newCurrent setObject:[NSString stringWithFormat:@"%d",status] forKey:DOWNLOAD_STATUS_KEY];
+    
+    // 只有当app从未下载，或app下载完成之后且新的versionid和老的versionid不一样时，才需要更新versionid字段
+    NSString* oldversionid = [newCurrent objectForKey:DOWNLOAD_APP_VERSION_KEY];
+    if (oldversionid == nil || (![self.versionid isEqualToString:oldversionid] && status >= DOWNLOADED)) {
+        [newCurrent setObject:self.versionid forKey:DOWNLOAD_APP_VERSION_KEY];
+    }
+    
+    if (status == DOWNLOADED) {
+        [newCurrent setObject:@"1" forKey:DOWNLOAD_SUCCESS_KEY];
+    }
     
     [newDict setValue:newCurrent forKey:self.tag];
     [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_INFO_KEY withObject:newDict];
@@ -272,18 +281,6 @@
     return isAllAvailable;
 }
 
-
-
-// t:调试用
--(void)isDevicefileExist{
-    NSFileManager* mgr = [NSFileManager defaultManager];
-    if ([mgr fileExistsAtPath:self.localPath]==YES) {
-        NSLog(@"device File exists");
-        NSLog(@"file is:%@",self.localPath);
-    }else{
-        NSLog(@"device File not exists");
-    }
-}
 
 
 
