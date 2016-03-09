@@ -10,6 +10,7 @@
 #import "TableViewCell.h"
 #import "App.h"
 #import "Constant.h"
+#import "DownloadHistory.h"
 
 @interface DownloadTableViewController : UIViewController
 
@@ -32,18 +33,5 @@
 // 下载回调
 -(void)receiveDownloadProgressNotification:(NSNotification*)notice;
 -(void)receiveDownloadFinishNotification:(NSNotification*)notice;
-@end
-
-
-
-
-@interface DownloadHistoryInfo : NSObject
-@property (nonatomic,copy) NSString* currentLength;
-@property (nonatomic,copy) NSString* TotalLength;
-@property (nonatomic,copy) NSString* status;
-@property (nonatomic,copy) NSString* versionid;
-@property (nonatomic,copy) NSString* appid;
-@property (nonatomic,copy) NSString* downloadSuccessFlag;
-@property (nonatomic,copy) NSString* password;
 @end
 

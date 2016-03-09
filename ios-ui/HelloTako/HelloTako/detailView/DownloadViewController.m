@@ -31,19 +31,7 @@ DownloadViewController* share = nil;
     [super viewWillAppear:animated];
 
     // todo:通过监听处理，以减少viewappear中的事件。
-    NSMutableArray* downloadingList = [self.listData objectAtIndex:1];
-    NSMutableArray* downloadedList = [self.listData objectAtIndex:0];
-    if (downloadingList != nil) {
-        for (int i=0; i<[downloadingList count]; i++) {
-            TakoApp* temp = [downloadingList objectAtIndex:i];
-            if (temp.status == DOWNLOADED) {
-                [downloadedList addObject:temp];
-                [downloadingList removeObject:temp];
-            }
-        }
-    }
-    [self refreshTableTitle];
-    [self.tableview reloadData];// 重新刷新cell
+    [self migrateItemIfneed];
 }
 
 - (void)viewDidLoad {
@@ -287,6 +275,7 @@ viewForFooterInSection:(NSInteger)section {
         [super saveCurrentAppStatus:DOWNLOADED_FAILED tag:app.appid];
         [XHTUIHelper alertWithNoChoice:[NSString stringWithFormat:@"下载失败:%@",msg] view:[XHTUIHelper getCurrentVC]];
     }
+    [self migrateItemIfneed];
 }
 
 
@@ -340,5 +329,21 @@ viewForFooterInSection:(NSInteger)section {
     [self.sectionTitleArray objectAtIndex:1];
 }
 
+// 更新已下载状态数
+-(void)migrateItemIfneed{
+    NSMutableArray* downloadingList = [self.listData objectAtIndex:1];
+    NSMutableArray* downloadedList = [self.listData objectAtIndex:0];
+    if (downloadingList != nil) {
+        for (int i=0; i<[downloadingList count]; i++) {
+            TakoApp* temp = [downloadingList objectAtIndex:i];
+            if (temp.status == DOWNLOADED) {
+                [downloadedList addObject:temp];
+                [downloadingList removeObject:temp];
+            }
+        }
+    }
+    [self refreshTableTitle];
+    [self.tableview reloadData];
+}
 
 @end

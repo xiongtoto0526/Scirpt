@@ -33,10 +33,10 @@
 #define DOWNLOAD_STATUS_KEY @"downlaod_status"
 
 // notification
-#define LOGIN_BACK_TO_USER_NOTIFICATION @"login_back_to_user"
+//#define LOGIN_BACK_TO_USER_NOTIFICATION @"login_back_to_user"
 #define CLICK_DOWNLOAD_BUTTON_NOTIFICATION @"click_download_button"
 #define CLICK_DOWNLOAD_CANCEL_BUTTON_NOTIFICATION @"click_download_cancel_button"
-#define LOGIN_BACK_TO_TEST_NOTIFICATION @"login_back_to_test"
+//#define LOGIN_BACK_TO_TEST_NOTIFICATION @"login_back_to_test"
 //#define DOWNLAOD_MANAGE_PAGE_FINISH_NOTIFICATION @"download_manage_page_finish"
 #define APPLICATION_WILL_TERMINATE_NOTIFICATION @"application_will_terminate"
 #define XHT_DOWNLOAD_PROGERSS_NOTIFICATION @"XHT_download_progress"

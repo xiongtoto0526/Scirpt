@@ -94,6 +94,7 @@
 		AD4E93EB1C87C9E9007BA86C /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93D91C87C9E9007BA86C /* UIImageView+HighlightedWebCache.m */; settings = {ASSET_TAGS = (); }; };
 		AD4E93EC1C87C9E9007BA86C /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93DB1C87C9E9007BA86C /* UIImageView+WebCache.m */; settings = {ASSET_TAGS = (); }; };
 		AD4E93ED1C87C9E9007BA86C /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E93DD1C87C9E9007BA86C /* UIView+WebCacheOperation.m */; settings = {ASSET_TAGS = (); }; };
+		ADCAAAE51C90281E00895680 /* DownloadHistoy.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCAAAE41C90281E00895680 /* DownloadHistoy.m */; settings = {ASSET_TAGS = (); }; };
 		ADD9D6941C8D8EFA0098BE52 /* InstallingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD9D68F1C8D8EFA0098BE52 /* InstallingModel.m */; settings = {ASSET_TAGS = (); }; };
 		ADD9D6951C8D8EFA0098BE52 /* SharedInstallManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD9D6931C8D8EFA0098BE52 /* SharedInstallManager.m */; settings = {ASSET_TAGS = (); }; };
 		ADD9D6981C8E7D5C0098BE52 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E36251C8001F800714FF3 /* TableViewCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -374,6 +375,8 @@
 		AD4E93DB1C87C9E9007BA86C /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		AD4E93DC1C87C9E9007BA86C /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		AD4E93DD1C87C9E9007BA86C /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		ADCAAAE31C90281E00895680 /* DownloadHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadHistory.h; sourceTree = "<group>"; };
+		ADCAAAE41C90281E00895680 /* DownloadHistoy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadHistoy.m; sourceTree = "<group>"; };
 		ADD9D68E1C8D8EFA0098BE52 /* InstallingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstallingModel.h; sourceTree = "<group>"; };
 		ADD9D68F1C8D8EFA0098BE52 /* InstallingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstallingModel.m; sourceTree = "<group>"; };
 		ADD9D6901C8D8EFA0098BE52 /* LSApplicationProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSApplicationProxy.h; sourceTree = "<group>"; };
@@ -414,6 +417,7 @@
 		AD0E360E1C8001F800714FF3 /* HelloTako */ = {
 			isa = PBXGroup;
 			children = (
+				ADCAAAE21C90281E00895680 /* db */,
 				AD4E936A1C858E21007BA86C /* third */,
 				AD0E36EB1C80354B00714FF3 /* validate */,
 				AD0E360F1C8001F800714FF3 /* AppDelegate.h */,
@@ -815,6 +819,15 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		ADCAAAE21C90281E00895680 /* db */ = {
+			isa = PBXGroup;
+			children = (
+				ADCAAAE31C90281E00895680 /* DownloadHistory.h */,
+				ADCAAAE41C90281E00895680 /* DownloadHistoy.m */,
+			);
+			path = db;
+			sourceTree = "<group>";
+		};
 		ADD9D68D1C8D8EFA0098BE52 /* MobileInstall */ = {
 			isa = PBXGroup;
 			children = (
@@ -866,9 +879,9 @@
 			productReference = ADD9D6FD1C8E7D5C0098BE52 /* Tako_qa.app */;
 			productType = "com.apple.product-type.application";
 		};
-		ADE01D641C181077009F425E /* HelloTako-qa */ = {
+		ADE01D641C181077009F425E /* HelloTako-qa-nouse */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ADE01D7F1C181077009F425E /* Build configuration list for PBXNativeTarget "HelloTako-qa" */;
+			buildConfigurationList = ADE01D7F1C181077009F425E /* Build configuration list for PBXNativeTarget "HelloTako-qa-nouse" */;
 			buildPhases = (
 				ADE01D611C181077009F425E /* Sources */,
 				ADE01D621C181077009F425E /* Frameworks */,
@@ -878,7 +891,7 @@
 			);
 			dependencies = (
 			);
-			name = "HelloTako-qa";
+			name = "HelloTako-qa-nouse";
 			productName = HelloTako;
 			productReference = ADE01D651C181077009F425E /* Tako.app */;
 			productType = "com.apple.product-type.application";
@@ -911,7 +924,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				ADE01D641C181077009F425E /* HelloTako-qa */,
+				ADE01D641C181077009F425E /* HelloTako-qa-nouse */,
 				ADD9D6961C8E7D5C0098BE52 /* HelloTako */,
 			);
 		};
@@ -988,6 +1001,7 @@
 				ADD9D6A61C8E7D5C0098BE52 /* AppDelegate.m in Sources */,
 				ADD9D6A71C8E7D5C0098BE52 /* App.m in Sources */,
 				ADD9D6A81C8E7D5C0098BE52 /* ShareEntity.m in Sources */,
+				ADCAAAE51C90281E00895680 /* DownloadHistoy.m in Sources */,
 				ADD9D6A91C8E7D5C0098BE52 /* UIImageView+WebCache.m in Sources */,
 				ADD9D6AA1C8E7D5C0098BE52 /* Server.m in Sources */,
 				ADD9D6AB1C8E7D5C0098BE52 /* MJRefreshAutoGifFooter.m in Sources */,
@@ -1322,7 +1336,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ADE01D7F1C181077009F425E /* Build configuration list for PBXNativeTarget "HelloTako-qa" */ = {
+		ADE01D7F1C181077009F425E /* Build configuration list for PBXNativeTarget "HelloTako-qa-nouse" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ADE01D801C181077009F425E /* Debug */,

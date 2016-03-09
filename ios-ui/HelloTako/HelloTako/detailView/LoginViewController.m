@@ -155,11 +155,11 @@
 
 -(IBAction) gotoParentView:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
-    
-    //    [self authFinish];
-    // 通知上层view刷新视图
-    [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_BACK_TO_USER_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];
+//    
+//    //    [self authFinish];
+//    // 通知上层view刷新视图
+//    [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_BACK_TO_USER_NOTIFICATION object:nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];
     
 }
 

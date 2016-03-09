@@ -59,13 +59,6 @@ TestViewController* shareTest = nil;
     [super viewWillDisappear:animated];
 }
 
-//-(void)receiveLoginBackNotification{
-//    BOOL isLogined = [XHTUIHelper isLogined];
-//    [self.tableview setHidden:!isLogined];
-//    if (isLogined && [self.listData count]==0) {
-//        [self loadMoreData];
-//    }
-//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -83,8 +76,7 @@ TestViewController* shareTest = nil;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveClickDownloadNotification:) name:CLICK_DOWNLOAD_BUTTON_NOTIFICATION object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveCancelDownloadNotification:) name:CLICK_DOWNLOAD_CANCEL_BUTTON_NOTIFICATION object:nil];
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveLoginBackNotification) name:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];
+
     
     // 添加下载进度监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDownloadProgressNotification:) name:XHT_DOWNLOAD_PROGERSS_NOTIFICATION object:nil];
