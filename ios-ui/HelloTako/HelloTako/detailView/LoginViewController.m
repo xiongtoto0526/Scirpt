@@ -34,16 +34,9 @@
     self.userPwd.tag=1;
     self.userNameTxt.borderStyle = UITextBorderStyleNone;
     self.userPwd.borderStyle = UITextBorderStyleNone;
-
-    UIImageView *nameImageview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
-    nameImageview.image = [UIImage imageNamed:@"ic_mail.png"];
-    self.userNameTxt.leftView = nameImageview;
-    self.userNameTxt.leftViewMode=UITextFieldViewModeAlways;
     
-    UIImageView *pwImageview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
-    pwImageview.image = [UIImage imageNamed:@"ic_pwd.png"];
-    self.userPwd.leftView = pwImageview;
-    self.userPwd.leftViewMode=UITextFieldViewModeAlways;
+    [XHTUIHelper addleftViewforText:self.userNameTxt image:@"ic_mail.png"];
+    [XHTUIHelper addleftViewforText:self.userPwd image:@"ic_pwd.png"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -177,4 +170,7 @@
         [self.emailLineimage setBackgroundColor:[UIColor grayColor]];
     }
 }
+
+
+
 @end

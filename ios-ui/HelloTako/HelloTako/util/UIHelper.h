@@ -56,4 +56,6 @@
 
 +(BOOL)isDevicefileValid:file md5:(NSString*)md5;
 
++(void)addleftViewforText:(UITextField*)t image:(NSString*)image;
+
 @end

@@ -361,4 +361,19 @@
     return s;
 }
 
++(void)addleftViewforText:(UITextField*)t image:(NSString*)image{
+    
+    UIImageView *nameImageview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
+    nameImageview.image = [UIImage imageNamed:image];
+    t.rightView = nameImageview;
+    t.rightViewMode=UITextFieldViewModeAlways;
+//    [t paste:self];
+//    int beginAt = 140;
+//    UITextPosition *start = [t positionFromPosition:[t beginningOfDocument]
+//                                                 offset:NSMakeRange(beginAt, 0).location];
+//    UITextPosition *end = [t positionFromPosition:start
+//                                               offset:NSMakeRange(beginAt, 0).length];
+//    [t setSelectedTextRange:[t textRangeFromPosition:start toPosition:end]];
+}
+
 @end
