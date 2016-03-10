@@ -28,9 +28,9 @@ DownloadViewController* share = nil;
 
 
 -(void)viewWillAppear:(BOOL)animated{
+    
     [super viewWillAppear:animated];
 
-    // todo:通过监听处理，以减少viewappear中的事件。
     [self migrateItemIfneed];
 }
 
@@ -85,6 +85,7 @@ DownloadViewController* share = nil;
             app = [TakoServer fetchAppWithid:info.download_appid];
         }
         
+        // 根据状态分别加载两个list
         int status = [info.download_status intValue];
         if (status == DOWNLOADED) {
             [downloadedList addObject:app];
@@ -149,6 +150,7 @@ DownloadViewController* share = nil;
 
 // 加载单元格
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     //根据indexPath准确地取出一行，而不是从cell重用队列中取出
     TableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (cell==nil) {
@@ -180,10 +182,8 @@ viewForFooterInSection:(NSInteger)section {
 }
 
 
-
-// 接收到cell的下载按钮点击事件
+// 接收到cell的下载按钮点击事件, 调用父类方法处理。
 -(void)receiveClickDownloadNotification:(NSNotification*)notice{
-    
     
     // 定位到当前的cell
     TableViewCell* cell = (TableViewCell*)[notice.userInfo objectForKey:CELL_INDEX_NOTIFICATION_KEY];
@@ -204,11 +204,10 @@ viewForFooterInSection:(NSInteger)section {
     self.currentCell = cell;
     
     [super receiveClickDownloadNotification:notice];
-    
 }
 
 
-// 接收到cell的取消按钮点击事件
+// 接收到cell的取消按钮点击事件, 调用父类方法处理。
 -(void)receiveCancelDownloadNotification:(NSNotification*)notice{
     
     

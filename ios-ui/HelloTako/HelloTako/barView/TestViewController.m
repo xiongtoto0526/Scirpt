@@ -35,9 +35,9 @@ TestViewController* shareTest = nil;
 }
 
 
--(void)viewDidAppear:(BOOL)animated{
+-(void)viewWillAppear:(BOOL)animated{
 
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     
     if (![XHTUIHelper isLogined]) {
         [self presentViewController:[LoginViewController new] animated:NO completion:^{
