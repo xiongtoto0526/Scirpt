@@ -44,8 +44,10 @@ BOOL isShowDownloadManagePage = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    NSLog(@"view will appear...");
-    // 刷新页面。
+    
+    [super viewWillAppear:animated];
+    
+    // 重载数据
     [self.loginBtn setHidden:[XHTUIHelper isLogined]];
     self.userName.text = [ShareEntity shareInstance].userName;
     self.userAccount.text = [ShareEntity shareInstance].userAccount;
@@ -57,9 +59,11 @@ BOOL isShowDownloadManagePage = YES;
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
-     self.userImage.image = [UIImage imageNamed:@"ic_user_head_logged"];
+    // 初始化数据源
+    self.userImage.image = [UIImage imageNamed:@"ic_user_head_logged"];
     
     sectionTitleArray = [NSArray arrayWithObjects:@"",nil];
     sectionTextArray =[NSArray arrayWithObjects:[NSArray arrayWithObjects:@"关于Tako",@"退出登录",nil],nil];
@@ -116,12 +120,12 @@ BOOL isShowDownloadManagePage = YES;
 
 // 单击一次即可，不允许deselect
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(nonnull NSIndexPath *)indexPat{
-    [self tableView:tableView didSelectRowAtIndexPath:indexPat];
+    [self tableView:tableView didSelectRowAtIndexPath:indexPat];// 相当于disable双击
 }
 
 // 单元格选中时
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    
     if(indexPath.section==0 && indexPath.row==0){
         NSLog(@"即将进入“关于Tako”页面...");
         UIViewController* versionView = [[VersionViewController alloc] init];
@@ -129,7 +133,7 @@ BOOL isShowDownloadManagePage = YES;
         
     }
     
-//     //** isShowDownloadManagePage **/
+    /** isShowDownloadManagePage **/
     else if(indexPath.section==0 && indexPath.row==1){
         NSLog(@"即将进入“下载管理”页面...");
         UIViewController* downloadView = [[DownloadViewController alloc] init];

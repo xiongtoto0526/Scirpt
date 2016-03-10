@@ -25,19 +25,11 @@
 
 // appinfo in userdefault
 #define DOWNLOADED_APP_INFO_KEY @"download_app_info"
-//#define DOWNLOAD_APP_VERSION_KEY @"download_app_version"
-//#define DOWNLOAD_PASSWORD_KEY @"download_password"
-//#define DOWNLOAD_SUCCESS_KEY @"download_success_flag"
-//#define DOWNLOAD_TOTAL_LENGTH_KEY @"download_total_length"
-//#define DOWNLOAD_CURRENT_LENGTH_KEY @"download_current_length"
-//#define DOWNLOAD_STATUS_KEY @"downlaod_status"
+
 
 // notification
-//#define LOGIN_BACK_TO_USER_NOTIFICATION @"login_back_to_user"
 #define CLICK_DOWNLOAD_BUTTON_NOTIFICATION @"click_download_button"
 #define CLICK_DOWNLOAD_CANCEL_BUTTON_NOTIFICATION @"click_download_cancel_button"
-//#define LOGIN_BACK_TO_TEST_NOTIFICATION @"login_back_to_test"
-//#define DOWNLAOD_MANAGE_PAGE_FINISH_NOTIFICATION @"download_manage_page_finish"
 #define APPLICATION_WILL_TERMINATE_NOTIFICATION @"application_will_terminate"
 #define XHT_DOWNLOAD_PROGERSS_NOTIFICATION @"XHT_download_progress"
 #define XHT_DOWNLOAD_FINISH_NOTIFICATION @"XHT_download_finish"

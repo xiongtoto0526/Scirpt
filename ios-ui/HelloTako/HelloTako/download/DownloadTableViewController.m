@@ -444,7 +444,7 @@
             app.progress=@"0%";
             [cell.button setTitle:@"重下载" forState:UIControlStateNormal];
             cell.textDownload.text = @"";
-            cell.downloadSpeed.text = @"2k/s";
+            cell.downloadSpeed.text = @"2 KB/s";
             [cell.progressControl setProgress:0];
             [self hideProgressUI:YES cell:cell];
             break;

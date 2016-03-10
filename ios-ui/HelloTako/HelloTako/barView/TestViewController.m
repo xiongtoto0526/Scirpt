@@ -36,27 +36,21 @@ TestViewController* shareTest = nil;
 
 
 -(void)viewDidAppear:(BOOL)animated{
-   
-    
+
     [super viewDidAppear:animated];
     
-    BOOL isLogined = [XHTUIHelper isLogined];
-    [self.tableview setHidden:!isLogined];
-    if (isLogined && [self.listData count]==0) {
-        [self loadMoreData];
-    }
-
     if (![XHTUIHelper isLogined]) {
         [self presentViewController:[LoginViewController new] animated:NO completion:^{
             NSLog(@"should login first, will enter login view");
         }];
     }
     
+    BOOL isLogined = [XHTUIHelper isLogined];
+    [self.tableview setHidden:!isLogined];
+    if (isLogined && [self.listData count]==0) {
+        [self loadMoreData];
+    }
     
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
 }
 
 
@@ -83,8 +77,7 @@ TestViewController* shareTest = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDownloadFinishNotification:) name:XHT_DOWNLOAD_FINISH_NOTIFICATION object:nil];
     
-    
-    
+
     // 未登录时不显示tableview
     [self.tableview setHidden:![XHTUIHelper isLogined]];
     

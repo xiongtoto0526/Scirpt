@@ -35,7 +35,15 @@
     self.userNameTxt.borderStyle = UITextBorderStyleNone;
     self.userPwd.borderStyle = UITextBorderStyleNone;
 
-    // Do any additional setup after loading the view from its nib.
+    UIImageView *nameImageview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
+    nameImageview.image = [UIImage imageNamed:@"ic_mail.png"];
+    self.userNameTxt.leftView = nameImageview;
+    self.userNameTxt.leftViewMode=UITextFieldViewModeAlways;
+    
+    UIImageView *pwImageview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
+    pwImageview.image = [UIImage imageNamed:@"ic_pwd.png"];
+    self.userPwd.leftView = pwImageview;
+    self.userPwd.leftViewMode=UITextFieldViewModeAlways;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -155,16 +163,12 @@
 
 -(IBAction) gotoParentView:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
-//    
-//    //    [self authFinish];
-//    // 通知上层view刷新视图
-//    [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_BACK_TO_USER_NOTIFICATION object:nil];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_BACK_TO_TEST_NOTIFICATION object:nil];
-    
+    //    [self authFinish];
 }
 
-// 当输入框获得焦点时，执行该方法。
+// 当输入框获得焦点时，改变下拉框演示。
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
+   
     if (textField.tag == 0) {
         [self.emailLineimage setBackgroundColor:[UIColor blueColor]];
         [self.passwordLineimage setBackgroundColor:[UIColor grayColor]];

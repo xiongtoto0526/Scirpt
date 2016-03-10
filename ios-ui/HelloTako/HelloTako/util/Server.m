@@ -48,7 +48,7 @@
     NSString* retjson = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
     NSLog(@"http response is ...%@",retjson);
     if([XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_RET_KEY]==nil){
-        NSLog(@"fetch iterm url error...");
+        NSLog(@"error!!! fetch iterm url error...");
         return result;
     }
     
@@ -74,7 +74,7 @@
     NSString* retjson = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
     NSLog(@"http response is ...%@",retjson);
     if([XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_RET_KEY]==nil){
-        NSLog(@"fetch error...");
+        NSLog(@"error!!! app info fetch error...");
         return result;
     }
     
@@ -104,7 +104,7 @@
     NSString* retjson = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
     NSLog(@"http response is ...%@",retjson);// 量太大,暂时不log
     if([XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_RET_KEY]==nil){
-        NSLog(@"fetch error...");
+        NSLog(@"error!!!  apps fetch error...");
         return result;
     }
     
@@ -134,7 +134,7 @@
     
     // 处理http结果
     if(response == nil){
-        NSLog(@"http error...");
+        NSLog(@"error!!!  downloadurl fetch error...");
         return result;
     }
     

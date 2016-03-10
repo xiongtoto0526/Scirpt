@@ -2,6 +2,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
+// 当前db方式：直接访问 userdefault
 
 @interface DownloadHistory : NSObject
 @property (nonatomic,copy) NSString* download_current_length;
