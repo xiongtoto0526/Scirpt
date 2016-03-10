@@ -36,7 +36,7 @@ TestViewController* shareTest = nil;
 
 
 -(void)viewWillAppear:(BOOL)animated{
-
+    
     [super viewWillAppear:animated];
     
     if (![XHTUIHelper isLogined]) {
@@ -70,14 +70,14 @@ TestViewController* shareTest = nil;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveClickDownloadNotification:) name:CLICK_DOWNLOAD_BUTTON_NOTIFICATION object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveCancelDownloadNotification:) name:CLICK_DOWNLOAD_CANCEL_BUTTON_NOTIFICATION object:nil];
-
+    
     
     // 添加下载进度监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDownloadProgressNotification:) name:XHT_DOWNLOAD_PROGERSS_NOTIFICATION object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDownloadFinishNotification:) name:XHT_DOWNLOAD_FINISH_NOTIFICATION object:nil];
     
-
+    
     // 未登录时不显示tableview
     [self.tableview setHidden:![XHTUIHelper isLogined]];
     
@@ -186,8 +186,10 @@ TestViewController* shareTest = nil;
     // 检查历史下载记录
     NSDictionary* dict =[XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
     NSLog(@"start dict is:%@",dict);
+    
+    // 存在历史下载记录
     if (dict!=nil) {
-        // 初始化其他属性
+        
         for(int i=0;i<[newdata count];i++){
             TakoApp* app = (TakoApp*)[newdata objectAtIndex:i];
             
@@ -211,44 +213,14 @@ TestViewController* shareTest = nil;
             }
             
             for (NSString* key in dict) {
-
                 NSDictionary* d = (NSDictionary*)[dict objectForKey:key];
                 DownloadHistory* info = [[DownloadHistory shareInstance] initWithDictionary:d];
                 info.download_appid = key;
+                
+                // 根据历史信息，再更新下app的部分字段
                 if([app.appid isEqualToString:info.download_appid])
                 {
-                    int status = [info.download_status intValue];
-                    
-                    // 如果已经下载成功了，且发现新版本，则更新app的状态
-                    if ([info.download_success_flag isEqualToString:@"1"] && ![app.versionId isEqualToString:info.download_app_version]) {
-                        app.status = TOBE_UPDATE;
-                        app.isNeedUpdate = YES;
-                    }
-                    // 已下载
-                    else if (status == DOWNLOADED || status == INSTALLING || status == INSTALL_FAILED) {
-                        app.status = DOWNLOADED;
-                    }
-                    // 尚未下载完
-                    else if(status == STARTED || status == PAUSED){
-                        app.status = PAUSED;
-                        float currentL = [info.download_current_length floatValue];
-                        float totalL = [info.download_total_length floatValue];
-                        app.progressValue = (float)currentL/totalL;
-
-                        NSString* finishStr = [XHTUIHelper formatByteCount:currentL];
-                        NSString* totalStr = [XHTUIHelper formatByteCount:totalL];
-                        NSString* percent = [NSString stringWithFormat:@"%@/%@",finishStr,totalStr];
-                        app.progress = percent;
-                    }
-                    // 下载失败
-                    else if(status == INSTALLED){
-                        app.status = INSTALLED;
-                    }
-                    
-                    // 未更新前，需要使用旧的版本id和版本name。
-                     app.versionId = info.download_app_version;
-                     app.version = info.download_app_version_name;
-                    
+                    app = [self updateApp:app withHis:info];
                 }
             }
             
@@ -433,6 +405,46 @@ TestViewController* shareTest = nil;
     
 }
 
-
+// 根据历史信息，部分字段需要回填app
+-(TakoApp*) updateApp:(TakoApp*)app withHis:(DownloadHistory*)info{
+    
+    int status = [info.download_status intValue];
+    
+    // 如果已经下载成功了，且发现新版本，则更新app的状态
+    if ([info.download_success_flag isEqualToString:@"1"] && ![app.versionId isEqualToString:info.download_app_version]) {
+        app.status = TOBE_UPDATE;
+        app.isNeedUpdate = YES;
+    }
+    
+    // 已下载 或 安装失败
+    else if (status == DOWNLOADED || status == INSTALLING || status == INSTALL_FAILED) {
+        app.status = DOWNLOADED;
+    }
+    
+    // 尚未下载完
+    else if(status == STARTED || status == PAUSED){
+        app.status = PAUSED;
+        float currentL = [info.download_current_length floatValue];
+        float totalL = [info.download_total_length floatValue];
+        app.progressValue = (float)currentL/totalL;
+        
+        NSString* finishStr = [XHTUIHelper formatByteCount:currentL];
+        NSString* totalStr = [XHTUIHelper formatByteCount:totalL];
+        NSString* percent = [NSString stringWithFormat:@"%@/%@",finishStr,totalStr];
+        app.progress = percent;
+    }
+    
+    // 下载失败
+    else if(status == INSTALLED){
+        app.status = INSTALLED;
+    }
+    
+    // 未更新前，需要使用旧的password,版本id和版本name。
+    app.downloadPassword = info.download_password;
+    app.versionId = info.download_app_version;
+    app.version = info.download_app_version_name;
+    
+    return app;
+}
 
 @end
