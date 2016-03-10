@@ -3,6 +3,7 @@
 #import <UIKit/UIKit.h>
 #import "DownloadWorker.h"
 #import "Constant.h"
+#import "DownloadHistory.h"
 
 
 @interface XHtDownLoadQueue : NSObject<XHtDownLoadDelegate>
@@ -13,7 +14,8 @@
  #define XHT_DOWNLOAD_PROGERSS_NOTIFICATION
  #define XHT_DOWNLOAD_FINISH_NOTIFICATION
 */
-- (void)add:(NSString*)url versionid:(NSString*)versionid password:(NSString*)password tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate;
+- (void)add:(NSString*)url DownloadInfo:(DownloadHistory*)info tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate;
+
 
 // 暂停
 - (void)pause:(NSString*)tag ;

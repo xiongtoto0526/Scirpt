@@ -68,29 +68,24 @@ DownloadViewController* share = nil;
     }
     
     for (NSString* key in dict) {
-        DownloadHistoryInfo* info = [DownloadHistoryInfo new];
         NSDictionary* d = (NSDictionary*)[dict objectForKey:key];
-        info.currentLength = [d objectForKey:DOWNLOAD_CURRENT_LENGTH_KEY];
-        info.TotalLength = [d objectForKey:DOWNLOAD_TOTAL_LENGTH_KEY];
-        info.status = [d objectForKey:DOWNLOAD_STATUS_KEY];
-        info.versionid = [d objectForKey:DOWNLOAD_APP_VERSION_KEY];
-        info.appid = key; // appid 是 dict 的tag
+        DownloadHistory* info = [[DownloadHistory shareInstance] initWithDictionary:d];
         
         TakoApp* app = nil;
         // 首次加载时，必须从外层刷controller里面的listdata中，拿到最新的appprogress信息
         NSArray* temp = [TestViewController share].listData;
         for (int i=0; i<[[TestViewController share].listData count]; i++) {
             TakoApp* tempApp = [temp objectAtIndex:i];
-            if ([info.appid isEqualToString:tempApp.appid]) {
+            if ([info.download_appid isEqualToString:tempApp.appid]) {
                 app = tempApp;
                 break;
             }
         }
         if (app == nil) {
-            app = [TakoServer fetchAppWithid:info.appid];
+            app = [TakoServer fetchAppWithid:info.download_appid];
         }
         
-        int status = [info.status intValue];
+        int status = [info.download_status intValue];
         if (status == DOWNLOADED) {
             [downloadedList addObject:app];
         }else if(status == STARTED || status == PAUSED){
@@ -126,7 +121,7 @@ DownloadViewController* share = nil;
 
 // 改变行的高度,todo: 为何自定义的cell本身未生效？
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 75;
+    return 80;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

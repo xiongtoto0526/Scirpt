@@ -1,7 +1,7 @@
 
 #import "App.h"
-#import <objc/runtime.h>
-#import <zlib.h>
+//#import <objc/runtime.h>
+//#import <zlib.h>
 #import "UIHelper.h"
 #import "Constant.h"
 
@@ -10,7 +10,7 @@
 
 -(id)init{
     if((self = [super init])){
-        self.propertykeys = [self getObjectKeys:self];
+        self.propertykeys = [XHTUIHelper getObjectKeys:self];
     }
     return self;
 }
@@ -34,6 +34,9 @@
         
          NSString* bundleid = [(NSDictionary*)[(NSDictionary*)value objectForKey:@"package"] objectForKey:@"bundleid"];
         [super setValue:bundleid forKey:@"bundleid"];
+        
+         NSString* md5 = [(NSDictionary*)[(NSDictionary*)value objectForKey:@"package"] objectForKey:@"md5"];
+        [super setValue:md5 forKey:@"md5"];
         
         NSString* versionId = (NSString*)[(NSDictionary*)value objectForKey:@"id"];
         [super setValue:versionId forKey:@"versionId"];
@@ -63,6 +66,8 @@
     
     [super setValue:value forKey:key];
 }
+
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     if ([dictionary isKindOfClass:[NSDictionary class]]) {
         self = [super init];
@@ -75,20 +80,20 @@
     }    
 }
 
-
-- (NSMutableArray*)getObjectKeys:(id)obj
-{
-    NSMutableArray* keys = [NSMutableArray new];
-    unsigned int propsCount;
-    objc_property_t *props = class_copyPropertyList([obj class], &propsCount);
-    for(int i = 0;i < propsCount; i++)
-    {
-        objc_property_t prop = props[i];
-        NSString *propName = [NSString stringWithUTF8String:property_getName(prop)];
-        [keys addObject:propName];
-    }
-    return keys;
-}
+//
+//- (NSMutableArray*)getObjectKeys:(id)obj
+//{
+//    NSMutableArray* keys = [NSMutableArray new];
+//    unsigned int propsCount;
+//    objc_property_t *props = class_copyPropertyList([obj class], &propsCount);
+//    for(int i = 0;i < propsCount; i++)
+//    {
+//        objc_property_t prop = props[i];
+//        NSString *propName = [NSString stringWithUTF8String:property_getName(prop)];
+//        [keys addObject:propName];
+//    }
+//    return keys;
+//}
 
 
 @end

@@ -1,7 +1,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
+#import "DownloadHistory.h"
 
 // 下载回调协议
 @protocol XHtDownLoadDelegate <NSObject>
@@ -22,13 +22,14 @@
 
 @property (nonatomic, copy) NSString  *versionid;
 
+@property (nonatomic, copy) NSString  *versionname;
+
 @property (nonatomic, copy) NSString  *password;
 
 @property(nonatomic, strong)id<XHtDownLoadDelegate> delegate;
 
 
-// 启动
-- (void)startWithUrl:(NSURL*) url versionid:(NSString*)versionid password:(NSString*)password tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate;
+- (void)startWithUrl:(NSURL*) url DownloadInfo:(DownloadHistory*)info tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate ;
 
 // 暂停
 - (void)pause:(NSString*)tag;

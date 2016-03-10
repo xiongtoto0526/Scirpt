@@ -27,6 +27,6 @@
 
 +(NSData*)postWithDict:(NSDictionary*)dict url:(NSString*)methodUrl;
 
-+(NSData*) getWithUrl:(NSString*)methodUrl;
++(NSData*)getWithUrl:(NSString*)methodUrl;
 
 @end

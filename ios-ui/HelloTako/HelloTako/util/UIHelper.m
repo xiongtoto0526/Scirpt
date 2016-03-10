@@ -21,6 +21,12 @@
 #include <arpa/inet.h>
 #include <net/if.h>
 
+// 反射key
+#import <objc/runtime.h>
+#import <zlib.h>
+
+#import <CommonCrypto/CommonDigest.h>
+
 @implementation XHTUIHelper
 
 
@@ -149,7 +155,7 @@
     if (jsonStr==nil||key==nil) {
         return nil;
     }
-
+    
     id ret=nil;
     NSData* tempData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     if(tempData != nil){
@@ -195,7 +201,7 @@
 }
 
 +(NSString*)stringWithLong:(long long)longvalue{
-  return [NSString stringWithFormat:@"%qi",longvalue];
+    return [NSString stringWithFormat:@"%qi",longvalue];
 }
 
 //获取本机的IP
@@ -218,21 +224,29 @@
     return localIP;
 }
 
-+(BOOL)isDevicefileExist:(NSString*) file{
++(BOOL)isDevicefileValid:file md5:(NSString*)md5{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* homePath =[paths firstObject];
     NSString* filepath = [homePath stringByAppendingPathComponent:file];
-
+    
+    // 检查文件是否存在
     NSFileManager* mgr = [NSFileManager defaultManager];
     if ([mgr fileExistsAtPath:filepath]==YES) {
         NSLog(@"device File exists");
         NSLog(@"file is:%@",filepath);
-        return YES;
     }else{
-        NSLog(@"device File not exists");
+        NSLog(@"error!!! device File not exists");
         return NO;
     }
-
+    
+    // 检查md5
+    NSString* currentMd5 = [XHTUIHelper md5withFile:filepath];
+    if (![currentMd5 isEqualToString:md5]) {
+        NSLog(@"error!!! device filemd5 validate failed,local:%@,remote:%@",currentMd5,md5);
+        return NO;
+    }
+    
+    return YES;
 }
 
 
@@ -242,5 +256,109 @@
     return [NSByteCountFormatter stringFromByteCount:size countStyle:NSByteCountFormatterCountStyleFile];
 }
 
+
++ (NSMutableArray*)getObjectKeys:(id)obj
+{
+    NSMutableArray* keys = [NSMutableArray new];
+    unsigned int propsCount;
+    objc_property_t *props = class_copyPropertyList([obj class], &propsCount);
+    for(int i = 0;i < propsCount; i++)
+    {
+        objc_property_t prop = props[i];
+        NSString *propName = [NSString stringWithUTF8String:property_getName(prop)];
+        [keys addObject:propName];
+    }
+    return keys;
+}
+
++ (NSDictionary*)getObjectData:(id)obj
+{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    unsigned int propsCount;
+    objc_property_t *props = class_copyPropertyList([obj class], &propsCount);
+    for(int i = 0;i < propsCount; i++)
+    {
+        objc_property_t prop = props[i];
+        
+        NSString *propName = [NSString stringWithUTF8String:property_getName(prop)];
+        id value = [obj valueForKey:propName];
+        if(value == nil)
+        {
+            value = [NSNull null];
+        }
+        else
+        {
+            value = [self getObjectInternal:value];
+        }
+        [dic setObject:value forKey:propName];
+    }
+    return dic;
+}
+
++ (id)getObjectInternal:(id)obj
+{
+    if([obj isKindOfClass:[NSString class]]
+       || [obj isKindOfClass:[NSNumber class]]
+       || [obj isKindOfClass:[NSNull class]])
+    {
+        return obj;
+    }
+    
+    if([obj isKindOfClass:[NSArray class]])
+    {
+        NSArray *objarr = obj;
+        NSMutableArray *arr = [NSMutableArray arrayWithCapacity:objarr.count];
+        for(int i = 0;i < objarr.count; i++)
+        {
+            [arr setObject:[self getObjectInternal:[objarr objectAtIndex:i]] atIndexedSubscript:i];
+        }
+        return arr;
+    }
+    
+    if([obj isKindOfClass:[NSDictionary class]])
+    {
+        NSDictionary *objdic = obj;
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:[objdic count]];
+        for(NSString *key in objdic.allKeys)
+        {
+            [dic setObject:[self getObjectInternal:[objdic objectForKey:key]] forKey:key];
+        }
+        return dic;
+    }
+    return [self getObjectData:obj];
+}
+
+
+
++(NSString*)md5withFile:(NSString*) path{
+    
+    NSFileHandle *handle = [NSFileHandle fileHandleForReadingAtPath:path];
+    if( handle== nil ) {
+        return nil;
+    }
+    CC_MD5_CTX md5;
+    CC_MD5_Init(&md5);
+    BOOL done = NO;
+    while(!done)
+    {
+        NSData* fileData = [handle readDataOfLength: 256 ];
+//        NSLog(@"length is:%lu",(unsigned long)[fileData length]);
+        CC_MD5_Update(&md5, [fileData bytes], (CC_LONG)[fileData length]);// file_length  max to be 256 which never overflow,so here we it force to cc_long
+        if( [fileData length] == 0 ) done = YES;
+    }
+    unsigned char digest[CC_MD5_DIGEST_LENGTH];
+    CC_MD5_Final(digest, &md5);
+    NSString* s = [NSString stringWithFormat: @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+                   digest[0], digest[1],
+                   digest[2], digest[3],
+                   digest[4], digest[5],
+                   digest[6], digest[7],
+                   digest[8], digest[9],
+                   digest[10], digest[11],
+                   digest[12], digest[13],
+                   digest[14], digest[15]];
+    
+    return s;
+}
 
 @end

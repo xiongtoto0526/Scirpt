@@ -218,20 +218,16 @@ TestViewController* shareTest = nil;
             }
             
             for (NSString* key in dict) {
-                DownloadHistoryInfo* info = [DownloadHistoryInfo new];
+
                 NSDictionary* d = (NSDictionary*)[dict objectForKey:key];
-                info.appid = key;
-                if([app.appid isEqualToString:info.appid])
+                DownloadHistory* info = [[DownloadHistory shareInstance] initWithDictionary:d];
+                info.download_appid = key;
+                if([app.appid isEqualToString:info.download_appid])
                 {
-                    info.currentLength = [d objectForKey:DOWNLOAD_CURRENT_LENGTH_KEY];
-                    info.TotalLength = [d objectForKey:DOWNLOAD_TOTAL_LENGTH_KEY];
-                    info.status = [d objectForKey:DOWNLOAD_STATUS_KEY];
-                    info.versionid = [d objectForKey:DOWNLOAD_APP_VERSION_KEY];
-                    info.downloadSuccessFlag = [d objectForKey:DOWNLOAD_SUCCESS_KEY];
-                    int status = [info.status intValue];
+                    int status = [info.download_status intValue];
                     
                     // 如果已经下载成功了，且发现新版本，则更新app的状态
-                    if ([info.downloadSuccessFlag isEqualToString:@"1"] && ![app.versionId isEqualToString:info.versionid]) {
+                    if ([info.download_success_flag isEqualToString:@"1"] && ![app.versionId isEqualToString:info.download_app_version]) {
                         app.status = TOBE_UPDATE;
                         app.isNeedUpdate = YES;
                     }
@@ -242,8 +238,8 @@ TestViewController* shareTest = nil;
                     // 尚未下载完
                     else if(status == STARTED || status == PAUSED){
                         app.status = PAUSED;
-                        float currentL = [info.currentLength floatValue];
-                        float totalL = [info.TotalLength floatValue];
+                        float currentL = [info.download_current_length floatValue];
+                        float totalL = [info.download_total_length floatValue];
                         app.progressValue = (float)currentL/totalL;
 
                         NSString* finishStr = [XHTUIHelper formatByteCount:currentL];
@@ -256,8 +252,9 @@ TestViewController* shareTest = nil;
                         app.status = INSTALLED;
                     }
                     
-                    // 未更新前，需要使用旧的版本id。
-                     app.versionId = info.versionid;
+                    // 未更新前，需要使用旧的版本id和版本name。
+                     app.versionId = info.download_app_version;
+                     app.version = info.download_app_version_name;
                     
                 }
             }

@@ -2,10 +2,11 @@
 #import "DownloadQueue.h"
 #import "UIHelper.h"
 
-@interface DownloadInfo : NSObject
+@interface DownloadQueueInfo : NSObject
 @property (nonatomic, copy) NSString* url;
 @property (nonatomic, copy) NSString* tag;
 @property (nonatomic, copy) NSString* versionid;
+@property (nonatomic, copy) NSString* versionname;
 @property (nonatomic, copy) NSString* password;
 @property (nonatomic) BOOL isExecuting;
 @property (nonatomic) BOOL isSuspend;
@@ -18,7 +19,7 @@
 //    SUSPENDING,
 //};
 
-@implementation DownloadInfo
+@implementation DownloadQueueInfo
 
 @end
 
@@ -47,8 +48,7 @@ NSMutableDictionary* taskQueueDict = nil;
     return self;
 }
 
-
-- (void)add:(NSString*)url versionid:(NSString*)versionid password:(NSString*)password tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate{
+- (void)add:(NSString*)url DownloadInfo:(DownloadHistory*)info tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate{
     
     if (url==nil) {
         NSLog(@"the download url is invalid...");
@@ -59,19 +59,20 @@ NSMutableDictionary* taskQueueDict = nil;
     
     if (!isDup) {
         // 保存请求
-        DownloadInfo* d = [DownloadInfo new];
+        DownloadQueueInfo* d = [DownloadQueueInfo new];
         d.url = url;
         d.tag = tag;
-        d.versionid = versionid;
-        d.password = password;
+        d.versionid = info.download_app_version;
+        d.password = info.download_password;
+        d.versionname = info.download_app_version_name;
         d.isSuspend = NO;// 只有被用户主动暂停时，该标志位才会为YES
         d.isExecuting =NO;
         [taskQueueDict setObject:d forKey:tag];
     }
-
+    
     
     // 去除暂停标志。
-    DownloadInfo* d = (DownloadInfo*)[taskQueueDict objectForKey:tag];
+    DownloadQueueInfo* d = (DownloadQueueInfo*)[taskQueueDict objectForKey:tag];
     d.delegate = delegate; // 同一个tag可以有两个delegte，所以此处需要重新设置delegate
     d.isSuspend = NO;
     
@@ -82,20 +83,23 @@ NSMutableDictionary* taskQueueDict = nil;
         return;
     }
     
-    [worker startWithUrl:[NSURL URLWithString:url] versionid:versionid password:password tag:tag delegate:self ];
+    [worker startWithUrl:[NSURL URLWithString:url] DownloadInfo:info tag:tag delegate:self ];
     d.isExecuting=YES;// 更新执行状态
-    
-    
 }
+
 
 -(void)startOne{
     
-    DownloadInfo*  downloadInfo =nil;
+    DownloadQueueInfo*  downloadInfo =nil;
     for (NSString* key in taskQueueDict) {
-       downloadInfo =  [taskQueueDict objectForKey:key]; // 选取任务
-            if (!downloadInfo.isExecuting && !downloadInfo.isSuspend) {
+        downloadInfo =  [taskQueueDict objectForKey:key]; // 选取任务
+        if (!downloadInfo.isExecuting && !downloadInfo.isSuspend) {
             DownloadWorker* worker = [self newWorker];// 选取线程
-            [worker startWithUrl:[NSURL URLWithString:downloadInfo.url] versionid:downloadInfo.versionid password:downloadInfo.password tag:downloadInfo.tag  delegate:self];
+            DownloadHistory* info = [DownloadHistory new];
+            info.download_app_version = downloadInfo.versionid;
+            info.download_app_version_name = downloadInfo.versionname;
+            info.download_password = downloadInfo.password;
+            [worker startWithUrl:[NSURL URLWithString:downloadInfo.url] DownloadInfo:info tag:downloadInfo.tag  delegate:self];
             downloadInfo.isExecuting=YES;
             break;
         }
@@ -130,7 +134,7 @@ NSMutableDictionary* taskQueueDict = nil;
 - (void)pause:(NSString*)tag{
     
     // 更新队列的状态
-    DownloadInfo* info = [taskQueueDict objectForKey:tag];
+    DownloadQueueInfo* info = [taskQueueDict objectForKey:tag];
     info.isSuspend = YES;
     info.isExecuting = NO;
     
@@ -154,7 +158,7 @@ NSMutableDictionary* taskQueueDict = nil;
 - (void)stop:(NSString*)tag{
     
     // 更新队列的状态
-    DownloadInfo* info = [taskQueueDict objectForKey:tag];
+    DownloadQueueInfo* info = [taskQueueDict objectForKey:tag];
     info.isSuspend = YES;
     info.isExecuting = NO;
     
@@ -182,10 +186,10 @@ NSMutableDictionary* taskQueueDict = nil;
 
 // 下载过程中，先进入该回调，然后再转发至viewController
 -(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize speed:(NSString *)speed tag:(NSString*)tag{
-//    NSLog(@"progress wrapper in downloadQueue...");
-//    DownloadInfo* d =  (DownloadInfo*)[taskQueueDict objectForKey:tag];
-//    [d.delegate downloadingWithTotal:totalSize complete:finishSize tag:tag];
-//    
+    //    NSLog(@"progress wrapper in downloadQueue...");
+    //    DownloadInfo* d =  (DownloadInfo*)[taskQueueDict objectForKey:tag];
+    //    [d.delegate downloadingWithTotal:totalSize complete:finishSize tag:tag];
+    //
     
     // 获取到button对应的cell
     NSMutableDictionary* dict = [NSMutableDictionary new];
@@ -204,10 +208,10 @@ NSMutableDictionary* taskQueueDict = nil;
 -(void)downloadFinish:(BOOL)isSuccess msg:(NSString*)msg tag:(NSString*)tag{
     
     /* 使用 delegate 发送事件*/
-//    NSLog(@"finish wrapper in downloadQueue...");
-//    DownloadInfo* d =  (DownloadInfo*)[taskQueueDict objectForKey:tag];
-//    [d.delegate downloadFinish:isSuccess msg:msg tag:tag];
-
+    //    NSLog(@"finish wrapper in downloadQueue...");
+    //    DownloadInfo* d =  (DownloadInfo*)[taskQueueDict objectForKey:tag];
+    //    [d.delegate downloadFinish:isSuccess msg:msg tag:tag];
+    
     /* 使用 notification 发送事件*/
     NSString* ret = isSuccess?@"1":@"0";
     // 获取到button对应的cell

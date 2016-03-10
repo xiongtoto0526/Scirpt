@@ -17,6 +17,7 @@
 @property (nonatomic, copy) NSString *firstcreated;
 @property (nonatomic, copy) NSString *password;
 @property (nonatomic, copy) NSString *bundleid;
+@property (nonatomic, copy) NSString *md5;
 
 // properties for cell
 @property (nonatomic,copy) NSString* myCellIndex;

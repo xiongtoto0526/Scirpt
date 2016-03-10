@@ -4,6 +4,7 @@
 #import "UIHelper.h"
 #import "Constant.h"
 #import "Server.h"
+#import "DownloadHistory.h"
 
 @interface DownloadWorker ()<NSURLConnectionDataDelegate>
 
@@ -123,7 +124,7 @@
     self.currentLength += data.length;
     
     // 下载进度
-    double newProgress = (double)self.currentLength / self.totalLength;    
+    double newProgress = (double)self.currentLength / self.totalLength;
     self.progress = newProgress;
     
     // 计算下载速度
@@ -140,15 +141,15 @@
         self.downloadspeed = [XHTUIHelper formatByteCount:(self.currentLength-self.lastSize)/time];
         self.lastDate = currentDate;
         self.lastSize = self.currentLength;
-        NSLog(@"current speend is:%@/s",self.downloadspeed);
+        NSLog(@"current speed is:%@/s",self.downloadspeed);
     }
     
     if (self.downloadspeed==nil) {
-        self.downloadspeed = @"0k";
+        self.downloadspeed = @"2k";
     }
     
     [self.delegate downloadingWithTotal:self.totalLength complete:self.currentLength speed:[NSString stringWithFormat:@"%@/s",self.downloadspeed] tag:self.tag];
-
+    
 }
 
 
@@ -177,37 +178,38 @@
     
 }
 
-/*
- 启动
- */
-- (void)startWithUrl:(NSURL*) url versionid:(NSString*)versionid password:(NSString*)password tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate {
-    
+- (void)startWithUrl:(NSURL*) url DownloadInfo:(DownloadHistory*)info tag:(NSString*)tag delegate:(id<XHtDownLoadDelegate>)delegate {
     if (![self isDelegateAvailable:delegate]) {
         return;
     }
     
     self.delegate=delegate;
     self.tag = tag;
-    self.versionid = versionid;
-    self.password = password;
+    self.versionid = info.download_app_version;
+    self.versionname = info.download_app_version_name;
+    self.password = info.download_password;
     self.isFree = NO;
     self.lastSize=0;
     self.lastDate=nil;
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
-    
-    NSDictionary* oldDict = (NSDictionary*)[XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
+    DownloadHistory* hisInfo = [[DownloadHistory shareInstance] fetchWithAppid:tag];
     
     // 若之前有下载记录，则直接读取之前的进度。
-    if([oldDict objectForKey:self.tag]!=nil){
-        NSDictionary* t = (NSDictionary*)[oldDict objectForKey:self.tag];
-        self.currentLength = [(NSString*)[t objectForKey:DOWNLOAD_CURRENT_LENGTH_KEY] longLongValue];
-        self.totalLength = [(NSString*)[t objectForKey:DOWNLOAD_TOTAL_LENGTH_KEY] longLongValue];
-        self.versionid = (NSString*)[t objectForKey:DOWNLOAD_APP_VERSION_KEY];
-        self.password = (NSString*)[t objectForKey:DOWNLOAD_PASSWORD_KEY];
+    if(hisInfo!=nil){
+        self.currentLength = [hisInfo.download_current_length longLongValue];
+        self.totalLength = [hisInfo.download_total_length longLongValue];
     }else{
         self.currentLength = 0;
+    }
+    
+    
+    NSString* filepath = [self.homePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.ipa",self.versionid]];
+    // 若文件不存在，则创建一个空的文件到沙盒中。只有首次下载时,才会创建新文件。
+    NSFileManager* mgr = [NSFileManager defaultManager];
+    if ([mgr fileExistsAtPath:filepath] && self.currentLength == 0) {
+        [mgr removeItemAtPath:filepath error:nil];
     }
     
     // 请求头
@@ -241,42 +243,32 @@
 // 保存当前进度，以便下次退出应用后，仍可继续。
 -(void)saveCurrentProgress:(int) status{
     
-    NSDictionary* oldCurrent =nil;
-    NSMutableDictionary* newCurrent =nil;
-    NSMutableDictionary* newDict = nil;
-    NSDictionary* oldDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
-    
-    if (oldDict==nil) {
-        newDict = [NSMutableDictionary new];
-    }else{
-        newDict = [NSMutableDictionary dictionaryWithDictionary:oldDict];
+    BOOL isNew = NO;
+    DownloadHistory* info =  [[DownloadHistory shareInstance] fetchWithAppid:self.tag];
+    if (info==nil) {
+        info = [[DownloadHistory shareInstance] newWithAppid:self.tag];
+        isNew = YES;
     }
-    
-    oldCurrent =[newDict objectForKey:self.tag];
-    if (oldCurrent==nil) {
-        newCurrent = [NSMutableDictionary new];
-    }else{
-        newCurrent = [NSMutableDictionary dictionaryWithDictionary:oldCurrent];
-    }
-    
-    NSString* currentLength = [NSString stringWithFormat:@"%qi",self.currentLength];
-    NSString* totalLength = [NSString stringWithFormat:@"%qi",self.totalLength];
-    [newCurrent setObject:currentLength forKey:DOWNLOAD_CURRENT_LENGTH_KEY];
-    [newCurrent setObject:totalLength forKey:DOWNLOAD_TOTAL_LENGTH_KEY];
-    [newCurrent setObject:[NSString stringWithFormat:@"%d",status] forKey:DOWNLOAD_STATUS_KEY];
+    info.download_current_length = [NSString stringWithFormat:@"%qi",self.currentLength];
+    info.download_total_length = [NSString stringWithFormat:@"%qi",self.totalLength];
+    info.download_status = [NSString stringWithFormat:@"%d",status];
+    info.download_app_version_name = self.versionname;
+//    info.download_app_version = self.versionid;
     
     // 只有当app从未下载，或app下载完成之后且新的versionid和老的versionid不一样时，才需要更新versionid字段
-    NSString* oldversionid = [newCurrent objectForKey:DOWNLOAD_APP_VERSION_KEY];
-    if (oldversionid == nil || (![self.versionid isEqualToString:oldversionid] && status >= DOWNLOADED)) {
-        [newCurrent setObject:self.versionid forKey:DOWNLOAD_APP_VERSION_KEY];
+    if ([info.download_app_version isEqualToString: @"0"] || (![self.versionid isEqualToString:info.download_app_version] && status >= DOWNLOADED)) {
+        info.download_app_version = self.versionid;
     }
     
     if (status == DOWNLOADED) {
-        [newCurrent setObject:@"1" forKey:DOWNLOAD_SUCCESS_KEY];
+        info.download_success_flag = @"1";
     }
     
-    [newDict setValue:newCurrent forKey:self.tag];
-    [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_INFO_KEY withObject:newDict];
+    if (isNew) {
+        [[DownloadHistory shareInstance] addWithObject:info];
+    }else{
+        [[DownloadHistory shareInstance] updateWithAppid:self.tag object:info];
+    }
 }
 
 /*

@@ -42,12 +42,18 @@
 
 +(NSString*) hostFromInfoPlist;
 
-+(BOOL)isDevicefileExist:(NSString*) file;
-
 + (NSString *)localIPAddress;
 
 +(NSString*)stringWithLong:(long long)longvalue;
 
 + (NSString*)formatByteCount:(long long)size;
+
++ (NSMutableArray*)getObjectKeys:(id)obj;
+
++ (NSDictionary*)getObjectData:(id)obj;
+
++(NSString*)md5withFile:(NSString*) path;
+
++(BOOL)isDevicefileValid:file md5:(NSString*)md5;
 
 @end

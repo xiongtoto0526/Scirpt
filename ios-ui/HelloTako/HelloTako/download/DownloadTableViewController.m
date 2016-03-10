@@ -31,11 +31,6 @@
 @end
 
 
-@implementation DownloadHistoryInfo
-
-@end
-
-
 @implementation DownloadTableViewController
 
 
@@ -185,7 +180,8 @@
     NSString* itermServiceUrl = [TakoServer fetchItermUrl:self.currentApp.versionId password:self.currentApp.downloadPassword];
     NSLog(@"will install,iterm url is:%@",itermServiceUrl);
     NSString* testFile = [NSString stringWithFormat:@"%@.ipa",self.currentApp.versionId];
-    BOOL isFileReady = [XHTUIHelper isDevicefileExist:testFile];
+    BOOL isFileReady = [XHTUIHelper isDevicefileValid:testFile md5:self.currentApp.md5];
+    
     NSString* testUrl = [NSString stringWithFormat:@"%@:%d/%@",[XHTUIHelper localIPAddress],HTTP_SERVER_PORT,testFile];
     if (isFileReady) {
         NSLog(@"file is ready ,will install...try the test url in browse:%@",testUrl);
@@ -225,7 +221,14 @@
      2. 当某个应用暂停后，程序会保存当前进度。即使退出应用，下次进入时，仍可继续下。
      3. 参数tag说明: tag 为每个下载记录的唯一标识。
      */
-    [[XHtDownLoadQueue share] add:self.currentApp.downloadUrl versionid:self.currentApp.versionId password:self.currentApp.downloadPassword tag:self.currentApp.appid delegate:self];
+    DownloadHistory* info = [DownloadHistory new];
+    info.download_appid = self.currentApp.appid;
+    info.download_app_version = self.currentApp.versionId;
+    info.download_app_version_name = self.currentApp.version;
+    
+    [[XHtDownLoadQueue share] add:self.currentApp.downloadUrl DownloadInfo:info tag:self.currentApp.appid delegate:self];
+    
+//    [[XHtDownLoadQueue share] add:self.currentApp.downloadUrl versionid:self.currentApp.versionId password:self.currentApp.downloadPassword tag:self.currentApp.appid delegate:self];
 }
 
 
@@ -233,7 +236,19 @@
 -(void)continueDownload{
     NSLog(@"will continue download...");
     self.currentApp.status = STARTED;
-    [[XHtDownLoadQueue share] add:self.currentApp.downloadUrl versionid:self.currentApp.versionId password:self.currentApp.downloadPassword tag:self.currentApp.appid delegate:self];
+    
+    DownloadHistory* info = [DownloadHistory new];
+    info.download_appid = self.currentApp.appid;
+    info.download_app_version = self.currentApp.versionId;
+    info.download_app_version_name = self.currentApp.version;
+    
+    /* 添加到下载队列。注：
+     1. 下载队列无界，可无限添加，但每次只能有1个（constant.h中可配置梳理）活跃线程下载。允许重复添加（程序会自动识别）。
+     2. 当某个应用暂停后，程序会保存当前进度。即使退出应用，下次进入时，仍可继续下。
+     3. 参数tag说明: tag 为每个下载记录的唯一标识。
+     */
+    [[XHtDownLoadQueue share] add:self.currentApp.downloadUrl DownloadInfo:info tag:self.currentApp.appid delegate:self];
+//    [[XHtDownLoadQueue share] add:self.currentApp.downloadUrl versionid:self.currentApp.versionId password:self.currentApp.downloadPassword tag:self.currentApp.appid delegate:self];
 }
 
 
@@ -455,30 +470,8 @@
 
 // 更新当前app的状态,记录到userdefault。
 -(void)saveCurrentAppStatus:(int) status tag:(NSString*)tag{
-    
-    NSDictionary* oldCurrent =nil;
-    NSMutableDictionary* newCurrent =nil;
-    NSMutableDictionary* newDict = nil;
-    NSDictionary* oldDict = [XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
-    
-    if (oldDict==nil) {
-        newDict = [NSMutableDictionary new];
-    }else{
-        newDict = [NSMutableDictionary dictionaryWithDictionary:oldDict];
-    }
-    
-    oldCurrent =[newDict objectForKey:tag];
-    if (oldCurrent==nil) {
-        newCurrent = [NSMutableDictionary new];
-    }else{
-        newCurrent = [NSMutableDictionary dictionaryWithDictionary:oldCurrent];
-    }
-    
-    NSString* statusStr = [NSString stringWithFormat:@"%d",status];
-    [newCurrent setObject:statusStr forKey:DOWNLOAD_STATUS_KEY];
-    
-    [newDict setValue:newCurrent forKey:tag];
-    [XHTUIHelper writeNSUserDefaultsWithKey:DOWNLOADED_APP_INFO_KEY withObject:newDict];
+      NSString* statusStr = [NSString stringWithFormat:@"%d",status];
+    [[DownloadHistory shareInstance] updateStatusWithAppid:tag status:statusStr];
 }
 
 

@@ -102,7 +102,7 @@
     
     // 解析结果
     NSString* retjson = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-//    NSLog(@"http response is ...%@",retjson);// 量太大,暂时不log
+    NSLog(@"http response is ...%@",retjson);// 量太大,暂时不log
     if([XHTUIHelper objectWithJsonStr:retjson byKey:COMMON_RET_KEY]==nil){
         NSLog(@"fetch error...");
         return result;

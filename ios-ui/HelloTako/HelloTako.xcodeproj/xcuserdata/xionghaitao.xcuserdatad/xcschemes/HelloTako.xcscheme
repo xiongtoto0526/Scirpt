@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ADE01D641C181077009F425E"
-               BuildableName = "Tako.app"
-               BlueprintName = "HelloTako-qa-nouse"
+               BlueprintIdentifier = "ADD9D6961C8E7D5C0098BE52"
+               BuildableName = "Tako_qa.app"
+               BlueprintName = "HelloTako_qa"
                ReferencedContainer = "container:HelloTako.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ADE01D641C181077009F425E"
-            BuildableName = "Tako.app"
-            BlueprintName = "HelloTako-qa-nouse"
+            BlueprintIdentifier = "ADD9D6961C8E7D5C0098BE52"
+            BuildableName = "Tako_qa.app"
+            BlueprintName = "HelloTako_qa"
             ReferencedContainer = "container:HelloTako.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -55,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ADE01D641C181077009F425E"
-            BuildableName = "Tako.app"
-            BlueprintName = "HelloTako-qa-nouse"
+            BlueprintIdentifier = "ADD9D6961C8E7D5C0098BE52"
+            BuildableName = "Tako_qa.app"
+            BlueprintName = "HelloTako_qa"
             ReferencedContainer = "container:HelloTako.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -74,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ADE01D641C181077009F425E"
-            BuildableName = "Tako.app"
-            BlueprintName = "HelloTako-qa-nouse"
+            BlueprintIdentifier = "ADD9D6961C8E7D5C0098BE52"
+            BuildableName = "Tako_qa.app"
+            BlueprintName = "HelloTako_qa"
             ReferencedContainer = "container:HelloTako.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
