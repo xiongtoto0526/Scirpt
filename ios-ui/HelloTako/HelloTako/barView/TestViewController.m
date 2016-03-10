@@ -193,18 +193,10 @@ TestViewController* shareTest = nil;
         for(int i=0;i<[newdata count];i++){
             TakoApp* app = (TakoApp*)[newdata objectAtIndex:i];
             
-            // 重新加载时，若存在下载管理页，直接从下载管理页的实例中获取最新的appProgress信息
             BOOL isExist = NO;
             if ([DownloadViewController share].listData!=nil) {
-                NSArray* temp = [[DownloadViewController share].listData objectAtIndex:1];
-                for (int i=0; i<[temp count]; i++) {
-                    TakoApp* tempApp = [temp objectAtIndex:i];
-                    if ([app.appid isEqualToString:tempApp.appid]) {
-                        app = tempApp;
-                        isExist = YES;
-                        break;
-                    }
-                }
+                // 重新加载时，若存在下载管理页，直接从下载管理页的实例中获取最新的appProgress信息
+                isExist = [self updateApp:app withDownloadPage:[DownloadViewController share].listData];
             }
             
             // 如果拿到，不再读取userdefault
@@ -447,4 +439,18 @@ TestViewController* shareTest = nil;
     return app;
 }
 
+
+-(BOOL)updateApp:(TakoApp*)app withDownloadPage:(NSArray*)listdata{
+    BOOL isExist = NO;
+    NSArray* temp = [listdata objectAtIndex:1];
+    for (int i=0; i<[temp count]; i++) {
+        TakoApp* tempApp = [temp objectAtIndex:i];
+        if ([app.appid isEqualToString:tempApp.appid]) {
+            app = tempApp;
+            isExist = YES;
+            break;
+        }
+    }
+    return isExist;
+}
 @end
