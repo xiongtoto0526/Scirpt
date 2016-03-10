@@ -150,7 +150,7 @@
             [self beginInstall];
             break;
         case DOWNLOADED_FAILED:
-            [self startDownload];
+            [self downloadAgain];
             break;
         case STARTED:
             [self pauseDownload];
@@ -190,8 +190,8 @@
     }else{
         NSString* testUrl = [NSString stringWithFormat:@"http://%@:%d/%@",[XHTUIHelper localIPAddress],HTTP_SERVER_PORT,testFile];
         NSLog(@"File is not ready ,maybe you should download again...,try the test url in browse:%@",testUrl);
-        [self updateApp:self.currentApp cell:self.currentCell status:INITED];
-        [self saveCurrentAppStatus:INITED tag:self.currentApp.appid];
+        [self updateApp:self.currentApp cell:self.currentCell status:DOWNLOADED_FAILED];
+        [self saveCurrentAppStatus:DOWNLOADED_FAILED tag:self.currentApp.appid];
         [XHTUIHelper alertWithNoChoice:@"安装文件无效，请重新下载~" view:self];
     }
     
@@ -207,6 +207,13 @@
     [cell.downloadSpeed setHidden:isHide];
 }
 
+
+// 重新下载
+-(void)downloadAgain{
+    // url可能失效，需要重新获取
+    self.currentApp.downloadUrl = [TakoServer fetchDownloadUrl:self.currentApp.versionId password:self.currentApp.downloadPassword];
+    [self startDownload];
+}
 
 // 启动下载
 -(void)startDownload{
@@ -436,6 +443,9 @@
             NSLog(@"app is in downloaded failed status...");
             app.progress=@"0%";
             [cell.button setTitle:@"重下载" forState:UIControlStateNormal];
+            cell.textDownload.text = @"";
+            cell.downloadSpeed.text = @"2k/s";
+            [cell.progressControl setProgress:0];
             [self hideProgressUI:YES cell:cell];
             break;
         case INSTALLING:

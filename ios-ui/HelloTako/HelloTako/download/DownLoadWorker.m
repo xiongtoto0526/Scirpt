@@ -77,6 +77,10 @@
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     
+    if (response.expectedContentLength == -1) {
+        NSLog(@" Warning!!!! file length is -1");
+    }
+    
     // 校验下载链接是否为ipa文件。
     if (![[response.suggestedFilename pathExtension] isEqualToString:@"ipa"]) {
         [self.connection cancel];
@@ -145,7 +149,7 @@
     }
     
     if (self.downloadspeed==nil) {
-        self.downloadspeed = @"2k";
+        self.downloadspeed = @"2k";// use 2kb/s to init speed display.
     }
     
     [self.delegate downloadingWithTotal:self.totalLength complete:self.currentLength speed:[NSString stringWithFormat:@"%@/s",self.downloadspeed] tag:self.tag];
@@ -215,6 +219,8 @@
     // 请求头
     NSString *range = [NSString stringWithFormat:@"bytes=%lld-", self.currentLength];
     [request setValue:range forHTTPHeaderField:@"Range"];
+    [request setValue:@"" forHTTPHeaderField:@"Accept-Encoding"]; // set this field to avoid -1 return ,see more http://stackoverflow.com/questions/11136020/response-expectedcontentlength-return-1
+
     
     // todo:connectionWithRequest is deprecated in ios9.0, 需要改为 NSURLSession.
     self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
