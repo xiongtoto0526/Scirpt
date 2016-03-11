@@ -26,7 +26,7 @@
 #import "InstallingModel.h"
 #import "DownloadTableViewController.h"
 
-@interface DownloadTableViewController ()<XHtDownLoadDelegate,XHTInstallProgressDelegate>
+@interface DownloadTableViewController ()<XHtDownLoadDelegate,XHTInstallProgressDelegate,SWTableViewCellDelegate>
 @property (nonatomic,strong) NSTimer* timer;
 @end
 
@@ -530,48 +530,6 @@
 }
 
 
--(NSArray*) swipeTableCell:(MGSwipeTableCell*) cell swipeButtonsForDirection:(MGSwipeDirection)direction
-             swipeSettings:(MGSwipeSettings*) swipeSettings expansionSettings:(MGSwipeExpansionSettings*) expansionSettings
-{
-    
-    swipeSettings.transition = MGSwipeTransitionStatic;
-    expansionSettings.buttonIndex = 0;
-    
-    if (direction == MGSwipeDirectionRightToLeft){
-        
-        expansionSettings.fillOnTrigger = YES;
-        expansionSettings.threshold = 1.1;
-//        swipeSettings.onlySwipeButtons = YES; // 设置为yes,此时原内容不会隐藏。
-        
-        CGFloat padding = 15;
-        
-        MGSwipeButton * skip = [MGSwipeButton buttonWithTitle:@"忽略" backgroundColor:[UIColor colorWithRed:1.0 green:59/255.0 blue:50/255.0 alpha:1.0] padding:padding callback:^BOOL(MGSwipeTableCell *sender) {
-            NSLog(@"will goto skip page...");
-            
-             [cell refreshContentView]; // 刷新cell显示
-            return NO;  //设置为yes，将自动隐藏所有按钮。
-        }];
-        MGSwipeButton * detail = [MGSwipeButton buttonWithTitle:@"详情" backgroundColor:[UIColor colorWithRed:1.0 green:149/255.0 blue:0.05 alpha:1.0] padding:padding callback:^BOOL(MGSwipeTableCell *sender) {
-            NSLog(@"will goto detail page...");
-            
-            [cell refreshContentView]; // 刷新cell显示
-            return NO; //设置为yes，将自动隐藏所有按钮。
-        }];
-        MGSwipeButton * more = [MGSwipeButton buttonWithTitle:@"更多" backgroundColor:[UIColor colorWithRed:200/255.0 green:200/255.0 blue:205/255.0 alpha:1.0] padding:padding callback:^BOOL(MGSwipeTableCell *sender) {
-            NSLog(@"will goto more page...");
-            
-            
-            [cell refreshContentView]; // 刷新cell显示
-            return NO; //设置为yes，将自动隐藏所有按钮。
-        }];
-        
-        return @[more,detail,skip];
-    }
-    
-    return nil;
-    
-}
-
 -(void) swipeTableCell:(MGSwipeTableCell*) cell didChangeSwipeState:(MGSwipeState)state gestureIsActive:(BOOL)gestureIsActive
 {
     NSString * str;
@@ -585,5 +543,109 @@
     NSLog(@"Swipe state: %@ ::: Gesture: %@", str, gestureIsActive ? @"Active" : @"Ended");
 }
 
+
+#pragma mark - SWTableViewDelegate
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state
+{
+    switch (state) {
+        case 0:
+            NSLog(@"utility buttons closed");
+            break;
+        case 1:
+            NSLog(@"left utility buttons open");
+            break;
+        case 2:
+            NSLog(@"right utility buttons open");
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index
+{
+    switch (index) {
+        case 0:
+            NSLog(@"left button 0 was pressed");
+            break;
+        case 1:
+            NSLog(@"left button 1 was pressed");
+            break;
+        case 2:
+            NSLog(@"left button 2 was pressed");
+            break;
+        case 3:
+            NSLog(@"left btton 3 was pressed");
+        default:
+            break;
+    }
+}
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
+{
+    switch (index) {
+        case 0:
+        {
+            NSLog(@"More button pressed");
+            //            UIAlertView *alertTest = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"More more more" delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles: nil];
+            //            [alertTest show];
+            
+            [cell hideUtilityButtonsAnimated:YES];
+            break;
+        }
+        case 1:
+        {
+            NSLog(@"delete button pressed...");
+            //            // Delete button was pressed
+            //            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+            //
+            //            [_testArray[cellIndexPath.section] removeObjectAtIndex:cellIndexPath.row];
+            //            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell
+{
+    // allow just one cell's utility button to be open at once
+    return YES;
+}
+
+- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state
+{
+    switch (state) {
+        case 1:
+            // set to NO to disable all left utility buttons appearing
+            return YES;
+            break;
+        case 2:
+            // set to NO to disable all right utility buttons appearing
+            return YES;
+            break;
+        default:
+            break;
+    }
+    
+    return YES;
+}
+
+
+
+- (NSArray *)rightButtons
+{
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
+                                                title:@"More"];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
+                                                title:@"Delete"];
+    
+    return rightUtilityButtons;
+}
 
 @end

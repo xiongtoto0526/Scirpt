@@ -40,5 +40,8 @@
 // 下载回调
 -(void)receiveDownloadProgressNotification:(NSNotification*)notice;
 -(void)receiveDownloadFinishNotification:(NSNotification*)notice;
+
+- (NSArray *)rightButtons;
+
 @end
 

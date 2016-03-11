@@ -37,6 +37,9 @@
 // notification key
 #define CELL_INDEX_NOTIFICATION_KEY @"cellIndex"
 
+// tag
+#define CELL_FOR_TEST_PAGE_KEY 1
+#define CELL_FOR_DOWNLOAD_MANAGE_PAGE_KEY 2
 
 // download worker
 #define MAX_DOWNLOAD_THREAD_COUNT 2
