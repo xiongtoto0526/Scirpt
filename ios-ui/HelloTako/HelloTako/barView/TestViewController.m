@@ -467,10 +467,10 @@ TestViewController* shareTest = nil;
     return isExist;
 }
 
-
+// 返回NO，可以解决两侧的扩展按钮，整体出现的问题。
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return YES;
+    return NO;
 }
 
 
