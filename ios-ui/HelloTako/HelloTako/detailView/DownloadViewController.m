@@ -15,7 +15,7 @@
 #import "DownloadQueue.h"
 #import "TestViewController.h"
 
-@interface DownloadViewController ()<UITableViewDataSource,UITableViewDelegate,XHtDownLoadDelegate>
+@interface DownloadViewController ()<UITableViewDataSource,UITableViewDelegate,XHtDownLoadDelegate,MGSwipeTableCellDelegate>
 @property  NSMutableArray* sectionTitleArray;
 @end
 
@@ -168,6 +168,9 @@ DownloadViewController* share = nil;
     [super updateApp:app cell:cell status:app.status];
     cell.textDownload.text = app.progress;
     cell.progressControl.progress = app.progressValue;
+    
+    
+    cell.delegate = self;
     
     return cell;
 }

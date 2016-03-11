@@ -28,7 +28,7 @@ static DownloadHistory* share = nil;
     info.download_success_flag = @"0";
     info.download_status = @"0";// 初始化状态
     info.download_appid = appid;
-    info.download_password = @"0";
+    info.download_password = @"-1";
     info.download_app_version = @"0";
     return info;
 }

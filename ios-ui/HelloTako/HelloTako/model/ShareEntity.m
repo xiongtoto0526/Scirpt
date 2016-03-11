@@ -17,9 +17,7 @@ static ShareEntity* share=nil;
 +(ShareEntity*) shareInstance{
     @synchronized(self){
         if(share==nil){
-            share=[[ShareEntity alloc]init];
-//            share.userAccount= [XHTUIHelper readNSUserDefaultsObjectWithkey:USER_ACCOUNT_KEY];
-//            share.userName=[XHTUIHelper readNSUserDefaultsObjectWithkey:USER_NAME_KEY];
+            share=[[super alloc]init];
         }
             return share;
    }

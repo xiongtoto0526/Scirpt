@@ -179,8 +179,8 @@
 
 +(BOOL)isLogined{
     NSString* key = [XHTUIHelper readNSUserDefaultsWithkey:LOGIN_KEY];
-    NSLog(@"login key is:%@",key);
     if (key==nil) {
+        NSLog(@"login key is invalid,please login again...");
         return NO;
     }
     return [key isEqualToString:LOGIN_SUCCESS_KEY];

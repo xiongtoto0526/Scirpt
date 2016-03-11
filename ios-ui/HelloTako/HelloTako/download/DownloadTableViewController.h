@@ -11,7 +11,7 @@
 #import "App.h"
 #import "Constant.h"
 #import "DownloadHistory.h"
-
+#import "MGSwipeTableCell.h"
 
 /* 
  说明：

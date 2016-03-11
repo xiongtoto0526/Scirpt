@@ -126,9 +126,11 @@
 +(NSString*)fetchDownloadUrl:(NSString*)versionId password:(NSString*)password{
     NSString* result=nil;
     NSData* response=nil;
-    if (password==nil) {
+    if (password==nil || [password isEqualToString:@"-1"]) {
+        NSLog(@"无需下载密码。");
         response = [self getWithUrl:[NSString stringWithFormat:@"/app/version/download/url?id=%@",versionId]];
     }else{
+        NSLog(@"需要下载密码。");
         response = [self getWithUrl:[NSString stringWithFormat:@"/app/version/download/url?id=%@&password=%@",versionId,password]];
     }
     

@@ -521,4 +521,69 @@
     [self downloadFinish:isSuccessBool msg:msg tag:tag];
 }
 
+
+
+#pragma mark Swipe Delegate
+
+-(BOOL) swipeTableCell:(MGSwipeTableCell*) cell canSwipe:(MGSwipeDirection) direction fromPoint:(CGPoint) point{
+    return YES;
+}
+
+
+-(NSArray*) swipeTableCell:(MGSwipeTableCell*) cell swipeButtonsForDirection:(MGSwipeDirection)direction
+             swipeSettings:(MGSwipeSettings*) swipeSettings expansionSettings:(MGSwipeExpansionSettings*) expansionSettings
+{
+    
+    swipeSettings.transition = MGSwipeTransitionStatic;
+    expansionSettings.buttonIndex = 0;
+    
+    if (direction == MGSwipeDirectionRightToLeft){
+        
+        expansionSettings.fillOnTrigger = YES;
+        expansionSettings.threshold = 1.1;
+//        swipeSettings.onlySwipeButtons = YES; // 设置为yes,此时原内容不会隐藏。
+        
+        CGFloat padding = 15;
+        
+        MGSwipeButton * skip = [MGSwipeButton buttonWithTitle:@"忽略" backgroundColor:[UIColor colorWithRed:1.0 green:59/255.0 blue:50/255.0 alpha:1.0] padding:padding callback:^BOOL(MGSwipeTableCell *sender) {
+            NSLog(@"will goto skip page...");
+            
+             [cell refreshContentView]; // 刷新cell显示
+            return NO;  //设置为yes，将自动隐藏所有按钮。
+        }];
+        MGSwipeButton * detail = [MGSwipeButton buttonWithTitle:@"详情" backgroundColor:[UIColor colorWithRed:1.0 green:149/255.0 blue:0.05 alpha:1.0] padding:padding callback:^BOOL(MGSwipeTableCell *sender) {
+            NSLog(@"will goto detail page...");
+            
+            [cell refreshContentView]; // 刷新cell显示
+            return NO; //设置为yes，将自动隐藏所有按钮。
+        }];
+        MGSwipeButton * more = [MGSwipeButton buttonWithTitle:@"更多" backgroundColor:[UIColor colorWithRed:200/255.0 green:200/255.0 blue:205/255.0 alpha:1.0] padding:padding callback:^BOOL(MGSwipeTableCell *sender) {
+            NSLog(@"will goto more page...");
+            
+            
+            [cell refreshContentView]; // 刷新cell显示
+            return NO; //设置为yes，将自动隐藏所有按钮。
+        }];
+        
+        return @[more,detail,skip];
+    }
+    
+    return nil;
+    
+}
+
+-(void) swipeTableCell:(MGSwipeTableCell*) cell didChangeSwipeState:(MGSwipeState)state gestureIsActive:(BOOL)gestureIsActive
+{
+    NSString * str;
+    switch (state) {
+        case MGSwipeStateNone: str = @"None"; break;
+        case MGSwipeStateSwippingLeftToRight: str = @"SwippingLeftToRight"; break;
+        case MGSwipeStateSwippingRightToLeft: str = @"SwippingRightToLeft"; break;
+        case MGSwipeStateExpandingLeftToRight: str = @"ExpandingLeftToRight"; break;
+        case MGSwipeStateExpandingRightToLeft: str = @"ExpandingRightToLeft"; break;
+    }
+    NSLog(@"Swipe state: %@ ::: Gesture: %@", str, gestureIsActive ? @"Active" : @"Ended");
+}
+
+
 @end

@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MGSwipeTableCell.h"
+#import "SWTableViewCell.h"
 
 
-
-
-@interface TableViewCell : UITableViewCell
+@interface TableViewCell :  SWTableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *appName;
 @property (weak, nonatomic) IBOutlet UILabel *appVersion;

@@ -10,10 +10,9 @@
 #define ShareEntity_h
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-@interface ShareEntity : NSObject 
+@interface ShareEntity : NSObject
 +(ShareEntity*) shareInstance;
-//@property (copy, nonatomic) NSString* userName;
-//@property (copy, nonatomic) NSString* userAccount;
 @end
+
+
 #endif /* ShareEntity_h */
