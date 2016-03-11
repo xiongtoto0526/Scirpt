@@ -223,7 +223,7 @@ TestViewController* shareTest = nil;
     cell.rightUtilityButtons = [self rightButtons];
     
 #ifdef DEBUG
-    NSLog(@"Cell recursive description:\n\n%@\n\n", [cell performSelector:@selector(recursiveDescription)]);
+//    NSLog(@"Cell recursive description:\n\n%@\n\n", [cell performSelector:@selector(recursiveDescription)]);
 #endif
     
     return cell;

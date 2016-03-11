@@ -186,6 +186,13 @@ viewForFooterInSection:(NSInteger)section {
     return [[UIView alloc] initWithFrame:CGRectZero];
 }
 
+// 返回NO，可以解决两侧的扩展按钮，整体出现的问题。
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO;
+}
+
+
 #pragma mark 点击事件
 
 // 接收到cell的下载按钮点击事件, 调用父类方法处理。
