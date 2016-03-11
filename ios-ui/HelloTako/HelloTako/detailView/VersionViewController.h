@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface VersionViewController : UIViewController
+
 @property (weak, nonatomic) IBOutlet UILabel *version;
--(IBAction) gotoParentView:(id)sender;
+
 @end

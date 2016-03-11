@@ -25,6 +25,8 @@
 
 @implementation LoginViewController
 
+#pragma mark view生命周期
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [XHTUIHelper addBorderonButton:self.loginBt];
@@ -44,16 +46,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
+#pragma mark view的其他私有方法
 
 -(IBAction) signin:(id)sender{
     
@@ -93,8 +86,6 @@
         [XHTUIHelper writeNSUserDefaultsWithKey:USER_NAME_KEY withValue:self.authUserName];
         [XHTUIHelper writeNSUserDefaultsWithKey:LOGIN_KEY withValue:LOGIN_SUCCESS_KEY];
         
-        [ShareEntity shareInstance].userAccount=userAccount;
-        [ShareEntity shareInstance].userName=self.authUserName;
         [self gotoParentView:nil];
     }else{
         NSLog(@"登陆失败。");
@@ -158,6 +149,9 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     //    [self authFinish];
 }
+
+
+#pragma mark textField回调
 
 // 当输入框获得焦点时，改变下拉框演示。
 - (void)textFieldDidBeginEditing:(UITextField *)textField{

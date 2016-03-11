@@ -947,6 +947,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ksg.tako.qa;
 				PRODUCT_NAME = Tako_qa;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -961,6 +962,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ksg.tako.qa;
 				PRODUCT_NAME = Tako_qa;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

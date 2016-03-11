@@ -70,7 +70,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="测试" image="icon_test_unselected.png" selectedImage="7A5388E9-C0DC-4080-98D7-89A5F6FA198C" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="测试" image="icon_test_unselected.png" selectedImage="AAEFD33B-C4ED-47F0-A1C8-CA046328E26D" id="acW-dT-cKf"/>
                     <navigationItem key="navigationItem" title="测试" id="Eoe-hR-mcj"/>
                     <connections>
                         <outlet property="tableview" destination="CgI-oF-94s" id="OlL-11-WiV"/>
@@ -365,7 +365,7 @@
         <scene sceneID="1Le-Ee-tID">
             <objects>
                 <navigationController id="o0W-DL-sHH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="测试" image="icon_test_unselected.png" id="hPA-16-5Vm"/>
+                    <tabBarItem key="tabBarItem" title="测试" image="icon_test_selected.png" id="hPA-16-5Vm"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Og8-RK-SGY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -418,7 +418,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="7A5388E9-C0DC-4080-98D7-89A5F6FA198C" width="26" height="26">
+        <image name="AAEFD33B-C4ED-47F0-A1C8-CA046328E26D" width="26" height="26">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -517,6 +517,7 @@ AAAAAAAAAAAAAAAAABS/A
         <image name="ic_user_head_unlogged.png" width="220" height="220"/>
         <image name="icon_tabbar_mine" width="26" height="26"/>
         <image name="icon_tabbar_mine_selected" width="26" height="26"/>
+        <image name="icon_test_selected.png" width="26" height="26"/>
         <image name="icon_test_unselected.png" width="26" height="26"/>
     </resources>
 </document>

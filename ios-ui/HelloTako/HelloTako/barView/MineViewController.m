@@ -28,20 +28,7 @@ BOOL isShowDownloadManagePage = YES;
 
 @implementation MineViewController
 
--(void)receiveLoginBackNotification{
-    NSLog(@"receive login back notification...");
-    
-    // 刷新页面。
-    [self.loginBtn setHidden:[XHTUIHelper isLogined]];
-    self.userName.text = [ShareEntity shareInstance].userName;
-    self.userAccount.text = [ShareEntity shareInstance].userAccount;
-    if ([XHTUIHelper isLogined]) {
-        self.userImage.image = [UIImage imageNamed:@"ic_user_head_logged"];
-    }else{
-        self.userImage.image = [UIImage imageNamed:@"ic_user_head_unlogged"];
-    }
-    
-}
+#pragma mark view生命周期
 
 -(void)viewWillAppear:(BOOL)animated{
     
@@ -49,12 +36,15 @@ BOOL isShowDownloadManagePage = YES;
     
     // 重载数据
     [self.loginBtn setHidden:[XHTUIHelper isLogined]];
-    self.userName.text = [ShareEntity shareInstance].userName;
-    self.userAccount.text = [ShareEntity shareInstance].userAccount;
+    
     if ([XHTUIHelper isLogined]) {
         self.userImage.image = [UIImage imageNamed:@"ic_user_head_logged"];
+        self.userName.text = [XHTUIHelper readNSUserDefaultsObjectWithkey:USER_ACCOUNT_KEY];
+        self.userAccount.text = [XHTUIHelper readNSUserDefaultsObjectWithkey:USER_NAME_KEY];
     }else{
         self.userImage.image = [UIImage imageNamed:@"ic_user_head_unlogged"];
+        self.userName.text = @"";
+        self.userAccount.text =@"";
     }
 }
 
@@ -63,7 +53,6 @@ BOOL isShowDownloadManagePage = YES;
     [super viewDidLoad];
     
     // 初始化数据源
-    self.userImage.image = [UIImage imageNamed:@"ic_user_head_logged"];
     
     sectionTitleArray = [NSArray arrayWithObjects:@"",nil];
     sectionTextArray =[NSArray arrayWithObjects:[NSArray arrayWithObjects:@"关于Tako",@"退出登录",nil],nil];
@@ -75,8 +64,6 @@ BOOL isShowDownloadManagePage = YES;
     
     [XHTUIHelper addBorderonButton:self.loginBtn];    // button圆角化
     [self.loginBtn setHidden:[XHTUIHelper isLogined]];
-    self.userAccount.text = [ShareEntity shareInstance].userAccount;
-    self.userName.text = [ShareEntity shareInstance].userName;
     
 }
 
@@ -84,6 +71,8 @@ BOOL isShowDownloadManagePage = YES;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark tableview的delegate
 
 //section标题
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -155,9 +144,11 @@ BOOL isShowDownloadManagePage = YES;
             self.userName.text=@"";
             self.userAccount.text=@"";
             self.userImage.image = [UIImage imageNamed:@"ic_user_head_unlogged"];
-            [ShareEntity shareInstance].userName=@"";
-            [ShareEntity shareInstance].userAccount=@"";
+           
+            // 更新用户信息
             [XHTUIHelper writeNSUserDefaultsWithKey:LOGIN_KEY withObject:LOGIN_FAILED_KEY];
+            [XHTUIHelper writeNSUserDefaultsWithKey:USER_ACCOUNT_KEY withObject:@""];
+            [XHTUIHelper writeNSUserDefaultsWithKey:USER_NAME_KEY withObject:@""];
             
             [self gotoLoginView:nil];
         }];
@@ -167,6 +158,8 @@ BOOL isShowDownloadManagePage = YES;
         [self presentViewController:alertController animated:YES completion:nil];
     }
 }
+
+#pragma mark view的其他私有方法
 
 // Method disabled: 暂时不允许返回。必须登录。
 -(IBAction) gotoLoginView:(id)sender{

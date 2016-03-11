@@ -26,6 +26,7 @@ DownloadViewController* share = nil;
     return share;
 }
 
+#pragma mark view生命周期
 
 -(void)viewWillAppear:(BOOL)animated{
     
@@ -108,11 +109,7 @@ DownloadViewController* share = nil;
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
+#pragma mark tableview的delegate
 
 //section标题
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -181,6 +178,7 @@ viewForFooterInSection:(NSInteger)section {
     return [[UIView alloc] initWithFrame:CGRectZero];
 }
 
+#pragma mark 点击事件
 
 // 接收到cell的下载按钮点击事件, 调用父类方法处理。
 -(void)receiveClickDownloadNotification:(NSNotification*)notice{
@@ -237,9 +235,41 @@ viewForFooterInSection:(NSInteger)section {
     
 }
 
+#pragma mark view的其他私有方法
+
+// 更新下载数量
+-(void)refreshTableTitle{
+    NSMutableArray* downloadingList = [self.listData objectAtIndex:1];
+    NSMutableArray* downloadedList = [self.listData objectAtIndex:0];
+    
+    // 设置section title
+    NSString* title1 = [NSString stringWithFormat:@"已下载(%lu)",(unsigned long)[downloadedList count]];
+    NSString* title2 = [NSString stringWithFormat:@"下载中(%lu)",(unsigned long)[downloadingList count]];
+    
+    [self.sectionTitleArray replaceObjectAtIndex:0 withObject:title1];
+    [self.sectionTitleArray replaceObjectAtIndex:1 withObject:title2];
+    [self.sectionTitleArray objectAtIndex:1];
+}
+
+// 更新已下载状态数
+-(void)migrateItemIfneed{
+    NSMutableArray* downloadingList = [self.listData objectAtIndex:1];
+    NSMutableArray* downloadedList = [self.listData objectAtIndex:0];
+    if (downloadingList != nil) {
+        for (int i=0; i<[downloadingList count]; i++) {
+            TakoApp* temp = [downloadingList objectAtIndex:i];
+            if (temp.status == DOWNLOADED) {
+                [downloadedList addObject:temp];
+                [downloadingList removeObject:temp];
+            }
+        }
+    }
+    [self refreshTableTitle];
+    [self.tableview reloadData];
+}
+
 
 #pragma mark  下载回调
-
 
 // 下载结束回调
 -(void)downloadFinish:(BOOL)isSuccess msg:(NSString*)msg tag:(NSString *)tag{
@@ -306,38 +336,6 @@ viewForFooterInSection:(NSInteger)section {
     
     // 更新app
     app.progressValue = prg;
-}
-
-
-// 更新下载数量
--(void)refreshTableTitle{
-    NSMutableArray* downloadingList = [self.listData objectAtIndex:1];
-    NSMutableArray* downloadedList = [self.listData objectAtIndex:0];
-    
-    // 设置section title
-    NSString* title1 = [NSString stringWithFormat:@"已下载(%lu)",(unsigned long)[downloadedList count]];
-    NSString* title2 = [NSString stringWithFormat:@"下载中(%lu)",(unsigned long)[downloadingList count]];
-    
-    [self.sectionTitleArray replaceObjectAtIndex:0 withObject:title1];
-    [self.sectionTitleArray replaceObjectAtIndex:1 withObject:title2];
-    [self.sectionTitleArray objectAtIndex:1];
-}
-
-// 更新已下载状态数
--(void)migrateItemIfneed{
-    NSMutableArray* downloadingList = [self.listData objectAtIndex:1];
-    NSMutableArray* downloadedList = [self.listData objectAtIndex:0];
-    if (downloadingList != nil) {
-        for (int i=0; i<[downloadingList count]; i++) {
-            TakoApp* temp = [downloadingList objectAtIndex:i];
-            if (temp.status == DOWNLOADED) {
-                [downloadedList addObject:temp];
-                [downloadingList removeObject:temp];
-            }
-        }
-    }
-    [self refreshTableTitle];
-    [self.tableview reloadData];
 }
 
 @end

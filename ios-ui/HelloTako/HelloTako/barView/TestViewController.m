@@ -34,6 +34,7 @@ TestViewController* shareTest = nil;
     return shareTest;
 }
 
+#pragma mark view生命周期
 
 -(void)viewWillAppear:(BOOL)animated{
     
@@ -60,8 +61,8 @@ TestViewController* shareTest = nil;
     shareTest = self;
     
     // 设置底部bar图片
-    self.tabBarItem.image = [UIImage imageNamed:@"icon_test_unselected"];
-    self.tabBarItem.selectedImage = [UIImage imageNamed:@"icon_test_selected"];
+    self.navigationController.tabBarItem.image = [UIImage imageNamed:@"icon_test_unselected"];
+    self.navigationController.tabBarItem.selectedImage = [UIImage imageNamed:@"icon_test_selected"];
     
     // 表格的源数据
     self.listData =[NSMutableArray new];
@@ -108,6 +109,7 @@ TestViewController* shareTest = nil;
     
 }
 
+#pragma mark cell上的点击事件
 
 // 接收到cell的下载按钮点击事件
 -(void)receiveClickDownloadNotification:(NSNotification*)notice{
@@ -170,80 +172,7 @@ TestViewController* shareTest = nil;
 
 
 
-#pragma mark 上拉加载更多数据
-- (void)loadMoreData
-{
-    // 从server端拉取数据
-    NSArray* newdata = [self fetchDataFromServer];
-    
-    // 没有新数据提示
-    if ([newdata count]==0) {
-        [self.tableview.mj_footer endRefreshingWithNoMoreData];
-        return;
-    }
-    
-    
-    // 检查历史下载记录
-    NSDictionary* dict =[XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
-    NSLog(@"start dict is:%@",dict);
-    
-    // 存在历史下载记录
-    if (dict!=nil) {
-        
-        for(int i=0;i<[newdata count];i++){
-            TakoApp* app = (TakoApp*)[newdata objectAtIndex:i];
-            
-            BOOL isExist = NO;
-            if ([DownloadViewController share].listData!=nil) {
-                // 重新加载时，若存在下载管理页，直接从下载管理页的实例中获取最新的appProgress信息
-                isExist = [self updateApp:app withDownloadPage:[DownloadViewController share].listData];
-            }
-            
-            // 如果拿到，不再读取userdefault
-            if (isExist) {
-                continue;
-            }
-            
-            for (NSString* key in dict) {
-                NSDictionary* d = (NSDictionary*)[dict objectForKey:key];
-                DownloadHistory* info = [[DownloadHistory shareInstance] initWithDictionary:d];
-                info.download_appid = key;
-                
-                // 根据历史信息，再更新下app的部分字段
-                if([app.appid isEqualToString:info.download_appid])
-                {
-                    app = [self updateApp:app withHis:info];
-                }
-            }
-            
-        }
-    }
-    
-    
-    [self.listData addObjectsFromArray:newdata];
-    [self.tableview reloadData];
-    [self.tableview.mj_footer endRefreshing];
-    
-    // 更新游标
-    self.cursor = [NSString stringWithFormat:@"%lu",(unsigned long)[self.listData count]];
-}
-
-
--(NSMutableArray*)fetchDataFromServer{
-    if (self.cursor==nil) {
-        self.cursor=@"0";
-    }
-    
-    NSMutableArray* data = [TakoServer fetchApp:self.cursor];
-    return data;
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
+#pragma mark tableview的delegate
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [self.listData count];
@@ -293,30 +222,7 @@ TestViewController* shareTest = nil;
 
 
 
-// todo: 当下载管理中的cell下载进度更新时，需要重新加载本页面。
-- (void)reloadDataWhenRefresh
-{
-    [self.tableview reloadData];
-    
-    if (self.refreshControl) {
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyy-MM-dd,hh:mm a"];
-        NSString *title = [NSString stringWithFormat:@"松开刷新，上次更新时间: %@", [formatter stringFromDate:[NSDate date]]];
-        
-        // 黑色字体
-        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor blackColor]
-                                                                    forKey:NSForegroundColorAttributeName];
-        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
-        self.refreshControl.attributedTitle = attributedTitle;
-        
-        // 隐藏刷新栏
-        [self.refreshControl endRefreshing];
-    }
-}
-
-
-#pragma mark  下载回调
+#pragma mark  download的回调
 // 下载结束回调
 -(void)downloadFinish:(BOOL)isSuccess msg:(NSString*)msg tag:(NSString *)tag{
     NSLog(@"收到回调通知：文件下载完成。");
@@ -396,6 +302,99 @@ TestViewController* shareTest = nil;
     }
     
 }
+
+
+#pragma mark view的其他私有方法
+- (void)loadMoreData
+{
+    // 从server端拉取数据
+    NSArray* newdata = [self fetchDataFromServer];
+    
+    // 没有新数据提示
+    if ([newdata count]==0) {
+        [self.tableview.mj_footer endRefreshingWithNoMoreData];
+        return;
+    }
+    
+    // 检查历史下载记录
+    NSDictionary* dict =[XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
+    NSLog(@"start dict is:%@",dict);
+    
+    // 存在历史下载记录
+    if (dict!=nil) {
+        
+        for(int i=0;i<[newdata count];i++){
+            TakoApp* app = (TakoApp*)[newdata objectAtIndex:i];
+            
+            BOOL isExist = NO;
+            if ([DownloadViewController share].listData!=nil) {
+                // 重新加载时，若存在下载管理页，直接从下载管理页的实例中获取最新的appProgress信息
+                isExist = [self updateApp:app withDownloadPage:[DownloadViewController share].listData];
+            }
+            
+            // 如果拿到，不再读取userdefault
+            if (isExist) {
+                continue;
+            }
+            
+            for (NSString* key in dict) {
+                NSDictionary* d = (NSDictionary*)[dict objectForKey:key];
+                DownloadHistory* info = [[DownloadHistory shareInstance] initWithDictionary:d];
+                info.download_appid = key;
+                
+                // 根据历史信息，再更新app的部分字段
+                if([app.appid isEqualToString:info.download_appid])
+                {
+                    app = [self updateApp:app withHis:info];
+                }
+            }
+            
+        }
+    }
+    
+    
+    [self.listData addObjectsFromArray:newdata];
+    [self.tableview reloadData];
+    [self.tableview.mj_footer endRefreshing];
+    
+    // 更新游标
+    self.cursor = [NSString stringWithFormat:@"%lu",(unsigned long)[self.listData count]];
+}
+
+
+-(NSMutableArray*)fetchDataFromServer{
+    if (self.cursor==nil) {
+        self.cursor=@"0";
+    }
+    
+    NSMutableArray* data = [TakoServer fetchApp:self.cursor];
+    return data;
+}
+
+
+
+// todo: 当下载管理中的cell下载进度更新时，需要重新加载本页面。
+- (void)reloadDataWhenRefresh
+{
+    [self.tableview reloadData];
+    
+    if (self.refreshControl) {
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd,hh:mm a"];
+        NSString *title = [NSString stringWithFormat:@"松开刷新，上次更新时间: %@", [formatter stringFromDate:[NSDate date]]];
+        
+        // 黑色字体
+        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor blackColor]
+                                                                    forKey:NSForegroundColorAttributeName];
+        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+        self.refreshControl.attributedTitle = attributedTitle;
+        
+        // 隐藏刷新栏
+        [self.refreshControl endRefreshing];
+    }
+}
+
 
 // 根据历史信息，部分字段需要回填app
 -(TakoApp*) updateApp:(TakoApp*)app withHis:(DownloadHistory*)info{
