@@ -40,7 +40,7 @@ TestViewController* shareTest = nil;
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    
+
     if (![XHTUIHelper isLogined]) {
         [self presentViewController:[LoginViewController new] animated:NO completion:^{
             NSLog(@"should login first, will enter login view");
@@ -52,6 +52,8 @@ TestViewController* shareTest = nil;
     if (isLogined && [self.listData count]==0) {
         [self loadMoreData];
     }
+    
+    [self.tableview reloadData];
     
 }
 

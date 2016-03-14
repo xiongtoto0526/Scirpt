@@ -34,7 +34,7 @@
     
     NSString* result = nil;
     NSString* url = nil;
-    if (password!=nil) {
+    if (password!=nil && ![password isEqualToString:@"-1"]) {
         url = [NSString stringWithFormat:@"/app/version/url?id=%@&local=true&password=%@",versionId,password];
     }else{
         url = [NSString stringWithFormat:@"/app/version/url?id=%@&local=true",versionId];

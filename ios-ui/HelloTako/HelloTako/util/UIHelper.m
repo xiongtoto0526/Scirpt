@@ -224,7 +224,7 @@
     return localIP;
 }
 
-+(BOOL)isDevicefileValid:file md5:(NSString*)md5{
++(int)isDevicefileValid:file md5:(NSString*)md5{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* homePath =[paths firstObject];
     NSString* filepath = [homePath stringByAppendingPathComponent:file];
@@ -236,17 +236,17 @@
         NSLog(@"file is:%@",filepath);
     }else{
         NSLog(@"error!!! device File not exists");
-        return NO;
+        return 1;
     }
     
     // 检查md5
     NSString* currentMd5 = [XHTUIHelper md5withFile:filepath];
     if (![currentMd5 isEqualToString:md5]) {
         NSLog(@"error!!! device filemd5 validate failed,local:%@,remote:%@",currentMd5,md5);
-        return NO;
+        return 2;
     }
     
-    return YES;
+    return 0;
 }
 
 

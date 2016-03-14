@@ -37,7 +37,7 @@ static DownloadHistory* share = nil;
 // 查找
 -(DownloadHistory*)fetchWithAppid:(NSString*)appid{
     NSDictionary* all =[XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
-    NSLog(@"all dict is:%@",all);
+//    NSLog(@"all dict is:%@",all);
     if(all==nil){
         NSLog(@"not record found by key:%@,will return...",DOWNLOADED_APP_INFO_KEY);
         return nil;

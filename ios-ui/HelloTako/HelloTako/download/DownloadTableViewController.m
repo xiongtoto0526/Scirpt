@@ -252,19 +252,26 @@
     NSString* itermServiceUrl = [TakoServer fetchItermUrl:self.currentApp.versionId password:self.currentApp.downloadPassword];
     NSLog(@"will install,iterm url is:%@",itermServiceUrl);
     NSString* testFile = [NSString stringWithFormat:@"%@.ipa",self.currentApp.versionId];
-    BOOL isFileReady = [XHTUIHelper isDevicefileValid:testFile md5:self.currentApp.md5];
+    int retCode = [XHTUIHelper isDevicefileValid:testFile md5:self.currentApp.md5];
     
     NSString* testUrl = [NSString stringWithFormat:@"%@:%d/%@",[XHTUIHelper localIPAddress],HTTP_SERVER_PORT,testFile];
-    if (isFileReady) {
-        NSLog(@"file is ready ,will install...try the test url in browse:%@",testUrl);
+    NSLog(@"file is downloaded ,will install...try the test url in browse:%@",testUrl);
+    
+    if (retCode == 0 ) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:itermServiceUrl]];
         [XHTUIHelper alertWithNoChoice:@"安装已启动,可在桌面查看安装进度~" view:self];
     }else{
-        NSString* testUrl = [NSString stringWithFormat:@"http://%@:%d/%@",[XHTUIHelper localIPAddress],HTTP_SERVER_PORT,testFile];
-        NSLog(@"File is not ready ,maybe you should download again...,try the test url in browse:%@",testUrl);
+        
+        NSString* msg = @"";
+        if (retCode == 1) {
+            msg = @"安装文件无效，请重新下载~";
+        }else if (retCode == 2){
+            msg = @"安装文件校验失败，请重新下载~";
+        }
+        
         [self updateApp:self.currentApp cell:self.currentCell status:DOWNLOADED_FAILED];
         [self saveCurrentAppStatus:DOWNLOADED_FAILED tag:self.currentApp.appid];
-        [XHTUIHelper alertWithNoChoice:@"安装文件无效，请重新下载~" view:self];
+        [XHTUIHelper alertWithNoChoice:msg view:self];
     }
     
 }

@@ -259,7 +259,6 @@
     info.download_total_length = [NSString stringWithFormat:@"%qi",self.totalLength];
     info.download_status = [NSString stringWithFormat:@"%d",status];
     info.download_app_version_name = self.versionname;
-//    info.download_app_version = self.versionid;
     
     // 只有当app从未下载，或app下载完成之后且新的versionid和老的versionid不一样时，才需要更新versionid字段
     if ([info.download_app_version isEqualToString: @"0"] || (![self.versionid isEqualToString:info.download_app_version] && status >= DOWNLOADED)) {

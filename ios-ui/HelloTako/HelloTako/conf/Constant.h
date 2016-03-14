@@ -42,7 +42,7 @@
 #define CELL_FOR_DOWNLOAD_MANAGE_PAGE_KEY 2
 
 // download worker
-#define MAX_DOWNLOAD_THREAD_COUNT 2
+#define MAX_DOWNLOAD_THREAD_COUNT 3
 
 // tako server
 //#define TAKO_SERVER_HOST @"http://qa.tako.im:28870/service"
