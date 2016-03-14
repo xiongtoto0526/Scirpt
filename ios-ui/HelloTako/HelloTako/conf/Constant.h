@@ -42,7 +42,7 @@
 #define CELL_FOR_DOWNLOAD_MANAGE_PAGE_KEY 2
 
 // download worker
-#define MAX_DOWNLOAD_THREAD_COUNT 3
+#define MAX_DOWNLOAD_THREAD_COUNT 2
 
 // tako server
 //#define TAKO_SERVER_HOST @"http://qa.tako.im:28870/service"
@@ -51,7 +51,7 @@
 #define TAKO_SERVER_FETCH_SIZE @"10"
 
 // 调试开关
-#define IS_EXT_BUTTON_DISPLAY 1
+//#define IS_EXT_BUTTON_DISPLAY 1
 
 enum APPSTATUS{
     INITED = 0,

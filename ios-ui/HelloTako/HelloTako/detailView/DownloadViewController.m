@@ -31,7 +31,7 @@ DownloadViewController* share = nil;
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-
+    
     [self migrateItemIfneed];
 }
 
@@ -60,28 +60,45 @@ DownloadViewController* share = nil;
     NSMutableArray* downloadedList = [NSMutableArray new];
     NSMutableArray* downloadingList = [NSMutableArray new];
     self.sectionTitleArray = [NSMutableArray new];
+    
+    // 启动后新增的应用，需要添加到downloadinglist列表
+    for (int i=0; i<[[TestViewController share].listData count]; i++) {
+        TakoApp* tempApp = [[TestViewController share].listData objectAtIndex:i];
+        if (tempApp.status == STARTED || tempApp.status == PAUSED) {
+            [downloadingList addObject:tempApp];
+        }
+    }
+    
     NSDictionary* dict =[XHTUIHelper readNSUserDefaultsObjectWithkey:DOWNLOADED_APP_INFO_KEY];
     if (dict==nil) {
-        self.sectionTitleArray = [[NSMutableArray alloc]initWithObjects:@"已下载(0)",@"下载中(0)",nil];
+        // 设置section title
+        NSString* title1 = [NSString stringWithFormat:@"下载中(%lu)",(unsigned long)[downloadingList count]];
+        
+        self.sectionTitleArray = [[NSMutableArray alloc]initWithObjects:@"已下载(0)",title1,nil];
         [self.listData addObject:downloadedList];
         [self.listData addObject:downloadingList];
         return;
     }
     
+    
+    
+    //    读取历史的下载记录
     for (NSString* key in dict) {
         NSDictionary* d = (NSDictionary*)[dict objectForKey:key];
         DownloadHistory* info = [[DownloadHistory shareInstance] initWithDictionary:d];
         
         TakoApp* app = nil;
         // 首次加载时，必须从外层刷controller里面的listdata中，拿到最新的appprogress信息
-        NSArray* temp = [TestViewController share].listData;
-        for (int i=0; i<[[TestViewController share].listData count]; i++) {
-            TakoApp* tempApp = [temp objectAtIndex:i];
+        NSArray* testApplist = [TestViewController share].listData;
+        for (int i=0; i<[testApplist count]; i++) {
+            TakoApp* tempApp = [testApplist objectAtIndex:i];
             if ([info.download_appid isEqualToString:tempApp.appid]) {
                 app = tempApp;
                 break;
             }
         }
+        
+        // 如果没有，则从服务端拉取
         if (app == nil) {
             app = [TakoServer fetchAppWithid:info.download_appid];
         }
@@ -89,9 +106,14 @@ DownloadViewController* share = nil;
         // 根据状态分别加载两个list
         int status = [info.download_status intValue];
         if (status == DOWNLOADED) {
+            // 加入已下载列表
             [downloadedList addObject:app];
         }else if(status == STARTED || status == PAUSED){
-            [downloadingList addObject:app];
+            // 如果已存在列表中，则不再加入
+            if(![downloadingList containsObject:app]){
+                [downloadingList addObject:app];
+            }
+            
         }
     }
     
@@ -160,9 +182,9 @@ DownloadViewController* share = nil;
     cell.appVersion.text = app.version;
     cell.otherInfo.text = [NSString stringWithFormat:@"%@  %@",app.firstcreated,app.size];
     
-   
+    
     [cell.appImage sd_setImageWithURL:[NSURL URLWithString:app.logourl]
-                         placeholderImage:[UIImage imageNamed:@"ic_defaultapp"]];
+                     placeholderImage:[UIImage imageNamed:@"ic_defaultapp"]];
     
     
     [super updateApp:app cell:cell status:app.status];
@@ -320,9 +342,9 @@ viewForFooterInSection:(NSInteger)section {
 // 下载进度回调
 -(void)downloadingWithTotal:(long long)totalSize complete:(long long)finishSize speed:(NSString *)speed tag:(NSString *)tag{
     
-
+    
     float prg = (float)finishSize/totalSize;
-//    NSLog(@"收到回调通知：当前进度为:%f,tag:%@",prg,tag);
+    //    NSLog(@"收到回调通知：当前进度为:%f,tag:%@",prg,tag);
     NSString* finishStr = [XHTUIHelper formatByteCount:finishSize];
     NSString* totalStr = [XHTUIHelper formatByteCount:totalSize];
     NSString* percent = [NSString stringWithFormat:@"%@/%@",finishStr,totalStr];
