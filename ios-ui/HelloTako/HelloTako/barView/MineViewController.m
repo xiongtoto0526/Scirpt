@@ -24,7 +24,6 @@
 
 @end
 
-BOOL isShowDownloadManagePage = YES;
 
 @implementation MineViewController
 
@@ -53,13 +52,9 @@ BOOL isShowDownloadManagePage = YES;
     [super viewDidLoad];
     
     // 初始化数据源
-    
     sectionTitleArray = [NSArray arrayWithObjects:@"",nil];
-    sectionTextArray =[NSArray arrayWithObjects:[NSArray arrayWithObjects:@"关于Tako",@"退出登录",nil],nil];
+    sectionTextArray =[NSArray arrayWithObjects:[NSArray arrayWithObjects:@"关于Tako",@"下载管理",@"版本更新",@"退出登录",nil],nil];
     
-    if (isShowDownloadManagePage) {
-        sectionTextArray =[NSArray arrayWithObjects:[NSArray arrayWithObjects:@"关于Tako",@"下载管理",@"退出登录",nil],nil];
-    }
     
     
     [XHTUIHelper addBorderonButton:self.loginBtn];    // button圆角化
@@ -122,7 +117,6 @@ BOOL isShowDownloadManagePage = YES;
         
     }
     
-    /** isShowDownloadManagePage **/
     else if(indexPath.section==0 && indexPath.row==1){
         NSLog(@"即将进入“下载管理”页面...");
         UIViewController* downloadView = [[DownloadViewController alloc] init];
@@ -130,6 +124,18 @@ BOOL isShowDownloadManagePage = YES;
     }
     
     else if(indexPath.section==0 && indexPath.row==2){
+        NSLog(@"即将进入“版本更新”页面...");
+        NSString* latestVersion = @"";
+        BOOL isNeedUpdate = YES;
+        if (isNeedUpdate) {
+            NSLog(@"latest version is:%@, will update...",latestVersion);
+            NSURL* url = [NSURL URLWithString:@"http://qa.tako.im:28870/clp8"];
+            [[UIApplication sharedApplication] openURL:url];
+
+        }
+        }
+    
+    else if(indexPath.section==0 && indexPath.row==3){
         NSLog(@"即将进入“退出登录”页面...");
         if (![XHTUIHelper isLogined]) {
             [XHTUIHelper alertWithNoChoice:@"您已登出." view:self];

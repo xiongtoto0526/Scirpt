@@ -361,19 +361,35 @@
     return s;
 }
 
+
++(void)checkNewVersion{
+
+    BOOL isForceUpdate = YES;
+    NSString* newVersion = @"1.9.9";
+    NSString* msg = [NSString stringWithFormat:@"发现新版本:%@",newVersion];
+    if(isForceUpdate){
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:msg preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"暂不更新" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"现在更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSLog(@"开始更新...");
+            
+        }];
+        
+        [alertController addAction:cancelAction];
+        [alertController addAction:okAction];
+        UIViewController* alert = [self getCurrentVC];
+        [alert presentViewController:alertController animated:YES completion:nil];
+        
+    }
+}
+
 +(void)addleftViewforText:(UITextField*)t image:(NSString*)image{
     
     UIImageView *nameImageview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
     nameImageview.image = [UIImage imageNamed:image];
     t.rightView = nameImageview;
     t.rightViewMode=UITextFieldViewModeAlways;
-//    [t paste:self];
-//    int beginAt = 140;
-//    UITextPosition *start = [t positionFromPosition:[t beginningOfDocument]
-//                                                 offset:NSMakeRange(beginAt, 0).location];
-//    UITextPosition *end = [t positionFromPosition:start
-//                                               offset:NSMakeRange(beginAt, 0).length];
-//    [t setSelectedTextRange:[t textRangeFromPosition:start toPosition:end]];
 }
 
 @end

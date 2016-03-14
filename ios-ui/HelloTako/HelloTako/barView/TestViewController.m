@@ -38,9 +38,12 @@ TestViewController* shareTest = nil;
 #pragma mark view生命周期
 
 -(void)viewWillAppear:(BOOL)animated{
-    
+
     [super viewWillAppear:animated];
 
+    
+//    [XHTUIHelper checkNewVersion];
+    
     if (![XHTUIHelper isLogined]) {
         [self presentViewController:[LoginViewController new] animated:NO completion:^{
             NSLog(@"should login first, will enter login view");
@@ -59,7 +62,10 @@ TestViewController* shareTest = nil;
 
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
+//    [XHTUIHelper checkNewVersion];
     
     shareTest = self;
     

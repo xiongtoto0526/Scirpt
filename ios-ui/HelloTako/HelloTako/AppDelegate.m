@@ -23,6 +23,7 @@
 
 
 
+
 - (void)startServer
 {
     // 启动cocoaHttpServer
@@ -52,14 +53,16 @@
     bar.viewControllers = newItems;
     
     [NSThread sleepForTimeInterval:LAUNCH_SCREEN_TIME];//设置闪屏页面时间
+
 //    
 //     [XHTUIHelper clearAllUserDefaultsData]; // 调试用
 
     NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
     NSLog(@"当前版本:%@",currentVersion);
+
     
     
-    // 启动 httpserver
+      // 启动 httpserver
     httpServer = [[HTTPServer alloc] init];
     [httpServer setType:@"_http._tcp."];
     [httpServer setPort:HTTP_SERVER_PORT];
@@ -95,6 +98,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -108,5 +112,7 @@
     [SharedInstallManager stop];
 
 }
+
+
 
 @end

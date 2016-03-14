@@ -9,7 +9,7 @@
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
             <objects>
-                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LaunchScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="01J-lp-oVM" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
@@ -18,17 +18,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default.png" translatesAutoresizingMaskIntoConstraints="NO" id="5Tc-O4-avi">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="OOp-J0-7jc">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="5Tc-O4-avi" secondAttribute="bottom" id="Crg-Mu-kBP"/>
-                            <constraint firstItem="5Tc-O4-avi" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-20" id="Kev-eT-gsp"/>
-                            <constraint firstItem="5Tc-O4-avi" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" id="Nr7-pJ-fvh"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="5Tc-O4-avi" secondAttribute="trailing" constant="-20" id="QDX-Z5-Iga"/>
+                            <constraint firstItem="OOp-J0-7jc" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" id="HSP-Li-2ob"/>
+                            <constraint firstItem="OOp-J0-7jc" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-20" id="WZc-ll-XTm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OOp-J0-7jc" secondAttribute="trailing" constant="-20" id="gUy-iS-7qx"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="OOp-J0-7jc" secondAttribute="bottom" id="knc-z8-ooV"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -38,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Default.png" width="1080" height="1919"/>
+        <image name="LaunchImage.png" width="1080" height="1919"/>
     </resources>
 </document>

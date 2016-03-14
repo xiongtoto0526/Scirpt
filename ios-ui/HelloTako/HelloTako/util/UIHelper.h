@@ -58,4 +58,7 @@
 
 +(void)addleftViewforText:(UITextField*)t image:(NSString*)image;
 
+//+(void)checkNewVersion;
+
+
 @end

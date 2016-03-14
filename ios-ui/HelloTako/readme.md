@@ -3,7 +3,7 @@
 - 1. 需要添加 httpEnable 选项
 - 2. 支持ios系统7.0
 - 3. 对于已安装的应用，无法通过tako再次安装。--需要提示
-
+- 4. 对于tako的重复安装，需要手动允许证书。
 
 ### todo:
 - 特殊logo无法显示。http://tako.kssws.ks-cdn.com/test/logo/99f4a84b-9049-4af7-4da0-ed504e9ece74.png
