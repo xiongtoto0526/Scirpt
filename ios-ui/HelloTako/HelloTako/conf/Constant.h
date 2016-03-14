@@ -50,7 +50,8 @@
 #define TAKO_SERVER_TIME_OUT 30
 #define TAKO_SERVER_FETCH_SIZE @"10"
 
-
+// 调试开关
+#define IS_EXT_BUTTON_DISPLAY 1
 
 enum APPSTATUS{
     INITED = 0,

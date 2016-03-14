@@ -523,28 +523,8 @@
 
 
 
-#pragma mark Swipe Delegate
+#pragma mark 滑动回调 Swipe Delegate
 
--(BOOL) swipeTableCell:(MGSwipeTableCell*) cell canSwipe:(MGSwipeDirection) direction fromPoint:(CGPoint) point{
-    return YES;
-}
-
-
--(void) swipeTableCell:(MGSwipeTableCell*) cell didChangeSwipeState:(MGSwipeState)state gestureIsActive:(BOOL)gestureIsActive
-{
-    NSString * str;
-    switch (state) {
-        case MGSwipeStateNone: str = @"None"; break;
-        case MGSwipeStateSwippingLeftToRight: str = @"SwippingLeftToRight"; break;
-        case MGSwipeStateSwippingRightToLeft: str = @"SwippingRightToLeft"; break;
-        case MGSwipeStateExpandingLeftToRight: str = @"ExpandingLeftToRight"; break;
-        case MGSwipeStateExpandingRightToLeft: str = @"ExpandingRightToLeft"; break;
-    }
-    NSLog(@"Swipe state: %@ ::: Gesture: %@", str, gestureIsActive ? @"Active" : @"Ended");
-}
-
-
-#pragma mark - SWTableViewDelegate
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state
 {
@@ -620,11 +600,19 @@
     switch (state) {
         case 1:
             // set to NO to disable all left utility buttons appearing
+#ifdef IS_EXT_BUTTON_DISPLAY
             return YES;
+#else
+            return NO;
+#endif
             break;
         case 2:
             // set to NO to disable all right utility buttons appearing
+#ifdef IS_EXT_BUTTON_DISPLAY
             return YES;
+#else
+            return NO;
+#endif
             break;
         default:
             break;
@@ -640,10 +628,10 @@
     NSMutableArray *rightUtilityButtons = [NSMutableArray new];
     [rightUtilityButtons sw_addUtilityButtonWithColor:
      [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
-                                                title:@"More"];
+                                                title:@"更多"];
     [rightUtilityButtons sw_addUtilityButtonWithColor:
      [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
-                                                title:@"Delete"];
+                                                title:@"删除"];
     
     return rightUtilityButtons;
 }

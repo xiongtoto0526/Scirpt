@@ -42,9 +42,9 @@ NSMutableDictionary* workerDict = nil;
 -(void) clickDownload{
     
     // 获取到button对应的cell
-    TableViewCell *cell = (TableViewCell*)[[self.button superview] superview];
+//    TableViewCell *cell = (TableViewCell*)[[self.button superview] superview];
     NSMutableDictionary* dict = [NSMutableDictionary new];
-    [dict setObject:cell forKey:CELL_INDEX_NOTIFICATION_KEY];
+    [dict setObject:self forKey:CELL_INDEX_NOTIFICATION_KEY];
     
     // 发送事件
     NSNotification *notification =[NSNotification notificationWithName:CLICK_DOWNLOAD_BUTTON_NOTIFICATION object:nil userInfo:dict];
@@ -56,9 +56,9 @@ NSMutableDictionary* workerDict = nil;
 -(void) stopDownload{
     
     // 获取到button对应的cell
-    TableViewCell *cell = (TableViewCell*)[[self.button superview] superview];
+//    TableViewCell *cell = (TableViewCell*)[[self.button superview] superview];
     NSMutableDictionary* dict = [NSMutableDictionary new];
-    [dict setObject:cell forKey:CELL_INDEX_NOTIFICATION_KEY];
+    [dict setObject:self forKey:CELL_INDEX_NOTIFICATION_KEY];
     
     // 发送事件
     NSNotification *notification =[NSNotification notificationWithName:CLICK_DOWNLOAD_CANCEL_BUTTON_NOTIFICATION object:nil userInfo:dict];

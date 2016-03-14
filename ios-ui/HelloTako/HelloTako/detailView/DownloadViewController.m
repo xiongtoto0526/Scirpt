@@ -228,8 +228,7 @@ viewForFooterInSection:(NSInteger)section {
     TableViewCell* cell = (TableViewCell*)[notice.userInfo objectForKey:CELL_INDEX_NOTIFICATION_KEY];
     
     // 区别1：两次监听中，只有一个是合法的。
-    BOOL isValid = NO;
-    isValid = [[cell superview] superview] == self.tableview;
+    BOOL isValid = cell.tag == CELL_FOR_DOWNLOAD_MANAGE_PAGE_KEY;
     if (!isValid) {
         return;
     }
