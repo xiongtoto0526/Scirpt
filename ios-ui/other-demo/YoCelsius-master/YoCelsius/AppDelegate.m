@@ -49,6 +49,7 @@
     // 隐藏状态栏
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
     
+    NSLog(@"thread is:%@",[NSThread currentThread]);
     return YES;
 }
 

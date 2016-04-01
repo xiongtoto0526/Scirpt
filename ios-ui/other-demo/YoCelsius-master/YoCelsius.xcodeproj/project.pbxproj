@@ -154,6 +154,9 @@
 		10F653061B830D5F004E45FC /* PostNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F652FE1B830D5F004E45FC /* PostNetworking.m */; };
 		10F653071B830D5F004E45FC /* UploadNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F653001B830D5F004E45FC /* UploadNetworking.m */; };
 		10F6530B1B8310D2004E45FC /* NSString+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F6530A1B8310D2004E45FC /* NSString+Color.m */; };
+		AD01525C1CA111C000B28F0A /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD01525B1CA111BF00B28F0A /* Reveal.framework */; settings = {ASSET_TAGS = (); }; };
+		AD01525E1CA111E100B28F0A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD01525D1CA111E100B28F0A /* QuartzCore.framework */; };
+		AD0152601CA111E800B28F0A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD01525F1CA111E800B28F0A /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -479,6 +482,9 @@
 		10F653081B831018004E45FC /* SimpleNSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleNSLog.h; sourceTree = "<group>"; };
 		10F653091B8310D2004E45FC /* NSString+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Color.h"; sourceTree = "<group>"; };
 		10F6530A1B8310D2004E45FC /* NSString+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Color.m"; sourceTree = "<group>"; };
+		AD01525B1CA111BF00B28F0A /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		AD01525D1CA111E100B28F0A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		AD01525F1CA111E800B28F0A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -486,6 +492,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD0152601CA111E800B28F0A /* CoreGraphics.framework in Frameworks */,
+				AD01525E1CA111E100B28F0A /* QuartzCore.framework in Frameworks */,
+				AD01525C1CA111C000B28F0A /* Reveal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -960,6 +969,9 @@
 		10E1F5231A908C3200AED5D6 = {
 			isa = PBXGroup;
 			children = (
+				AD01525F1CA111E800B28F0A /* CoreGraphics.framework */,
+				AD01525D1CA111E100B28F0A /* QuartzCore.framework */,
+				AD01525B1CA111BF00B28F0A /* Reveal.framework */,
 				10E1F52E1A908C3200AED5D6 /* YoCelsius */,
 				10E1F5481A908C3200AED5D6 /* YoCelsiusTests */,
 				10E1F52D1A908C3200AED5D6 /* Products */,
@@ -1445,9 +1457,17 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/YoCelsius.pch";
 				INFOPLIST_FILE = YoCelsius/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lz",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.YouXianMing.YoCelsius;
 				PRODUCT_NAME = YoCelsius;
 				PROVISIONING_PROFILE = "";
@@ -1465,9 +1485,17 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/YoCelsius.pch";
 				INFOPLIST_FILE = YoCelsius/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lz",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.YouXianMing.YoCelsius;
 				PRODUCT_NAME = YoCelsius;
 				PROVISIONING_PROFILE = "";

@@ -72,9 +72,13 @@
 }
 
 - (void)buttonTouchDownAndDragEnter {
+   
     self.showView.bounds = ((CALayer *)self.showView.layer.presentationLayer).bounds;
     self.showView.alpha  = ((CALayer *)self.showView.layer.presentationLayer).opacity;
 
+    NSLog(@"bound is:%@",NSStringFromCGRect(self.showView.bounds));
+
+    
     self.normalLabel.alpha    = ((CALayer *)self.normalLabel.layer.presentationLayer).opacity;
     self.highlightLabel.alpha = ((CALayer *)self.highlightLabel.layer.presentationLayer).opacity;
     
@@ -85,6 +89,8 @@
                      animations:^{
                          self.showView.bounds = CGRectMake(0, 0, SHOW_VIEW_WIDTH,
                                                            (self.animationWidth <= 0? SHOW_VIEW_WIDTH : self.animationWidth));
+//                         self.showView.bounds = CGRectMake(100, 0, 100, 100);// add xht
+        NSLog(@"bound is:%@",NSStringFromCGRect(self.showView.bounds));
         self.showView.alpha  = 1;
         
         self.normalLabel.alpha    = 0.f;
@@ -152,8 +158,8 @@
     self.showView.alpha  = 0.f;
     self.showView.center = CGPointMake(self.frame.size.width / 2.f, self.frame.size.height / 2.f);
     
-    self.showView.transform              = CGAffineTransformMakeRotation(45 * M_PI / 180.0);
-    self.showView.backgroundColor        = [UIColor redColor];
+//    self.showView.transform              = CGAffineTransformMakeRotation(45 * M_PI / 180.0);
+    self.showView.backgroundColor        = [UIColor blueColor];
     self.showView.userInteractionEnabled = NO;
 }
 

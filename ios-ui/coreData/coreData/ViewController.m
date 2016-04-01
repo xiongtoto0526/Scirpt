@@ -32,6 +32,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = [NSEntityDescription entityForName:@"App" inManagedObjectContext:self.myAppDelegate.managedObjectContext];
     
+
     NSError *error = nil;
     NSArray* objects = [self.myAppDelegate.managedObjectContext executeFetchRequest:request error:&error];
     for (id obj in objects) {
