@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "XhtButtonPanel.h"
+#import "SettingViewController.h"
 
 @interface ViewController ()<UIScrollViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -36,7 +37,7 @@
     
     // 设置segmentview
     // Minimum code required to use the segmented control with the default styling.
-    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"下载记录", @"应用详情"]];
+    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"设置", @"应用详情"]];
     segmentedControl.frame = CGRectMake(0, CGRectGetHeight(appProfile.frame), viewWidth, 40);
     segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     
@@ -134,6 +135,7 @@
 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
+    [self presentViewController:[[SettingViewController alloc] init] animated:YES completion:nil];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
