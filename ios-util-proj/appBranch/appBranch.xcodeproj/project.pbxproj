@@ -23,6 +23,8 @@
 		AD9180781CB361E9009F4F24 /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9180711CB361E9009F4F24 /* QRCodeReaderView.m */; settings = {ASSET_TAGS = (); }; };
 		AD9180791CB361E9009F4F24 /* QRCodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9180731CB361E9009F4F24 /* QRCodeReaderViewController.m */; settings = {ASSET_TAGS = (); }; };
 		AD91807A1CB361E9009F4F24 /* QRToggleTorchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9180751CB361E9009F4F24 /* QRToggleTorchButton.m */; settings = {ASSET_TAGS = (); }; };
+		AD91807E1CB36BCF009F4F24 /* testViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD91807C1CB36BCF009F4F24 /* testViewController.m */; settings = {ASSET_TAGS = (); }; };
+		AD91807F1CB36BCF009F4F24 /* testViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD91807D1CB36BCF009F4F24 /* testViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		ADF7491D1CA523D2007A945B /* SGFocusImageFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF7491C1CA523D2007A945B /* SGFocusImageFrame.m */; settings = {ASSET_TAGS = (); }; };
 		ADF7492A1CA5257C007A945B /* banner1.png in Resources */ = {isa = PBXBuildFile; fileRef = ADF7491F1CA5257C007A945B /* banner1.png */; settings = {ASSET_TAGS = (); }; };
 		ADF7492B1CA5257C007A945B /* banner2.png in Resources */ = {isa = PBXBuildFile; fileRef = ADF749201CA5257C007A945B /* banner2.png */; settings = {ASSET_TAGS = (); }; };
@@ -71,6 +73,9 @@
 		AD9180731CB361E9009F4F24 /* QRCodeReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeReaderViewController.m; sourceTree = "<group>"; };
 		AD9180741CB361E9009F4F24 /* QRToggleTorchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRToggleTorchButton.h; sourceTree = "<group>"; };
 		AD9180751CB361E9009F4F24 /* QRToggleTorchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRToggleTorchButton.m; sourceTree = "<group>"; };
+		AD91807B1CB36BCF009F4F24 /* testViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testViewController.h; sourceTree = "<group>"; };
+		AD91807C1CB36BCF009F4F24 /* testViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testViewController.m; sourceTree = "<group>"; };
+		AD91807D1CB36BCF009F4F24 /* testViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = testViewController.xib; sourceTree = "<group>"; };
 		ADF7491B1CA523D2007A945B /* SGFocusImageFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGFocusImageFrame.h; sourceTree = "<group>"; };
 		ADF7491C1CA523D2007A945B /* SGFocusImageFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGFocusImageFrame.m; sourceTree = "<group>"; };
 		ADF7491F1CA5257C007A945B /* banner1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner1.png; sourceTree = "<group>"; };
@@ -137,6 +142,9 @@
 				AD6E101C1CAE20EE000C376D /* SettingViewController.h */,
 				AD6E101D1CAE20EE000C376D /* SettingViewController.m */,
 				AD6E101E1CAE20EE000C376D /* SettingViewController.xib */,
+				AD91807B1CB36BCF009F4F24 /* testViewController.h */,
+				AD91807C1CB36BCF009F4F24 /* testViewController.m */,
+				AD91807D1CB36BCF009F4F24 /* testViewController.xib */,
 				ADF749351CA5360B007A945B /* XhtButtonPanel.h */,
 				ADF749361CA5360B007A945B /* XhtButtonPanel.m */,
 				AD01527A1CA1363200B28F0A /* Main.storyboard */,
@@ -289,6 +297,7 @@
 				ADF7492A1CA5257C007A945B /* banner1.png in Resources */,
 				ADF7493F1CA54590007A945B /* ic_my@2x.png in Resources */,
 				ADF7492D1CA5257C007A945B /* banner4.png in Resources */,
+				AD91807F1CB36BCF009F4F24 /* testViewController.xib in Resources */,
 				ADF7493E1CA54590007A945B /* ic_mail.png in Resources */,
 				AD6E10201CAE20EE000C376D /* SettingViewController.xib in Resources */,
 				ADF7492E1CA5257C007A945B /* Default-568h@2x.png in Resources */,
@@ -314,6 +323,7 @@
 				AD9180771CB361E9009F4F24 /* QRCodeReader.m in Sources */,
 				ADF749381CA5360B007A945B /* XhtButtonPanel.m in Sources */,
 				AD9180781CB361E9009F4F24 /* QRCodeReaderView.m in Sources */,
+				AD91807E1CB36BCF009F4F24 /* testViewController.m in Sources */,
 				AD0152731CA1363200B28F0A /* main.m in Sources */,
 				ADF7491D1CA523D2007A945B /* SGFocusImageFrame.m in Sources */,
 			);

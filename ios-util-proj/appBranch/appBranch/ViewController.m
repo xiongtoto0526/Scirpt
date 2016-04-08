@@ -37,7 +37,7 @@
     
     // 设置segmentview
     // Minimum code required to use the segmented control with the default styling.
-    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"设置", @"应用详情"]];
+    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"设置", @"功能列表"]];
     segmentedControl.frame = CGRectMake(0, CGRectGetHeight(appProfile.frame), viewWidth, 40);
     segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     
