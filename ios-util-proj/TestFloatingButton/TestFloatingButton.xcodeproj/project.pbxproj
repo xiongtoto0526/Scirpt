@@ -16,6 +16,7 @@
 		AD8908A11CB7A00400DCD65E /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8908A01CB7A00400DCD65E /* FirstViewController.m */; settings = {ASSET_TAGS = (); }; };
 		AD8908A41CB7AB8000DCD65E /* TakoSdk.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8908A31CB7AB8000DCD65E /* TakoSdk.m */; settings = {ASSET_TAGS = (); }; };
 		AD8908A71CB7ACE500DCD65E /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8908A61CB7ACE500DCD65E /* UIHelper.m */; settings = {ASSET_TAGS = (); }; };
+		AD8908AB1CB8ADD300DCD65E /* MyAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8908AA1CB8ADD300DCD65E /* MyAnimate.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		AD8908A31CB7AB8000DCD65E /* TakoSdk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakoSdk.m; sourceTree = "<group>"; };
 		AD8908A51CB7ACE500DCD65E /* UIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIHelper.h; sourceTree = "<group>"; };
 		AD8908A61CB7ACE500DCD65E /* UIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIHelper.m; sourceTree = "<group>"; };
+		AD8908A91CB8ADD300DCD65E /* MyAnimate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnimate.h; sourceTree = "<group>"; };
+		AD8908AA1CB8ADD300DCD65E /* MyAnimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnimate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +78,8 @@
 				AD8908A61CB7ACE500DCD65E /* UIHelper.m */,
 				AD8908A21CB7AB8000DCD65E /* TakoSdk.h */,
 				AD8908A31CB7AB8000DCD65E /* TakoSdk.m */,
+				AD8908A91CB8ADD300DCD65E /* MyAnimate.h */,
+				AD8908AA1CB8ADD300DCD65E /* MyAnimate.m */,
 				AD89089F1CB7A00400DCD65E /* FirstViewController.h */,
 				AD8908A01CB7A00400DCD65E /* FirstViewController.m */,
 				AD8908911CB79F3000DCD65E /* Main.storyboard */,
@@ -167,6 +172,7 @@
 				AD8908A41CB7AB8000DCD65E /* TakoSdk.m in Sources */,
 				AD8908901CB79F3000DCD65E /* ViewController.m in Sources */,
 				AD89088D1CB79F3000DCD65E /* AppDelegate.m in Sources */,
+				AD8908AB1CB8ADD300DCD65E /* MyAnimate.m in Sources */,
 				AD89088A1CB79F3000DCD65E /* main.m in Sources */,
 				AD8908A11CB7A00400DCD65E /* FirstViewController.m in Sources */,
 				AD8908A71CB7ACE500DCD65E /* UIHelper.m in Sources */,

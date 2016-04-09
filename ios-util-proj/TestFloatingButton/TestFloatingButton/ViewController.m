@@ -35,7 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blueColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     UIButton* newbt = [UIButton buttonWithType:UIButtonTypeCustom];
     [newbt setTitle:@"悬浮按钮2" forState:UIControlStateNormal];
     newbt.frame = CGRectMake(20, 20, 100, 40);

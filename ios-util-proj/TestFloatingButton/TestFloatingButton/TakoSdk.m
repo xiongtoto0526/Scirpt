@@ -8,9 +8,11 @@
 
 #import "TakoSdk.h"
 #import "UIHelper.h"
+#import "MyAnimate.h"
 
 @interface TakoSdk (){
     Boolean isOpened;
+    Boolean isDragged;
 }
 @property (nonatomic,strong) UIButton* mainButton;
 @property (nonatomic,strong) UIButton* subButton;
@@ -36,6 +38,7 @@ static TakoSdk* shareTakoSdk = nil;
     [self.mainButton setTitle:@"主按钮" forState:UIControlStateNormal];
     self.mainButton.frame = CGRectMake(0, 0, 80, 80);
     self.mainButton.backgroundColor = [UIColor grayColor];
+    [self.mainButton addTarget:self action:@selector(touchDown) forControlEvents:UIControlEventTouchDown];
     [self.mainButton addTarget:self action:@selector(openMenu) forControlEvents:UIControlEventTouchUpInside];
     [UIHelper addBorderonButton:self.mainButton cornerSize:40];
     
@@ -56,48 +59,97 @@ static TakoSdk* shareTakoSdk = nil;
     return self.rootWindow;
 }
 
+-(void)touchDown{
+    isDragged = NO;
+}
+
+static int a =0;
 
 -(void)openMenu{
     NSLog(@"will show menu bar...");
     
-    // 已打开,忽略。
+    // 拖拽期间不再响应点击事件
+    if (isDragged) {
+        return;
+    }
+    
+    // 已打开时，收缩window。
     if (isOpened) {
-        self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, self.rootWindow.frame.origin.y, self.rootWindow.frame.size.width, originalFrame.size.height);
-        self.subButton = nil;
+        CGPoint endPoint = CGPointMake(0, 0);
+            [self.subButton setX:40]; // bug 1: why???
+         [[MyAnimate share] myRotateAndMoveforOpenView:self.subButton endPoint:endPoint delegate:self];
+
+//        self.subButton = nil;
         isOpened = NO;
         return;
     }
+    
     self.subButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.subButton setTitle:@"次按钮" forState:UIControlStateNormal];
-    self.subButton.frame = CGRectMake(0, 90, 80, 80);
-    //    [newbt addTarget:self action:@selector(openNew) forControlEvents:UIControlEventTouchDown];
-    [self.rootWindow addSubview:self.subButton];
-    self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, self.rootWindow.frame.origin.y, self.rootWindow.frame.size.width, self.rootWindow.frame.size.height+90);
-    
+//    self.subButton.frame = CGRectMake(0, 90, 80, 80);
+    self.subButton.frame = self.mainButton.frame;
+    [self.subButton setX:40]; // bug 1: why???
     [self.subButton setBackgroundColor:[UIColor grayColor]];
     [UIHelper addBorderonButton:self.subButton cornerSize:40];
-    isOpened = YES;
+    self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, self.rootWindow.frame.origin.y, self.rootWindow.frame.size.width, self.rootWindow.frame.size.height+190+8);
+
+    [self.rootWindow insertSubview:self.subButton belowSubview:self.mainButton];
+
+//    [self.rootWindow addSubview:self.subButton];
     
+    //    self.subButton.alpha = 1;
+    
+    // 测试所有动画
+//    [[MyAnimate share] myScaleforView:self.subButton];
+//    [[MyAnimate share] myOppositeforView:self.subButton];
+//    [[MyAnimate share] myRotateforView:self.subButton];
+//    [[MyAnimate share] myShakeforView:self.subButton];
+
+    //    [[MyAnimate share] myRotateAndMoveforCloseView:self.subButton];
+    CGPoint endPoint = CGPointMake(0, 190);
+    [[MyAnimate share] myRotateAndMoveforOpenView:self.subButton endPoint:endPoint delegate:self];
+
+    isOpened = YES;
+        a = a+1;
 }
+
+
+// bug: 这里的delegate可能造成多个回调冲突，需要优化。
+-(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
+    if (flag && !isOpened) {
+        self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, self.rootWindow.frame.origin.y, self.rootWindow.frame.size.width, originalFrame.size.height);    }
+}
+
 
 - (void) dragMoving: (UIControl *) c withEvent:ev
 {
+    isDragged = YES;
+
+    // 菜单已打开时，不响应拖拽
+    if(isOpened){
+        return;
+    }
+    
     // todo:需要取到最上层的。
     UIView* appWindow = [[UIApplication sharedApplication].windows objectAtIndex:0];
     CGPoint currentCenter = [[[ev allTouches] anyObject] locationInView:appWindow];
+    
     self.rootWindow.center = currentCenter;
 }
 
 - (void) dragEnded: (UIControl *) c withEvent:ev
 {
+    /* 
+     1. 非拖拽的touchup事件不响应，
+     2. 菜单打开时，不响应
+     */
+    if(!isDragged || isOpened){
+        return;
+    }
     // todo:需要取到最上层的。
     UIView* appWindow = [[UIApplication sharedApplication].windows objectAtIndex:0];
     CGPoint currentCenter = [[[ev allTouches] anyObject] locationInView:appWindow];
-    
-//    // 已经靠边，则不做出来
-//    if (currentCenter.x == mainS.width-self.rootWindow.frame.size.width/2 || self.rootWindow.frame.size.width/2) {
-//        return;
-//    }
+
     
     // 判断当前位置, 只能靠边停. todo：需要增加动画
     if (currentCenter.x<mainS.width/2 ) {
@@ -105,7 +157,16 @@ static TakoSdk* shareTakoSdk = nil;
     }else{
         currentCenter.x = mainS.width-self.rootWindow.frame.size.width/2;
     }
+    
+    //首尾式动画
+    [UIView beginAnimations:nil context:nil];
+
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+//    [UIView setAnimationRepeatCount:3];
+    [UIView setAnimationDuration:0.2];  
     self.rootWindow.center = currentCenter;
+    
+    [UIView commitAnimations];
 }
 
 
