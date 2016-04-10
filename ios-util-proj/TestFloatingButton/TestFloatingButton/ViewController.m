@@ -32,12 +32,12 @@
     [newbt setTitle:@"悬浮按钮2" forState:UIControlStateNormal];
     newbt.frame = CGRectMake(20, 20, 100, 40);
     [newbt addTarget:self action:@selector(sayHello) forControlEvents:UIControlEventTouchUpInside];
-
+    
     newbt.backgroundColor = [UIColor redColor];
     [self.view addSubview:newbt];
     
     [self performSelector:@selector(createButton) withObject:nil afterDelay:0.1];
-
+    
     
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -48,14 +48,27 @@
 }
 
 -(void)openNew{
-   [self presentViewController:[FirstViewController new] animated:YES completion:nil];
-
+    [self presentViewController:[FirstViewController new] animated:YES completion:nil];
+    
 }
 
 - (void)createButton
 {
-    [[TakoSdk share] takoSdkInit];
+    NSMutableArray* bts = [NSMutableArray new];
+    for (int i=0; i<3; i++) {
+        UIButton* sub = [[UIButton alloc] init];
+        [sub setTitle:[NSString stringWithFormat:@"子按钮%d",i] forState:UIControlStateNormal];
+        [sub setBackgroundImage:[UIImage imageNamed:@"btbg.png"] forState:UIControlStateNormal];
+        [sub addTarget:self action:@selector(doClick:) forControlEvents:UIControlEventTouchDown];
+        [bts addObject:sub];
+    }
+    
+    [[TakoSdk share] takoSdkInitWithSubButtons:bts];
+
 }
 
+-(void)doClick:(UIButton*) bt{
+    NSLog(@"hello ,toto,tag:%ld",(long)bt.tag);
+}
 
 @end

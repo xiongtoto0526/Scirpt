@@ -33,6 +33,17 @@ static TakoSdk* shareTakoSdk = nil;
     return shareTakoSdk;
 }
 
+-(void) takoSdkInitWithSubButtons:(NSArray*)buttons{
+    [self takoSdkInit];
+    self.subButtons = [NSMutableArray new];
+    for (int i =0 ;i<[buttons count];i++) {
+        UIButton* sub = [buttons objectAtIndex:i];
+        sub = [self buildSubButton:sub index:i];
+        [self.subButtons addObject:sub];
+        [self.rootWindow insertSubview:sub belowSubview:self.mainButton];
+    }
+}
+
 -(UIWindow*) takoSdkInit{
     
     // 添加主按钮
@@ -96,8 +107,8 @@ static TakoSdk* shareTakoSdk = nil;
         
         self.subButtons = [NSMutableArray new];
         for (int i=0; i<button_count; i++) {
-            UIButton* sub = [self buildSubButtonWithIndex:i];
-            [self.rootWindow insertSubview:sub belowSubview:self.mainButton];
+            UIButton* sub = [self buildSubButton:[[UIButton alloc] init] index:i];
+//            UIButton* sub = [self buildSubButtonWithIndex:i];
             [self.subButtons addObject:sub];
         }
     }
@@ -187,22 +198,14 @@ static TakoSdk* shareTakoSdk = nil;
     self.rootWindow = nil;
 }
 
--(UIButton*)buildSubButtonWithIndex:(int) i{
-    NSString* title ;
-    if (i == -1) {
-        title = @"主按钮";
-    }else{
-        title = [NSString stringWithFormat:@"次按钮%d",i];
-    }
-    UIButton* sub = [[UIButton alloc]initWithFrame:self.mainButton.frame];
-    [sub setTitle:title forState:UIControlStateNormal];
-    [sub setBackgroundImage:[UIImage imageNamed:@"btbg.png"] forState:UIControlStateNormal];
-    [sub.titleLabel setFont:[UIFont systemFontOfSize:11]];
-    sub.alpha = button_alpha;
-    sub.tag =i;
-    [UIHelper addBorderonButton:sub cornerSize:button_width/2];
 
-    return sub;
+
+-(UIButton*)buildSubButton:(UIButton*)button index:(int) i{
+    button.frame = self.mainButton.frame;
+    [button.titleLabel setFont:[UIFont systemFontOfSize:11]];
+    button.tag =i;
+    [UIHelper addBorderonButton:button cornerSize:button_width/2];
+    return button;
 }
 
 

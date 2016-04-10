@@ -11,8 +11,10 @@
 @interface TakoSdk : NSObject
 
 +(TakoSdk*)share;
+-(void) takoSdkInitWithSubButtons:(NSArray*)buttons;
 -(UIWindow*) takoSdkInit;
 -(void) destoryTakoSdk;
+-(UIButton*)buildSubButton:(UIButton*)button index:(int) i;
 
 @property (nonatomic,strong) NSMutableArray* subButtons;
 
