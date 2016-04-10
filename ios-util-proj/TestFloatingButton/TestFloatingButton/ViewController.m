@@ -69,6 +69,7 @@
 
 -(void)doClick:(UIButton*) bt{
     NSLog(@"hello ,toto,tag:%ld",(long)bt.tag);
+    [self presentViewController:[FirstViewController new] animated:YES completion:nil];
 }
 
 @end

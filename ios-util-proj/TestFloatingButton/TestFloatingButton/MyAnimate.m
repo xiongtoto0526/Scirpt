@@ -116,7 +116,7 @@ static MyAnimate* shareAnimate = nil;
     
     float end_y_center = endPoint.y+ext_y;
     CGPoint original = view.center;
-    NSLog(@"original x is:%f",original.x);
+//    NSLog(@"original x is:%f",original.x);
     CGPoint endPoint2 = CGPointMake(original.x, end_y_center);
     CGPoint farPoint = CGPointMake(original.x, end_y_center+buffer);// 5 为摇晃时的幅度
     CGPoint nearPoint = CGPointMake(original.x, end_y_center-buffer);// 5 为摇晃时的幅度

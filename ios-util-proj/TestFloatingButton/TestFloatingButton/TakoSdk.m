@@ -9,6 +9,9 @@
 #import "TakoSdk.h"
 #import "UIHelper.h"
 #import "MyAnimate.h"
+#import "XibViewController.h"
+
+#define test_xib_show 1
 
 @interface TakoSdk (){
     Boolean isOpened;
@@ -84,11 +87,34 @@ static TakoSdk* shareTakoSdk = nil;
 
 -(void)openMenu{
     
+    
+#ifdef test_xib_show
+    
+    // 注意：此处直接加载subview时，不会加载到任何xibview中的任何event
+//    UIView* xibView = [XibViewController new].view;
+//    xibView.frame = [UIScreen mainScreen].bounds;
+//    [[[UIApplication sharedApplication].windows objectAtIndex:0] addSubview:xibView];
+    
+    UIWindow* window = [[UIApplication sharedApplication].windows objectAtIndex:0];
+    UIView *frontView = [[window subviews] objectAtIndex:0];
+
+    id nextResponder = [frontView nextResponder];
+    
+    UIViewController*  currentVC;
+    if ([nextResponder isKindOfClass:[UIViewController class]])
+      currentVC = nextResponder;
+    else
+    currentVC = window.rootViewController;
+    
+    [currentVC presentViewController:[XibViewController new] animated:NO completion:nil];
+#endif
+    
     // 拖拽期间不再响应点击事件
     if (isDragged) {
     NSLog(@"dragging...");
         return;
     }
+    
     
     // 已打开时，收缩window。
     if (isOpened) {
@@ -149,6 +175,7 @@ static TakoSdk* shareTakoSdk = nil;
 
 - (void) dragMoving: (UIControl *) c withEvent:ev
 {
+   
     isDragged = YES;
     
     // 菜单已打开时，不响应拖拽

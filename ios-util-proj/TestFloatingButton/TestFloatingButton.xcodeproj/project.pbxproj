@@ -19,6 +19,8 @@
 		AD8908AB1CB8ADD300DCD65E /* MyAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8908AA1CB8ADD300DCD65E /* MyAnimate.m */; settings = {ASSET_TAGS = (); }; };
 		AD8908B01CBA1B0A00DCD65E /* btbg.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8908AF1CBA1B0A00DCD65E /* btbg.png */; settings = {ASSET_TAGS = (); }; };
 		AD8908B41CBA26EE00DCD65E /* btmbg.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8908B31CBA26EE00DCD65E /* btmbg.png */; settings = {ASSET_TAGS = (); }; };
+		AD8908B81CBA423700DCD65E /* XibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8908B61CBA423700DCD65E /* XibViewController.m */; settings = {ASSET_TAGS = (); }; };
+		AD8908B91CBA423700DCD65E /* XibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD8908B71CBA423700DCD65E /* XibViewController.xib */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,9 @@
 		AD8908AA1CB8ADD300DCD65E /* MyAnimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnimate.m; sourceTree = "<group>"; };
 		AD8908AF1CBA1B0A00DCD65E /* btbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btbg.png; sourceTree = "<group>"; };
 		AD8908B31CBA26EE00DCD65E /* btmbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btmbg.png; sourceTree = "<group>"; };
+		AD8908B51CBA423700DCD65E /* XibViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XibViewController.h; sourceTree = "<group>"; };
+		AD8908B61CBA423700DCD65E /* XibViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XibViewController.m; sourceTree = "<group>"; };
+		AD8908B71CBA423700DCD65E /* XibViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XibViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +91,9 @@
 				AD8908AA1CB8ADD300DCD65E /* MyAnimate.m */,
 				AD89089F1CB7A00400DCD65E /* FirstViewController.h */,
 				AD8908A01CB7A00400DCD65E /* FirstViewController.m */,
+				AD8908B51CBA423700DCD65E /* XibViewController.h */,
+				AD8908B61CBA423700DCD65E /* XibViewController.m */,
+				AD8908B71CBA423700DCD65E /* XibViewController.xib */,
 				AD8908AF1CBA1B0A00DCD65E /* btbg.png */,
 				AD8908B31CBA26EE00DCD65E /* btmbg.png */,
 				AD8908911CB79F3000DCD65E /* Main.storyboard */,
@@ -166,6 +174,7 @@
 				AD8908B01CBA1B0A00DCD65E /* btbg.png in Resources */,
 				AD8908B41CBA26EE00DCD65E /* btmbg.png in Resources */,
 				AD8908951CB79F3000DCD65E /* Assets.xcassets in Resources */,
+				AD8908B91CBA423700DCD65E /* XibViewController.xib in Resources */,
 				AD8908931CB79F3000DCD65E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,6 +186,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD8908B81CBA423700DCD65E /* XibViewController.m in Sources */,
 				AD8908A41CB7AB8000DCD65E /* TakoSdk.m in Sources */,
 				AD8908901CB79F3000DCD65E /* ViewController.m in Sources */,
 				AD89088D1CB79F3000DCD65E /* AppDelegate.m in Sources */,
@@ -332,6 +342,7 @@
 				AD89089E1CB79F3000DCD65E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
