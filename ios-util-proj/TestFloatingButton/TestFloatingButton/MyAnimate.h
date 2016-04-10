@@ -31,6 +31,8 @@
 // 抖动
 -(void)myShakeforView:(UIView*)view;
 
+
+//以下改造自：https://github.com/Tangdixi/DCPathButton
 // 收起，旋转加移动
 - (void)myRotateAndMoveforCloseView:(UIView *)view endPoint:(CGPoint)endPoint delegate:(id)delegate;
 

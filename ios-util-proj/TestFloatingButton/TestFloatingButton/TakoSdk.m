@@ -15,20 +15,20 @@
     Boolean isDragged;
 }
 @property (nonatomic,strong) UIButton* mainButton;
-@property (nonatomic,strong) UIButton* subButton;
-@property (nonatomic,strong) NSMutableArray* subButtons;
 @property (nonatomic,strong) UIWindow* rootWindow;
 @end
 
 static TakoSdk* shareTakoSdk = nil;
-#define button_width 40
-#define originalFrame  CGRectMake(100, 180, button_width+40, button_width)
+#define button_count 3
+#define button_alpha 1
+#define button_width 50
+#define originalFrame  CGRectMake(100, 180, button_width, button_width)
 
 @implementation TakoSdk
 
 +(TakoSdk*)share{
     if (shareTakoSdk ==nil) {
-       shareTakoSdk = [[TakoSdk alloc] init];
+        shareTakoSdk = [[TakoSdk alloc] init];
     }
     return shareTakoSdk;
 }
@@ -38,9 +38,12 @@ static TakoSdk* shareTakoSdk = nil;
     // 添加主按钮
     self.mainButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.mainButton setTitle:@"主按钮" forState:UIControlStateNormal];
-    [self.mainButton sizeToFit];
-    self.mainButton.frame = CGRectMake(0, 20, button_width, button_width);
-    self.mainButton.backgroundColor = [UIColor grayColor];
+    [self.mainButton setBackgroundImage:[UIImage imageNamed:@"btmbg.png"] forState:UIControlStateNormal];
+    [self.mainButton.titleLabel setFont:[UIFont systemFontOfSize:11]];
+    self.mainButton.frame = CGRectMake(0, 0, button_width, button_width);
+    self.mainButton.backgroundColor = [UIColor clearColor];
+    
+    // 注册响应事件
     [self.mainButton addTarget:self action:@selector(touchDown) forControlEvents:UIControlEventTouchDown];
     [self.mainButton addTarget:self action:@selector(openMenu) forControlEvents:UIControlEventTouchUpInside];
     [UIHelper addBorderonButton:self.mainButton cornerSize:button_width/2];
@@ -49,6 +52,7 @@ static TakoSdk* shareTakoSdk = nil;
     [self.mainButton addTarget:self action:@selector(dragMoving:withEvent: )forControlEvents: UIControlEventTouchDragInside];
     [self.mainButton addTarget:self action:@selector(dragEnded:withEvent: )forControlEvents: UIControlEventTouchUpInside |
      UIControlEventTouchUpOutside];
+    self.mainButton.alpha = button_alpha;
     
     // 添加window
     self.rootWindow = [[UIWindow alloc]initWithFrame:originalFrame];
@@ -77,71 +81,60 @@ static TakoSdk* shareTakoSdk = nil;
     
     // 已打开时，收缩window。
     if (isOpened) {
+        [self.mainButton setTitle:@"主按钮" forState:UIControlStateNormal];
+        
         for(int i =0 ;i<[self.subButtons count];i++){
             CGPoint endPoint = CGPointMake(0, self.mainButton.frame.origin.y);
             UIButton* sub = [self.subButtons objectAtIndex:i];
-         [[MyAnimate share] myRotateAndMoveforCloseView:sub endPoint:endPoint delegate:self];
+            [[MyAnimate share] myRotateAndMoveforCloseView:sub endPoint:endPoint delegate:self];
         }
         isOpened = NO;
         return;
     }
     
     if ([self.subButtons count]==0) {
-       
-    self.subButtons = [NSMutableArray new];
-    
-    for (int i=0; i<3; i++) {
-        UIButton* sub = [[UIButton alloc]initWithFrame:self.mainButton.frame];
-        [sub setTitle:[NSString stringWithFormat:@"次按钮%d",i] forState:UIControlStateNormal];
-        sub.tag =i;
-//        NSLog(@"tag is:%ld",(long)sub.tag);
-//        [sub setX:self.mainButton.frame.size.width/2];
-//        NSLog(@"main x is:%f",self.mainButton.frame.origin.x);
-        [sub setBackgroundColor:[UIColor grayColor]];
-        [UIHelper addBorderonButton:sub cornerSize:button_width/2];
-        NSLog(@"fram is:%f",sub.frame.origin.y);
-        [self.rootWindow insertSubview:sub belowSubview:self.mainButton];
-        [self.subButtons addObject:sub];
-    }
+        
+        self.subButtons = [NSMutableArray new];
+        for (int i=0; i<button_count; i++) {
+            UIButton* sub = [self buildSubButtonWithIndex:i];
+            [self.rootWindow insertSubview:sub belowSubview:self.mainButton];
+            [self.subButtons addObject:sub];
+        }
     }
     
-
-    self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, self.rootWindow.frame.origin.y, self.rootWindow.frame.size.width, self.rootWindow.frame.size.height+290+8);
     
-
-    
-    //    self.subButton.alpha = 1;
+    self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, self.rootWindow.frame.origin.y, self.rootWindow.frame.size.width, self.rootWindow.frame.size.height+button_width*button_count);
     
     // 测试所有动画
-//    [[MyAnimate share] myScaleforView:self.subButton];
-//    [[MyAnimate share] myOppositeforView:self.subButton];
-//    [[MyAnimate share] myRotateforView:self.subButton];
-//    [[MyAnimate share] myShakeforView:self.subButton];
-
+    //    [[MyAnimate share] myScaleforView:self.subButton];
+    //    [[MyAnimate share] myOppositeforView:self.subButton];
+    //    [[MyAnimate share] myRotateforView:self.subButton];
+    //    [[MyAnimate share] myShakeforView:self.subButton];
+    
     for (int i =0;i<[self.subButtons count];i++) {
-//        NSLog(@"tag is:%ld",(long)sub.tag);
+        //        NSLog(@"tag is:%ld",(long)sub.tag);
         UIButton* sub = [self.subButtons objectAtIndex:i];
-        float end_y =  self.mainButton.frame.origin.y + sub.frame.size.height*(i+1);
+        float end_y =  self.mainButton.frame.origin.y + sub.frame.size.height*(i+1)+1;
         CGPoint endPoint = CGPointMake(0, end_y);
         [[MyAnimate share] myRotateAndMoveforOpenView:sub endPoint:endPoint delegate:self];
     }
-
-
+    [self.mainButton setTitle:@"收起" forState:UIControlStateNormal];
     isOpened = YES;
 }
 
 
-// bug: 这里的delegate可能造成多个回调冲突，需要优化。
+// 这里的delegate可能造成多个回调，此处通过if判断过滤
 -(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
-//    if (flag && !isOpened) {
-//        self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, self.rootWindow.frame.origin.y, self.rootWindow.frame.size.width, originalFrame.size.height);    }
+    if (flag && !isOpened && self.rootWindow.frame.size.height != originalFrame.size.height) {
+        self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, self.rootWindow.frame.origin.y, self.rootWindow.frame.size.width, originalFrame.size.height);
+    }
 }
 
 
 - (void) dragMoving: (UIControl *) c withEvent:ev
 {
     isDragged = YES;
-
+    
     // 菜单已打开时，不响应拖拽
     if(isOpened){
         return;
@@ -156,7 +149,7 @@ static TakoSdk* shareTakoSdk = nil;
 
 - (void) dragEnded: (UIControl *) c withEvent:ev
 {
-    /* 
+    /*
      1. 非拖拽的touchup事件不响应，
      2. 菜单打开时，不响应
      */
@@ -166,7 +159,7 @@ static TakoSdk* shareTakoSdk = nil;
     // todo:需要取到最上层的。
     UIView* appWindow = [[UIApplication sharedApplication].windows objectAtIndex:0];
     CGPoint currentCenter = [[[ev allTouches] anyObject] locationInView:appWindow];
-
+    
     
     // 判断当前位置, 只能靠边停. todo：需要增加动画
     if (currentCenter.x<mainS.width/2 ) {
@@ -177,10 +170,10 @@ static TakoSdk* shareTakoSdk = nil;
     
     //首尾式动画
     [UIView beginAnimations:nil context:nil];
-
+    
     [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-//    [UIView setAnimationRepeatCount:3];
-    [UIView setAnimationDuration:0.2];  
+    //    [UIView setAnimationRepeatCount:3];
+    [UIView setAnimationDuration:0.2];
     self.rootWindow.center = currentCenter;
     
     [UIView commitAnimations];
@@ -194,6 +187,23 @@ static TakoSdk* shareTakoSdk = nil;
     self.rootWindow = nil;
 }
 
+-(UIButton*)buildSubButtonWithIndex:(int) i{
+    NSString* title ;
+    if (i == -1) {
+        title = @"主按钮";
+    }else{
+        title = [NSString stringWithFormat:@"次按钮%d",i];
+    }
+    UIButton* sub = [[UIButton alloc]initWithFrame:self.mainButton.frame];
+    [sub setTitle:title forState:UIControlStateNormal];
+    [sub setBackgroundImage:[UIImage imageNamed:@"btbg.png"] forState:UIControlStateNormal];
+    [sub.titleLabel setFont:[UIFont systemFontOfSize:11]];
+    sub.alpha = button_alpha;
+    sub.tag =i;
+    [UIHelper addBorderonButton:sub cornerSize:button_width/2];
+
+    return sub;
+}
 
 
 @end

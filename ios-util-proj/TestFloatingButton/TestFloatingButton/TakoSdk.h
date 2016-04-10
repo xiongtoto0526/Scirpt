@@ -14,4 +14,6 @@
 -(UIWindow*) takoSdkInit;
 -(void) destoryTakoSdk;
 
+@property (nonatomic,strong) NSMutableArray* subButtons;
+
 @end

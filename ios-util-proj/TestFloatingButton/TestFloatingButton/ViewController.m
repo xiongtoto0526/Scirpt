@@ -22,14 +22,6 @@
 
 @implementation ViewController
 
-// notes: this mehod maybe do nothing if your xib is auto-layout enabled
--(void) addBorderonButton:(UIButton*) btn cornerSize:(int) size{
-    UIColor* systemBlue = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
-    btn.layer.borderColor = systemBlue.CGColor;
-    btn.layer.borderWidth = 1.0;
-    btn.layer.cornerRadius = size;
-}
-
 
 
 
@@ -44,7 +36,7 @@
     newbt.backgroundColor = [UIColor redColor];
     [self.view addSubview:newbt];
     
-    [self performSelector:@selector(createButton) withObject:nil afterDelay:1];
+    [self performSelector:@selector(createButton) withObject:nil afterDelay:0.1];
 
     
     // Do any additional setup after loading the view, typically from a nib.

@@ -13,7 +13,7 @@
 +(void) addBorderonButton:(UIButton*) btn cornerSize:(int) size{
     UIColor* systemBlue = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
     btn.layer.borderColor = systemBlue.CGColor;
-    btn.layer.borderWidth = 1.0;
+//    btn.layer.borderWidth = 1.0;
     btn.layer.cornerRadius = size;
 }
 
