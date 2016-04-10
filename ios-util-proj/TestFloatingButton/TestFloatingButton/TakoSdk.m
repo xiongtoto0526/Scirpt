@@ -83,26 +83,30 @@ static TakoSdk* shareTakoSdk = nil;
 
 
 -(void)openMenu{
-    NSLog(@"will show menu bar...");
     
     // 拖拽期间不再响应点击事件
     if (isDragged) {
+    NSLog(@"dragging...");
         return;
     }
     
     // 已打开时，收缩window。
     if (isOpened) {
+    NSLog(@"will close menu...");
         [self.mainButton setTitle:@"主按钮" forState:UIControlStateNormal];
+        [[MyAnimate share] myRotateAndMoveforCloseView:self.mainButton endPoint:CGPointMake(0, 0) buffer:0 delegate:self];
+        
         
         for(int i =0 ;i<[self.subButtons count];i++){
             CGPoint endPoint = CGPointMake(0, self.mainButton.frame.origin.y);
             UIButton* sub = [self.subButtons objectAtIndex:i];
-            [[MyAnimate share] myRotateAndMoveforCloseView:sub endPoint:endPoint delegate:self];
+            [[MyAnimate share] myRotateAndMoveforCloseView:sub endPoint:endPoint buffer:5 delegate:self];
         }
         isOpened = NO;
         return;
     }
     
+    NSLog(@"will open menu ...");
     if ([self.subButtons count]==0) {
         
         self.subButtons = [NSMutableArray new];
@@ -122,12 +126,13 @@ static TakoSdk* shareTakoSdk = nil;
     //    [[MyAnimate share] myRotateforView:self.subButton];
     //    [[MyAnimate share] myShakeforView:self.subButton];
     
+    [[MyAnimate share] myRotateAndMoveforOpenView:self.mainButton endPoint:CGPointMake(0, 0) buffer:0 delegate:self];
     for (int i =0;i<[self.subButtons count];i++) {
         //        NSLog(@"tag is:%ld",(long)sub.tag);
         UIButton* sub = [self.subButtons objectAtIndex:i];
         float end_y =  self.mainButton.frame.origin.y + sub.frame.size.height*(i+1)+1;
         CGPoint endPoint = CGPointMake(0, end_y);
-        [[MyAnimate share] myRotateAndMoveforOpenView:sub endPoint:endPoint delegate:self];
+        [[MyAnimate share] myRotateAndMoveforOpenView:sub endPoint:endPoint buffer:5 delegate:self];
     }
     [self.mainButton setTitle:@"收起" forState:UIControlStateNormal];
     isOpened = YES;

@@ -108,7 +108,7 @@ static MyAnimate* shareAnimate = nil;
 }
 
 // 展开
-- (void)myRotateAndMoveforOpenView:(UIView *)view endPoint:(CGPoint)endPoint delegate:(id)delegate{
+- (void)myRotateAndMoveforOpenView:(UIView *)view endPoint:(CGPoint)endPoint buffer:(int)buffer delegate:(id)delegate{
 
     // 需要加上圆的半径
     float ext_x = view.frame.size.width/2;
@@ -118,8 +118,8 @@ static MyAnimate* shareAnimate = nil;
     CGPoint original = view.center;
     NSLog(@"original x is:%f",original.x);
     CGPoint endPoint2 = CGPointMake(original.x, end_y_center);
-    CGPoint farPoint = CGPointMake(original.x, end_y_center+5);// 5 为摇晃时的幅度
-    CGPoint nearPoint = CGPointMake(original.x, end_y_center-5);// 5 为摇晃时的幅度
+    CGPoint farPoint = CGPointMake(original.x, end_y_center+buffer);// 5 为摇晃时的幅度
+    CGPoint nearPoint = CGPointMake(original.x, end_y_center-buffer);// 5 为摇晃时的幅度
     
     
     // bug1: 需要在point中x，y 方向分别增加 半径个像素。
@@ -136,7 +136,7 @@ static MyAnimate* shareAnimate = nil;
 
 
 // 收起
-- (void)myRotateAndMoveforCloseView:(UIView *)view endPoint:(CGPoint)endPoint delegate:(id)delegate{
+- (void)myRotateAndMoveforCloseView:(UIView *)view endPoint:(CGPoint)endPoint buffer:(int)buffer delegate:(id)delegate{
     // 需要加上圆的半径
     float ext_x = view.frame.size.width/2;
     float ext_y = view.frame.size.width/2;
@@ -144,8 +144,8 @@ static MyAnimate* shareAnimate = nil;
     float end_y_center = endPoint.y+ext_y;
     CGPoint original = view.center;
     CGPoint endPoint2 = CGPointMake(original.x, end_y_center);
-    CGPoint farPoint = CGPointMake(original.x, end_y_center+5);// 5 为摇晃时的幅度
-    CGPoint nearPoint = CGPointMake(original.x, end_y_center-5);// 5 为摇晃时的幅度
+    CGPoint farPoint = CGPointMake(original.x, end_y_center+buffer);// buffer 为摇晃时的幅度
+    CGPoint nearPoint = CGPointMake(original.x, end_y_center-buffer);// buffer 为摇晃时的幅度
     
     
     // bug1: 需要在point中x，y 方向分别增加 半径个像素。
