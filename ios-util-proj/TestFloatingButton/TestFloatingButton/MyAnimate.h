@@ -34,7 +34,7 @@
 // 收起，旋转加移动
 - (void)myRotateAndMoveforCloseView:(UIView *)view;
 
-// 展开，旋转加移动
+// 展开，旋转加移动, 注意：endpoint是view结束位置的中心位置
 - (void)myRotateAndMoveforOpenView:(UIView *)view endPoint:(CGPoint)endPoint delegate:(id)delegate;
 
 @end

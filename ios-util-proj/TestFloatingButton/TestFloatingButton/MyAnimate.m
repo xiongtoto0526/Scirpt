@@ -115,13 +115,14 @@ static MyAnimate* shareAnimate = nil;
     float ext_y = view.frame.size.width/2;
     
     ext_x =0;
-    ext_y =40;
+    ext_y =0;
     
     float endY = endPoint.y;
-    CGPoint original = view.frame.origin;
-    CGPoint endPoint2 = CGPointMake(original.x+ext_x, endY+ext_y);
-    CGPoint farPoint = CGPointMake(original.x+ext_x, endY+ext_y+5);// 5 为摇晃时的幅度
-    CGPoint nearPoint = CGPointMake(original.x+ext_x, endY+ext_y-5);// 5 为摇晃时的幅度
+    CGPoint original = view.center;
+    NSLog(@"original x is:%f",original.x);
+    CGPoint endPoint2 = CGPointMake(original.x, endY+ext_y);
+    CGPoint farPoint = CGPointMake(original.x, endY+ext_y+5);// 5 为摇晃时的幅度
+    CGPoint nearPoint = CGPointMake(original.x, endY+ext_y-5);// 5 为摇晃时的幅度
     
     
     // bug1: 需要在point中x，y 方向分别增加 半径个像素。
@@ -132,7 +133,7 @@ static MyAnimate* shareAnimate = nil;
     [view.layer addAnimation:bloomAnimation forKey:@"bloomAnimation"];
 
     // bug2: 需要在动画结束后再移动到这个位置。
-    view.frame  = CGRectMake(0, endY, view.frame.size.width, view.frame.size.height);
+    view.frame  = CGRectMake(0, endY+40, view.frame.size.width, view.frame.size.height);
 }
 
 
@@ -140,7 +141,7 @@ static MyAnimate* shareAnimate = nil;
 {
     // 1.Configure rotation animation
     //
-    float duration = 0.5f;
+    float duration = 0.3f;
     
     CAKeyframeAnimation *rotationAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.rotation.z"];
     rotationAnimation.values = @[@(0.0), @(- M_PI), @(- M_PI * 1.5), @(- M_PI * 2)];

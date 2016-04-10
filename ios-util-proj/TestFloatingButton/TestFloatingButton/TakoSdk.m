@@ -16,6 +16,7 @@
 }
 @property (nonatomic,strong) UIButton* mainButton;
 @property (nonatomic,strong) UIButton* subButton;
+@property (nonatomic,strong) NSMutableArray* subButtons;
 @property (nonatomic,strong) UIWindow* rootWindow;
 @end
 
@@ -63,7 +64,6 @@ static TakoSdk* shareTakoSdk = nil;
     isDragged = NO;
 }
 
-static int a =0;
 
 -(void)openMenu{
     NSLog(@"will show menu bar...");
@@ -75,27 +75,44 @@ static int a =0;
     
     // 已打开时，收缩window。
     if (isOpened) {
-        CGPoint endPoint = CGPointMake(0, 0);
-            [self.subButton setX:40]; // bug 1: why???
-         [[MyAnimate share] myRotateAndMoveforOpenView:self.subButton endPoint:endPoint delegate:self];
+//        CGPoint endPoint = CGPointMake(0, 0);
+//            [self.subButton setX:40]; // bug 1: why???
+        for(int i =0 ;i<[self.subButtons count];i++){
+            CGPoint endPoint = CGPointMake(0, 0);
+            UIButton* sub = [self.subButtons objectAtIndex:i];
+//            [sub setX:40]; // bug 1: why???
+         [[MyAnimate share] myRotateAndMoveforOpenView:sub endPoint:endPoint delegate:self];
+        }
+        
 
 //        self.subButton = nil;
         isOpened = NO;
         return;
     }
     
-    self.subButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.subButton setTitle:@"次按钮" forState:UIControlStateNormal];
-//    self.subButton.frame = CGRectMake(0, 90, 80, 80);
-    self.subButton.frame = self.mainButton.frame;
-    [self.subButton setX:40]; // bug 1: why???
-    [self.subButton setBackgroundColor:[UIColor grayColor]];
-    [UIHelper addBorderonButton:self.subButton cornerSize:40];
-    self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, self.rootWindow.frame.origin.y, self.rootWindow.frame.size.width, self.rootWindow.frame.size.height+190+8);
+    if ([self.subButtons count]==0) {
+       
+    self.subButtons = [NSMutableArray new];
+    
+    for (int i=0; i<4; i++) {
+        UIButton* sub = [[UIButton alloc]initWithFrame:self.mainButton.frame];
+        [sub setTitle:[NSString stringWithFormat:@"次按钮%d",i] forState:UIControlStateNormal];
+        sub.tag =i;
+        NSLog(@"tag is:%ld",(long)sub.tag);
+//        [sub setX:self.mainButton.frame.size.width/2];
+        NSLog(@"main x is:%f",self.mainButton.frame.origin.x);
+        [sub setBackgroundColor:[UIColor grayColor]];
+        [UIHelper addBorderonButton:sub cornerSize:40];
+        NSLog(@"fram is:%f",sub.frame.origin.y);
+        [self.rootWindow insertSubview:sub belowSubview:self.mainButton];
+        [self.subButtons addObject:sub];
+    }
+    }
+    
 
-    [self.rootWindow insertSubview:self.subButton belowSubview:self.mainButton];
+    self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, self.rootWindow.frame.origin.y, self.rootWindow.frame.size.width, self.rootWindow.frame.size.height+290+8);
+    
 
-//    [self.rootWindow addSubview:self.subButton];
     
     //    self.subButton.alpha = 1;
     
@@ -106,11 +123,18 @@ static int a =0;
 //    [[MyAnimate share] myShakeforView:self.subButton];
 
     //    [[MyAnimate share] myRotateAndMoveforCloseView:self.subButton];
-    CGPoint endPoint = CGPointMake(0, 190);
-    [[MyAnimate share] myRotateAndMoveforOpenView:self.subButton endPoint:endPoint delegate:self];
+    int a = 0;
+    for (UIButton* sub in self.subButtons) {
+//        NSLog(@"tag is:%ld",(long)sub.tag);
+        float newHeight =  sub.frame.size.height*a+1;
+        CGPoint endPoint = CGPointMake(0, newHeight+sub.frame.size.height/2);
+        [[MyAnimate share] myRotateAndMoveforOpenView:sub endPoint:endPoint delegate:self];
+        a = a+1;
+    }
+//    CGPoint endPoint = CGPointMake(0, 190);
+//    [[MyAnimate share] myRotateAndMoveforOpenView:self.subButton endPoint:endPoint delegate:self];
 
     isOpened = YES;
-        a = a+1;
 }
 
 
