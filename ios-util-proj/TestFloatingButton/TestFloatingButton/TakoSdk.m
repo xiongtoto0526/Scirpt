@@ -21,7 +21,8 @@
 @end
 
 static TakoSdk* shareTakoSdk = nil;
-#define originalFrame  CGRectMake(100, 180, 80, 80)
+#define button_width 40
+#define originalFrame  CGRectMake(100, 180, button_width+40, button_width)
 
 @implementation TakoSdk
 
@@ -37,11 +38,12 @@ static TakoSdk* shareTakoSdk = nil;
     // 添加主按钮
     self.mainButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.mainButton setTitle:@"主按钮" forState:UIControlStateNormal];
-    self.mainButton.frame = CGRectMake(0, 0, 80, 80);
+    [self.mainButton sizeToFit];
+    self.mainButton.frame = CGRectMake(0, 20, button_width, button_width);
     self.mainButton.backgroundColor = [UIColor grayColor];
     [self.mainButton addTarget:self action:@selector(touchDown) forControlEvents:UIControlEventTouchDown];
     [self.mainButton addTarget:self action:@selector(openMenu) forControlEvents:UIControlEventTouchUpInside];
-    [UIHelper addBorderonButton:self.mainButton cornerSize:40];
+    [UIHelper addBorderonButton:self.mainButton cornerSize:button_width/2];
     
     // window拖拽跟随
     [self.mainButton addTarget:self action:@selector(dragMoving:withEvent: )forControlEvents: UIControlEventTouchDragInside];
@@ -52,7 +54,7 @@ static TakoSdk* shareTakoSdk = nil;
     self.rootWindow = [[UIWindow alloc]initWithFrame:originalFrame];
     self.rootWindow.windowLevel = UIWindowLevelAlert+1;
     self.rootWindow.backgroundColor = [UIColor clearColor];
-    self.rootWindow.layer.cornerRadius = 40;
+    self.rootWindow.layer.cornerRadius = button_width/2;
     self.rootWindow.layer.masksToBounds = YES;
     [self.rootWindow addSubview:self.mainButton];
     [self.rootWindow makeKeyAndVisible];//关键语句,显示window
@@ -75,17 +77,11 @@ static TakoSdk* shareTakoSdk = nil;
     
     // 已打开时，收缩window。
     if (isOpened) {
-//        CGPoint endPoint = CGPointMake(0, 0);
-//            [self.subButton setX:40]; // bug 1: why???
         for(int i =0 ;i<[self.subButtons count];i++){
-            CGPoint endPoint = CGPointMake(0, 0);
+            CGPoint endPoint = CGPointMake(0, self.mainButton.frame.origin.y);
             UIButton* sub = [self.subButtons objectAtIndex:i];
-//            [sub setX:40]; // bug 1: why???
-         [[MyAnimate share] myRotateAndMoveforOpenView:sub endPoint:endPoint delegate:self];
+         [[MyAnimate share] myRotateAndMoveforCloseView:sub endPoint:endPoint delegate:self];
         }
-        
-
-//        self.subButton = nil;
         isOpened = NO;
         return;
     }
@@ -94,15 +90,15 @@ static TakoSdk* shareTakoSdk = nil;
        
     self.subButtons = [NSMutableArray new];
     
-    for (int i=0; i<4; i++) {
+    for (int i=0; i<3; i++) {
         UIButton* sub = [[UIButton alloc]initWithFrame:self.mainButton.frame];
         [sub setTitle:[NSString stringWithFormat:@"次按钮%d",i] forState:UIControlStateNormal];
         sub.tag =i;
-        NSLog(@"tag is:%ld",(long)sub.tag);
+//        NSLog(@"tag is:%ld",(long)sub.tag);
 //        [sub setX:self.mainButton.frame.size.width/2];
-        NSLog(@"main x is:%f",self.mainButton.frame.origin.x);
+//        NSLog(@"main x is:%f",self.mainButton.frame.origin.x);
         [sub setBackgroundColor:[UIColor grayColor]];
-        [UIHelper addBorderonButton:sub cornerSize:40];
+        [UIHelper addBorderonButton:sub cornerSize:button_width/2];
         NSLog(@"fram is:%f",sub.frame.origin.y);
         [self.rootWindow insertSubview:sub belowSubview:self.mainButton];
         [self.subButtons addObject:sub];
@@ -122,17 +118,14 @@ static TakoSdk* shareTakoSdk = nil;
 //    [[MyAnimate share] myRotateforView:self.subButton];
 //    [[MyAnimate share] myShakeforView:self.subButton];
 
-    //    [[MyAnimate share] myRotateAndMoveforCloseView:self.subButton];
-    int a = 0;
-    for (UIButton* sub in self.subButtons) {
+    for (int i =0;i<[self.subButtons count];i++) {
 //        NSLog(@"tag is:%ld",(long)sub.tag);
-        float newHeight =  sub.frame.size.height*a+1;
-        CGPoint endPoint = CGPointMake(0, newHeight+sub.frame.size.height/2);
+        UIButton* sub = [self.subButtons objectAtIndex:i];
+        float end_y =  self.mainButton.frame.origin.y + sub.frame.size.height*(i+1);
+        CGPoint endPoint = CGPointMake(0, end_y);
         [[MyAnimate share] myRotateAndMoveforOpenView:sub endPoint:endPoint delegate:self];
-        a = a+1;
     }
-//    CGPoint endPoint = CGPointMake(0, 190);
-//    [[MyAnimate share] myRotateAndMoveforOpenView:self.subButton endPoint:endPoint delegate:self];
+
 
     isOpened = YES;
 }
@@ -140,8 +133,8 @@ static TakoSdk* shareTakoSdk = nil;
 
 // bug: 这里的delegate可能造成多个回调冲突，需要优化。
 -(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
-    if (flag && !isOpened) {
-        self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, self.rootWindow.frame.origin.y, self.rootWindow.frame.size.width, originalFrame.size.height);    }
+//    if (flag && !isOpened) {
+//        self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, self.rootWindow.frame.origin.y, self.rootWindow.frame.size.width, originalFrame.size.height);    }
 }
 
 

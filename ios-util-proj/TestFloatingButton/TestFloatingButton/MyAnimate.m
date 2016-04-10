@@ -9,7 +9,7 @@
 #import "MyAnimate.h"
 
 
-
+#define duration_x  0.5f
 static MyAnimate* shareAnimate = nil;
 
 @implementation MyAnimate
@@ -114,15 +114,12 @@ static MyAnimate* shareAnimate = nil;
     float ext_x = view.frame.size.width/2;
     float ext_y = view.frame.size.width/2;
     
-    ext_x =0;
-    ext_y =0;
-    
-    float endY = endPoint.y;
+    float end_y_center = endPoint.y+ext_y;
     CGPoint original = view.center;
     NSLog(@"original x is:%f",original.x);
-    CGPoint endPoint2 = CGPointMake(original.x, endY+ext_y);
-    CGPoint farPoint = CGPointMake(original.x, endY+ext_y+5);// 5 为摇晃时的幅度
-    CGPoint nearPoint = CGPointMake(original.x, endY+ext_y-5);// 5 为摇晃时的幅度
+    CGPoint endPoint2 = CGPointMake(original.x, end_y_center);
+    CGPoint farPoint = CGPointMake(original.x, end_y_center+5);// 5 为摇晃时的幅度
+    CGPoint nearPoint = CGPointMake(original.x, end_y_center-5);// 5 为摇晃时的幅度
     
     
     // bug1: 需要在point中x，y 方向分别增加 半径个像素。
@@ -132,8 +129,34 @@ static MyAnimate* shareAnimate = nil;
     // @"bloomAnimation" 仅是一个唯一标示
     [view.layer addAnimation:bloomAnimation forKey:@"bloomAnimation"];
 
-    // bug2: 需要在动画结束后再移动到这个位置。
-    view.frame  = CGRectMake(0, endY+40, view.frame.size.width, view.frame.size.height);
+    // 注意: 需要在动画结束后再将view,移动到这个最终位置。
+    view.frame  = CGRectMake(0,  endPoint.y, view.frame.size.width, view.frame.size.height);
+}
+
+
+
+// 收起
+- (void)myRotateAndMoveforCloseView:(UIView *)view endPoint:(CGPoint)endPoint delegate:(id)delegate{
+    // 需要加上圆的半径
+    float ext_x = view.frame.size.width/2;
+    float ext_y = view.frame.size.width/2;
+    
+    float end_y_center = endPoint.y+ext_y;
+    CGPoint original = view.center;
+    CGPoint endPoint2 = CGPointMake(original.x, end_y_center);
+    CGPoint farPoint = CGPointMake(original.x, end_y_center+5);// 5 为摇晃时的幅度
+    CGPoint nearPoint = CGPointMake(original.x, end_y_center-5);// 5 为摇晃时的幅度
+    
+    
+    // bug1: 需要在point中x，y 方向分别增加 半径个像素。
+    CAAnimationGroup *bloomAnimation = [self bloomAnimationWithEndPoint:endPoint2
+                                                            andFarPoint:farPoint
+                                                           andNearPoint:nearPoint originalPoint:original delegate:delegate];
+    // @"debloomAnimation" 仅是一个唯一标示
+    [view.layer addAnimation:bloomAnimation forKey:@"debloomAnimation"];
+    
+    // 注意: 需要在动画结束后再将view,移动到这个最终位置。
+    view.frame  = CGRectMake(0, endPoint.y, view.frame.size.width, view.frame.size.height);
 }
 
 
@@ -141,7 +164,7 @@ static MyAnimate* shareAnimate = nil;
 {
     // 1.Configure rotation animation
     //
-    float duration = 0.3f;
+    float duration = duration_x;
     
     CAKeyframeAnimation *rotationAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.rotation.z"];
     rotationAnimation.values = @[@(0.0), @(- M_PI), @(- M_PI * 1.5), @(- M_PI * 2)];
@@ -169,75 +192,14 @@ static MyAnimate* shareAnimate = nil;
     // 两个动画合并
     CAAnimationGroup *animations = [CAAnimationGroup animation];
     animations.animations = @[movingAnimation, rotationAnimation];
-//    animations.animations = @[rotationAnimation];
-
+    //    animations.animations = @[rotationAnimation];
+    
     animations.duration = duration;
     animations.delegate = delegate;
     
     return animations;
 }
 
-
-
-// 收起
--(void)myRotateAndMoveforCloseView:(UIView *)view{
-    
-    CGPoint original = view.frame.origin;
-    //    CGFloat currentAngel = 0;
-    CGFloat bloomRadius = 150;
-    CGPoint farPoint = CGPointMake(original.x, original.y+bloomRadius-10);
-    CGPoint endPoint = CGPointMake(original.x, original.y+bloomRadius);
-    
-    CAAnimationGroup *foldAnimation = [self foldAnimationFromPoint:endPoint withFarPoint:farPoint originalPoint:original];
-    
-    [view.layer addAnimation:foldAnimation forKey:@"foldAnimation"];
-    view.frame = CGRectMake(0, 190, 80, 80);
-    view.alpha = 1;
-    //    [self bringSubviewToFront:self.pathCenterButton];
-    
-    // 删除多余视图
-    //        [self resizeToFoldedFrame];
-    
-}
-
-
-
-- (CAAnimationGroup *)foldAnimationFromPoint:(CGPoint)endPoint withFarPoint:(CGPoint)farPoint originalPoint:(CGPoint)original
-{
-    // 1.Configure rotation animation
-    //
-    CAKeyframeAnimation *rotationAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotationAnimation.values = @[@(0), @(M_PI), @(M_PI * 2)];
-    rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-    rotationAnimation.duration = 0.35f;
-    
-    // 2.Configure moving animation
-    //
-    CAKeyframeAnimation *movingAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-    
-    // Create moving path
-    //
-    CGMutablePathRef path = CGPathCreateMutable();
-    
-    CGPathAddLineToPoint(path, NULL, original.x, original.y);
-    //    CGPathAddLineToPoint(path, NULL, farPoint.x, farPoint.y);
-    CGPathMoveToPoint(path, NULL, endPoint.x, endPoint.y);
-    
-    movingAnimation.keyTimes = @[@(0.0f), @(0.75), @(1.0)];
-    
-    movingAnimation.path = path;
-    movingAnimation.duration = 0.35f;
-    CGPathRelease(path);
-    
-    // 3.Merge animation together
-    //
-    CAAnimationGroup *animations = [CAAnimationGroup animation];
-    animations.animations = @[rotationAnimation, movingAnimation];
-    animations.animations = @[rotationAnimation, movingAnimation];
-    animations.duration = 0.35f;
-    
-    return animations;
-}
 
 
 @end
