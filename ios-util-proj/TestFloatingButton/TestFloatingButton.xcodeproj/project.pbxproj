@@ -17,10 +17,8 @@
 		AD8908A41CB7AB8000DCD65E /* TakoSdk.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8908A31CB7AB8000DCD65E /* TakoSdk.m */; settings = {ASSET_TAGS = (); }; };
 		AD8908A71CB7ACE500DCD65E /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8908A61CB7ACE500DCD65E /* UIHelper.m */; settings = {ASSET_TAGS = (); }; };
 		AD8908AB1CB8ADD300DCD65E /* MyAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8908AA1CB8ADD300DCD65E /* MyAnimate.m */; settings = {ASSET_TAGS = (); }; };
-		AD8908B01CBA1B0A00DCD65E /* btbg.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8908AF1CBA1B0A00DCD65E /* btbg.png */; settings = {ASSET_TAGS = (); }; };
-		AD8908B41CBA26EE00DCD65E /* btmbg.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8908B31CBA26EE00DCD65E /* btmbg.png */; settings = {ASSET_TAGS = (); }; };
 		AD8908B81CBA423700DCD65E /* XibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8908B61CBA423700DCD65E /* XibViewController.m */; settings = {ASSET_TAGS = (); }; };
-		AD8908B91CBA423700DCD65E /* XibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD8908B71CBA423700DCD65E /* XibViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		AD8908C91CBB372800DCD65E /* MyTako.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AD8908C81CBB372800DCD65E /* MyTako.bundle */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,15 +40,23 @@
 		AD8908A61CB7ACE500DCD65E /* UIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIHelper.m; sourceTree = "<group>"; };
 		AD8908A91CB8ADD300DCD65E /* MyAnimate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnimate.h; sourceTree = "<group>"; };
 		AD8908AA1CB8ADD300DCD65E /* MyAnimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnimate.m; sourceTree = "<group>"; };
-		AD8908AF1CBA1B0A00DCD65E /* btbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btbg.png; sourceTree = "<group>"; };
-		AD8908B31CBA26EE00DCD65E /* btmbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btmbg.png; sourceTree = "<group>"; };
 		AD8908B51CBA423700DCD65E /* XibViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XibViewController.h; sourceTree = "<group>"; };
 		AD8908B61CBA423700DCD65E /* XibViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XibViewController.m; sourceTree = "<group>"; };
-		AD8908B71CBA423700DCD65E /* XibViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XibViewController.xib; sourceTree = "<group>"; };
+		AD8908BE1CBB35F900DCD65E /* MyTako.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyTako.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD8908C01CBB35F900DCD65E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD8908C81CBB372800DCD65E /* MyTako.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MyTako.bundle; sourceTree = "<group>"; };
+		AD8908D31CBB3CBF00DCD65E /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		AD8908821CB79F3000DCD65E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD8908BB1CBB35F900DCD65E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -64,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				AD8908871CB79F3000DCD65E /* TestFloatingButton */,
+				AD8908BF1CBB35F900DCD65E /* MyTako */,
 				AD8908861CB79F3000DCD65E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				AD8908851CB79F3000DCD65E /* TestFloatingButton.app */,
+				AD8908BE1CBB35F900DCD65E /* MyTako.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -81,6 +89,7 @@
 			children = (
 				AD89088B1CB79F3000DCD65E /* AppDelegate.h */,
 				AD89088C1CB79F3000DCD65E /* AppDelegate.m */,
+				AD8908D31CBB3CBF00DCD65E /* config.h */,
 				AD89088E1CB79F3000DCD65E /* ViewController.h */,
 				AD89088F1CB79F3000DCD65E /* ViewController.m */,
 				AD8908A51CB7ACE500DCD65E /* UIHelper.h */,
@@ -93,9 +102,7 @@
 				AD8908A01CB7A00400DCD65E /* FirstViewController.m */,
 				AD8908B51CBA423700DCD65E /* XibViewController.h */,
 				AD8908B61CBA423700DCD65E /* XibViewController.m */,
-				AD8908B71CBA423700DCD65E /* XibViewController.xib */,
-				AD8908AF1CBA1B0A00DCD65E /* btbg.png */,
-				AD8908B31CBA26EE00DCD65E /* btmbg.png */,
+				AD8908C71CBB372800DCD65E /* bundle */,
 				AD8908911CB79F3000DCD65E /* Main.storyboard */,
 				AD8908941CB79F3000DCD65E /* Assets.xcassets */,
 				AD8908961CB79F3000DCD65E /* LaunchScreen.storyboard */,
@@ -112,6 +119,22 @@
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
+		};
+		AD8908BF1CBB35F900DCD65E /* MyTako */ = {
+			isa = PBXGroup;
+			children = (
+				AD8908C01CBB35F900DCD65E /* Info.plist */,
+			);
+			path = MyTako;
+			sourceTree = "<group>";
+		};
+		AD8908C71CBB372800DCD65E /* bundle */ = {
+			isa = PBXGroup;
+			children = (
+				AD8908C81CBB372800DCD65E /* MyTako.bundle */,
+			);
+			path = bundle;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -133,6 +156,23 @@
 			productReference = AD8908851CB79F3000DCD65E /* TestFloatingButton.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AD8908BD1CBB35F900DCD65E /* MyTako */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD8908C11CBB35F900DCD65E /* Build configuration list for PBXNativeTarget "MyTako" */;
+			buildPhases = (
+				AD8908BA1CBB35F900DCD65E /* Sources */,
+				AD8908BB1CBB35F900DCD65E /* Frameworks */,
+				AD8908BC1CBB35F900DCD65E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyTako;
+			productName = MyTako;
+			productReference = AD8908BE1CBB35F900DCD65E /* MyTako.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -143,6 +183,9 @@
 				ORGANIZATIONNAME = "熊海涛";
 				TargetAttributes = {
 					AD8908841CB79F3000DCD65E = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+					AD8908BD1CBB35F900DCD65E = {
 						CreatedOnToolsVersion = 7.0.1;
 					};
 				};
@@ -161,6 +204,7 @@
 			projectRoot = "";
 			targets = (
 				AD8908841CB79F3000DCD65E /* TestFloatingButton */,
+				AD8908BD1CBB35F900DCD65E /* MyTako */,
 			);
 		};
 /* End PBXProject section */
@@ -171,11 +215,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD8908981CB79F3000DCD65E /* LaunchScreen.storyboard in Resources */,
-				AD8908B01CBA1B0A00DCD65E /* btbg.png in Resources */,
-				AD8908B41CBA26EE00DCD65E /* btmbg.png in Resources */,
 				AD8908951CB79F3000DCD65E /* Assets.xcassets in Resources */,
-				AD8908B91CBA423700DCD65E /* XibViewController.xib in Resources */,
+				AD8908C91CBB372800DCD65E /* MyTako.bundle in Resources */,
 				AD8908931CB79F3000DCD65E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD8908BC1CBB35F900DCD65E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +243,13 @@
 				AD89088A1CB79F3000DCD65E /* main.m in Sources */,
 				AD8908A11CB7A00400DCD65E /* FirstViewController.m in Sources */,
 				AD8908A71CB7ACE500DCD65E /* UIHelper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD8908BA1CBB35F900DCD65E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +379,37 @@
 			};
 			name = Release;
 		};
+		AD8908C21CBB35F900DCD65E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = NO;
+				INFOPLIST_FILE = MyTako/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.self.MyTako;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos9.0;
+				SKIP_INSTALL = NO;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		AD8908C31CBB35F900DCD65E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = NO;
+				COPY_PHASE_STRIP = YES;
+				INFOPLIST_FILE = MyTako/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.self.MyTako;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos9.0;
+				SKIP_INSTALL = NO;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -343,6 +430,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		AD8908C11CBB35F900DCD65E /* Build configuration list for PBXNativeTarget "MyTako" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD8908C21CBB35F900DCD65E /* Debug */,
+				AD8908C31CBB35F900DCD65E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

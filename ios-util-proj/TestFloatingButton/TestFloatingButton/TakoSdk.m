@@ -10,8 +10,8 @@
 #import "UIHelper.h"
 #import "MyAnimate.h"
 #import "XibViewController.h"
+#import "config.h"
 
-#define test_xib_show 1
 
 @interface TakoSdk (){
     Boolean isOpened;
@@ -52,7 +52,16 @@ static TakoSdk* shareTakoSdk = nil;
     // 添加主按钮
     self.mainButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.mainButton setTitle:@"主按钮" forState:UIControlStateNormal];
+    
+#ifdef use_xib_res
+    // 从xib中加载图片
+    NSString* bundlePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"MyTako.bundle"];
+    UIImage* mbgImage = [UIImage imageWithContentsOfFile:[bundlePath stringByAppendingPathComponent:@"/btmbg.png"]];
+    [self.mainButton setBackgroundImage:mbgImage forState:UIControlStateNormal];
+#else
     [self.mainButton setBackgroundImage:[UIImage imageNamed:@"btmbg.png"] forState:UIControlStateNormal];
+#endif
+    
     [self.mainButton.titleLabel setFont:[UIFont systemFontOfSize:11]];
     self.mainButton.frame = CGRectMake(0, 0, button_width, button_width);
     self.mainButton.backgroundColor = [UIColor clearColor];

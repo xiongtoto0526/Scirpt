@@ -16,6 +16,14 @@
 
 @implementation XibViewController
 
+
+-(instancetype)init{
+    NSBundle* bundle = [NSBundle bundleWithPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"MyTako.bundle"]];
+
+    self = [super initWithNibName:@"XibViewController" bundle:bundle];
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.bt addTarget:self action:@selector(showOrHidePicture:) forControlEvents:UIControlEventTouchDown];

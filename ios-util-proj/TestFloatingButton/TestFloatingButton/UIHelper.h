@@ -14,6 +14,9 @@
 @interface UIHelper : NSObject
 
 +(void) addBorderonButton:(UIButton*) btn cornerSize:(int) size;
+// 获取当前view
++ (UIViewController *)getCurrentVC;
+
 
 @end
 

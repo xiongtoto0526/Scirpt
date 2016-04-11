@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "FirstViewController.h"
 #import "TakoSdk.h"
+#import "config.h"
 
 #define  mainS  [UIScreen mainScreen].bounds.size
 
@@ -58,7 +59,16 @@
     for (int i=0; i<3; i++) {
         UIButton* sub = [[UIButton alloc] init];
         [sub setTitle:[NSString stringWithFormat:@"子按钮%d",i] forState:UIControlStateNormal];
+        
+#ifdef use_xib_res
+        // 从xib中加载图片
+        NSString* bundlePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"MyTako.bundle"];
+        UIImage* mbgImage = [UIImage imageWithContentsOfFile:[bundlePath stringByAppendingPathComponent:@"/btbg.png"]];
+        [sub setBackgroundImage:mbgImage forState:UIControlStateNormal];
+#else
         [sub setBackgroundImage:[UIImage imageNamed:@"btbg.png"] forState:UIControlStateNormal];
+#endif
+        
         [sub addTarget:self action:@selector(doClick:) forControlEvents:UIControlEventTouchDown];
         [bts addObject:sub];
     }
@@ -69,6 +79,8 @@
 
 -(void)doClick:(UIButton*) bt{
     NSLog(@"hello ,toto,tag:%ld",(long)bt.tag);
+    
+    // 当且仅当 viewController为当前视图时，才能present一个FirstViewController，否则 此处的self 需要修改为 【UIhelper getCurrentVC】
     [self presentViewController:[FirstViewController new] animated:YES completion:nil];
 }
 
