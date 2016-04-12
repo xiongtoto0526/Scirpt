@@ -19,6 +19,14 @@
 		AD8908AB1CB8ADD300DCD65E /* MyAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8908AA1CB8ADD300DCD65E /* MyAnimate.m */; settings = {ASSET_TAGS = (); }; };
 		AD8908B81CBA423700DCD65E /* XibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8908B61CBA423700DCD65E /* XibViewController.m */; settings = {ASSET_TAGS = (); }; };
 		AD8908C91CBB372800DCD65E /* MyTako.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AD8908C81CBB372800DCD65E /* MyTako.bundle */; settings = {ASSET_TAGS = (); }; };
+		AD97A57C1CBCB3ED00DA8524 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD97A57A1CBCB3ED00DA8524 /* FeedBackViewController.m */; settings = {ASSET_TAGS = (); }; };
+		AD97A57D1CBCB3ED00DA8524 /* FeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD97A57B1CBCB3ED00DA8524 /* FeedBackViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		AD97A5811CBCC6A700DA8524 /* FeedBackDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD97A57F1CBCC6A700DA8524 /* FeedBackDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
+		AD97A5821CBCC6A700DA8524 /* FeedBackDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD97A5801CBCC6A700DA8524 /* FeedBackDetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		AD97A5841CBCC8D500DA8524 /* ic_addpic.png in Resources */ = {isa = PBXBuildFile; fileRef = AD97A5831CBCC8D500DA8524 /* ic_addpic.png */; settings = {ASSET_TAGS = (); }; };
+		AD97A5921CBCDF2B00DA8524 /* DRPDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD97A5891CBCDF2B00DA8524 /* DRPDrawView.m */; settings = {ASSET_TAGS = (); }; };
+		AD97A59A1CBCF01900DA8524 /* EditImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD97A5981CBCF01900DA8524 /* EditImageViewController.m */; settings = {ASSET_TAGS = (); }; };
+		AD97A59B1CBCF01900DA8524 /* EditImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD97A5991CBCF01900DA8524 /* EditImageViewController.xib */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +54,18 @@
 		AD8908C01CBB35F900DCD65E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD8908C81CBB372800DCD65E /* MyTako.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MyTako.bundle; sourceTree = "<group>"; };
 		AD8908D31CBB3CBF00DCD65E /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		AD97A5791CBCB3ED00DA8524 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
+		AD97A57A1CBCB3ED00DA8524 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
+		AD97A57B1CBCB3ED00DA8524 /* FeedBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedBackViewController.xib; sourceTree = "<group>"; };
+		AD97A57E1CBCC6A700DA8524 /* FeedBackDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackDetailViewController.h; sourceTree = "<group>"; };
+		AD97A57F1CBCC6A700DA8524 /* FeedBackDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackDetailViewController.m; sourceTree = "<group>"; };
+		AD97A5801CBCC6A700DA8524 /* FeedBackDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedBackDetailViewController.xib; sourceTree = "<group>"; };
+		AD97A5831CBCC8D500DA8524 /* ic_addpic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_addpic.png; sourceTree = "<group>"; };
+		AD97A5881CBCDF2B00DA8524 /* DRPDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRPDrawView.h; sourceTree = "<group>"; };
+		AD97A5891CBCDF2B00DA8524 /* DRPDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRPDrawView.m; sourceTree = "<group>"; };
+		AD97A5971CBCF01900DA8524 /* EditImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditImageViewController.h; sourceTree = "<group>"; };
+		AD97A5981CBCF01900DA8524 /* EditImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditImageViewController.m; sourceTree = "<group>"; };
+		AD97A5991CBCF01900DA8524 /* EditImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditImageViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +107,7 @@
 		AD8908871CB79F3000DCD65E /* TestFloatingButton */ = {
 			isa = PBXGroup;
 			children = (
+				AD97A5861CBCDF2B00DA8524 /* MyDrawImage */,
 				AD89088B1CB79F3000DCD65E /* AppDelegate.h */,
 				AD89088C1CB79F3000DCD65E /* AppDelegate.m */,
 				AD8908D31CBB3CBF00DCD65E /* config.h */,
@@ -96,8 +117,18 @@
 				AD8908A61CB7ACE500DCD65E /* UIHelper.m */,
 				AD8908A21CB7AB8000DCD65E /* TakoSdk.h */,
 				AD8908A31CB7AB8000DCD65E /* TakoSdk.m */,
+				AD97A57E1CBCC6A700DA8524 /* FeedBackDetailViewController.h */,
+				AD97A57F1CBCC6A700DA8524 /* FeedBackDetailViewController.m */,
+				AD97A5801CBCC6A700DA8524 /* FeedBackDetailViewController.xib */,
+				AD97A5971CBCF01900DA8524 /* EditImageViewController.h */,
+				AD97A5981CBCF01900DA8524 /* EditImageViewController.m */,
+				AD97A5991CBCF01900DA8524 /* EditImageViewController.xib */,
+				AD97A5791CBCB3ED00DA8524 /* FeedBackViewController.h */,
+				AD97A57A1CBCB3ED00DA8524 /* FeedBackViewController.m */,
+				AD97A57B1CBCB3ED00DA8524 /* FeedBackViewController.xib */,
 				AD8908A91CB8ADD300DCD65E /* MyAnimate.h */,
 				AD8908AA1CB8ADD300DCD65E /* MyAnimate.m */,
+				AD97A5831CBCC8D500DA8524 /* ic_addpic.png */,
 				AD89089F1CB7A00400DCD65E /* FirstViewController.h */,
 				AD8908A01CB7A00400DCD65E /* FirstViewController.m */,
 				AD8908B51CBA423700DCD65E /* XibViewController.h */,
@@ -135,6 +166,15 @@
 			);
 			path = bundle;
 			sourceTree = SOURCE_ROOT;
+		};
+		AD97A5861CBCDF2B00DA8524 /* MyDrawImage */ = {
+			isa = PBXGroup;
+			children = (
+				AD97A5881CBCDF2B00DA8524 /* DRPDrawView.h */,
+				AD97A5891CBCDF2B00DA8524 /* DRPDrawView.m */,
+			);
+			path = MyDrawImage;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -216,7 +256,11 @@
 			files = (
 				AD8908981CB79F3000DCD65E /* LaunchScreen.storyboard in Resources */,
 				AD8908951CB79F3000DCD65E /* Assets.xcassets in Resources */,
+				AD97A57D1CBCB3ED00DA8524 /* FeedBackViewController.xib in Resources */,
 				AD8908C91CBB372800DCD65E /* MyTako.bundle in Resources */,
+				AD97A59B1CBCF01900DA8524 /* EditImageViewController.xib in Resources */,
+				AD97A5821CBCC6A700DA8524 /* FeedBackDetailViewController.xib in Resources */,
+				AD97A5841CBCC8D500DA8524 /* ic_addpic.png in Resources */,
 				AD8908931CB79F3000DCD65E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -235,12 +279,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD97A5921CBCDF2B00DA8524 /* DRPDrawView.m in Sources */,
 				AD8908B81CBA423700DCD65E /* XibViewController.m in Sources */,
 				AD8908A41CB7AB8000DCD65E /* TakoSdk.m in Sources */,
 				AD8908901CB79F3000DCD65E /* ViewController.m in Sources */,
 				AD89088D1CB79F3000DCD65E /* AppDelegate.m in Sources */,
 				AD8908AB1CB8ADD300DCD65E /* MyAnimate.m in Sources */,
 				AD89088A1CB79F3000DCD65E /* main.m in Sources */,
+				AD97A5811CBCC6A700DA8524 /* FeedBackDetailViewController.m in Sources */,
+				AD97A59A1CBCF01900DA8524 /* EditImageViewController.m in Sources */,
+				AD97A57C1CBCB3ED00DA8524 /* FeedBackViewController.m in Sources */,
 				AD8908A11CB7A00400DCD65E /* FirstViewController.m in Sources */,
 				AD8908A71CB7ACE500DCD65E /* UIHelper.m in Sources */,
 			);
@@ -362,6 +410,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TestFloatingButton/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.self.TestFloatingButton;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -373,6 +422,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TestFloatingButton/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.self.TestFloatingButton;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -438,6 +488,7 @@
 				AD8908C31CBB35F900DCD65E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

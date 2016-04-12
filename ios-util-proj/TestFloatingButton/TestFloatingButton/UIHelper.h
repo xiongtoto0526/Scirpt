@@ -16,8 +16,14 @@
 +(void) addBorderonButton:(UIButton*) btn cornerSize:(int) size;
 // 获取当前view
 + (UIViewController *)getCurrentVC;
++ (UIImage *)takeScreenshot;
+
+@end
 
 
+@interface UIImage(UIImageScale)
+-(UIImage*)getSubImage:(CGRect)rect;
+-(UIImage*)scaleToSize:(CGSize)size;
 @end
 
 

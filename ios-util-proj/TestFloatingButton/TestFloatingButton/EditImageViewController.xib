@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditImageViewController">
+            <connections>
+                <outlet property="image" destination="FHC-ru-KuP" id="8vx-aX-s03"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FHC-ru-KuP">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="FHC-ru-KuP" secondAttribute="trailing" id="4lC-qa-IQP"/>
+                <constraint firstAttribute="trailing" secondItem="FHC-ru-KuP" secondAttribute="trailing" id="DuZ-m6-EZE"/>
+                <constraint firstItem="FHC-ru-KuP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="IGP-J8-e3p"/>
+                <constraint firstAttribute="bottom" secondItem="FHC-ru-KuP" secondAttribute="bottom" id="Mqo-zs-OA2"/>
+                <constraint firstItem="FHC-ru-KuP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="a2l-9w-P3U"/>
+                <constraint firstAttribute="bottom" secondItem="FHC-ru-KuP" secondAttribute="bottom" id="bUv-Oo-9ei"/>
+                <constraint firstItem="FHC-ru-KuP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dVk-j1-gbP"/>
+                <constraint firstItem="FHC-ru-KuP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gPK-xd-mME"/>
+                <constraint firstAttribute="trailing" secondItem="FHC-ru-KuP" secondAttribute="trailing" id="mK9-wl-jaf"/>
+                <constraint firstItem="FHC-ru-KuP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="wHg-n2-akg"/>
+                <constraint firstItem="FHC-ru-KuP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="wbj-Nv-dlq"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="DuZ-m6-EZE"/>
+                    <exclude reference="Mqo-zs-OA2"/>
+                    <exclude reference="a2l-9w-P3U"/>
+                    <exclude reference="gPK-xd-mME"/>
+                    <exclude reference="mK9-wl-jaf"/>
+                    <exclude reference="wHg-n2-akg"/>
+                </mask>
+            </variation>
+        </view>
+    </objects>
+</document>

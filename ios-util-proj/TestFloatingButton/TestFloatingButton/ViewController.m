@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "FirstViewController.h"
+#import "FeedBackViewController.h"
 #import "TakoSdk.h"
 #import "config.h"
 
@@ -73,7 +74,7 @@
         [bts addObject:sub];
     }
     
-    [[TakoSdk share] takoSdkInitWithSubButtons:bts];
+    [[TakoSdk share] initWithSubButtons:bts];
 
 }
 
@@ -81,7 +82,8 @@
     NSLog(@"hello ,toto,tag:%ld",(long)bt.tag);
     
     // 当且仅当 viewController为当前视图时，才能present一个FirstViewController，否则 此处的self 需要修改为 【UIhelper getCurrentVC】
-    [self presentViewController:[FirstViewController new] animated:YES completion:nil];
+    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:[FeedBackViewController new]];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 @end

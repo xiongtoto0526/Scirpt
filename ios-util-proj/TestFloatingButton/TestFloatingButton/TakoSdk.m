@@ -27,7 +27,7 @@ static TakoSdk* shareTakoSdk = nil;
 #define button_count 3
 #define button_alpha 1
 #define button_width 50
-#define originalFrame  CGRectMake(100, 180, button_width, button_width)
+#define originalFrame  CGRectMake(0, 380, button_width, button_width)
 
 @implementation TakoSdk
 
@@ -38,7 +38,7 @@ static TakoSdk* shareTakoSdk = nil;
     return shareTakoSdk;
 }
 
--(void) takoSdkInitWithSubButtons:(NSArray*)buttons{
+-(void) initWithSubButtons:(NSArray*)buttons{
     [self takoSdkInit];
     self.subButtons = [NSMutableArray new];
     for (int i =0 ;i<[buttons count];i++) {
@@ -219,9 +219,13 @@ static TakoSdk* shareTakoSdk = nil;
 
 // 这里的delegate可能造成多个回调，此处通过if判断过滤
 -(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
+    
     if (flag) {
         isAnimating = isAnimating  -1;
     }
+    
+    // 若动画已完成，且当前状态是关闭的，且rootWindows高度不是原始高度，则恢复为原始高度。
+    // 注：必须等动画完成后才能恢复原始高度，否则动画过程无法显示。
     if (flag && !isOpened && self.rootWindow.frame.size.height != originalFrame.size.height) {
         if (isDown) {
             self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, self.rootWindow.frame.origin.y, self.rootWindow.frame.size.width, originalFrame.size.height);
@@ -316,6 +320,14 @@ static TakoSdk* shareTakoSdk = nil;
     for (UIButton* sub in self.subButtons) {
         [sub setY:y];
     }
+}
+
+-(void)show{
+    [self.rootWindow setHidden:NO];
+}
+
+-(void)hide{
+    [self.rootWindow setHidden:YES];
 }
 
 @end

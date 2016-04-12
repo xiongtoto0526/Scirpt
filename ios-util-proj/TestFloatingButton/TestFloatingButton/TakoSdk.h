@@ -12,9 +12,12 @@
 
 +(TakoSdk*)share;
 
--(void) takoSdkInitWithSubButtons:(NSArray*)buttons;
+-(void) initWithSubButtons:(NSArray*)buttons;
 
--(void) destoryTakoSdk;
+-(void) hide;
+-(void) show;
+
+-(void) destory;
 
 
 //-(UIWindow*) takoSdkInit;
