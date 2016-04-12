@@ -13,6 +13,7 @@
 		AD97A56A1CBBB3A300DA8524 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD97A5681CBBB3A300DA8524 /* Main.storyboard */; };
 		AD97A56C1CBBB3A300DA8524 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD97A56B1CBBB3A300DA8524 /* Assets.xcassets */; };
 		AD97A56F1CBBB3A300DA8524 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD97A56D1CBBB3A300DA8524 /* LaunchScreen.storyboard */; };
+		AD97A5781CBBB3C800DA8524 /* Constant.m in Sources */ = {isa = PBXBuildFile; fileRef = AD97A5771CBBB3C800DA8524 /* Constant.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		AD97A56B1CBBB3A300DA8524 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD97A56E1CBBB3A300DA8524 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD97A5701CBBB3A300DA8524 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD97A5761CBBB3B700DA8524 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
+		AD97A5771CBBB3C800DA8524 /* Constant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constant.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 		AD97A55E1CBBB3A300DA8524 /* TestCoding */ = {
 			isa = PBXGroup;
 			children = (
+				AD97A5761CBBB3B700DA8524 /* Constant.h */,
+				AD97A5771CBBB3C800DA8524 /* Constant.m */,
 				AD97A5621CBBB3A300DA8524 /* AppDelegate.h */,
 				AD97A5631CBBB3A300DA8524 /* AppDelegate.m */,
 				AD97A5651CBBB3A300DA8524 /* ViewController.h */,
@@ -152,6 +157,7 @@
 				AD97A5671CBBB3A300DA8524 /* ViewController.m in Sources */,
 				AD97A5641CBBB3A300DA8524 /* AppDelegate.m in Sources */,
 				AD97A5611CBBB3A300DA8524 /* main.m in Sources */,
+				AD97A5781CBBB3C800DA8524 /* Constant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

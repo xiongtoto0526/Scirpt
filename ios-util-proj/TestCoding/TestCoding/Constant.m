@@ -7,3 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Constant.h"
+
+NSString *const XUserName = @"StrongX";
+
+@implementation Constant
+
+@end

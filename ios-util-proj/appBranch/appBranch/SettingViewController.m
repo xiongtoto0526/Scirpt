@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.listData = [NSMutableArray arrayWithObjects:@"测试",@"二维码扫描",@"测试开关",@"测试stepper",@"测试picker",@"退出",nil];
+    self.listData = [NSMutableArray arrayWithObjects:@"测试",@"二维码扫描",@"测试开关",@"测试stepper",@"测试picker",@"测试本地推送",@"退出",nil];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -76,8 +76,12 @@
 
          [self presentViewController:dataController animated:NO completion:nil];
     }else if (indexPath.row == 5){
+//        [self testLocalNotification];
+    }
+    else if (indexPath.row == 6){
         [self dismissViewControllerAnimated:NO completion:nil];
     }
+    
 }
 
 

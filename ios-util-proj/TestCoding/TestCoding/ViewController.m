@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "Constant.h"
 
 @interface ViewController ()
 
@@ -16,6 +17,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"constant XUserName is:%@",XUserName);
+    NSString* testString = @"d";
+    [testString isEqualToString:XUserName];
+    [testString isEqualToString:TEST_STR];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
