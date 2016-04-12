@@ -16,6 +16,8 @@
 @interface TakoSdk (){
     Boolean isOpened;
     Boolean isDragged;
+    Boolean isDown;
+    int isAnimating; // 每次打开和关闭菜单有五次动画，为防止动画尚未完成前再次执行动画，增加此参数。（若不增加该参数，向上展示时，因原点迁移会引起误操作）
 }
 @property (nonatomic,strong) UIButton* mainButton;
 @property (nonatomic,strong) UIWindow* rootWindow;
@@ -68,7 +70,7 @@ static TakoSdk* shareTakoSdk = nil;
     
     // 注册响应事件
     [self.mainButton addTarget:self action:@selector(touchDown) forControlEvents:UIControlEventTouchDown];
-    [self.mainButton addTarget:self action:@selector(openMenu) forControlEvents:UIControlEventTouchUpInside];
+    [self.mainButton addTarget:self action:@selector(openMenu:WithEvent:) forControlEvents:UIControlEventTouchUpInside];
     [UIHelper addBorderonButton:self.mainButton cornerSize:button_width/2];
     
     // window拖拽跟随
@@ -94,8 +96,7 @@ static TakoSdk* shareTakoSdk = nil;
 }
 
 
--(void)openMenu{
-    
+-(void)openMenu:(UIButton*)bt WithEvent:(UIEvent*)event{
     
 #ifdef test_xib_show
     
@@ -124,15 +125,34 @@ static TakoSdk* shareTakoSdk = nil;
         return;
     }
     
+    if (isAnimating>0) {
+        return;
+    }
+    isAnimating = button_count +1;
+    
+    // 判断当前屏幕是否能容纳向下展开所有按钮
+    CGPoint touchPoint = [self touchPointInScreenWithevent:event];
+    if (touchPoint.y + button_width/2 + button_width*self.subButtons.count < mainS.height) {
+        NSLog(@"向下展开...");
+        isDown = YES;
+    }else{
+        isDown = NO;
+        NSLog(@"向上展开...");
+    }
     
     // 已打开时，收缩window。
     if (isOpened) {
     NSLog(@"will close menu...");
         [self.mainButton setTitle:@"主按钮" forState:UIControlStateNormal];
-        [[MyAnimate share] myRotateAndMoveforCloseView:self.mainButton endPoint:CGPointMake(0, 0) buffer:0 delegate:self];
         
+        if (isDown) {
+            [[MyAnimate share] myRotateAndMoveforCloseView:self.mainButton endPoint:CGPointMake(0, 0) buffer:0 delegate:self];
+        }else{
+            [[MyAnimate share] myRotateAndMoveforCloseView:self.mainButton endPoint:CGPointMake(0, button_width*(button_count)) buffer:0 delegate:self];
+        }
         
         for(int i =0 ;i<[self.subButtons count];i++){
+
             CGPoint endPoint = CGPointMake(0, self.mainButton.frame.origin.y);
             UIButton* sub = [self.subButtons objectAtIndex:i];
             [[MyAnimate share] myRotateAndMoveforCloseView:sub endPoint:endPoint buffer:5 delegate:self];
@@ -142,6 +162,17 @@ static TakoSdk* shareTakoSdk = nil;
     }
     
     NSLog(@"will open menu ...");
+    if(isDown){
+        self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, self.rootWindow.frame.origin.y, self.rootWindow.frame.size.width, self.rootWindow.frame.size.height+button_width*button_count);
+    }else{
+        // 迁移坐标原点
+        self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, self.rootWindow.frame.origin.y-button_width*(button_count), self.rootWindow.frame.size.width, self.rootWindow.frame.size.height+button_width*(button_count));
+
+        // 坐标原点迁移，需要重新设置所有button的位置
+        [self resetYforAllButtons:button_width*button_count];
+    }
+    
+    
     if ([self.subButtons count]==0) {
         
         self.subButtons = [NSMutableArray new];
@@ -153,19 +184,31 @@ static TakoSdk* shareTakoSdk = nil;
     }
     
     
-    self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, self.rootWindow.frame.origin.y, self.rootWindow.frame.size.width, self.rootWindow.frame.size.height+button_width*button_count);
-    
     // 测试所有动画
     //    [[MyAnimate share] myScaleforView:self.subButton];
     //    [[MyAnimate share] myOppositeforView:self.subButton];
     //    [[MyAnimate share] myRotateforView:self.subButton];
     //    [[MyAnimate share] myShakeforView:self.subButton];
     
-    [[MyAnimate share] myRotateAndMoveforOpenView:self.mainButton endPoint:CGPointMake(0, 0) buffer:0 delegate:self];
+
+    if (isDown) {
+        [[MyAnimate share] myRotateAndMoveforOpenView:self.mainButton endPoint:CGPointMake(0, 0) buffer:0 delegate:self];
+    }else{
+        [[MyAnimate share] myRotateAndMoveforOpenView:self.mainButton endPoint:CGPointMake(0, button_width*button_count) buffer:0 delegate:self];
+    }
+
+    
     for (int i =0;i<[self.subButtons count];i++) {
         //        NSLog(@"tag is:%ld",(long)sub.tag);
         UIButton* sub = [self.subButtons objectAtIndex:i];
-        float end_y =  self.mainButton.frame.origin.y + sub.frame.size.height*(i+1)+1;
+        
+        float end_y = 0.0;
+        if (isDown) {
+            end_y =  self.mainButton.frame.origin.y + sub.frame.size.height*(i+1)+1;
+        }else{
+            end_y =  self.mainButton.frame.origin.y - sub.frame.size.height*(i+1)+1;
+        }
+        
         CGPoint endPoint = CGPointMake(0, end_y);
         [[MyAnimate share] myRotateAndMoveforOpenView:sub endPoint:endPoint buffer:5 delegate:self];
     }
@@ -176,8 +219,19 @@ static TakoSdk* shareTakoSdk = nil;
 
 // 这里的delegate可能造成多个回调，此处通过if判断过滤
 -(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
+    if (flag) {
+        isAnimating = isAnimating  -1;
+    }
     if (flag && !isOpened && self.rootWindow.frame.size.height != originalFrame.size.height) {
-        self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, self.rootWindow.frame.origin.y, self.rootWindow.frame.size.width, originalFrame.size.height);
+        if (isDown) {
+            self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, self.rootWindow.frame.origin.y, self.rootWindow.frame.size.width, originalFrame.size.height);
+        }else{
+            // 迁移坐标原点
+            self.rootWindow.frame = CGRectMake(self.rootWindow.frame.origin.x, CGRectGetMaxY(self.rootWindow.frame)-button_width, self.rootWindow.frame.size.width, originalFrame.size.height);
+            
+            // 坐标原点迁移，需要重新设置所有button的位置
+            [self resetYforAllButtons:0];
+        }
     }
 }
 
@@ -249,5 +303,19 @@ static TakoSdk* shareTakoSdk = nil;
     return button;
 }
 
+
+
+-(CGPoint)touchPointInScreenWithevent:(UIEvent*)event{
+    UIView* appWindow = [[UIApplication sharedApplication].windows objectAtIndex:0];
+    CGPoint currentCenter = [[[event allTouches] anyObject] locationInView:appWindow];
+    return currentCenter;
+}
+
+-(void)resetYforAllButtons:(float)y{
+    [self.mainButton setY:y];
+    for (UIButton* sub in self.subButtons) {
+        [sub setY:y];
+    }
+}
 
 @end

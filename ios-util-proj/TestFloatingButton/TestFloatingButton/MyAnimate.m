@@ -9,7 +9,7 @@
 #import "MyAnimate.h"
 
 
-#define duration_x  0.5f
+#define duration_x  0.3f
 static MyAnimate* shareAnimate = nil;
 
 @implementation MyAnimate
