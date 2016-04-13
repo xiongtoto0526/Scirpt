@@ -12,6 +12,7 @@
 //#import "UploadImage.h"
 
 #define SELECTED 9999
+#define NO_SELECTED 1111
 
 
 
@@ -24,12 +25,11 @@
 @property (strong,nonatomic) UIActionSheet* actionSheet;
 @property (strong,nonatomic) UIImage* currentImage;
 @property (strong,nonatomic) UIButton* currentButton;
-//@property (strong,nonatomic) UIImagePickerController* picker;
 @end
 
 @implementation FeedBackDetailViewController
 
-
+// 重写返回按钮，以便监听编辑时撤销事件
 -(void)backButtonClicked{
     NSLog(@"will back...");
     [self.textView resignFirstResponder];
@@ -50,32 +50,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"提交反馈";
-    self.selectButton.tag =0;
+    self.selectButton.tag =NO_SELECTED;
+    self.secondSelectButton.tag =NO_SELECTED;
+    self.thirdSelectButton.tag = NO_SELECTED;
     isModified = NO;
 
+    // 重写返回按钮
     UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithTitle:@"返回"
                                                       style:UIBarButtonItemStylePlain target:self action:@selector(backButtonClicked)];
     self.navigationItem.leftBarButtonItem = backButton;
+    
+    // 提交按钮
+    UIBarButtonItem *submitButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交"
+                                                                         style:UIBarButtonItemStylePlain target:self action:@selector(submitButtonClicked)];
+    
+    self.navigationItem.rightBarButtonItem = submitButtonItem;
     
     // 单击空白处收起键盘
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
     [self.view addGestureRecognizer:tapGestureRecognizer];
 
-    // 初始化隐藏第2，3个button
+    // 初始化隐藏第二，第三个button，并隐藏
     [self.secondSelectButton setHidden:YES];
     [self.thirdSelectButton setHidden:YES];
-    
-    self.textView.frame = CGRectMake(self.textView.frame.origin.x, self.textView.frame.origin.y, self.textView.frame.size.width, mainS.height/3);
-    self.textView.delegate = self;
-    
     [self.selectButton addTarget:self action:@selector(selectImage:) forControlEvents:UIControlEventTouchDown];
     [self.secondSelectButton addTarget:self action:@selector(selectImage:) forControlEvents:UIControlEventTouchDown];
     [self.thirdSelectButton addTarget:self action:@selector(selectImage:) forControlEvents:UIControlEventTouchDown];
     
-    UIBarButtonItem *submitButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交"
-                                                                       style:UIBarButtonItemStylePlain target:self action:@selector(submitButtonClicked)];
+    // 文本编辑框
+    self.textView.frame = CGRectMake(self.textView.frame.origin.x, self.textView.frame.origin.y, self.textView.frame.size.width, mainS.height/3);
+    self.textView.delegate = self;
     
-    self.navigationItem.rightBarButtonItem = submitButtonItem;
+    // 添加删除按钮
+    
+    
     
 }
 
@@ -100,9 +108,6 @@
     }else{
         [self callActionSheetFunc];
     }
-    
-
-    
 }
 
 

@@ -25,7 +25,7 @@
             </userGuides>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="发现一个问题 : ..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="EE7-DL-qru">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="175"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="182"/>
                     <color key="backgroundColor" red="0.96020754421818177" green="0.96020754421818177" blue="0.96020754421818177" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="240" id="VPB-qF-HnG"/>
@@ -93,7 +93,7 @@
                     </variation>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="温馨提示: 点击图片可涂鸦~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YgG-v8-U3f">
-                    <rect key="frame" x="21" y="188" width="204" height="21"/>
+                    <rect key="frame" x="10" y="195" width="204" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="204" id="0OC-8K-hDP"/>
                         <constraint firstAttribute="height" constant="21" id="Jyd-X7-cik"/>
@@ -110,7 +110,7 @@
                 <constraint firstItem="DGx-07-pv3" firstAttribute="width" secondItem="oeD-U7-vPg" secondAttribute="width" id="DK7-2E-rBw"/>
                 <constraint firstItem="YgG-v8-U3f" firstAttribute="top" secondItem="EE7-DL-qru" secondAttribute="bottom" constant="13" id="LpQ-SM-ZIY"/>
                 <constraint firstItem="DGx-07-pv3" firstAttribute="height" secondItem="oeD-U7-vPg" secondAttribute="height" id="Nle-Sh-aJK"/>
-                <constraint firstItem="YgG-v8-U3f" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="21" id="OG6-d3-t0x"/>
+                <constraint firstItem="YgG-v8-U3f" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="OG6-d3-t0x"/>
                 <constraint firstItem="DGx-07-pv3" firstAttribute="leading" secondItem="dDg-5H-GgJ" secondAttribute="trailing" constant="20" id="Pbn-4d-AN9"/>
                 <constraint firstAttribute="trailing" secondItem="EE7-DL-qru" secondAttribute="trailing" id="Q0S-fi-cSB"/>
                 <constraint firstItem="oeD-U7-vPg" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Q5z-EP-fmS"/>
@@ -120,7 +120,7 @@
                 <constraint firstItem="oeD-U7-vPg" firstAttribute="leading" secondItem="DGx-07-pv3" secondAttribute="trailing" constant="21" id="ocS-TP-TFS"/>
                 <constraint firstItem="dDg-5H-GgJ" firstAttribute="height" secondItem="DGx-07-pv3" secondAttribute="height" id="pat-0s-eA7"/>
                 <constraint firstItem="EE7-DL-qru" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qk8-Qe-KOS"/>
-                <constraint firstItem="DGx-07-pv3" firstAttribute="top" secondItem="YgG-v8-U3f" secondAttribute="bottom" constant="9" id="s4x-mG-S1w"/>
+                <constraint firstItem="DGx-07-pv3" firstAttribute="top" secondItem="YgG-v8-U3f" secondAttribute="bottom" constant="2" id="s4x-mG-S1w"/>
                 <constraint firstItem="DGx-07-pv3" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="tDU-Di-3BP"/>
                 <constraint firstItem="dDg-5H-GgJ" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="xCL-kT-PdM"/>
             </constraints>
