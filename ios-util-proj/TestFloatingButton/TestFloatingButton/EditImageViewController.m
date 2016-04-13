@@ -14,7 +14,7 @@
 @interface EditImageViewController ()<DRPDrawViewDelegate>{
     BOOL isDrawed;
     UIBarButtonItem* saveButtonItem;
-    UIBarButtonItem* space;
+//    UIBarButtonItem* space;
     UIBarButtonItem* clearButtonItem;
 }
 @property (weak, nonatomic) IBOutlet UIButton *clearButton;
@@ -45,13 +45,10 @@
     [self.view addSubview:drawView];
     self.drawView = drawView;
     
-    self.navigationController.navigationBar.translucent = YES;//????
      saveButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存"
                                                        style:UIBarButtonItemStylePlain target:self action:@selector(saveButtonClicked)];
     
     
-    space =  [[UIBarButtonItem alloc] initWithTitle:@" "
-                                                  style:UIBarButtonItemStyleDone target:nil action:nil];
     
     clearButtonItem  = [[UIBarButtonItem alloc] initWithTitle:@"擦除"
                                                             style:UIBarButtonItemStylePlain target:self action:@selector(clearButtonClicked)];
@@ -62,7 +59,6 @@
     self.navigationItem.rightBarButtonItems = items;
 
     
-    // Do any additional setup after loading the view from its nib.
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -81,7 +77,6 @@
     
     // 防止截屏时引入将导航栏
     [self.navigationController.navigationBar setHidden:YES];
-    
     UIImage* image =  [UIHelper takeScreenshot];
     [self.navigationController.navigationBar setHidden:NO];
     [self.delegate imageEditFinish:image];
@@ -108,16 +103,17 @@
     
 }
 -(void)drawingInView:(DRPDrawView *)drawView{
-    isDrawed = YES;
-    NSArray* items = [NSArray arrayWithObjects:saveButtonItem,space,clearButtonItem,nil];
-    self.navigationItem.rightBarButtonItems = items;
+   //    NSLog(@"drawing...");
 }
 
 - (void)didStopDrawingInView:(DRPDrawView *)drawView{
+    isDrawed = YES;
+    NSArray* items = [NSArray arrayWithObjects:saveButtonItem,clearButtonItem,nil];
+    self.navigationItem.rightBarButtonItems = items;
 //    NSLog(@"end draw...");
   
 }
 
-//todo: 1.sdk-hide,sdk-show 2.将button和image对应
+//todo: 1将button和image对应
 
 @end

@@ -27,11 +27,12 @@ static TakoSdk* shareTakoSdk = nil;
 #define button_count 3
 #define button_alpha 1
 #define button_width 50
-#define originalFrame  CGRectMake(0, 380, button_width, button_width)
+#define originalFrame  CGRectMake(0, mainS.height-60, button_width, button_width)
 
 @implementation TakoSdk
 
 +(TakoSdk*)share{
+
     if (shareTakoSdk ==nil) {
         shareTakoSdk = [[TakoSdk alloc] init];
     }
@@ -291,7 +292,7 @@ static TakoSdk* shareTakoSdk = nil;
 
 
 // 对象释放
-- (void)destoryTakoSdk
+- (void)destory
 {
     [self.rootWindow resignKeyWindow];
     self.rootWindow = nil;

@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface FeedBackDetailViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIButton *thirdSelectButton;
 
+@property (weak, nonatomic) IBOutlet UIButton *secondSelectButton;
 @end
