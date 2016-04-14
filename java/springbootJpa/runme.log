@@ -32,4 +32,19 @@ ArtifactTransferException: Failure to transfer org.javassist:javassist:jar:3.18.
 解决方法：
 直接删除本地对应的cache库，然后重新update Dependency.
 
+2. use h2-database
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <optional>true</optional>
+    </dependency>
+</dependencies>
+
+3. h2.db
+http://localhost:8080/h2-console/
+
+
+
+
 
