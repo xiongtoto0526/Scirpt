@@ -10,6 +10,7 @@ import net.javabeat.spring.data.domain.Book;
 
 public interface BookQueryRepositoryExample extends Repository<Book, Long> {
 	
+	// 完全自定义的sql查询
 	@Query(value = "select * from #{#entityName} b where b.name=?1", nativeQuery = true)
 	List<Book> findByName(String name);
 

@@ -1,5 +1,6 @@
 package net.javabeat.spring.data.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +60,14 @@ public class BookServiceImpl implements BookService {
 
 	public void delete(long id) {
 		bookRepository.delete(id);
+	}
+	
+	public void insert(Book book) {
+		
+		bookRepository.save(book);
+	}
+	
+	public void batchInsert(List<Book> books) {
+		bookRepository.save(books);
 	}
 }

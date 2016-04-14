@@ -19,4 +19,8 @@ public interface BookService {
 	List<Book> findByPriceRange(long price1, long price2);
 	List<Book> findByNameMatch(String name);
 	List<Book> findByNamedParam(String name, String author, long price);
+	
+	public void insert(Book book) ;
+	public void batchInsert(List<Book> books) ;
+
 }

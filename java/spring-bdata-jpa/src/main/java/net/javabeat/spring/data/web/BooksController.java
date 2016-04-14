@@ -1,5 +1,6 @@
 package net.javabeat.spring.data.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,5 +73,31 @@ public class BooksController {
 	public List<Book> getBookByNameAndAuthor(@PathVariable String name, @PathVariable String author) {
 		List<Book> books = bookService.findByNameAndAuthor(name, author);
 		return books;
+	}
+	
+	@RequestMapping(value = "/insert/test")
+	public String insert() {
+		Book book = new Book();
+		book.setId(100);
+		book.setName("xht");
+		book.setAuthor("han-han");
+		book.setPrice(100);
+		bookService.insert(book);;
+		return "insert ok";
+	}
+	
+	@RequestMapping(value = "/batchInsert/test")
+	public String batchInsert() {
+		List<Book> books = new ArrayList<Book>();
+		for (int i = 101; i < 107; i++) {
+			Book book = new Book();
+			book.setId(i);
+			book.setName("xht"+i);
+			book.setAuthor("han-han"+i);
+			book.setPrice(i);
+			books.add(book);
+		}
+		bookService.batchInsert(books);;
+		return "batch insert ok";
 	}
 }
