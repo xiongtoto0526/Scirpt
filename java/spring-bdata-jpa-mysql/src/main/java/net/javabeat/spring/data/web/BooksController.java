@@ -75,6 +75,12 @@ public class BooksController {
 		return books;
 	}
 	
+	@RequestMapping(value = "/find/page/test")
+	public String findByPage() {
+		bookService.findAllByPage(null);
+		return "page ok";
+	}
+	
 	@RequestMapping(value = "/insert/test")
 	public String insert() {
 		Book book = new Book();
@@ -82,7 +88,7 @@ public class BooksController {
 		book.setName("xht");
 		book.setAuthor("han-han");
 		book.setPrice(100);
-		bookService.insert(book);;
+		bookService.insert(book);
 		return "insert ok";
 	}
 	
@@ -97,7 +103,7 @@ public class BooksController {
 			book.setPrice(i);
 			books.add(book);
 		}
-		bookService.batchInsert(books);;
+		bookService.batchInsert(books);
 		return "batch insert ok";
 	}
 }

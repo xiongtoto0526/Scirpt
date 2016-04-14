@@ -1,5 +1,7 @@
--- if provided, this script can not be null.
---use spring.datasource.schema and spring.datasource.data to change to location of the script
+--1.if provided, this script can not be null.
+--2.spring.datasource.schema and spring.datasource.data can be changed to redefine the location of the script
+--3.this script will run again,every time the app restart...
+drop table book;
 CREATE TABLE `book` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL COMMENT 'id标示',
