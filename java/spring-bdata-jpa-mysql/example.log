@@ -1,20 +1,3 @@
-WARN restartedMain org.hibernate.cfg.SettingsFactory - Unrecognized value for "hibernate.hbm2ddl.auto": .
-WARN restartedMain org.hibernate.cfg.SettingsFactory - Unrecognized value for "hibernate.hbm2ddl.auto": .
-DEBUG restartedMain org.springframework.data.repository.config.RepositoryComponentProvider - Identified candidate component class: file [/Users/xionghaitao/my_git_rep/script/java/spring-bdata-jpa-mysql/target/classes/net/javabeat/spring/data/service/BookNamedQueryRepositoryExample.class]
-DEBUG restartedMain org.springframework.data.repository.config.RepositoryComponentProvider - Identified candidate component class: file [/Users/xionghaitao/my_git_rep/script/java/spring-bdata-jpa-mysql/target/classes/net/javabeat/spring/data/service/BookOwnRepository.class]
-DEBUG restartedMain org.springframework.data.repository.config.RepositoryComponentProvider - Identified candidate component class: file [/Users/xionghaitao/my_git_rep/script/java/spring-bdata-jpa-mysql/target/classes/net/javabeat/spring/data/service/BookQueryRepositoryExample.class]
-DEBUG restartedMain org.springframework.data.repository.config.RepositoryComponentProvider - Identified candidate component class: file [/Users/xionghaitao/my_git_rep/script/java/spring-bdata-jpa-mysql/target/classes/net/javabeat/spring/data/service/BookRepository.class]
-DEBUG restartedMain org.springframework.data.repository.config.RepositoryConfigurationDelegate - Spring Data JPA - Registering repository: bookOwnRepository - Interface: net.javabeat.spring.data.service.BookOwnRepository - Factory: org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean
-DEBUG restartedMain org.springframework.data.repository.config.RepositoryConfigurationDelegate - Spring Data JPA - Registering repository: bookRepository - Interface: net.javabeat.spring.data.service.BookRepository - Factory: org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean
-DEBUG restartedMain org.springframework.data.repository.config.RepositoryConfigurationDelegate - Spring Data JPA - Registering repository: bookNamedQueryRepositoryExample - Interface: net.javabeat.spring.data.service.BookNamedQueryRepositoryExample - Factory: org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean
-DEBUG restartedMain org.springframework.data.repository.config.RepositoryConfigurationDelegate - Spring Data JPA - Registering repository: bookQueryRepositoryExample - Interface: net.javabeat.spring.data.service.BookQueryRepositoryExample - Factory: org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean
-WARN restartedMain org.hibernate.cfg.SettingsFactory - Unrecognized value for "hibernate.hbm2ddl.auto": .
-DEBUG restartedMain org.springframework.data.jpa.repository.query.JpaQueryFactory - Looking up query for method findByNameAndAuthor
-DEBUG restartedMain org.springframework.data.jpa.repository.query.NamedQuery - Looking up named query Book.findByNameAndAuthor
-DEBUG restartedMain org.springframework.data.jpa.repository.query.NamedQuery - Did not find named query Book.findByNameAndAuthor
-DEBUG restartedMain org.springframework.data.jpa.repository.query.JpaQueryFactory - Looking up query for method findByName
-DEBUG restartedMain org.springframework.data.jpa.repository.query.JpaQueryFactory - Looking up query for method findByName
-DEBUG restartedMain org.springframework.data.jpa.repository.query.JpaQueryFactory - Looking up query for method findByPriceRange
 DEBUG restartedMain org.springframework.data.jpa.repository.query.JpaQueryFactory - Looking up query for method findByNamedParam
 DEBUG restartedMain org.springframework.data.jpa.repository.query.JpaQueryFactory - Looking up query for method findByNameMatch
 DEBUG restartedMain org.springframework.data.jpa.repository.query.JpaQueryFactory - Looking up query for method findByPrice
