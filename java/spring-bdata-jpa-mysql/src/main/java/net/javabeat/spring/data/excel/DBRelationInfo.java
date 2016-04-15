@@ -1,6 +1,6 @@
 package net.javabeat.spring.data.excel;
 
-public class RelationInfo {
+public class DBRelationInfo {
 	int fileId;
 	String fileName;
 	int sheetId;

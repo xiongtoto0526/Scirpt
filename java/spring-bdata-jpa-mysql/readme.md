@@ -28,6 +28,17 @@ mysql-workbench
 解决方法：
 数据源配置出错，修改application.properties 
 
+启动错误：
+[PersistenceUnit: default] Unable to build Hibernate SessionFactory
+解决方法：
+实体缺少@ID定义
+参考：http://stackoverflow.com/questions/30158788/spring-boot-jta-error
+private static final long serialVersionUID = -741628085598136717L;
+//	
+//	@Column(name = "no")
+//	long no;
+//	@Column(name = "name"
+
 #reference
 http://www.tuicool.com/articles/zEz2QrY
 
