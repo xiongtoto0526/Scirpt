@@ -9,9 +9,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import net.javabeat.spring.data.domain.Book;
-import net.javabeat.spring.data.excel.CellValue;
+import net.javabeat.spring.data.excel.CellInfo;
 import net.javabeat.spring.data.excel.DBRelationInfo;
 import net.javabeat.spring.data.excel.MyBeanUtil;
 import net.javabeat.spring.data.service.MyExcelService;
@@ -74,7 +75,7 @@ public class MyExcelServiceImpl implements MyExcelService {
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	private <Book> void read2003Excel(File file) throws IOException {
+	private void read2003Excel(File file) throws IOException {
 		List<Object> list = new ArrayList<Object>();
 		HSSFWorkbook hwb = new HSSFWorkbook(new FileInputStream(file));
 		HSSFSheet sheet = hwb.getSheetAt(0);
@@ -125,7 +126,7 @@ public class MyExcelServiceImpl implements MyExcelService {
 				DecimalFormat nf = new DecimalFormat("0");// 两位小数格式
 				SimpleDateFormat sdf = new SimpleDateFormat(
 						"yyyy-MM-dd HH:mm:ss");// 日期格式
-				CellValue value = new CellValue();
+				CellInfo value = new CellInfo();
 
 				switch (cell.getCellType()) {
 				case XSSFCell.CELL_TYPE_STRING:
@@ -299,7 +300,7 @@ public class MyExcelServiceImpl implements MyExcelService {
 
 		// String fieldName = getModelFieldNameByRelation(relationInfo);
 		for (Object temp : value) {
-			CellValue a = (CellValue)temp;
+			CellInfo a = (CellInfo)temp;
 			System.out.print(a.getxName());
 			MyClassUtil.setClassFieldByValue(model, temp);
 		}
@@ -308,7 +309,18 @@ public class MyExcelServiceImpl implements MyExcelService {
 		return model;
 	}
 
-	public  Object buildModelFromCell(Object cell) {
+	/*
+	 * 特别注意：cell的这种入库方式，只适合使用id抽离之后。
+	 * 根据cell的输入信息构建model
+	 * cellKey: cell的key值
+	 * cellValue: cell的真实值
+	 * xKey: 横坐标的Key值（id，月份值）
+	 * xValue: 横坐标的值（id，月份值）
+	 * yKey: 纵坐标的Key值（id）
+	 * yValue: 纵坐标的值（id）
+	 * extValues: 其他属性的值（年，月，分摊比例，分摊人数）
+	 * */
+	public  CellInfo buildModelFromCell(String cellKey,Object cellValue,String xKey,Object xValue,String yKey,Object yValue,Map<String,Object>extValues) {
 		return null;
 	}
 

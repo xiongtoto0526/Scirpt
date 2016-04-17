@@ -6,22 +6,23 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.Map;
 
 import org.springframework.data.repository.CrudRepository;
 
 public class MyClassUtil {
 
-	public static <T> CrudRepository<T, Serializable> getRepoByModelName(
-			String modelName) {
-		// ctx.getbean(modelname)
+	public static Object setClassFieldByMap(Object model, Map<String,Object> destMap) {
+		
 		return null;
 	}
-
+	
+	
 	public static Object setClassFieldByValue(Object model, Object destValue) {
 		System.out.println(destValue);
 
 		Field[] field = model.getClass().getDeclaredFields(); // 获取实体类的所有属性，返回Field数组
-		CellValue cellValue = (CellValue) destValue;
+		CellInfo cellValue = (CellInfo) destValue;
 		
 		
         String fieldName = ExcelService.getFieldNameByColumeName(cellValue.xName);
@@ -88,6 +89,36 @@ public class MyClassUtil {
 		return model;
 	}
 
+	public static Object getInstanceByClassName(String className) {
+	
+			Class modelClass = null;
+			try {
+				modelClass = Class.forName(className);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				System.out.println("表名有误，无法实例化类:" + className);
+				e.printStackTrace();
+			}
+
+			// 获取类实例
+			Object model = null;
+			try {
+				model = modelClass.newInstance();// ?? why cast it again ??
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				System.out.println("类名有误，无法实例化类名:" + className);
+				e.printStackTrace();
+			}
+
+			return model;
+		}
+
+	
+
+	
 	public static Class getClassByName(String className) {
 		Class modelClass = null;
 		try {

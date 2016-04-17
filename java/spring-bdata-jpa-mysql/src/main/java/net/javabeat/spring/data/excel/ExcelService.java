@@ -102,7 +102,7 @@ public class ExcelService {
 				DecimalFormat nf = new DecimalFormat("0");// 两位小数格式
 				SimpleDateFormat sdf = new SimpleDateFormat(
 						"yyyy-MM-dd HH:mm:ss");// 日期格式
-				CellValue value = new CellValue();
+				CellInfo value = new CellInfo();
 
 				switch (cell.getCellType()) {
 				case XSSFCell.CELL_TYPE_STRING:
@@ -326,7 +326,7 @@ public class ExcelService {
 
 		// String fieldName = getModelFieldNameByRelation(relationInfo);
 		for (Object temp : value) {
-			CellValue a = (CellValue)temp;
+			CellInfo a = (CellInfo)temp;
 			System.out.print(a.xName);
 			MyClassUtil.setClassFieldByValue(model, temp);
 		}
