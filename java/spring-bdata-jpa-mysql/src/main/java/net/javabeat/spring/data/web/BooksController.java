@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.javabeat.spring.data.domain.Book;
-import net.javabeat.spring.data.excel.ExcelService;
 import net.javabeat.spring.data.service.BookService;
 
 @RestController
@@ -21,7 +20,7 @@ public class BooksController {
 	private BookService bookService;
 
 	@Autowired
-	private net.javabeat.spring.data.service.MyExcelService myExcelService;
+	private net.javabeat.spring.data.service.ExcelService excelService;
 	
 	@RequestMapping(value = "/add/{id}/{name}/{author}/{price}")
 	public Book addBook(@PathVariable int id, @PathVariable String name, @PathVariable String author,
@@ -116,7 +115,7 @@ public class BooksController {
 	@RequestMapping(value = "/excelinsert/test")
 	public String excelinsert() throws IOException {
 		java.io.File excelFile = new java.io.File("student_info.xls");
-		myExcelService.readExcel(excelFile);
+		excelService.readExcel(excelFile);
 		return "excel insert ok";
 	}
 	

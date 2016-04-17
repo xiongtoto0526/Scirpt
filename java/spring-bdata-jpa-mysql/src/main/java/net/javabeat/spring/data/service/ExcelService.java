@@ -5,6 +5,6 @@ import java.util.List;
 
 import net.javabeat.spring.data.domain.Book;
 
-public interface MyExcelService {
+public interface ExcelService {
 	public void readExcel(File file);
 }

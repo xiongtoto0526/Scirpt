@@ -24,7 +24,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public class BookExcelServiceImpl implements MyExcelService {
+public class TestExcelServiceImpl implements ExcelService {
 
 	@Override
 	public void readExcel(File file) {
