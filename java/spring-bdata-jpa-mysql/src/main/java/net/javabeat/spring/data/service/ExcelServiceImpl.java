@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.javabeat.spring.data.excel.CellInfo;
+import net.javabeat.spring.data.excel.ExcelHelper;
 import net.javabeat.spring.data.excel.MyBeanUtil;
 import net.javabeat.spring.data.excel.MyClassUtil;
 
@@ -24,7 +25,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public class TestExcelServiceImpl implements ExcelService {
+public class ExcelServiceImpl implements ExcelService {
 
 	@Override
 	public void readExcel(File file) {
@@ -173,7 +174,7 @@ public class TestExcelServiceImpl implements ExcelService {
 	/*
 	 * 根据输入，输出一个可直接入库的model模型对象
 	 */
-	public Object buildModelFromCell(Object model,
+	private Object buildModelFromCell(Object model,
 			Map<Integer, Object> xValues, Map<Integer, Object> yValues,
 			Map<String, Object> extMap, CellInfo cellInfo) {
 
@@ -189,7 +190,7 @@ public class TestExcelServiceImpl implements ExcelService {
 		return model;
 	}
 
-	public static String getTableName(String sheetName) {
+	private String getTableName(String sheetName) {
 		// todo: 从DB中查找到tableName
 		sheetName = "Book_sheet";
 

@@ -1,7 +1,8 @@
-package net.javabeat.spring.data.service;
+package net.javabeat.spring.data.excel;
 
 import net.javabeat.spring.data.excel.MyBeanUtil;
 import net.javabeat.spring.data.excel.MyClassUtil;
+import net.javabeat.spring.data.service.CellService;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
