@@ -58,39 +58,32 @@ public class BookExcelServiceImpl implements MyExcelService {
 		Map<Integer, Object> xValues = new HashMap<Integer, Object>();// 横轴对应的id集合
 		Map<Integer, Object> yValues = new HashMap<Integer, Object>();// 纵轴对应的id集合
 
-		// 0.获取表名
-		String tableName = ExcelHelper.getTableName("book_sheet");
-
-		// 2. 获取实体类名
-		String modelClassName = ExcelHelper.getModleClassName(tableName);
-
-		// 1. 获取db对象
+		// 获取表名
+		String tableName = getTableName("book_sheet");
+		// 获取实体类名
+		String modelClassName = ExcelHelper.getModelClassName(tableName);
+		// 获取db对象
 		JpaRepository rep = ExcelHelper.getRepositoryObject(modelClassName);
-
-		// 1.1 获取service
+		// 获取service
 		CellService cellService = ExcelHelper
 				.getCellServiceObject(modelClassName);
-
-		// 3. 获取横轴和纵轴对应的table列名
+		// 获取横轴和纵轴对应的table列名
 		String xHeaderKey = cellService.getXkey();
 		String yHeaderKey = cellService.getXkey();
-
-		// 4. 读取第一行的所有列名,行名Id。
+		// 获取列名,行名Id。
 		xValues = cellService.getXvalues(sheet);
 		yValues = cellService.getYvalues(sheet);
+		// 获取其他属性。如模板Id，年，月
+		Map<String, Object> extMap = cellService.buildExtMap("book_sheet");
 
-		// 6. 获取extMap的属性。如模板Id，年，月
-		Map<String, Object> extMap = cellService.buildExtMap(null, null,
-				"book_sheet");
+		// 7. todo:将sheet分三块。比例，金额，人数。重复提取才能入库
 
-		// 7. todo:将sheet进行分三块。比例，金额，人数。重复提取才能入库
-
-		// 逐行读取。
+		// 开始读取内容
 		int counter = 0;
-		for (int i = sheet.getFirstRowNum(); counter < sheet
-				.getPhysicalNumberOfRows(); i++) {
-
-			Object model = MyClassUtil.getInstanceByClassName(modelClassName);
+		int startIndex = sheet.getFirstRowNum();
+		int endIndex = sheet.getPhysicalNumberOfRows();
+		for (int i = startIndex; counter < endIndex; i++) {
+			Object model = ExcelHelper.getModelObject(modelClassName);
 			row = sheet.getRow(i);
 
 			// 到达行尾则返回
@@ -112,13 +105,14 @@ public class BookExcelServiceImpl implements MyExcelService {
 				DecimalFormat nf = new DecimalFormat("0");// 两位小数格式
 				SimpleDateFormat sdf = new SimpleDateFormat(
 						"yyyy-MM-dd HH:mm:ss");// 日期格式
-				
+
+				// 创建cellInfo记录信息
 				CellInfo cellInfo = new CellInfo();
 				cellInfo.setxHeaderKey(xHeaderKey);
-				cellInfo.setxHeaderKey(yHeaderKey);
+				cellInfo.setyHeaderKey(yHeaderKey);
 				cellInfo.setColumnId(cell.getColumnIndex());
 				cellInfo.setRowId(cell.getRowIndex());
-				
+
 				switch (cell.getCellType()) {
 				case XSSFCell.CELL_TYPE_STRING:
 					System.out.println(i + "行" + j + " 列 is String type");
@@ -134,8 +128,8 @@ public class BookExcelServiceImpl implements MyExcelService {
 							.getDataFormatString())) {
 						cellInfo.setValue(nf.format(cell.getNumericCellValue()));
 					} else {
-						cellInfo.setValue(sdf.format(HSSFDateUtil.getJavaDate(cell
-								.getNumericCellValue())));
+						cellInfo.setValue(sdf.format(HSSFDateUtil
+								.getJavaDate(cell.getNumericCellValue())));
 					}
 					break;
 				case XSSFCell.CELL_TYPE_BOOLEAN:
@@ -158,21 +152,20 @@ public class BookExcelServiceImpl implements MyExcelService {
 				}
 
 				// 构建一个model
-				String cellKey = cellService.getCellkey(cell,null);
+				String cellKey = cellService.getCellkey(cell, null);
 				cellInfo.setCellKey(cellKey);
-				Object newModelInstance = buildModelFromCell(model,xValues, yValues,
-						extMap,cellInfo);
+				Object newModelInstance = buildModelFromCell(model, xValues,
+						yValues, extMap, cellInfo);
 
 				// 将每行的值保存到list
 				list.add(newModelInstance);
 			}
 		}
 
-
 		// 2. 保存
 		System.out.print("1...");
-		// 选择入库策略：没个sheet读取所有的数据后，一次性插入。内存中驻留的数据最大是，number_x * number_y 。
-		int importMode = 1; // 1: 全sheet一次性入库。目前可以直接入 ,// 2: 一次入库最大条1000. 
+		// 选择入库策略： sheet一次性入库.
+		int importMode = 1;
 		rep.save(list);
 		System.out.print("2...");
 	}
@@ -180,16 +173,30 @@ public class BookExcelServiceImpl implements MyExcelService {
 	/*
 	 * 根据输入，输出一个可直接入库的model模型对象
 	 */
-	public Object buildModelFromCell(Object model,Map<Integer, Object> xValues,
-			Map<Integer, Object> yValues,Map<String, Object> extMap, CellInfo cellInfo) {
-		
-		Map<String,Object> destMap = new HashMap<String,Object>();
-		destMap.put(cellInfo.getxHeaderKey(), xValues.get(Integer.valueOf(cellInfo.getColumnId())));
-		destMap.put(cellInfo.getyHeaderKey(), yValues.get(Integer.valueOf(cellInfo.getRowId())));
+	public Object buildModelFromCell(Object model,
+			Map<Integer, Object> xValues, Map<Integer, Object> yValues,
+			Map<String, Object> extMap, CellInfo cellInfo) {
+
+		Map<String, Object> destMap = new HashMap<String, Object>();
+		destMap.put(cellInfo.getxHeaderKey(),
+				xValues.get(Integer.valueOf(cellInfo.getColumnId())));
+		destMap.put(cellInfo.getyHeaderKey(),
+				yValues.get(Integer.valueOf(cellInfo.getRowId())));
 		destMap.put(cellInfo.getCellKey(), cellInfo.getValue());
 		destMap.putAll(extMap);
-		
-        MyClassUtil.setClassFieldByMap(model, destMap);
+
+		MyClassUtil.setClassFieldByMap(model, destMap);
 		return model;
 	}
+
+	public static String getTableName(String sheetName) {
+		// todo: 从DB中查找到tableName
+		sheetName = "Book_sheet";
+
+		if (sheetName.equals("Book_sheet")) {
+			return "book_table";
+		}
+		return null;
+	}
+
 }

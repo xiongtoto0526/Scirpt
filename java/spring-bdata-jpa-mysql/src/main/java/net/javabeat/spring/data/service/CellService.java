@@ -13,12 +13,12 @@ public interface CellService {
 	public Object getXValue(String xKey);
 	public String getYkey();
 	public Object getYValue(String yKey);
-	public String getCellkey(Object cellValue,Object... ext);
 	
 	public Map<Integer, Object> getXvalues(HSSFSheet sheet);
 	public Map<Integer, Object> getYvalues(HSSFSheet sheet);
 	
+	public String getCellkey(Object cellValue,Object... ext);
 	
-	public Map<String,Object> buildExtMap(Long xId,Long yId,String sheetName,Object... ext);
+	public Map<String,Object> buildExtMap(String sheetName,Object... ext);
 	
 }
