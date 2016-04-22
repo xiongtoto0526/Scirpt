@@ -1,6 +1,0 @@
-DEBUG restartedMain org.springframework.data.jpa.repository.query.JpaQueryFactory - Looking up query for method findByNamedParam
-DEBUG restartedMain org.springframework.data.jpa.repository.query.JpaQueryFactory - Looking up query for method findByNameMatch
-DEBUG restartedMain org.springframework.data.jpa.repository.query.JpaQueryFactory - Looking up query for method findByPrice
-DEBUG restartedMain org.springframework.data.jpa.repository.query.NamedQuery - Looking up named query Book.findByPrice
-DEBUG restartedMain org.springframework.data.jpa.repository.query.NamedQuery - Did not find named query Book.findByPrice.count
-DEBUG restartedMain org.springframework.data.jpa.repository.query.NamedQuery - Found named query Book.findByPrice!
