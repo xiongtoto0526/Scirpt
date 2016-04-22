@@ -2,7 +2,7 @@ package net.javabeat.spring.data.excel;
 
 import net.javabeat.spring.data.excel.MyBeanUtil;
 import net.javabeat.spring.data.excel.MyClassUtil;
-import net.javabeat.spring.data.service.CellService;
+import net.javabeat.spring.data.service.SheetService;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,28 +13,24 @@ public class ExcelHelper {
 
 
 	public static String getModelClassName(String tableName) {
-		return domainPackageName
-		+ getModelName(tableName);
+		return getModelName(tableName);
 	}
 	
 	public static String getModelName(String tableName) {
 		// todo: 从DB中查找到tableName
 	    tableName = "Book_table";
 	    
-		if (tableName.equals("book_table")) {
+		if (tableName.equals("Book_table")) {
 			return "Book";
 		}
 		return null;
 	}
 	
-	public static CellService getCellServiceObject(String modelClassName){
-		String cellServiceClassName = servicePackageName + modelClassName
-				+ "cellServiceImpl";
-		Class cellServiceClass = MyClassUtil
-				.getClassByName(cellServiceClassName);
-		CellService cellService = (CellService) MyBeanUtil
-				.getBean(cellServiceClass);
-		return cellService;
+	public static SheetService getSheetServiceObject(String modelClassName){
+		String sheetServiceClassName = servicePackageName + modelClassName
+				+ "SheetServiceImpl";
+		SheetService sheetService = (SheetService)MyClassUtil.getInstanceByClassName(sheetServiceClassName);
+		return sheetService;
 	}
 	
 	public static JpaRepository getRepositoryObject(String modelClassName) {

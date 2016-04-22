@@ -24,7 +24,11 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 public class ExcelServiceImpl implements ExcelService {
 
 	@Override
@@ -56,9 +60,6 @@ public class ExcelServiceImpl implements ExcelService {
 		HSSFRow row = null;
 		HSSFCell cell = null;
 
-		Map<Integer, Object> xValues = new HashMap<Integer, Object>();// 横轴对应的id集合
-		Map<Integer, Object> yValues = new HashMap<Integer, Object>();// 纵轴对应的id集合
-
 		// 获取表名
 		String tableName = getTableName("book_sheet");
 		// 获取实体类名
@@ -66,16 +67,16 @@ public class ExcelServiceImpl implements ExcelService {
 		// 获取db对象
 		JpaRepository rep = ExcelHelper.getRepositoryObject(modelClassName);
 		// 获取service
-		CellService cellService = ExcelHelper
-				.getCellServiceObject(modelClassName);
+		SheetService sheetService = ExcelHelper
+				.getSheetServiceObject(modelClassName);
 		// 获取横轴和纵轴对应的table列名
-		String xHeaderKey = cellService.getXkey();
-		String yHeaderKey = cellService.getXkey();
+		String xHeaderKey = sheetService.getXkey();
+		String yHeaderKey = sheetService.getXkey();
 		// 获取列名,行名Id。
-		xValues = cellService.getXvalues(sheet);
-		yValues = cellService.getYvalues(sheet);
+		Map<Integer, Object> xValues = sheetService.getXvalues(sheet);
+		Map<Integer, Object> yValues = sheetService.getYvalues(sheet);
 		// 获取其他属性。如模板Id，年，月
-		Map<String, Object> extMap = cellService.buildExtMap("book_sheet");
+		Map<String, Object> extMap = sheetService.buildExtMap("book_sheet");
 
 		// 7. todo:将sheet分三块。比例，金额，人数。重复提取才能入库
 
@@ -153,7 +154,7 @@ public class ExcelServiceImpl implements ExcelService {
 				}
 
 				// 构建一个model
-				String cellKey = cellService.getCellkey(cell, null);
+				String cellKey = sheetService.getCellkey(cell, null);
 				cellInfo.setCellKey(cellKey);
 				Object newModelInstance = buildModelFromCell(model, xValues,
 						yValues, extMap, cellInfo);

@@ -6,8 +6,12 @@ import java.util.Map;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-public class BookCellServiceImpl implements CellService {
+@Service
+@Transactional
+public class BookSheetServiceImpl implements SheetService {
 
 	@Override
 	public String getXkey() {
@@ -38,11 +42,11 @@ public class BookCellServiceImpl implements CellService {
 	@Override
 	public String getCellkey(Object cellValue, Object... ext) {
 		// TODO :每个表不一样，有的表连续两行的属性值不一样.如百分比和整形值。根据传入的value类型，或传入的额外参数来判断CellKey
-		if (cellValue instanceof Integer) {
-			return "shareAmount";
-		} else if (cellValue instanceof String) {
-			return "sharePro";
-		}
+//		if (cellValue instanceof Integer) {
+//			return "shareAmount";
+//		} else if (cellValue instanceof String) {
+//			return "sharePro";
+//		}
 		return "defaultCellKey";
 	}
 

@@ -1,31 +1,26 @@
-package net.javabeat.spring.data.web;
+package com.xht.myApp.web;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.tomcat.jni.File;
+import com.xht.myApp.domain.Book;
+import com.xht.myApp.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.javabeat.spring.data.domain.Book;
-import net.javabeat.spring.data.service.BookService;
-import net.javabeat.spring.data.service.ExcelService;
+
 
 @RestController
 @RequestMapping(value = "/books")
 public class BooksController {
 	@Autowired
 	private BookService bookService;
-
-	@Autowired
-	private ExcelService excelService;
 	
 	@RequestMapping(value = "/add/{id}/{name}/{author}/{price}")
 	public Book addBook(@PathVariable int id, @PathVariable String name, @PathVariable String author,
-			@PathVariable long price) {
+						@PathVariable long price) {
 		Book book = new Book();
 		book.setId(id);
 		book.setName(name);
@@ -111,13 +106,6 @@ public class BooksController {
 		}
 		bookService.batchInsert(books);
 		return "batch insert ok";
-	}
-	
-	@RequestMapping(value = "/excelinsert/test")
-	public String excelinsert() throws IOException {
-		java.io.File excelFile = new java.io.File("student_info.xls");
-		excelService.readExcel(excelFile);
-		return "excel insert ok";
 	}
 	
 }

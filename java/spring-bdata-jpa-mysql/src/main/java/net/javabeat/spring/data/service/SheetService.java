@@ -7,11 +7,12 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 
 
 // 对于x-y-value类型的入库方式，可以使用下面service
-public interface CellService {
+public interface SheetService {
 	
 	public String getXkey();
 	public Object getXValue(String xKey);
 	public String getYkey();
+
 	public Object getYValue(String yKey);
 	
 	public Map<Integer, Object> getXvalues(HSSFSheet sheet);
