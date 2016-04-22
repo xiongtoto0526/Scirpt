@@ -1,4 +1,4 @@
-You want init a gradle project by command with the source code ? so,follow me:
+You want init a gradle project by command with the source code ? follow me:
 
 1. download the the src dir .
 2. in terminal, use : gradle init .
