@@ -1,15 +1,12 @@
-package com.xht.myApp.service;
+package net.javabeat.spring.data.service;
 
 import java.util.List;
 
-import com.xht.myApp.domain.Book;
-import com.xht.myApp.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.javabeat.spring.data.domain.Book;
 
 @Service
 @Transactional
@@ -21,15 +18,10 @@ public class BookServiceImpl implements BookService {
 	@Autowired
 	private BookQueryRepositoryExample bookQueryRepository;
 	@Autowired
-	private BookNamedQueryRepositoryExample bookNamedQueryRepository;
+	private BookNamedQueryRepositoryExample bookNamedQueryRepository;	
 
 	public List<Book> findAll() {
 		return bookRepository.findAll();
-	}
-	
-	public Page<Book> findAllByPage(PageRequest request) {
-		request = new PageRequest(1, 2);
-		return bookRepository.findAll(request);
 	}
 
 	public List<Book> findByName(String name) {
@@ -61,25 +53,11 @@ public class BookServiceImpl implements BookService {
 	}
 
 	public Book findOne(long id) {
+		System.out.println("Cached Pages");
 		return bookRepository.findOne(id);
 	}
 
 	public void delete(long id) {
 		bookRepository.delete(id);
-	}
-	
-	@Transactional
-	public void insert(Book book) {
-		bookRepository.save(book);
-	}
-	
-	@Transactional
-	public void batchInsert(List<Book> books) {
-		bookRepository.save(books);
-	}
-
-	@Override
-	public List<NOName> findById(long id) {
-		return bookRepository.findById(id);
 	}
 }

@@ -1,14 +1,10 @@
-package com.xht.myApp.service;
+package net.javabeat.spring.data.service;
 
 import java.util.List;
 
-import com.xht.myApp.domain.Book;
-//import com.xht.myApp.repository.NoName;
-import com.xht.myApp.repository.NOName;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 
+import net.javabeat.spring.data.domain.Book;
 
 public interface BookService {
 	public List<Book> findAll();
@@ -23,9 +19,4 @@ public interface BookService {
 	List<Book> findByPriceRange(long price1, long price2);
 	List<Book> findByNameMatch(String name);
 	List<Book> findByNamedParam(String name, String author, long price);
-	public Page<Book> findAllByPage(PageRequest request);
-	public void insert(Book book) ;
-	public void batchInsert(List<Book> books) ;
-	public List<NOName> findById(long id);
-
 }
