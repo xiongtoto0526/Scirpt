@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Global go install script
+
+# For all platform, please refer to https://golang.org/doc/install/source
+
+# set -x
+cd bin
+./myPackage

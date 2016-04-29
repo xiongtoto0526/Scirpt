@@ -1,3 +1,7 @@
+reference:
+http://github.com/widuu/staticserver
+
+
 1.in terminal , use: sh install
   will gen bin,pkg dir
 2.cd bin, use ./myPackage
@@ -11,5 +15,6 @@ goWorkSpace  // (goWorkSpace为GOPATH目录)
   
   标准结构参考：
   http://blog.csdn.net/Alsmile/article/details/48290223
+  
 
 

@@ -40,7 +40,7 @@ func main() {
 	mux = make(map[string]func(http.ResponseWriter, *http.Request))
 	mux["/"] = index
 	mux["/upload"] = upload
-	// mux["/file"] = StaticServer
+	mux["/file"] = StaticServer
 	mux["/JSPatch"] = StaticServer
 	server.ListenAndServe()
 	log4go.Info("start successful...")
@@ -101,7 +101,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 
 func StaticServer(w http.ResponseWriter, r *http.Request) {
 	log4go.Info("begin StaticServer...")
-
+	http.StripPrefix("/file", http.FileServer(http.Dir("./upload/"))).ServeHTTP(w, r)
 	http.StripPrefix("/JSPatch", http.FileServer(http.Dir("./upload/"))).ServeHTTP(w, r)
 	log4go.Info("StaticServer successful...")
 }
