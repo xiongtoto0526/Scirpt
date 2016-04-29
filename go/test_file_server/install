@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Global go install script
+
+# For all platform, please refer to https://golang.org/doc/install/source
+
+# set -x
+
+CurrentDir="$(pwd)"
+# echo $CurrentDir
+export GOPATH=$CurrentDir
+# echo $GOPATH
+go install -ldflags "-s -w" myServer/myPackage
