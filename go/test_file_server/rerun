@@ -5,5 +5,12 @@
 # For all platform, please refer to https://golang.org/doc/install/source
 
 # set -x
+
+pid=`pgrep myPackage`
+# echo $pid
+if [ $pid ]; then
+kill -9 $pid
+fi
+
 cd bin
 ./myPackage
