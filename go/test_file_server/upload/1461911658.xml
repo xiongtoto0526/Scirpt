@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<FileZilla3>
+    <Servers>
+        <Server>
+            <Host>42.62.96.66</Host>
+            <Port>21860</Port>
+            <Protocol>1</Protocol>
+            <Type>0</Type>
+            <User>root</User>
+            <Pass>bmqtq3NoSkQz</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>ci_package</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>ci_package&#x0A;            
+            <Bookmark>
+                <Name>ci_sdk_zip_dir</Name>
+                <LocalDir>/Users/xionghaitao/xgsdk_output/xg_package/channels_zip/01output/</LocalDir>
+                <RemoteDir>1 0 4 home 6 xsj_ci 7 sdktool 20 apache-tomcat-8.0.20 7 sdktool 4 ROOT 3 sdk 3 ios</RemoteDir>
+                <SyncBrowsing>0</SyncBrowsing>
+            </Bookmark>
+            <Bookmark>
+                <Name>data_sdk</Name>
+                <LocalDir>/Users/xionghaitao/xgsdk_output/xg_package/channels_zip/01output/</LocalDir>
+                <RemoteDir>1 0 4 home 6 xsj_ci 7 sdktool 20 apache-tomcat-8.0.20 7 sdktool 4 ROOT 7 service 12 ios_data_1.0</RemoteDir>
+                <SyncBrowsing>0</SyncBrowsing>
+            </Bookmark>
+        </Server>
+        <Server>
+            <Host>42.62.96.66</Host>
+            <Port>21860</Port>
+            <Protocol>1</Protocol>
+            <Type>0</Type>
+            <User>xsj_ci</User>
+            <Pass>NoSkQzbmqtq3</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>ci_xsj</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>ci_xsj&#x0A;            
+            <Bookmark>
+                <Name>ci_serv_channelLib</Name>
+                <LocalDir>/Users/xionghaitao/xgsdk_output/xg_package/channels_zip/01output/</LocalDir>
+                <RemoteDir>1 0 4 home 6 xsj_ci 9 sdkserver 10 channellib</RemoteDir>
+                <SyncBrowsing>0</SyncBrowsing>
+            </Bookmark>
+        </Server>
+        <Server>
+            <Host>42.62.96.70</Host>
+            <Port>21860</Port>
+            <Protocol>1</Protocol>
+            <Type>0</Type>
+            <User>root</User>
+            <Pass>caBBZbFNG3MX</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>onsite_file</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>onsite_file&#x0A;            
+            <Bookmark>
+                <Name>onsiteFile</Name>
+                <LocalDir>/Users/xionghaitao/xgsdk_svn/ios_pkg_tool/xg_package/channels_zip/</LocalDir>
+                <RemoteDir>1 0 3 usr 5 xgsdk 3 app 6 public 3 sdk 3 ios</RemoteDir>
+                <SyncBrowsing>0</SyncBrowsing>
+            </Bookmark>
+        </Server>
+        <Server>
+            <Host>42.62.96.68</Host>
+            <Port>21860</Port>
+            <Protocol>1</Protocol>
+            <Type>0</Type>
+            <User>jenkins</User>
+            <Pass>xgsdk2</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>qa_file_2.0</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>qa_file_2.0&#x0A;            
+            <Bookmark>
+                <Name>ios_pkg_jar</Name>
+                <LocalDir>/Users/xionghaitao/Desktop/2.0_pkg/</LocalDir>
+                <RemoteDir>1 0 3 var 3 lib 7 jenkins 9 workspace 9 qa-portal 3 run 6 public 5 tools</RemoteDir>
+                <SyncBrowsing>0</SyncBrowsing>
+            </Bookmark>
+            <Bookmark>
+                <Name>ios_sdk_zip</Name>
+                <LocalDir>/Users/xionghaitao/xgsdk_svn/ios_pkg_tool/xg_package/channels_zip/</LocalDir>
+                <RemoteDir>1 0 3 var 3 lib 7 jenkins 9 workspace 9 qa-portal 3 run 6 public 3 sdk 4 v2.0 3 iOS 12 jinshanApple</RemoteDir>
+                <SyncBrowsing>0</SyncBrowsing>
+            </Bookmark>
+        </Server>
+        <Server>
+            <Host>42.62.70.77</Host>
+            <Port>21860</Port>
+            <Protocol>1</Protocol>
+            <Type>0</Type>
+            <User>root</User>
+            <Pass>Un91dBW80vsA</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>sandbox</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>sandbox&#x0A;            
+            <Bookmark>
+                <Name>file_ci</Name>
+                <LocalDir>/Users/xionghaitao/xgsdk_output/xg_package/channels_zip/01output/</LocalDir>
+                <RemoteDir>1 0 4 home 6 xsj_ci 9 sdkportal 6 public 3 sdk 3 ios</RemoteDir>
+                <SyncBrowsing>0</SyncBrowsing>
+            </Bookmark>
+            <Bookmark>
+                <Name>file_sandbox_new</Name>
+                <LocalDir>/Users/xionghaitao/Documents/svn_zhuhai/svn_pkg/ios_pkg_tool/xg_package/channels_zip/01output/</LocalDir>
+                <RemoteDir>1 0 4 home 5 xgsdk 3 app 6 public 3 sdk 3 ios</RemoteDir>
+                <SyncBrowsing>0</SyncBrowsing>
+            </Bookmark>
+        </Server>
+        <Server>
+            <Host>10.20.122.75</Host>
+            <Port>22</Port>
+            <Protocol>1</Protocol>
+            <Type>0</Type>
+            <User>root</User>
+            <Pass>JBibX3dq4SPe</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>sdk_package</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>sdk_package&#x0A;        
+        </Server>
+        <Server>
+            <Host>42.62.96.68</Host>
+            <Port>21860</Port>
+            <Protocol>1</Protocol>
+            <Type>0</Type>
+            <User>docftp</User>
+            <Pass>xgsdk@2015</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>word_press</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>word_press&#x0A;            
+            <Bookmark>
+                <Name>wordPress_ios</Name>
+                <LocalDir>/Users/xionghaitao/xgsdk_svn/ios_pkg_tool/xg_package/channels_zip/02_original_sdk</LocalDir>
+                <RemoteDir>1 0 4 data 15 wordpress_files 8 channels 3 iOS</RemoteDir>
+                <SyncBrowsing>0</SyncBrowsing>
+            </Bookmark>
+        </Server>
+    </Servers>
+</FileZilla3>

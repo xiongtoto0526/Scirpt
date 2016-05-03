@@ -1,0 +1,87 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;test_file_server&gt;">
+    <CLASSES>
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/gopkg.in" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/labix.org" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/golang.org" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/.DS_Store" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/docs.go" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/web.go-cors" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/swagger-ui" />
+      <root url="file://$USER_HOME$/github_local_rep/betatest/gotako/src/takows" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/web.go" />
+      <root url="file://$PROJECT_DIR$/../testMethod/src/genSql.go" />
+      <root url="file://$PROJECT_DIR$/../testMethod/src/mongoDBUtilxht.go" />
+      <root url="file://$PROJECT_DIR$/../testMethod/src/test" />
+      <root url="file://$PROJECT_DIR$/../testMethod/src/testStruct.go" />
+      <root url="file://$PROJECT_DIR$/../testMethod/src/mongoDBUtil.go" />
+      <root url="file://$PROJECT_DIR$/../testMethod/src/readFile" />
+      <root url="file://$PROJECT_DIR$/../testMethod/src/apiProject" />
+      <root url="file://$PROJECT_DIR$/../testMethod/src/myProject" />
+      <root url="file://$PROJECT_DIR$/../testMethod/src/.DS_Store" />
+      <root url="file://$PROJECT_DIR$/../testMethod/src/method.go" />
+      <root url="file://$PROJECT_DIR$/../testMethod/src/genSql" />
+      <root url="file://$PROJECT_DIR$/../testMethod/src/myTestClass.go" />
+      <root url="file://$PROJECT_DIR$/../testMethod/src/swagger-demo" />
+      <root url="file://$USER_HOME$/github_local_rep/betatest/gotako/src/takocmn" />
+      <root url="file://$USER_HOME$/github_local_rep/betatest/gotako/src/takofs" />
+      <root url="file://$USER_HOME$/github_local_rep/betatest/gotako/src/github.com" />
+      <root url="file://$USER_HOME$/github_local_rep/betatest/gotako/src/takoup" />
+      <root url="file://$USER_HOME$/github_local_rep/betatest/gotako/src/.DS_Store" />
+      <root url="file://$USER_HOME$/github_local_rep/betatest/gotako/src/docs.go" />
+      <root url="file://$USER_HOME$/github_local_rep/betatest/gotako/src/swagger-ui" />
+      <root url="file://$USER_HOME$/github_local_rep/betatest/gotako/src/web.go" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <excluded>
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/mattn/go-isatty/_example" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/mattn/go-colorable/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/fvbock/endless/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/nu7hatch/gouuid/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/gocraft/web/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/mattn/go-colorable/_example" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/rs/xhandler/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/davecgh/go-spew/spew/testdata" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/goinggo/tracelog/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/mgutz/ansi/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/axgle/mahonia/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/stretchr/testify/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/golang.org/x/net/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/gopkg.in/mgo.v2/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/mgutz/logxi/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/yvasiyarov/swagger/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/smartystreets/assertions/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/goinggo/beego-mgo/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/beego/bee/testdata" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/howeyc/fsnotify/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/go-sql-driver/mysql/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/golang.org/x/net/html/testdata" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/axgle/pinyin/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/jtolds/gls/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/goinggo/beego-mgo/go-i18n/goi18n/testdata" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/rs/cors/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/lib/pq/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/DHowett/go-plist/.git" />
+      <root url="file://$PROJECT_DIR$" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/beego/bee/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/smartystreets/goconvey/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/mssola/user_agent/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/alecthomas/log4go/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/golang.org/x/net/html/charset/testdata" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/kimiazhu/log4go/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/ks3sdklib/aws-sdk-go/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/kelseyhightower/envconfig/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/golang.org/x/net/http2/testdata" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/bitly/go-simplejson/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/mattn/go-isatty/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/davecgh/go-spew/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/widuu/gojson/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/pmezard/go-difflib/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/golang.org/x/sys/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/golibs/src/github.com/skratchdot/open-golang/.git" />
+      <root url="file://$USER_HOME$/github_local_rep/betatest/gotako/src/github.com/astaxie/beego/utils/testdata" />
+    </excluded>
+  </library>
+</component>
