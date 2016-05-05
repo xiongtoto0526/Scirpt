@@ -1,0 +1,154 @@
+/*@import url('black.css');*/
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,
+th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {margin:0;padding:0;}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section { display:block;}
+audio,canvas,video { display: inline-block;*display: inline;*zoom: 1;}
+input,select,textarea{font-size:100%;}
+table{border-collapse:collapse;border-spacing:0;}
+th{text-align:inherit;}
+input[type=button]{-webkit-appearance:none;outline:none}
+.window { position: relative; overflow: hidden; border-radius: 5px; padding: 3%; height: 90%; }
+.head { text-align: center; height: 9%; }
+p { display:inline; font-size: .9em; }
+.head p { margin-top: 2%; font-size: 1.2em; }
+.head #closeBtn { background: url('closes.png') no-repeat; background-size:auto 100%; background-position: right top; border: 0px;
+    position: absolute; right: 4%; top:4%; width: 28%; height: 10%; }
+.head #closeBtn.mini {}
+.head #backBtn { background: url('back.png') no-repeat; background-size:auto 100%; border: 0px;
+    position: absolute; left: 4%; top: 4%; width: 28%; height: 10%; }
+.main { width: 100%;}
+.edit {position: relative; margin: 3% auto 0; width:76%; }
+.edit, .editCaptcha input { height: 15%; line-height: 13%; border:#f2f2f2 solid 1px; border-radius: 0.2em; background-color:#fff;}
+
+.edit input { padding:0 10%; line-height:110%; border:0; width:90%; height: 100%;  color: #83919e;
+    font-size: 1.0em }
+.edit input#account { background: url('account_icon.png') no-repeat right;  }
+.edit input#pwd { background: url('password_icon.png') no-repeat right; }
+.edit input#phoneNumber {background: url('phone_icon.png') no-repeat right; }
+.edit input#phone { }
+.edit input#cardNumber { width: 100%; }
+.edit input#cardPwd { width: 100%; }
+.editCaptcha { margin: 3% auto 0; text-align: center; height:15%; }
+.editCaptcha input { height:100%; line-height:110%; font-size: 1em; }
+.editCaptcha img#captchaImg { vertical-align:middle; line-height:100%; width: 34%; height:90%; margin-left: 1%; border:1px; }
+.editCaptcha input#captcha { padding-left: 5%; width:46%; }
+.editCaptcha input#resend { background-color: #f5f6f8; width: 28%; height:100%; border:0; font-size: .9em; margin-left: 1%; color: #fbb136; }
+.editCaptcha input#resend:hover { background-color:#efefef; }
+input { background: transparent; border: 0; }
+input:focus { outline: 0; }
+div.agreement { width: 90%; margin: 2% auto 0 12%; font-size: .9em }
+div.link { display:inline; color: #058794; }
+div.agreement input[type="checkbox"] { display: none; }
+div.agreement input[type="checkbox"] + label { display:inline; background: url('icon_unchecked.png') no-repeat; background-size: 30%; padding: 1% 0% 1% 7%; }
+div.agreement input[type="checkbox"]:checked + label { display:inline; background: url('icon_checked.png') no-repeat; background-size: 30%; }
+div.btn { margin: 2% auto 0px auto; text-align: center; font-size: .9em }
+.btn input { border-radius: 2.2em; background-color: #fe3232;}
+.btn input:hover { border-radius: 2.2em; background-color: #d62222;}
+input#forgetPwd { padding:.2em 0; width: 100%; font-size: 1.0em; background: none; }
+input#submit { margin: 2% auto auto; height: 15%; width: 55%; font-size: 1.2em }
+input#confirmBtn { margin-top:2%; height: 18%; width: 40%; font-size: 1.0em; color:#fff; }
+input#cancelBtn { margin-top:2%; margin-right: 5%; height: 18%; width: 40%; font-size: 1.0em; color:#fff; }
+input#connentPhone { margin: 2% auto 0px auto; width: 100%; font-size: .9em; text-decoration: underline; background: none; }
+input#connentPassport { margin: 2% auto 0px auto; width: 100%; font-size: .9em; text-decoration: underline; background: none; }
+.productInfo { margin-left: 15%; margin-bottom: 3%; font-size: .9em }
+.productInfo div { margin-top: 3%; }
+.productInfo p#pPrice { color: #FF0000; }
+.pic .timer { text-align: center; margin-top: 1%; margin-bottom: 1%; }
+.pic .icon { margin: 0 auto; background: url('pic.png') center top no-repeat; background-size:auto 100%; height: 22%; width: 80%; }
+.pic .name { text-align: center; margin-top: 3%; width: 100%; font-size: 1em; }
+.msg { margin-top: 2%; margin-left: 12%; width: 80%; }
+.msgIcon { display: inline; padding: 3%; background: url('icon_msg.png') transparent no-repeat left; background-size: 100%; }
+.msg .msgTitle { margin: 2% auto 5% auto; font-size: 1.2em; }
+.msg .msgContext { display: inline; font-size: .9em; }
+.footMsg { margin-top: 2%; line-height:1.2em; font-size: .9em; text-align: center; }
+.footMsgTitle { margin-top: 2%; margin-bottom: 2%; text-align: center; color: #ec514f; font-size: 1.5em;
+    font-style:italic; white-space: nowrap;}
+.footMsgTitle span { font-size: 3em; }
+.footMsgTitle span.f2em { font-size: 2em;}
+.footMsgContext { text-align: center; line-height: 1.4em;}
+.footMsgContextPhone { color: #8ABEF8; display: inline; }
+.foot {bottom: 0; position:absolute; left: 0; width: 100%; height: 14%;  }
+.foot.big { height: 20%; position: relative; top: 8%; }
+.vLine { margin: 0px auto; height: 100%; background: #C2C3C4; width: 1px; }
+.window .foot_no_bor { border-top:0 none;}
+.foot input { position:absolute; width: 45%; bottom: 0px; font-size: .9em; }
+.foot input#quick { height: 100%; width: 45%; left: 3%; }
+.foot input#footBackBtn { height: 100%; width: 45%; left: 3%; }
+.foot input#register { height: 100%; width: 45%; right: 3%; }
+.foot input#footNextBtn { height: 100%; width: 45%; right: 3%; }
+.foot input#footMPayBtn { height: 100%; width: 90%; right: 3%; }
+.foot input#registerPassport { height: 100%; width: 100%; }
+.paymentType { margin-top: 3%; text-align: center; text-align: center; }
+.paymentType input { margin-left: 1%; margin-right: 1%; position: relative; display: inline-block; width: 11%; height: 100%; }
+.paymentType input#alipayBtn { background: url('alipay_icon.png') no-repeat; background-size: 100%; }
+.paymentType input#wxpayBtn { background: url('wxpay_icon.png') no-repeat; background-size: 100%; }
+.paymentType input#bankpayBtn { background: url('bankpay_icon.png') no-repeat; background-size: 100%; }
+.paymentType input#jdpayBtn { background: url('jdpay_icon.png') no-repeat; background-size: 100%; }
+.paymentType input#mobilepayBtn { background: url('mobile_icon.png') no-repeat; background-size: 100%; }
+.cTelco { margin-bottom: 2%; }
+.cDollar { margin-bottom: 2%; }
+.fTelco { text-align: center; }
+.fDollar { margin-left: 5%; }
+input[name=dollar] { position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0; }
+input[name=dollar] + label.lDollar { padding-left:26px; height:21px; width: 20%; display:inline-block; line-height:21px; background-repeat:no-repeat; background-position: 0 0; font-size:21px;
+    vertical-align:middle; cursor:pointer; margin: 1%; white-space: nowrap; overflow: hidden; }
+input[name=dollar]:checked + label.lDollar { background-position: 0 -21px; }
+label.lDollar { background-image:url('checkbox.png'); -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+input[name=telco] { display:none; }
+input[name=telco] + label.lTelco { display:inline-block; width: 20%; font-size:21px; padding: 4px 12px;
+    text-align: center; background-color: #51aded; border-color: #ddd; color: #fff;
+    border-radius: 5px; }
+input[name=telco]:checked + label.lTelco { background-image: none; background-color:#ed5153; }
+.height-60 { height: 60%; }
+.height-40 { height: 40%; }
+.height-30 { height: 30%; }
+.height-20 { height: 20%; }
+
+
+.account-list{
+    display: none;
+    position: absolute;
+    overflow-y: auto;
+    top: 100%;
+    left: 0px;
+    margin: 3% auto 0;
+    width: 100%;
+    z-index: 9999;
+    background: rgba(255,255,255,0.9);
+    border: 1px #f2f2f2 solid;
+    line-height: 24px;
+    border-radius: 0.2rem ;
+    max-height: 450%;
+}
+
+.account-list li{
+    list-style: none;
+    padding: 5px 10px;
+    color: #83919e;
+    overflow: hidden;
+}
+.account-list b{
+    float: left;
+    width: 80%;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+.account-list span{
+    float: right;
+    color: #ccc;
+}
+
+@media screen and (min-height:420px) {
+    .head #closeBtn, .head #backBtn { height:2em; }
+}
+
+@media screen and (max-height:200px) {
+    .edit { margin:1% auto 0; height: 2em;}
+    .head { padding:1% 0 0;}
+    .head p { position: absolute; top: 0; left: 48%; width: 40%; font-size: .8em; text-indent: -1%; text-align: left;}
+    input#submit { height: 2em;}
+    .head #backBtn, .head #closeBtn { height: 1.5em;}
+}

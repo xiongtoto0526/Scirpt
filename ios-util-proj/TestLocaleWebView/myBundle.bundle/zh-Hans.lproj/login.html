@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <title>login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--    <meta name="viewport" content="width=$html_width$, height=$html_height$, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, target-densityDpi=device-dpi",user-scalable=no/>-->
+</head>
+<link rel="stylesheet" type="text/css" href="./base.css">
+<link rel="stylesheet" type="text/css" href="./$css$.css">
+<script type="text/javascript" src="./baseMethod.js"></script>
+
+<body onload="init()">
+    <div class="window">
+        <div class="head">
+            <p>登录</p>
+            <input type="button" id="closeBtn" onclick="closesPage()">
+        </div>
+        <div class="main">
+            <div id="widget">
+                <div class="edit">
+                    <input type="text" id="account" placeholder="用户名/手机号" oninput="completeSelect(this)" value="">
+                    <div id="account-list" class="account-list">
+                        <ul>
+                        </ul>
+                    </div>
+                </div>
+                <div class="edit">
+                    <input type="password" id="pwd" placeholder="密码" value="">
+                </div>
+                <div class="btn">
+                    <input type="button" id="forgetPwd" value="忘记密码?" onclick="forgetPwdPage()" class="button">
+                    <input type="button" id="submit" value="登录" onclick="login()" class="button">
+                </div>
+            </div>
+        </div>
+        <div class="foot">
+            <div class="foot_wrap">
+                <input type="button" id="quick" value="试玩进入" onclick="quickLogin()">
+                <input type="button" id="register" value="快速注册" onclick="registerPhonePage()">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

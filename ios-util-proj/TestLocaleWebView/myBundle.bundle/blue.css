@@ -1,0 +1,14 @@
+.window { background: #058794; color: #fff; }
+input { color: #f7f7f7; }
+input[type=text], input[type=number], input[type=password], input[type=tel] { color: #555; }
+body div.link, body .productInfo p#pPrice, body .footMsgContextPhone, .main .footMsgTitle { color: #fbb136; }
+body .btn input { background-color: #fbb136;}
+body .btn input:hover { background-color: #eaa026;}
+.pic .name { color: #fff; }
+body .msgIcon { background: url('icon_msg_red.png') transparent no-repeat left; 
+background-size: 100%; }
+body .foot { border-top: #05808c solid 1px; background: #058794; }
+body .foot input:hover { background-color: #047884;}
+body .vLine { background: #05808c; }
+body input[name=telco] + label.lTelco { background-color: #fbb136;}
+body label.lDollar { background-image: url('checkbox_yellow.png');}

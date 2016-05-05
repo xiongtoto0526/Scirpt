@@ -1,0 +1,11 @@
+.window { background: #1f2834; color: #fff; }
+input { color: #f7f7f7; }
+.main .edit, .editCaptcha input#captcha  { background-color: #fff; border:#f2f2f2 solid 1px;}
+div.link { color: #d09857; }
+.productInfo p#pPrice { color: #e1423f; }
+.pic .name { color: #d09857; }
+.footMsgContextPhone { color: #d09857; }
+body .foot { border-top: #1d2631 solid 1px; background: #1f2834; }
+body .foot input:hover { background-color: #1c242f;}
+body .vLine { background: #1d2631; }
+

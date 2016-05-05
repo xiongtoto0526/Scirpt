@@ -1,0 +1,10 @@
+.window { background: #f4f5f9; color: #555; }
+input { color: #555; }
+input#submit { color: #f7f7f7; }
+.productInfo p#pPrice { color: #da5663; }
+.pic .name { color: #555; }
+.foot { background: #f4f5f9; border-top: #e8e9ec solid 1px; }
+.foot input:hover { background-color: #dadde4;}
+.vLine { background: #e8e9ec; color: #6d7a8a; }
+body .editCaptcha input#resend { background-color: #fbb136; color: #fff;}
+body .editCaptcha input#resend:hover { background-color: #e89a19;}
