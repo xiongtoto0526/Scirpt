@@ -48,6 +48,7 @@
     
     NSString* htmlString = [[NSString alloc] initWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
     
+    // 注意： 此处的 baseURL 切勿弄错
     [self.webView loadHTMLString: htmlString baseURL:[NSURL fileURLWithPath:[bundle bundlePath]]];
     }
 
