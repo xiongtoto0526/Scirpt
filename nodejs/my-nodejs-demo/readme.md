@@ -17,6 +17,11 @@ express my-node-demo
 4.启动
 npm start
 
+5.gulp启动
+sudo npm install -g gulp	
+- gulp 测试
+sublime中，打开test_gulp，command +B 运行（前提是安装了sublime的nodeJS插件）。
+
 ## 目录详解
 - app.js.bak : 旧的app.js，移动至 app文件夹。app.js的路径在www中可配。
   存放整个node服务的模板信息，入口参数，路由等信息。
