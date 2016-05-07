@@ -1,3 +1,18 @@
+# 快速开始
+本项目使用http-server充当web容器，angularJS充当mvc前端框架
+
+1.配置文件:
+
+- .bowerrc , bower安装目录
+- bower.json , bower 管理的项目依赖源码库
+- package.json, npm下载的项目依赖包
+
+2 . 安装依赖包
+npm install（其中npm用于下载工具包，bower用于下载angular源码库）
+
+3 . 启动
+npm start
+
 # angular-seed — the seed for AngularJS apps
 
 This project is an application skeleton for a typical [AngularJS](http://angularjs.org/) web app.

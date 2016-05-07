@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>成本看板</title>
+
+  <!-- build:css /css/finance-we.min.css -->
+  <link rel="stylesheet" href="/bower_components/zepto.fullpage/src/zepto.fullpage.css" />
+  <link rel="stylesheet" href="/bower_components/font-awesome-bower/css/font-awesome.css" />
+  <link rel="stylesheet" href="/css/main-finance-we.css" />
+  <!-- endbuild -->
+</head>
+
+<body style="display: none">
+  <div class="project-list" style="display: none">
+    <div class="title">
+      项目选择
+    </div>
+    <div class="project-scroll">
+      <div class="project-wrap"></div>
+    </div>
+  </div>
+
+  <div class="wp">
+    <div class="wp-inner">
+      <div class="page page1">
+        <div class="title">在研项目费用状况
+          <i class="fa fa-arrow-left project-select" aria-hidden="true" onclick="window.back2ProjectList()"></i>
+          <div class="sub-title inline">(单位/万)</div>
+        </div>
+        <div class="table-wrap">
+        </div>
+        <div class="next-page dark">
+          <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <div class="page page2">
+        <div class="title">
+          <i class="fa fa-arrow-left project-select" aria-hidden="true" onclick="window.back2ProjectList()"></i>
+          <div class="summary-month">2014年4月</div>
+          <div>成本看板</div>
+        </div>
+
+        <div class="summary-panes">
+          <div class="summary-pane first">
+            <div class="left">
+              <i class="fa fa-usd" aria-hidden="true"></i>
+            </div>
+            <div class="right">
+              <div class="label first-value"></div>
+              <div class="value first-label">当月收入</div>
+            </div>
+          </div>
+          <div class="summary-pane second">
+            <div class="left">
+              <i class="fa fa-database" aria-hidden="true"></i>
+            </div>
+            <div class="right">
+              <div class="label second-value"></div>
+              <div class="value second-label">当月费用</div>
+            </div>
+          </div>
+          <div class="summary-pane third">
+            <div class="left">
+              <i class="fa fa-heart" aria-hidden="true"></i>
+            </div>
+            <div class="right">
+              <div class="label third-value"></div>
+              <div class="value third-label">当月利润</div>
+            </div>
+          </div>
+          <div class="summary-pane fourth">
+            <div class="left">
+              <i class="fa fa-hourglass-half" aria-hidden="true"></i>
+            </div>
+            <div class="right">
+              <div class="label fourth-value"></div>
+              <div class="value fourth-label">剩余预算</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary-feet">
+          <div class="summary">
+            <div class="left">
+              <div class="bottom-left-label">当月利润率:</div>
+              <div class="summary-value bottom-left-value"></div>
+            </div>
+            <div class="right">
+              <div class="bottom-right-label">当月人均利润:</div>
+              <div class="summary-value bottom-right-value"></div>
+            </div>
+          </div>
+        </div>
+        <div class="next-page">
+          <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <div class="page page3">
+        <div class="top">
+          <div class="title">利润/利润率
+            <i class="fa fa-arrow-left project-select" aria-hidden="true" onclick="window.back2ProjectList()"></i>
+            <div class="sub-title inline">(单位/万)</div>
+          </div>
+          <div class="profit-chart">
+          </div>
+          <div class="top-legend">
+            <i class="fa fa-bar-chart" aria-hidden="true"></i>
+            <span>利润</span>
+            <i class="fa fa-line-chart" aria-hidden="true"></i>
+            <span>利润率</span>
+          </div>
+        </div>
+        <div class="bottom">
+          <div class="title dark">人均利润
+            <div class="sub-title inline">(人数含分摊)</div>
+          </div>
+          <div class="ppp-chart">
+          </div>
+        </div>
+        <div class="next-page dark">
+          <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <div class="page page4">
+        <div class="top">
+          <div class="title dark">净收入
+            <i class="fa fa-arrow-left project-select" aria-hidden="true" onclick="window.back2ProjectList()"></i>
+            <div class="sub-title inline">(单位/万)</div>
+          </div>
+          <div class="revenue-chart">
+          </div>
+        </div>
+        <div class="bottom">
+          <div class="title dark">收入(含内部结算)构成
+            <div class="sub-title inline">(单位/万)</div>
+          </div>
+          <div class="revenue-items-chart">
+          </div>
+        </div>
+        <div class="next-page dark">
+          <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <div class="page page5">
+        <div class="top">
+          <div class="title">总费用
+            <i class="fa fa-arrow-left project-select" aria-hidden="true" onclick="window.back2ProjectList()"></i>
+            <div class="sub-title inline">(单位/万)</div>
+          </div>
+          <div class="cost-chart">
+          </div>
+        </div>
+        <div class="bottom">
+          <div class="left">
+            <div class="title dark"><span class="cost-month"></span>直接费用
+            </div>
+            <div class="direct-cost-chart">
+            </div>
+          </div>
+          <div class="right">
+            <div class="title dark"><span class="cost-month"></span>间接费用
+            </div>
+            <div class="indirect-cost-chart">
+            </div>
+          </div>
+        </div>
+        <div class="next-page dark">
+          <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <div class="page page6">
+        <div class="light-blue-panel">
+          <div class="title blue">费用详情
+            <i class="fa fa-arrow-left project-select" aria-hidden="true" onclick="window.back2ProjectList()"></i>
+            <div class="sub-title inline">(单位/万)</div>
+          </div>
+
+          <div class="switch-btn-group">
+            <div class="left-switch-btn active">直接费用</div>
+            <div class="right-switch-btn">间接费用</div>
+          </div>
+        </div>
+        <div class="cost-table-wrap">
+        </div>
+        <div class="next-page dark">
+          <i class="fa fa-angle-up" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- build:js /js/finance-we.min.js -->
+  <script src="/bower_components/zepto/zepto.min.js"></script>
+  <script src="/bower_components/zepto.fullpage/src/zepto.fullpage.js"></script>
+  <script src="/bower_components/iscroll.lite/iscroll-lite.min.js"></script>
+  <script src="/bower_components/moment/min//moment.min.js"></script>
+  <script src="/bower_components/underscore/underscore-min.js"></script>
+  <script src="/bower_components/echarts/dist/echarts.min.js"></script>
+  <script src="/bower_components/spin.js/spin.min.js"></script>
+  <script src="/js/main-finance-we.js"></script>
+  <!-- endbuild -->
+
+</body>
+
+</html>
