@@ -34,6 +34,7 @@ if (app.get('env') === 'development') {
   app.use(express.static(path.join(basePath, 'pub')));
 }
 
+// 路由设置，如：/finance的路由都走./routes/finance。里面无需再设置finance的前缀
 app.use('/', require('./routes/index'));
 app.use('/finance', require('./routes/finance'));
 app.use('/testxht', require('./routes/testxht'));

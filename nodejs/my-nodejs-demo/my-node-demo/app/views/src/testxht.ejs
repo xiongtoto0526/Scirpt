@@ -7,6 +7,8 @@
   <title>熊海涛</title>
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+
 </head>
 
 <body>
@@ -14,6 +16,31 @@
 
   <br />
   <a href="/finance/we">testxht</a>
+
+  <p>尝试修改以下表单。</p>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+名: <input type="text" ng-model="firstName"><br>
+姓: <input type="text" ng-model="lastName"><br>
+<br>
+姓名: {{firstName + " " + lastName}}
+
+</div>
+
+
+
+
+<!-- <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+ -->
+<script src="/js/third/angular.min.js"></script>
+<script src="/js/third/angular-resource.min.js"></script>
+<script src="/js/third/angular-route.min.js"></script>
+<script src="/js/third/angular-sanitize.min.js"></script>
+<script src="/js/third/angular-disqus.min.js"></script>
+<script src="/js/third/services.js"></script>
+<script src="/js/third/controllers.js"></script>
+<script src="/js/xhttest.js"></script> 
 </body>
 
 </html>

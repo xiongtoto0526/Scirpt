@@ -56,6 +56,7 @@ gulp.task('copy', function() {
   gulp.src(assets + '/**/img/*').pipe(flatten()).pipe(gulp.dest(tmp + '/img'));
   gulp.src(assets + '/**/fonts/*').pipe(flatten()).pipe(gulp.dest(tmp + '/fonts'));
   gulp.src(assets + '/**/file/*').pipe(flatten()).pipe(gulp.dest(tmp + '/file'));
+  gulp.src(assets + '/**/js/*').pipe(flatten()).pipe(gulp.dest(tmp + '/js'));
 });
 
 // 设置环境变量
