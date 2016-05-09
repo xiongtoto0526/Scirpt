@@ -1,3 +1,4 @@
 my-node-demo/node_modules
 my-node-demo/bower_components
+my-node-demo/tmp
 *.log

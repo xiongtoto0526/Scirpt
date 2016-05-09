@@ -37,6 +37,7 @@ var tmp = path.join(process.cwd(), 'tmp');
 
 var stylesPath = taskConfig.stylesPath;
 
+// 入口
 gulp.task('default', function() {
   return runSequence('development');
 });
@@ -45,21 +46,25 @@ gulp.task('development', function() {
   return runSequence('clean', ['copy', 'env:development', 'template', 'style', 'url'], 'bundle', 'serve', 'watch', 'opn');
 });
 
+// 清理temp目录
 gulp.task('clean', function(cb) {
   return rimraf(tmp, cb);
 });
 
+// 拷贝源文件至临时目录
 gulp.task('copy', function() {
   gulp.src(assets + '/**/img/*').pipe(flatten()).pipe(gulp.dest(tmp + '/img'));
   gulp.src(assets + '/**/fonts/*').pipe(flatten()).pipe(gulp.dest(tmp + '/fonts'));
   gulp.src(assets + '/**/file/*').pipe(flatten()).pipe(gulp.dest(tmp + '/file'));
 });
 
+// 设置环境变量
 gulp.task('env:development', function() {
   process.env.NODE_ENV = 'development';
   process.env.PORT = port ? port : config.port;
 });
 
+// 压缩html,并将anularJs的模板文件生成js，放置到views目录下。
 gulp.task('template', ['template:financeWe']);
 gulp.task('template:financeWe', () => template(taskConfig.template.financeWe));
 
@@ -71,6 +76,8 @@ function template(app) {
     .pipe(gulp.dest(tmp + '/js'));
 }
 
+
+// 压缩css，并生成sourceMap文件
 gulp.task('style', function() {
   return gulp.src(stylesPath)
     .pipe(sourcemaps.init())
@@ -82,11 +89,13 @@ gulp.task('style', function() {
     .pipe(livereload());
 });
 
+// 将命令行的baseUrl写入配置文件
 gulp.task('url', function() {
   config.baseUrl = baseUrl ? baseUrl : 'http://' + devip()[0] + ':' + config.port;
   jetpack.write(configPath, config);
 });
 
+// 
 gulp.task('bundle', ['bundle:financeWe']);
 
 gulp.task('bundle:financeWe', ['template:financeWe'], () => bundle(taskConfig.bundle.financeWe));
@@ -113,6 +122,7 @@ function bundle(app) {
   }
 }
 
+// 监听资源文件，如有变化，则重启node服务
 gulp.task('serve', function() {
   return nodemon({
     script: './bin/www',
@@ -133,6 +143,7 @@ gulp.task('watch', function() {
   gulp.watch([taskConfig.paths.js.financeWe, taskConfig.paths.tpl.financeWe], ['bundle:financeWe']);
 });
 
+// 浏览器打开
 gulp.task('opn', function() {
   return opn('http://' + devip()[0] + ':' + process.env.PORT);
 });
