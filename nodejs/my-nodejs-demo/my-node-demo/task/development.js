@@ -66,8 +66,9 @@ gulp.task('env:development', function() {
 });
 
 // 压缩html,并将anularJs的模板文件生成js，放置到views目录下。
-gulp.task('template', ['template:financeWe']);
+gulp.task('template', ['template:financeWe', 'template:finance']);
 gulp.task('template:financeWe', () => template(taskConfig.template.financeWe));
+gulp.task('template:finance', () => template(taskConfig.template.finance));
 
 function template(app) {
   return gulp.src(app.files)
@@ -96,10 +97,11 @@ gulp.task('url', function() {
   jetpack.write(configPath, config);
 });
 
-// 
-gulp.task('bundle', ['bundle:financeWe']);
-
+// 将打包好的模板文件js，babel化，并重命名拷贝到tmp目录
+gulp.task('bundle', ['bundle:financeWe', 'bundle:finance']);
 gulp.task('bundle:financeWe', ['template:financeWe'], () => bundle(taskConfig.bundle.financeWe));
+gulp.task('bundle:finance', ['template:finance'], () => bundle(taskConfig.bundle.finance));
+
 
 function bundle(app) {
   if (app.weClient) {
@@ -123,7 +125,7 @@ function bundle(app) {
   }
 }
 
-// 监听资源文件，如有变化，则重启node服务
+// 启node服务
 gulp.task('serve', function() {
   return nodemon({
     script: './bin/www',
@@ -137,6 +139,7 @@ gulp.task('serve', function() {
   });
 });
 
+// 监听资源文件，如有变化，则重启
 gulp.task('watch', function() {
   livereload.listen();
 
@@ -146,5 +149,6 @@ gulp.task('watch', function() {
 
 // 浏览器打开
 gulp.task('opn', function() {
-  return opn('http://' + devip()[0] + ':' + process.env.PORT+'/testxht');
+  // return opn('http://' + devip()[0] + ':' + process.env.PORT+'/testxht');
+  return opn('http://' + devip()[0] + ':' + process.env.PORT+'/finance');
 });
