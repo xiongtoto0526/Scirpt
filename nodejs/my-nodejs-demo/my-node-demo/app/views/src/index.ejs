@@ -2,43 +2,117 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <title>Finance We</title>
-  <meta name="description" content="" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/bower_components/font-awesome-bower/css/font-awesome.css" />
+	<meta charset="utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge" />
+	<title>Finance We</title>
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/bower_components/font-awesome-bower/css/font-awesome.css" />
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script> 
 
 </head>
-
+<!-- 
+<style>
+.dropdown-menu {
+    min-width: 60px !important;
+}
+</style>
+ -->
 <body>
-  Index
+ <div style ="margin-left: 30px;margin-right: 30px">
 
-  <br />
-  <a href="/finance/we">Finance We</a>
+<div class="row" style="margin-top: 10px">
+	<div class="dropdown col-md-2" >
+		<button type="button" class="btn dropdown-toggle" id="dropdownMenu1" 
+		data-toggle="dropdown">
+		选择平台
+		<span class="caret"></span>
+	    </button>
+	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+		<li role="presentation">
+			<a role="menuitem" tabindex="-1" href="#">平台1</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" tabindex="-1" href="#">平台2</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" tabindex="-1" href="#">
+				平台3
+			</a>
+		</li>
+		<li role="presentation" class="divider"></li>
+		<li role="presentation">
+			<a role="menuitem" tabindex="-1" href="#">其他</a>
+		</li>
+	</ul>
+</div>
 
+	<div class="dropdown col-md-3" >
+		<button type="button" class="btn dropdown-toggle" id="dropdownMenu1" 
+		data-toggle="dropdown">
+		选择类型
+		<span class="caret"></span>
+	    </button>
+	<ul class="dropdown-menu" style = "min-width: 100px !important;" role="menu" aria-labelledby="dropdownMenu1">
+		<li role="presentation">
+			<a role="menuitem" tabindex="-1" href="#">人数</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" tabindex="-1" href="#">比例</a>
+		</li>
+		
+	 </ul>
+    </div>
 
-   <div class="row clearfix">
+    <button class="btn block "  style = "margin-left: 380px;" ng-model="platform" btn-radio="0">取消</button>
+    <button class="btn block btn-primary"  ng-model="platform" btn-radio="0">提交</button>
+</div>
+
+<div class="row clearfix" style="margin-top: 15px">
     <!--<div class="col-md-2 col-sm-3 col-xs-12" style="margin-top: 15px">
       <a ng-click="goto('/release')" class="btn btn-success btn-block"><i class="fa fa-fw fa-cloud-upload"></i> 上传新应用</a>
-    </div> -->
-    <div class="col-md-7 col-sm-6 col-xs-12" style="margin-top: 15px;margin-left: 5cm">
-      <div class="btn-group block clearfix" ng-init="platform = 0">
-        <button class="btn block btn-primary" ng-model="platform" btn-radio="0">全部</button>
-        <button class="btn block btn-primary" ng-model="platform" btn-radio="1">iOS</button>
-        <button class="btn block btn-primary" ng-model="platform" btn-radio="2">Android</button>
-      </div>
-    </div>
-    <div class="col-md-3 col-sm-3 col-xs-12" style="margin-top: 15px">
-      <div class="input-group">
-        <input type="text" class="form-control" ng-model="appname" placeholder="查找应用">
-        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-      </div>
-    </div>
+  </div> -->
+  <div class="col-md-7 col-sm-6 col-xs-12" >
+  	<div class="btn-group block clearfix" ng-init="platform = 0">
+  		<button class="btn block btn-primary" ng-model="platform" btn-radio="0">珠海</button>
+  		<button class="btn block btn-primary" ng-model="platform" btn-radio="1">广州</button>
+  		<button class="btn block btn-primary" ng-model="platform" btn-radio="2">成都</button>
+  		<button class="btn block btn-primary" ng-model="platform" btn-radio="3">大连</button>
+  		<button class="btn block btn-primary" ng-model="platform" btn-radio="4">海外</button>
+  		<button class="btn block btn-primary" ng-model="platform" btn-radio="5">其他</button>
+  	</div>
   </div>
+  <div class="col-md-3 col-sm-3 col-xs-12" >
+  	<div class="input-group" >
+  		<input type="text" class="form-control" ng-model="appname" placeholder="查找项目">
+  		<span class="input-group-addon"><i class="fa fa-search"></i></span>
+  	</div>
+  </div>
+</div>
 
+<div class="panel panel-default" style="margin-top: 15px">
+  <div class="panel-body" > 
+
+<div ng-app="" ng-init="names=['项目166666666666666','项目2','项目3','项目4','项目5','项目6','项目7']" class="row">
+	<!-- <p>使用 ng-repeat 来循环数组</p> -->
+ <div class="col-lg-4" ng-repeat="x in names">
+  <div class="input-group" style="margin-top: 15px"   \>
+  
+  	<span class="input-group-addon">{{x}}</span>
+  	<input type="text" style="width:80px" class="form-control" placeholder ="0.0">
  
+  	<!-- <span class="input-group-addon">.00</span> -->
+  </div>
+  </div>
+</div>
+
+ </div>
+</div>
+
+ <div>
 
 </body>
 
