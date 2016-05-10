@@ -146,5 +146,5 @@ gulp.task('watch', function() {
 
 // 浏览器打开
 gulp.task('opn', function() {
-  return opn('http://' + devip()[0] + ':' + process.env.PORT);
+  return opn('http://' + devip()[0] + ':' + process.env.PORT+'/testxht');
 });

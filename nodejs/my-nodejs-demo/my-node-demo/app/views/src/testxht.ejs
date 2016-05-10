@@ -9,6 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script> 
 
+<style>
+input.ng-invalid {
+    background-color: lightblue;
+}
+</style>
 </head>
 
 <body>
@@ -19,6 +24,9 @@
 
   <p>尝试修改以下表单。</p>
 
+<!-- 参考网页：http://www.runoob.com/angularjs/angularjs-filters.html -->
+
+<!-- 控制器 
 <div ng-app="myApp" ng-controller="myCtrl">
 
 名: <input type="text" ng-model="firstName"><br>
@@ -27,6 +35,86 @@
 姓名: {{firstName + " " + lastName}}
 
 </div>
+-->
+<!-- 
+<div ng-app="myApp" ng-controller="myCtrl"> 
+
+
+
+</div>
+ -->
+<!--  ng-option 的使用，可直接获取到对象。-->
+<div ng-app="myApp" ng-controller="myCtrl">
+
+<select ng-model="selectedName" ng-options="x for x in names">
+</select>
+
+</div>
+
+<!-- 表单验证 设置type即可。同时 增加 novalidate 属性，禁用浏览器自带的表单验证
+<form ng-app="myApp" ng-controller="validateCtrl" 
+name="myForm" novalidate>
+<input type="url" name="homepage" ng-model="user.facebook_url" />
+<input type="email" name="email" ng-model="user.email" />
+<input type="number" name="email" ng-model="user.age" />
+</form>
+-->
+
+<!-- 模块 
+var app = angular.module("myApp", []);
+
+Note: 在模块定义中 [] 参数用于定义模块的依赖关系。
+中括号[]表示该模块没有依赖，如果有依赖的话会在中括号写上依赖的模块名字。
+-->
+
+
+<!-- 定义函数 
+<button ng-click="toggle()">>隐藏/显示</button>
+-->
+
+
+<!--  循环 
+<div ng-app="myApp" ng-init="names=[
+{name:'Jani',country:'Norway'},
+{name:'Hege',country:'Sweden'},
+{name:'Kai',country:'Denmark'}]">
+
+<p>循环对象:</p>
+<ul>
+  <li ng-repeat="x in names">
+  {{ x.name + ', ' + x.country }}</li>
+</ul>
+
+</div>
+-->
+
+<!-- ng-css 
+<form ng-app="" name="myForm">
+    输入你的名字:
+    <input name="myName" ng-model="myText" required>
+</form>
+
+<p>编辑文本域，不同状态背景颜色会发送变化。</p>
+<p>文本域添加了 required 属性，该值是必须的，如果为空则是不合法的。</p>
+-->
+
+<!-- 不同controller间使用rootScope传递变量 -->
+
+<!-- 过滤器 
+<div ng-app="myApp" ng-controller="personCtrl">
+<p>姓名为 {{ lastName | lowercase }}</p>
+</div>
+-->
+
+<!-- 自定义服务 
+app.service('hexafy', function() {
+    this.myFunc = function (x) {
+        return x.toString(16);
+    }
+});
+特别注意：当你创建了自定义服务，并连接到你的应用上后，你可以在控制器，指令，过滤器或其他服务中使用它。
+如：自定义过滤器和数值转换插件。<li ng-repeat="x in counts">{{x | myFormat}}</li>
+-->
 
 
 
@@ -40,7 +128,7 @@
 <script src="/js/third/angular-disqus.min.js"></script>
 <script src="/js/third/services.js"></script>
 <script src="/js/third/controllers.js"></script>
-<script src="/js/xhttest.js"></script> 
+<script src="/js/xhttest.js"></script>  <!-- 注意：必须在所有angularJS的源文件加载完之后，才能加载自己的js -->
 </body>
 
 </html>

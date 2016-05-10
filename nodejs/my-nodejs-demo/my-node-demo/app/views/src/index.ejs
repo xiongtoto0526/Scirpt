@@ -7,6 +7,9 @@
   <title>Finance We</title>
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/bower_components/font-awesome-bower/css/font-awesome.css" />
+
 </head>
 
 <body>
@@ -14,6 +17,29 @@
 
   <br />
   <a href="/finance/we">Finance We</a>
+
+
+   <div class="row clearfix">
+    <!--<div class="col-md-2 col-sm-3 col-xs-12" style="margin-top: 15px">
+      <a ng-click="goto('/release')" class="btn btn-success btn-block"><i class="fa fa-fw fa-cloud-upload"></i> 上传新应用</a>
+    </div> -->
+    <div class="col-md-7 col-sm-6 col-xs-12" style="margin-top: 15px;margin-left: 5cm">
+      <div class="btn-group block clearfix" ng-init="platform = 0">
+        <button class="btn block btn-primary" ng-model="platform" btn-radio="0">全部</button>
+        <button class="btn block btn-primary" ng-model="platform" btn-radio="1">iOS</button>
+        <button class="btn block btn-primary" ng-model="platform" btn-radio="2">Android</button>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-12" style="margin-top: 15px">
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="appname" placeholder="查找应用">
+        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+      </div>
+    </div>
+  </div>
+
+ 
+
 </body>
 
 </html>
