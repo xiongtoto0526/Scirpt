@@ -9,3 +9,6 @@ view
 
 usage:
 ./mypackage
+
+visit:
+localhost:9090

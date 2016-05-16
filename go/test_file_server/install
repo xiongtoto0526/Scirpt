@@ -11,3 +11,7 @@ CurrentDir="$(pwd)"
 export GOPATH=$CurrentDir
 # echo $GOPATH
 go install -ldflags "-s -w" myServer/myPackage
+
+export GOOS=windows
+export GOARCH=amd64
+go install -ldflags "-s -w" myServer/myPackage

@@ -2,8 +2,8 @@ reference:
 http://github.com/widuu/staticserver
 
 
-1.in terminal , use: sh install
-  will gen bin,pkg dir
+1.in terminal , use: sudo sh install
+  生成可执行文件，包括windows 和 Linux
 2.cd bin, use ./myPackage
   will run a server
 
