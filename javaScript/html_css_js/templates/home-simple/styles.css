@@ -1,0 +1,171 @@
+/**
+ * Minimal and Modern Portfolio Layout PSD to HTML Conversion
+ * 
+ * Author: Richard Carpenter <http://www.hv-designs.co.uk>
+ * Copyright: 2009 Six Revisions
+ **/
+
+* {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+}
+body {
+  background-image: url(images/background.png);
+  background-repeat: repeat-x;
+  background-color: #001b32;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: #c8c8c8;
+}
+#container {
+  margin: auto;
+  width: 850px;
+}
+#top {
+  float: left;
+  width: 850px;
+  height: 119px;
+}
+#title {
+  float: left;
+  width: 278px;
+  height: 74px;
+  padding-top: 45px;
+}
+#title h1 {
+  display: block;
+  float: left;
+  width: 278px;
+  height: 74px;
+  text-indent: -9999px;
+}
+#title h1 a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: url(images/title.png);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+#navigation { float: right; }
+.nav-links li {
+  display: block;
+  float: left;
+  list-style-type: none;
+}
+.nav-links li a {
+  float: left;
+  width: 120px;
+  height: 68px;
+  text-decoration: none;
+  text-transform: capitalize;
+  color: #666666;
+  font-size: 12px;
+  text-align: center;
+  padding-top: 51px;
+  border-left-width: 1px;
+  border-left-style: solid;
+  border-left-color: #cecece;
+}
+.nav-links li a:hover {
+  color: #00284a;
+  background-image: url(images/nav_hover.png);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+li.borderx2 {
+  border-right-width: 1px;
+  border-right-style: solid;
+  border-right-color: #cecece;
+}
+#welcome {
+  float: left;
+  width: 850px;
+  background-image: url(images/content_background.png);
+  background-repeat: no-repeat;
+  height: 326px;
+  padding-top: 40px;
+}
+h2 {
+  text-transform: uppercase;
+  color: #ffffff;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+.heading-color2 { color: #9a9a9a; }
+#welcome-text {
+  width: 406px;
+  line-height: 18px;
+  padding-top: 50px;
+  float: left;
+  text-align: justify;
+}
+#welcome-text { margin-bottom:10px; }
+.list li {
+  text-decoration: none;
+  background-image: url(images/bullet.png);
+  background-repeat: no-repeat;
+  list-style-type: none;
+  float: left;
+  width: 180px;
+  padding-left: 20px;
+  margin-top: 10px;
+  background-position: left center;
+}
+#welcome-image {
+  float: right;
+  height: 326px;
+  width: 427px;
+}
+.separator {
+  background-image: url(images/separator.png);
+  background-repeat: no-repeat;
+  float: left;
+  height: 17px;
+  width: 850px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#sidebar {
+  float: left;
+  height: 209px;
+  width: 219px;
+  background-image: url(images/contentbox.png);
+  background-repeat: no-repeat;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 30px;
+  padding-left: 20px;
+}
+h3 {
+  text-transform: uppercase;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 12px;
+}
+.sidebar-list li {
+  list-style-type: none;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  background-image: url(images/divider.png);
+  background-repeat: repeat-x;
+  background-position: bottom;
+}
+#content {
+  float: right;
+  width: 550px;
+  text-align: justify;
+}
+#content p { margin-bottom: 10px; }
+#footer {
+  float: left;
+  width: 850px;
+  height: 60px;
+  background-image: url(images/footer.png);
+  background-repeat: no-repeat;
+  margin-top: 40px;
+  padding-top: 25px;
+  text-align: center;
+}
