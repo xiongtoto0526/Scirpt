@@ -19,13 +19,13 @@ var tmp = path.join(process.cwd(), 'tmp'),
 
 // 本地服务
 var connect = require('gulp-connect');
-
+var myPort = 8151;
 
 
 
 // 入口 （如需并发可[]中加入）
 gulp.task('default', function() {
-  return runSequence('clean', 'copy', 'bundle', 'connect','serve','jsConvert','babelWatch','watch','open');
+  return runSequence('clean', 'copy', 'bundle', 'connect','serve','jsConvert','jsConvert2','babelWatch','watch','open');
 });
 
 
@@ -51,9 +51,9 @@ gulp.task('serve',function(){});
 //使用connect启动一个Web服务器
 gulp.task('connect', function () {
   connect.server({
-    root: process.cwd(),
+    root: process.cwd(),// 将整个工程目录都监控起来，以便可以加载到插件 power_components
     livereload: true,
-    port: 8081
+    port: myPort
   });
 });
 
@@ -87,6 +87,14 @@ gulp.task('jsConvert', function() {
     .pipe(gulp.dest(tmp+'/js'));
 });
 
+gulp.task('jsConvert2', function() {
+  return browserify(src+'/js/app.js')
+    .transform(babelify)
+    .bundle()
+    .pipe(source('app.js'))
+    .pipe(gulp.dest(tmp+'/js'));
+});
+
 gulp.task('babelWatch', function() {
   gulp.watch([src+'/js/**/*.js'], ['jsConvert']);
 });
@@ -94,7 +102,7 @@ gulp.task('babelWatch', function() {
 
 // 浏览器打开
 gulp.task('open', function() {
-  return opn('http://localhost:8081/tmp');
+  return opn('http://localhost:'+myPort+'/tmp');
 });
 
 

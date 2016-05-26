@@ -1,8 +1,10 @@
 'use strict';
 
+import directives from './directives';
 
 angular.module('xhtApp', [
-	'ngSimditor'
+	'ngSimditor',
+      directives.name
 ])
 .config(['simditorConfig',function(simditorConfig) {
 	simditorConfig.placeholder = '这里输入文字...';
