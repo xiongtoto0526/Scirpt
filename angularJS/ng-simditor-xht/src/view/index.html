@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="xhtApp">
+<head>
+	<meta charset="utf-8">
+	
+	 <!-- build:css /css/xht.min.css -->
+	<link rel="stylesheet" href="../../bower_components/simditor/styles/simditor.css" />
+	<link rel="stylesheet" href="../../bower_components/simditor-html/styles/simditor-html.css" />
+	<!-- endbuild -->
+
+	<title></title>
+</head>
+<body>
+<div ng-controller="XhtCtrl">
+	<ng-simditor content="test"></ng-simditor>
+	{{ test }}
+</div>
+<p> xht </p>
+	 <!-- build:js /js/third.min.js -->
+	<script src="../../bower_components/jquery/dist/jquery.js"></script>
+	<script src="../../bower_components/angular/angular.js"></script>
+	<script src="../../bower_components/simple-module/lib/module.js"></script>
+	<script src="../../bower_components/simple-hotkeys/lib/hotkeys.js"></script>
+	<script src="../../bower_components/simple-uploader/lib/uploader.js"></script>
+	<script src="../../bower_components/simditor/lib/simditor.js"></script>
+	<script src="../../bower_components/js-beautify/js/lib/beautify.js"></script>
+	<script src="../../bower_components/js-beautify/js/lib/beautify-css.js"></script>
+	<script src="../../bower_components/js-beautify/js/lib/beautify-html.js"></script>
+	<script src="../../bower_components/simditor-html/lib/simditor-html.js"></script>
+	<!-- endbuild -->
+	
+
+	<!-- build:js /js/xht.min.js -->
+	<!-- <script src="../js/angular-simditor.js"></script> -->
+	<script src="../js/ng-simditor.js"></script>
+	<script src="../js/app.js"></script>
+	<!-- endbuild -->
+</body>
+</html>

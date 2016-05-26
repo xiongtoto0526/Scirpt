@@ -12,6 +12,8 @@ var pub = path.join(process.cwd(), 'pub');
 var viewsSrc = path.join(process.cwd(), 'app', 'views', 'src');
 var viewsDist = path.join(process.cwd(), 'app', 'views', 'dist');
 
+
+// 注意：deploy task本身依赖 development.js的资源处理,需要先运行 gulp（如：babel，browserify）
 gulp.task('deploy', function() {
   return runSequence('production');
 });

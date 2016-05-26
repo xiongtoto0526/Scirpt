@@ -56,7 +56,7 @@ gulp.task('copy', function() {
   gulp.src(assets + '/**/img/*').pipe(flatten()).pipe(gulp.dest(tmp + '/img'));
   gulp.src(assets + '/**/fonts/*').pipe(flatten()).pipe(gulp.dest(tmp + '/fonts'));
   gulp.src(assets + '/**/file/*').pipe(flatten()).pipe(gulp.dest(tmp + '/file'));
-  gulp.src(assets + '/**/js/*').pipe(flatten()).pipe(gulp.dest(tmp + '/js'));
+  gulp.src(assets + '/**/js/*').pipe(flatten()).pipe(gulp.dest(tmp + '/js')); // 此处只会拷贝js目录下的文件，不会递归拷贝子文件夹。
 });
 
 // 设置环境变量
@@ -65,7 +65,7 @@ gulp.task('env:development', function() {
   process.env.PORT = port ? port : config.port;
 });
 
-// 压缩html,并将anularJs的模板文件生成js，放置到views目录下。
+// 压缩html,并将anularJs的模板文件生成js，放置到tmp/js目录下。
 gulp.task('template', ['template:financeWe', 'template:finance']);
 gulp.task('template:financeWe', () => template(taskConfig.template.financeWe));
 gulp.task('template:finance', () => template(taskConfig.template.finance));
@@ -79,7 +79,7 @@ function template(app) {
 }
 
 
-// 压缩css，并生成sourceMap文件
+// 压缩css，并生成sourceMap文件，放置到tmp/css目录下。并实时监控该目录（livereload，配合下面的watch task）
 gulp.task('style', function() {
   return gulp.src(stylesPath)
     .pipe(sourcemaps.init())
@@ -97,7 +97,7 @@ gulp.task('url', function() {
   jetpack.write(configPath, config);
 });
 
-// 将打包好的模板文件js，babel化，并重命名拷贝到tmp目录
+// 将打包好的模板文件js，babel化，并重命名拷贝到tmp/js目录， 并实时监控该目录（livereload，配合下面的watch task）
 gulp.task('bundle', ['bundle:financeWe', 'bundle:finance']);
 gulp.task('bundle:financeWe', ['template:financeWe'], () => bundle(taskConfig.bundle.financeWe));
 gulp.task('bundle:finance', ['template:finance'], () => bundle(taskConfig.bundle.finance));
@@ -106,10 +106,10 @@ gulp.task('bundle:finance', ['template:finance'], () => bundle(taskConfig.bundle
 function bundle(app) {
   if (app.weClient) {
     return browserify(app.entry)
-      .transform('babelify', { presets: 'es2015', compact: false })
+      .transform('babelify', { presets: 'es2015', compact: false })// es6 ==> es5
       .bundle()
       .pipe(source('main.js'))
-      .pipe($.rename({ suffix: '-' + app.type, extname: '.js' }))
+      .pipe($.rename({ suffix: '-' + app.type, extname: '.js' })) // main.js ==> main-finance.js
       .pipe(gulp.dest(tmp + '/js'))
       .pipe(livereload());
   } else {
@@ -117,7 +117,7 @@ function bundle(app) {
       .transform('babelify', { presets: 'es2015', compact: false })
       .bundle()
       .pipe(source('main.js'))
-      .pipe(ngAnnotate({ add: true }))
+      .pipe(ngAnnotate({ add: true })) // ngAnnotate, 将ngInjest的标签注入依赖
       .pipe(streamify(regenerator({ includeRuntime: true })))
       .pipe($.rename({ suffix: '-' + app.type, extname: '.js' }))
       .pipe(gulp.dest(tmp + '/js'))
