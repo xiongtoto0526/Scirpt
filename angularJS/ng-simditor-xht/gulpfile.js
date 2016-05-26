@@ -25,7 +25,7 @@ var myPort = 8151;
 
 // 入口 （如需并发可[]中加入）
 gulp.task('default', function() {
-  return runSequence('clean', 'copy', 'bundle', 'connect','jsConvert','jsConvert2','watch','open');
+  return runSequence('clean', 'copy', 'bundle', 'connect','jsConvert','watch','open');
 });
 
 
@@ -63,7 +63,7 @@ gulp.task('watch', function () {
   gulp.watch(['./src/view/*.html'], ['htmlReload']);// 监控src下面所有html文件
 });
 
-gulp.task('jsReload',['jsConvert','jsConvert2'],function() {
+gulp.task('jsReload',['jsConvert'],function() {
   return gulp.src(tmp+'/js')
     .pipe(connect.reload());
 });
@@ -78,15 +78,6 @@ gulp.task('htmlReload', function() {
 
 // 语法转换： 将nodeJS转换为javsscript，并将转换后的资源拷贝到tmp目录
 gulp.task('jsConvert', function() {
-  return browserify(src+'/js/main.js')
-    .transform(babelify)
-    .bundle()
-    .pipe(source('main.js'))
-    .pipe(rename('ng-simditor.js'))
-    .pipe(gulp.dest(tmp+'/js'));
-});
-
-gulp.task('jsConvert2', function() {
   return browserify(src+'/js/app.js')
     .transform(babelify)
     .bundle()
@@ -98,7 +89,7 @@ gulp.task('jsConvert2', function() {
 
 // 浏览器打开
 gulp.task('open', function() {
-  return opn('http://localhost:'+myPort+'/tmp');
+  return opn('http://localhost:'+myPort+'/tmp/view');
 });
 
 

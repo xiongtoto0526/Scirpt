@@ -22,6 +22,7 @@
   "dependencies": {
     "angular": ">=1.2.0",
     "simditor": "~2.1.*",
+    "angular-toastr": "^1.7.0",
     "simditor-html": "mycolorway/simditor-html#~1.0.0",
     "angular-simditor": "~0.1.1"
   },

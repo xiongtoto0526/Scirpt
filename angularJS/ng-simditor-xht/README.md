@@ -9,3 +9,5 @@
 - npm install
 - bower install
 
+# plugin
+- toastr (import : css + tpl + js)

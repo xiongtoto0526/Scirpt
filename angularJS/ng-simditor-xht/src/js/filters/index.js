@@ -1,9 +1,7 @@
-// 'use strict';
+'use strict';
 
-// import fuzzySearch from './fuzzy-search-filter.js';
-// import detailsCell from './details-cell-fitter.js';
+import firstFilter from './first-filter.js';
 
-// export default angular
-//   .module('app.filters', [])
-//   .filter('fuzzySearch', fuzzySearch)
-//   .filter('detailsCell', detailsCell);
+export default angular
+  .module('app.filters', [])
+  .filter('firstFilter', firstFilter)
