@@ -25,7 +25,7 @@ var myPort = 8151;
 
 // 入口 （如需并发可[]中加入）
 gulp.task('default', function() {
-  return runSequence('clean', 'copy', 'bundle', 'connect','serve','jsConvert','jsConvert2','babelWatch','watch','open');
+  return runSequence('clean', 'copy', 'bundle', 'connect','jsConvert','jsConvert2','watch','open');
 });
 
 
@@ -43,9 +43,8 @@ gulp.task('copy', function() {
   gulp.src(src + '/**/js/*').pipe(flatten()).pipe(gulp.dest(tmp + '/js')); // 此处只会拷贝js目录下的文件，不会递归拷贝子文件夹。
 });
 
-gulp.task('bundle',function(){});
 
-gulp.task('serve',function(){});
+gulp.task('bundle',function(){});
 
 
 //使用connect启动一个Web服务器
@@ -60,13 +59,12 @@ gulp.task('connect', function () {
 
 //创建watch任务,其监测的文件改动之后，去调用一个Gulp的Task（即本文件的reload）
 gulp.task('watch', function () {
-  gulp.watch(['./src/js/*.js'], ['jsReload']);
-  gulp.watch(['./src/view/*.html'], ['htmlReload']);
+  gulp.watch(['./src/js/**/*.js'], ['jsReload']); // 监控src下面所有JS文件
+  gulp.watch(['./src/view/*.html'], ['htmlReload']);// 监控src下面所有html文件
 });
 
-gulp.task('jsReload', function() {
-  return gulp.src('src/js/*.js')
-    .pipe(gulp.dest(tmp + '/js'))
+gulp.task('jsReload',['jsConvert','jsConvert2'],function() {
+  return gulp.src(tmp+'/js')
     .pipe(connect.reload());
 });
 
@@ -77,7 +75,8 @@ gulp.task('htmlReload', function() {
 });
 
 
-// 将nodeJS语法转换为javsscript语法，并将转换后的资源拷贝到tmp目录
+
+// 语法转换： 将nodeJS转换为javsscript，并将转换后的资源拷贝到tmp目录
 gulp.task('jsConvert', function() {
   return browserify(src+'/js/main.js')
     .transform(babelify)
@@ -95,9 +94,6 @@ gulp.task('jsConvert2', function() {
     .pipe(gulp.dest(tmp+'/js'));
 });
 
-gulp.task('babelWatch', function() {
-  gulp.watch([src+'/js/**/*.js'], ['jsConvert']);
-});
 
 
 // 浏览器打开

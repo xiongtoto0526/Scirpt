@@ -29,5 +29,5 @@ angular.module('xhtApp', [
     ];
 }])
 .controller('XhtCtrl', ['$scope', function($scope){
-	$scope.test = 'test contenddd123444t';
+	$scope.test = 'test  content 12';
 }]);
