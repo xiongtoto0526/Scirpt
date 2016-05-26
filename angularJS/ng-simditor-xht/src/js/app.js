@@ -30,4 +30,7 @@ angular.module('xhtApp', [
 }])
 .controller('XhtCtrl', ['$scope', function($scope){
 	$scope.test = 'test  content 12';
+}])
+.controller('TestDrCtrl', ['$scope', function($scope){
+      $scope.test = 'test  dr 12';
 }]);
