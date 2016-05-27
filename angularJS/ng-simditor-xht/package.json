@@ -37,6 +37,12 @@
   },
   "homepage": "https://github.com/ghostboyzone/angular-simditor",
   "dependencies": {
-    "gulp-connect": "^4.0.0"
+    "connect": "^3.4.1",
+    "connect-modrewrite": "^0.9.0",
+    "gulp-connect": "^4.0.0",
+    "gulp-webserver": "^0.9.1",
+    "mocer": "^1.1.2",
+    "proxy-middleware": "^0.15.0",
+    "url": "^0.11.0"
   }
 }

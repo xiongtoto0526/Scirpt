@@ -1,7 +1,8 @@
 'use strict';
 
 // @ngInject
-export default ($location, $timeout) => {
+export default ($location, $timeout, simditorOptions) => {
+
 
     return {
         // name: '',
@@ -19,17 +20,20 @@ export default ($location, $timeout) => {
         // transclude: true,
         // compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
         link: function($scope, iElm, iAttrs, controller) {
-            var editor = new Simditor({
-                placeholder: '这里输入文字...',
+
+            var config = angular.extend({
+                textarea: iElm,
                 toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment', '|', 'html'],
+                placeholder: '这里输入文字啊1...',
                 pasteImage: true,
                 defaultImage: '',
                 upload: {
                     url: '/upload'
                 },
-                textarea: iElm,
                 allowedTags: ['br', 'a', 'img', 'b', 'strong', 'i', 'u', 'font', 'p', 'ul', 'ol', 'li', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'hr', 'div', 'script', 'style']
-            });
+            }, simditorOptions);
+
+            var editor = new Simditor(config);
 
             var nowContent = '';
 
@@ -49,9 +53,9 @@ export default ($location, $timeout) => {
         }
     };
 
-// @ngInject
-  function controller($location) {
-    let vm = this;
-  }
+    // @ngInject
+    function controller($location) {
+        let vm = this;
+    }
 
 };

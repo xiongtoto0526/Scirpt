@@ -1,0 +1,54 @@
+{
+  "apis": [
+    {
+      "path": "/Users/xionghaitao/my_git_rep/script/angularJS/ng-simditor-xht/src/mocks/books.GET.md",
+      "url": "/books",
+      "method": "GET",
+      "res": "# 书籍列表\n\n### URL\n\n/books\n\n### Request params\n\n```js\n//<request>\n{}\n```\n\n### Response\n\n```javascript\n//<response=200>\n[\n  {\n    id: 1,\n    name: 'foo' // book name\n  },\n  {\n    id: 2,\n    name: 'bar' // book name\n  }\n]\n```\n",
+      "id": 0
+    },
+    {
+      "path": "/Users/xionghaitao/my_git_rep/script/angularJS/ng-simditor-xht/src/mocks/users/1.GET.md",
+      "url": "/users/1",
+      "method": "GET",
+      "res": "# Get User List\n\n### request\n```js\n//<request>\n{}\n```\n\n### response with 200\n```js\n//<response=200>\n{\n  id: 1,\n  name: \"xx\", // hello\n  email: \"foo@gmail.com\",\n}\n```\n",
+      "id": 1
+    },
+    {
+      "path": "/Users/xionghaitao/my_git_rep/script/angularJS/ng-simditor-xht/src/mocks/users.GET.md",
+      "url": "/users",
+      "method": "GET",
+      "res": "# Get User List\n\n\n### URL\n\n/users\n\n### Request params\n\n```js\n//<request>\n{\n  page: 1\n}\n```\n\n### Response\n\n```javascript\n//<response=200>\n[\n  {\n    id: 1,\n    name: 'foo' // book name\n  },\n  {\n    id: 2,\n    name: 'bar' // book name\n  }\n]\n```\n",
+      "id": 2
+    }
+  ],
+  "tree": {
+    "path": "",
+    "name": "mocks",
+    "type": "directory",
+    "children": [
+      {
+        "path": "books.GET.md",
+        "name": "books.GET.md",
+        "type": "file"
+      },
+      {
+        "path": "users",
+        "name": "users",
+        "type": "directory",
+        "children": [
+          {
+            "path": "users/1.GET.md",
+            "name": "1.GET.md",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "path": "users.GET.md",
+        "name": "users.GET.md",
+        "type": "file"
+      }
+    ]
+  }
+}
