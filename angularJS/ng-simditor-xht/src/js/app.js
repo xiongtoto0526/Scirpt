@@ -50,5 +50,5 @@ angular.module('xhtApp', [
 
 })
     .controller('TestDrCtrl', ['$scope', function($scope) {
-        $scope.test = 'This Ctrl do not use ~';
+        $scope.test = 'This Ctrl do not uuu use ~';
     }]);

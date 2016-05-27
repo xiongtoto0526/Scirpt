@@ -35,7 +35,7 @@ var browserSync = require('browser-sync').create();
 
 // 入口 （如需并发可[]中加入）
 gulp.task('default', function() {
-  return runSequence('clean', 'copy', 'bundle','browser-sync','jsConvert','watch','open');
+  return runSequence('clean', 'copy', 'bundle', 'connect','browser-sync','jsConvert','watch','open');
 });
 
 
@@ -57,6 +57,15 @@ gulp.task('copy', function() {
 gulp.task('bundle',function(){});
 
 
+//使用connect启动一个Web服务器
+gulp.task('connect', function () {
+  // connect.server({
+  //   root: process.cwd(),// 将整个工程目录都监控起来，以便可以加载到插件 power_components
+  //   livereload: true,
+  //   port: myPort
+  // });
+});
+
 // Static server
 gulp.task('browser-sync', function() {
   browserSync.init({
@@ -69,6 +78,42 @@ gulp.task('browser-sync', function() {
   });
 });
 
+//使用 gulp-webserver 启动一个Web服务器
+gulp.task('server', function () {  
+  return gulp.src(process.cwd())
+    .pipe(webserver({
+            livereload: true,
+            directoryListing: {
+                enable:true
+                // path: 'market'
+            },
+            port: myPort,
+            // 这里是关键,直接mock本地数据
+            middleware: function(req, res, next) {
+                var urlObj = url.parse(req.url, true),
+                    method = req.method;
+                switch (urlObj.pathname) {
+                    case '/api/orders':
+                        var data = {
+                            "status": 0,
+                            "msg": "it is ok !", 
+                            "data": [{'x':'1','h':'2','t':'3'}]
+                        };
+                        res.setHeader('Content-Type', 'application/json');
+                        res.end(JSON.stringify(data));
+                        return;
+                    case '/api/goods':
+                        // ...
+                        return;
+                    case '/api/images':
+                        // ...
+                        return;
+                    default:
+                        ;
+                }
+                next();
+            }
+        }));});
 
 
 //创建watch任务,其监测的文件改动之后，去调用一个Gulp的Task（即本文件的reload）
