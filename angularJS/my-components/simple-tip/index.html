@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html ng-app="plunker">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularJS Plunker</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <link rel="stylesheet" href="style.css" />
+    <script data-require="angular.js@1.4.x" src="https://code.angularjs.org/1.4.3/angular.js" data-semver="1.4.3"></script>
+    <script src="app.js"></script>
+  </head>
+
+  <body ng-init="longtext = 'Long text - make shorter'">
+    
+    <h3>Regular tooltip</h3>
+    <span tooltip tooltip-message="'Hello World!'">Hover over me!</span>
+    
+    <h3>Tooltip that optionally shows if content overflows</h3>
+    <p style="max-width: 100px;" tooltip tooltip-message="longtext" tooltip-overflow>{{longtext}}</p>
+    <input ng-model="longtext">
+  </body>
+
+</html>
+
+
+                

@@ -1,0 +1,32 @@
+{
+  "name": "fo-modal",
+  "version": "1.0.8",
+  "description": "",
+  "main": "dist/js/fo-modal.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forsigner/fo-modal.git"
+  },
+  "keywords": [
+    "angular",
+    "popover",
+    "thether"
+  ],
+  "author": "forsigner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/forsigner/fo-modal/issues"
+  },
+  "homepage": "https://github.com/forsigner/fo-modal#readme",
+  "devDependencies": {
+    "babelify": "^6.3.0",
+    "browserify": "^11.2.0",
+    "gulp-less": "^3.0.3",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-rename": "^1.2.2",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}

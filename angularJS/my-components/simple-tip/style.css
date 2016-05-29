@@ -1,0 +1,16 @@
+.tooltip {
+  position: absolute;
+  padding: 2px;
+  background: rgba(220, 220, 220, 0.8);
+  border: 1px solid rgb(128, 128, 128);
+  border-radius: 3px;
+}
+
+[tooltip-overflow] {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+                

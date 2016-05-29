@@ -1,0 +1,28 @@
+{
+  "name": "fo-modal",
+  "version": "1.0.8",
+  "homepage": "https://github.com/forsigner/fo-modal",
+  "authors": [
+    "forsigner"
+  ],
+  "description": "angular popover",
+  "moduleType": [
+    "globals"
+  ],
+  "main": "dist/js/fo-modal.js",
+  "keywords": [
+    "angular",
+    "popover",
+    "tether"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "tests"
+  ],
+  "dependencies": {
+    "tether": "*"
+  }
+}
