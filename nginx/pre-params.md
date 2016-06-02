@@ -16,7 +16,18 @@ $args
 这个变量等于请求行中的参数。
 
 $1
-location()中的参数
+location()中的参数,例：
+
+^/images/([a-z]{2})/([a-z0-9]{5})/(.*)\.(png|jpg|gif)$   
+---->http://xxxx.com/images/aa/abc01/test.gif  
+<pre> 其中   
+$1=([a-z]{2})      #$1=aa  
+$2=([a-z0-9]{5})   #$2=abc01  
+$3=(.*)            #$3=test  
+$4=(png|jpg|gif)   #$4=gif  
+  
+上面的4个地段都是query 串中匹配的字符串  
+</pre>
 
 
 
