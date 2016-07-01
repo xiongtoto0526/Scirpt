@@ -1,9 +1,23 @@
+body {
+    background-color: yellow
+}
 
-    body {
-        background-color: yellow
-    }
-    
-    p {
-        background-color: rgb(250, 0, 255);
-        padding: 20px;
-    }
+p {
+    background-color: rgb(250, 0, 255);
+    padding: 20px;
+}
+
+div.rounded {
+    background-color: white;
+    /*height: 12px;*/
+    width: 200px;
+    font-size: 11px;
+    overflow: hidden;
+}
+div.no-rounded {
+	 height: 12px;
+}
+
+span {
+	display: inline-block;
+}

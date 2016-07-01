@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>api</title>
+  <link rel="stylesheet" href="mocer.app.css">
+</head>
+
+<body ng-controller="AppController as vm">
+
+  <div class="main clearfix">
+
+    <div class="menu-box">
+      <div
+        class="tree-view"
+        tree-view
+        tree-id="abc"
+        tree-model="vm.treeData"
+        node-id="path"
+        node-label="name"
+        node-children="children" >
+      </div>
+    </div>
+
+    <div class="content-box" ui-view></div>
+
+  </div>
+
+  <script src="mocer.app.js"></script>
+
+</body>
+
+</html>
