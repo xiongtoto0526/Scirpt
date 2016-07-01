@@ -1,0 +1,39 @@
+<body style="margin:0px;">
+    <div style="height:300px;background:#e0e0e0"></div>
+    <div id="fixedMenu_keleyi_com" style="background:#ffffff;width:100%;">
+        <ul>
+            <li><a href="http://www.keleyi.com/menu/net/" target="_blank">.NET</a></li>
+            <li><a href="http://www.keleyi.com/menu/javascript/" target="_blank">Javascript</a></li>
+            <li><a href="http://www.keleyi.com/menu/jquery/" target="_blank">jQuery</a></li>
+            <li><a href="http://www.keleyi.com/menu/csharp/" target="_blank">C#</a></li>
+            <li><a href="http://www.keleyi.com/menu/other/" target="_blank">其他</a></li>
+            <li><a href="http://www.keleyi.com/" target="_blank">首页</a></li>
+        </ul>
+    </div>
+    <div style="height:2600px;background:#999"></div>
+    <script type="text/javascript" src="http://www.keleyi.com/keleyi/pmedia/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var ie6 = document.all;
+        var dv = $('#fixedMenu_keleyi_com'),
+            st;
+        dv.attr('otop', dv.offset().top); //存储原来的距离顶部的距离 
+        $(window).scroll(function() {
+            st = Math.max(document.body.scrollTop || document.documentElement.scrollTop);
+            if (st > parseInt(dv.attr('otop'))) {
+                if (ie6) { //IE6不支持fixed属性，所以只能靠设置position为absolute和top实现此效果 
+                    dv.css({
+                        position: 'absolute',
+                        top: st
+                    });
+                } else if (dv.css('position') != 'fixed') dv.css({
+                    'position': 'fixed',
+                    top: 0
+                });
+            } else if (dv.css('position') != 'static') dv.css({
+                'position': 'static'
+            });
+        });
+    });
+    </script>
+</body>
