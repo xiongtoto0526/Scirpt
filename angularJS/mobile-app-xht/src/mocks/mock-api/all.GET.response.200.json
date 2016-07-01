@@ -1,0 +1,22 @@
+[
+  {
+    "url": "/mockie/all.json",
+    "res": [
+      {
+        "url": "/books",
+        "method": "GET",
+        "res": "# 用户列表\n\n```js\n//<request>\n[{\n  \"id\": 1,\n  \"books\": \"xx\", // hello\n  \"email\": \"foo@gmail.com\"\n}, {\n  \"id\": 2,\n  \"name\": \"bar\",\n  \"email\": \"bar@gmail.com\"\n}]\n```\n\n```javascript\n//<response>\n[\n  {\n    id: 1,\n    book: \"xx\", // hello\n    email: \"foo@gmail.com\",\n  },\n  {\n    \"id\": 2,\n    \"name\": \"bar\",\n    \"email\": \"bar@gmail.com\"\n  }\n]\n```\n"
+      },
+      {
+        "url": "/users/1",
+        "method": "GET",
+        "res": "# Get User List\n\n### request\n```js\n//<request>\n[{\n  \"id\": 10000,\n  \"name\": \"xx\", // hello\n  \"email\": \"foo@gmail.com\"\n}, {\n  \"id\": 2,\n  \"name\": \"bar\",\n  \"email\": \"bar@gmail.com\"\n}]\n```\n\n### response with 200\n```js\n//<response=200>\n{\n  id: 1,\n  name: \"xx\", // hello\n  email: \"foo@gmail.com\",\n}\n```\n"
+      },
+      {
+        "url": "/users",
+        "method": "GET",
+        "res": "# Get User List\n\n### request\n```js\n//<request>\n[{\n  \"id\": 1,\n  \"name\": \"xx\", // hello\n  \"email\": \"foo@gmail.com\"\n}, {\n  \"id\": 2,\n  \"name\": \"bar\",\n  \"email\": \"bar@gmail.com\"\n}]\n```\n\n### response with 200\n```javascript\n//<response=200>\n[\n  {\n    id: 1,\n    name: \"xx\", // hello\n    email: \"foo@gmail.com\",\n  },\n  {\n    \"id\": 2,\n    \"name\": \"bar\",\n    \"email\": \"bar@gmail.com\"\n  }\n]\n```\n\n### response with 400\n```javascript\n//<response=400>\n[\n  {\n    id: 1,\n    name: \"xx\", // hello\n    email: \"foo@gmail.com\",\n  },\n  {\n    \"id\": 2,\n    \"name\": \"bar\",\n    \"email\": \"bar@gmail.com\"\n  }\n]\n```\n"
+      }
+    ]
+  }
+]

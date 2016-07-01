@@ -22,6 +22,8 @@ var tmp = path.join(process.cwd(), 'tmp'),
     src = path.join(process.cwd(), 'src');
 
 var myPort = 8151;
+
+// see more: https://www.npmjs.com/package/mocer
 var mocer = require('mocer');
 var browserSync = require('browser-sync').create();
 
