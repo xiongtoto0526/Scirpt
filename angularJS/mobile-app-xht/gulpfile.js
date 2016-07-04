@@ -20,6 +20,12 @@ var htmlhint = require("gulp-htmlhint");
 // js检查 https://www.npmjs.com/package/gulp-eslint
 const eslint = require('gulp-eslint');
 
+// 压缩html https://github.com/jonschlinkert/gulp-htmlmin
+var htmlmin = require('gulp-htmlmin');
+
+// 压缩css https://github.com/scniro/gulp-clean-css
+var cleanCSS = require('gulp-clean-css');
+
 
 // 定义本地目录
 var tmp = path.join(process.cwd(), 'tmp'),
@@ -31,12 +37,14 @@ var myPort = 8151;
 var mocer = require('mocer');
 var browserSync = require('browser-sync').create();
 
-
+// 替换build-block块：https://www.npmjs.com/package/gulp-useref
+var useref = require('gulp-useref');
+ 
 
 
 // 入口 （如需并发可[]中加入）
 gulp.task('default', function() {
-  return runSequence('clean', 'copy', 'bundle','htmlCheck','jsCheck','browser-sync','watch','open');
+  return runSequence('clean', 'copy', 'bundle','htmlCheck',['htmlMinify','cssMinify'],'jsCheck','browser-sync','watch','open');
 });
 
 
@@ -58,6 +66,25 @@ gulp.task('htmlCheck',function(){
     .pipe(htmlhint('.htmlhintrc')).pipe(htmlhint.failReporter())// 控制台输出错误日志
 })
 
+
+gulp.task('htmlMinify', function() {
+  return gulp.src('./src/view/*.html')
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('min/html'))
+});
+
+gulp.task('cssMinify', function() {
+  return gulp.src('./src/css/*.css')
+    .pipe(cleanCSS({compatibility: 'ie8'}))
+    .pipe(gulp.dest('min/css'));
+});
+
+
+gulp.task('replaceBuildBlock', function () {
+    return gulp.src('./src/view/*.html')
+        .pipe(useref())
+        .pipe(gulp.dest('xhtBuildBlockTest'));
+});
 // 检查js
 gulp.task('jsCheck', () => {
     // ESLint ignores files with "node_modules" paths. 
