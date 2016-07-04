@@ -111,7 +111,8 @@ gulp.task('browser-sync', function() {
     middleware: [
       mocer(src + '/mocks')
     ]},
-    port: myPort
+    port: myPort,
+    open: false,  // to prevent conficts with gulp-opn,see open options: https://www.browsersync.io/docs/options 
   });
 });
 
