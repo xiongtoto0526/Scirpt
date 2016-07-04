@@ -18,7 +18,7 @@
       "path": "/Users/xionghaitao/my_git_rep/script/angularJS/mobile-app-xht/src/mocks/readme.md",
       "url": "/readme",
       "method": "md",
-      "res": "#usage:\n- start your server\n- open browser:\n-  http://localhost:8151/mocks/_apis#/url?path=users.GET.md\n-  done.",
+      "res": "#usage:\n- start your server\n- open browser:\n-  http://localhost:8151/users\n-  done.\n\n# view \n_apis folder will generate each time you run the gulp.\nso that you can easily view all the json in the browser,try this url:\nhttp://localhost:8151/mocks/_apis\n\n\n\n# file/folder desc\n## result define\n- desks.GET.md\n- books.GET.md\n- users.GET.md\n\n## generate folder\n- _apis\n\n## test\n- mock-api (for user test)\n",
       "id": 2
     },
     {

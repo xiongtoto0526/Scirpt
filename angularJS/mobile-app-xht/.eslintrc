@@ -1,0 +1,13 @@
+{
+ "globals": {
+    "angular": false
+    },
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    "no-console": ["error", { allow: ["warn", "error"] }]
+  }
+}

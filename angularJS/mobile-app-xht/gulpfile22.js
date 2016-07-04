@@ -13,12 +13,7 @@ var gulp = require('gulp'),
   runSequence = require('run-sequence'),
   opn = require('opn'),
   flatten = require('gulp-flatten'); // 扁平化目录
-
-// html检查 https://github.com/bezoerb/gulp-htmlhint  
-var htmlhint = require("gulp-htmlhint");
-
-// js检查 https://www.npmjs.com/package/gulp-eslint
-const eslint = require('gulp-eslint');
+  
 
 
 // 定义本地目录
@@ -36,7 +31,7 @@ var browserSync = require('browser-sync').create();
 
 // 入口 （如需并发可[]中加入）
 gulp.task('default', function() {
-  return runSequence('clean', 'copy', 'bundle','htmlCheck','jsCheck','browser-sync','watch','open');
+  return runSequence('clean', 'copy', 'bundle','browser-sync','watch','open');
 });
 
 
@@ -52,29 +47,6 @@ gulp.task('copy', function() {
 
 gulp.task('bundle',function(){});
 
-// 检查html
-gulp.task('htmlCheck',function(){
-  gulp.src("./src/view/*.html")
-    .pipe(htmlhint('.htmlhintrc')).pipe(htmlhint.failReporter())// 控制台输出错误日志
-})
-
-// 检查js
-gulp.task('jsCheck', () => {
-    // ESLint ignores files with "node_modules" paths. 
-    // So, it's best to have gulp ignore the directory as well. 
-    // Also, Be sure to return the stream from the task; 
-    // Otherwise, the task may end before the stream has finished. 
-    return gulp.src(['./src/js/*.js','!node_modules/**'])
-        // eslint() attaches the lint output to the "eslint" property 
-        // of the file object so it can be used by other modules. 
-        .pipe(eslint())
-        // eslint.format() outputs the lint results to the console. 
-        // Alternatively use eslint.formatEach() (see Docs). 
-        .pipe(eslint.format())
-        // To have the process exit with an error code (1) on 
-        // lint error, return the stream and pipe to failAfterError last. 
-        .pipe(eslint.failAfterError());
-});
 
 // Static server, http://localhost:myPort/users ，will return your users.GET.md file.
 gulp.task('browser-sync', function() {
@@ -99,8 +71,8 @@ gulp.task('watch', function () {
 
 //创建watch任务,其监测的文件改动之后，去调用一个Gulp的Task（即本文件的reload）
 gulp.task('watch', function () {
-  gulp.watch(['./src/js/**/*.js'], ['jsCheck','jsReload']); // 监控src下面所有JS文件
-  gulp.watch(['./src/view/*.html'], ['htmlCheck','htmlReload']);// 监控src下面所有html文件
+  gulp.watch(['./src/js/**/*.js'], ['jsReload']); // 监控src下面所有JS文件
+  gulp.watch(['./src/view/*.html'], ['htmlReload']);// 监控src下面所有html文件
 });
 
 gulp.task('jsReload',function() {
