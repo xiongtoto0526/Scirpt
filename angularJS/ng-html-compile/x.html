@@ -1,0 +1,17 @@
+<!doctype html>
+<html ng-app='xApp'>
+<head>
+    <title>test x</title>
+    <script src="angular.min.js"></script>
+    <script src="x.js"></script>
+</head>
+    <div ng-controller='xCtrl'>
+    	 <input ng-model="xhtHtml"> <br>
+    	 <textarea ng-model="xhtHtml"></textarea> <br>
+    	 <div ng-html-compile="xhtHtml"></div>
+        <p >{{text}},World &frac34; </p>
+        <span>&radic;</span>
+    </div>
+</html>
+
+<!-- reference : https://github.com/francisbouvier/ng_html_compile -->
