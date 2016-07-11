@@ -1,0 +1,73 @@
+<html>
+<!-- 
+目标：
+	如果有一个DIV作为外部容器，内部的DIV如果设置了float样式，则外部的容器DIV因为内部没有clear，导致不能被撑开。这个时候我们可以用clearfix清除浮动 ，实现：
+	父div可以的高度可以随子div变化而自适应。
+-->
+
+<head>
+    <title> css用clearfix清除浮动实例</title>
+    <meta name="generator" content="editplus" />
+    <meta name="author" content="" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+</head>
+
+<body>
+    <style type="text/css">
+    /*所有主流浏览器都支持 :after 伪元素。*/
+    
+    * {
+        color: white;
+    }
+    
+    .clearfix:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden
+    }
+    
+    .clearfix {
+        *+height: 1%;
+    }
+    /*不知道有什么用处，不加ie7也没有问题*/
+    
+    .box {
+        background: red;
+        width: 500px;
+        position: relative;
+    }
+    
+    .l {
+        float: left;
+        background: #333;
+        width: 200px;
+        height: 100px;
+    }
+    
+    .r {
+        float: right;
+        background: #666;
+        width: 200px;
+        height: 200px;
+    }
+    
+    .s {
+        width: 100px;
+        height: 100px;
+        background: #999;
+        position: absolute;
+        right: -50px;
+        ;
+    }
+    </style>
+    <div class="box clearfix">
+        <div class="l">left</div>
+        <div class="r">right</div>
+        <div class="s">absolute</div>
+    </div>
+</body>
+
+</html>

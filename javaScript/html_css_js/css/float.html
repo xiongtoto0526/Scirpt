@@ -1,0 +1,50 @@
+<html>
+<!-- 
+目标：
+   如何理解基础的浮动。是本身不受浮动的影响，回到原来的文档流。
+ -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+    
+    .div1,
+    .div2,
+    .div3 {
+        color: white;
+    }
+    
+    .div1 {
+        height: 100px;
+        background-color: blue;
+        float: right;
+    }
+    
+    .div2 {
+        height: 200px;
+        background-color: green;
+        float: right;
+        /*clear: right;*/
+    }
+    
+    .div3 {
+        height: 150px;
+        background-color: black;
+        float: right;
+        clear: right;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="div1">
+        hello xht div1
+    </div>
+    <div class="div2">
+        hello xht div2
+    </div>
+    <div class="div3">
+        hello xht div3
+    </div>
+</body>
+
+</html>
