@@ -3,10 +3,10 @@
 目标：
    如何理解基础的浮动。是本身不受浮动的影响，回到原来的文档流。
  -->
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style>
-    
     .div1,
     .div2,
     .div3 {
@@ -44,6 +44,20 @@
     </div>
     <div class="div3">
         hello xht div3
+    </div>
+    <!-- 包裹性：去除float，div无法自适应 ，通absolute-->
+    <div style="background-color:yellow;float:left">
+        <p>hello</p>
+        <div></div>
+    </div>
+    <br>
+    <br>
+
+
+    <div style="background-color:red;margin-top:500px;float:left">
+        <div style="background-color:yellow;width:100px;height:100px;position:absolute"></div>
+        <p style="padding-left:200px;">hello1</p>
+        <p style="padding-left:200px;">hello2</p>
     </div>
 </body>
 

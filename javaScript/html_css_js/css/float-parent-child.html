@@ -18,21 +18,21 @@
     /*所有主流浏览器都支持 :after 伪元素。*/
     
     * {
-        color: white;
+        color: black;
     }
     
     .clearfix:after {
-        content: ".";
-        display: block;
-        height: 0;
+        content: "";
+        display: table;
         clear: both;
-        visibility: hidden
     }
-    
+
+
+    /*for ie6,7*/    
     .clearfix {
-        *+height: 1%;
+        *zoom: 1%;
     }
-    /*不知道有什么用处，不加ie7也没有问题*/
+
     
     .box {
         background: red;
@@ -63,11 +63,13 @@
         ;
     }
     </style>
-    <div class="box clearfix">
+    <!-- style="float:left",使用float和absolute属性，也可以实现clearfix的包裹效果 -->
+    <div class="box clearfix">  
         <div class="l">left</div>
         <div class="r">right</div>
         <div class="s">absolute</div>
     </div>
+    <div>hello</div>
 </body>
 
 </html>

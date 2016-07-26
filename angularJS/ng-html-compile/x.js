@@ -10,7 +10,11 @@ app.controller('xCtrl', ['$scope', function ($scope) {
 app.directive('ngHtmlCompile',function ($compile) {
       return {
         restrict: 'A',
+        scope: {
+         myAttr: '@'
+        },
         link: function(scope, element, attrs) {
+          debugger;
           scope.$watch(
             function(scope) {
                // watch the 'compile' expression for changes
