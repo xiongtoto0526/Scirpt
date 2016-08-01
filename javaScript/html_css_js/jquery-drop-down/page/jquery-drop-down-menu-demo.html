@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery slideToggle轻松实现效果不错的垂直下拉菜单</title>
+<link rel="shortcut icon" href="http://www.zhangxinxu.com/zxx_ico.png" />
+<style type="text/css">
+ul,li{padding:0; margin:0; list-style-type:none;}
+a{color:#34538b;}.rel{position:relative;}
+.zxx_test{padding:30px; font-family:'宋体'; font-size:84%;}
+.zxx_v_menu{width:120px; position:relative;}
+.click_area{padding:1px; border:1px solid #dddddd; background:#f9f9f9;}
+.click_area .v_menu{display:block; padding-left:5px; line-height:6px; border-top:6px solid #f8f8f8; background:#f7f7f7; border-bottom:5px solid #f5f5f5; font-size:12px; text-decoration:none; zoom:1;}
+.click_area .v_menu:hover{color:#34538b; text-decoration:none; border-top-color:#f5f5f5; background-color:#f4f4f4; border-bottom-color:#f2f2f2;}
+.point_out{width:14px; border:1px solid; border-color:#eeeeee #dddddd #d9d9d9 #eeeeee; background:#f8f8f8; padding:1px; float:right; margin-right:5px; position:relative; top:-16px; color:#34538b;}
+.point_in{display:block; line-height:3px; border-top:5px solid #f5f5f5; background:#f4f4f4; border-bottom:3px solid #f2f2f2;}
+.v_menu_list{position:absolute; width:98.5%; border:1px solid #dddddd; background:white; left:0px; top:21px; font-size:12px; display:none;}
+.v_menu_list li a{display:block; padding:5px 0 5px 5px; text-decoration:none; zoom:1;}
+.v_menu_list li a:hover{color:#333333; text-decoration:none; font-weight:bold;}
+.v_menu_list li.alt a{background-color:#f6f6f6;}
+</style>
+<script type="text/javascript" src="../js/jquery-1.2.6.pack.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(".v_menu_list li:odd").addClass("alt");	
+	$("#menuClick").click(function(){
+		$("#vMenuList").slideToggle();	
+		return false;
+	});
+	$(".v_menu_list > li > a").hover(function(){
+		$(this).animate({
+			paddingLeft: 20				
+		},100);									  
+	},function(){
+		$(this).animate({
+			paddingLeft: 5				
+		},50);	
+	});
+});
+</script>
+</head>
+
+<body>
+<div class="zxx_test">
+    <div class="zxx_v_menu">
+        <div class="click_area" id="menuClick">
+            <a class="v_menu" href="#zhangxinxu" hidefocus="true"><span class="rel">垂直导航</span></a>
+            <span class="point_out"><span class="point_in">▼</span></span>
+        </div>
+        <ul class="v_menu_list" id="vMenuList">
+            <li><a href="#zhangxinxu">圣诞节</a></li>
+            <li><a href="#zhangxinxu">冬至</a></li>
+            <li><a href="#zhangxinxu">地震</a></li>
+            <li><a href="#zhangxinxu">股市</a></li>
+            <li><a href="#zhangxinxu">十月围城</a></li>
+            <li><a href="#zhangxinxu">三枪拍案惊奇</a></li>
+            <li><a href="#zhangxinxu">蜗居</a></li>
+            <li><a href="#zhangxinxu">阿凡达</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

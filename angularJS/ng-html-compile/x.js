@@ -11,10 +11,12 @@ app.directive('ngHtmlCompile',function ($compile) {
       return {
         restrict: 'A',
         scope: {
-         myAttr: '@'
+         myAttr: '='
         },
         link: function(scope, element, attrs) {
           debugger;
+          console.log(scope.myAttr);
+          // scope.myAttr='x2';
           scope.$watch(
             function(scope) {
                // watch the 'compile' expression for changes
