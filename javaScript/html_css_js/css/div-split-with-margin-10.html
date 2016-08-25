@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CSS3 box-orient</title>
+  <style type="text/css">
+  .prev {
+    background: black;
+    color: white;
+    font-size: 16px;
+    display: block;
+    float: left;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    /* Firefox */
+    -webkit-box-sizing: border-box;
+    /* Safari */
+    width: 50%;
+  }
+  
+  .next {
+    background: black;
+    color: white;
+    font-size: 16px;
+    display: block;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    /* Firefox */
+    -webkit-box-sizing: border-box;
+    /* Safari */
+    width: 50%;
+    float: left;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="clearfix">
+    <a class="prev" href="#">Previous</a>
+    <a class="next" href="#">Next</a>
+  </div>
+</body>
+
+</html>
