@@ -1,0 +1,39 @@
+
+<html ng-app="mod" xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <script src="./angular.min.js"></script>
+    <style>
+     h1 {
+ /*       -webkit-transition: 1s;
+        transition: 1s;*/
+              -webkit-transition-duration: 0.2s;
+         -o-transition-duration: 0.2s;
+        background-color: gray;
+        height: 100px;  /*  if height is set to auto , transition will not work !!!!! */
+        opacity: 1;
+      }
+    
+      .blur {
+ /*       -webkit-transition: 1s;
+        transition: 1s;*/
+        height: 50px;
+        opacity: 0.2;
+      }
+
+    </style>
+    
+    <script>
+        angular.module('mod', [ ]).controller('x', function (
+         $scope
+       ) {
+            $scope.blur = false;
+        });
+    </script>
+  </head>
+  
+  <body ng-controller="x">
+    <button ng-click="blur = !blur">Toggle Fade</button>
+    <h1 ng-class="{ blur: blur }">Hey Anubhav!!</h1>
+  </body>
+</html>
