@@ -1,0 +1,157 @@
+{
+    "name": "Level 0",
+    "children": [
+        {
+            "name": "Level 1-1",
+            "children": [
+                {
+                    "name": "Level 2-1",
+                    "children": [
+                        {
+                            "name": "Level 3-1",
+                            "size": 3938
+                        },
+                        {
+                            "name": "Level 3-2",
+                            "size": 3812
+                        }
+                    ]
+                },
+                {
+                    "name": "Level 2-2",
+                    "size": 3534                    
+                },
+                {
+                    "name": "Level 2-3",
+                    "children": [
+                        {
+                            "name": "Level 3-3",
+                            "size": 7074
+                        }
+                    ]
+                }
+            ]
+        },        
+        {
+            "name": "Level 1-2",
+            "children": [
+                {
+                    "name": "Level 2-4",
+                    "size": 8833
+                },
+                {
+                    "name": "Level 2-5",
+                    "size": 1732
+                }
+            ]
+        },
+        {
+            "name": "Level 1-3",
+            "children": [
+                {
+                    "name": "Level 2-6",
+                    "size": 4116
+                }
+            ]
+        },
+        {
+            "name": "Level 1-4",
+            "children": [
+                {
+                    "name": "Level 2-7",
+                    "size": 1082
+                },
+                {
+                    "name": "Level 2-8",
+                    "size": 1336
+                },
+                {
+                    "name": "Level 2-9",
+                    "size": 319
+                }
+            ]
+        },
+        {
+            "name": "Level 1-5",
+            "children": [
+                {
+                    "name": "Level 2-10",
+                    "size": 8258
+                },
+                {
+                    "name": "Level 2-11",
+                    "children": [
+                        {
+                            "name": "Level 3-4",
+                            "size": 9354
+                        },
+                        {
+                            "name": "Level 3-5",
+                            "size": 1233
+                        }
+                    ]
+                },
+                {
+                    "name": "Level 2-12",
+                    "size": 335
+                },
+                {
+                    "name": "Level 2-13",
+                    "children": [
+                        {
+                            "name": "Level 3-6",
+                            "size": 6367
+                        },
+                        {
+                            "name": "Level 3-7",
+                            "size": 1229
+                        },
+                        {
+                            "name": "Level 3-8",
+                            "size": 2059
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Level 1-6",
+            "children": [                
+                {
+                    "name": "Level 2-14",
+                    "children": [
+                        {
+                            "name": "Level 3-9",
+                            "children": [
+                                {
+                                    "name": "Level 4-1",
+                                    "size": 4461
+                                },
+                                {
+                                    "name": "Level 4-2",
+                                    "size": 6314
+                                },
+                                {
+                                    "name": "Level 4-3",
+                                    "size": 3444
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Level 3-10",
+                            "size": 1286
+                        },
+                        {
+                            "name": "Level 3-11",
+                            "size": 2490
+                        }
+                    ]
+                },
+                {
+                    "name": "Level 2-15",
+                    "size": 16540
+                }
+            ]
+        }
+    ]
+}

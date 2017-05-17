@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test d3 xht</title>
+</head>
+<body>
+	
+
+	<script src="https://d3js.org/d3.v3.min.js"></script>
+	<script>
+	    var theData = [1,2,3]
+		var p = d3.select("body").selectAll("p").append("p").data(theData).enter().append("p").text(function(d) {return d});
+	</script>
+</body>
+</html>

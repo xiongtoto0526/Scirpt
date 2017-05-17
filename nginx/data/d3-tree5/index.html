@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.node {
+  cursor: pointer;
+}
+
+.node rect {
+  stroke: steelblue;
+  stroke-width: 2px;
+  width: 110px;
+  height: 40px;
+}
+rect.assistent {
+  fill: #fff;
+  stroke-width: 1px;
+  stroke-dasharray: 5;
+}
+
+rect.post{
+  fill: #fff;
+}
+
+.node text tspan{
+  font: 9px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+</style>
+<body>
+<div class="container"></div>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="main.js"></script>
